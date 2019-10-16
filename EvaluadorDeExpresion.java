@@ -32,11 +32,26 @@ public class EvaluadorDeExpresion{
 	}
 
 	public void destruir(){
-		if(maquina != null) maquina = null;
-		if(automataPila != null) automataPila = null;
-		if(automataFinitoDeterminista != null) automataFinitoDeterminista = null;
-		if(automataFinitoNoDeterminista != null) automataFinitoNoDeterminista = null;
-		if(automataFinitoNoDeterministaEpsilon != null) automataFinitoNoDeterministaEpsilon = null;
+		if(maquina != null){
+			maquina.destruir();
+			maquina = null;
+		}
+		if(automataFinitoDeterminista != null){
+			automataFinitoNoDeterminista.destruir();
+			automataFinitoDeterminista = null;
+		}
+		if(automataFinitoNoDeterminista != null){
+			automataFinitoNoDeterminista.destruir();
+			automataFinitoNoDeterminista = null;
+		}
+		if(automataFinitoNoDeterministaEpsilon != null){
+			automataFinitoNoDeterministaEpsilon.destruir();
+			automataFinitoNoDeterministaEpsilon = null;
+		}
+		if(automataAPila != null){
+			automataAPila.destruir();
+			automataAPila = null;
+		}
 		System.gc(); 
 	}
 
