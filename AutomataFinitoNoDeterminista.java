@@ -1,23 +1,23 @@
 import java.util.ArrayList;
-public class AutomataFinitonNoDeterminista extends AutomataFinito
+public class AutomataFinitoNoDeterminista extends AutomataFinito
 {
-	private ArrayList< ArrayList< ArrayList< Integer > > > tablaDeTransiciones;
+	private ArrayList< ArrayList< ArrayList<Integer>>> tablaDeTransiciones;
 
-	public AutomataFinitonNoDeterminista(
-		int numeroDeEstados,
-		char[] alfabeto,
-		int[] estadosAceptacion,
-		ArrayList<ArrayList<ArrayList<Integer>>> tablaDeTransiciones)
+	public AutomataFinitoNoDeterminista(
+			int numeroDeEstados,
+			char[] alfabeto,
+			int[] estadosAceptacion,
+			ArrayList<ArrayList<ArrayList<Integer>>> tablaDeTransiciones)
 	{
 		super(numeroDeEstados, alfabeto, estadosAceptacion);
 		this.tablaDeTransiciones = tablaDeTransiciones;
 	}
 
-	public AutomataFinitonNoDeterminista(){
+	public AutomataFinitoNoDeterminista(){
 		this(0, null, null, null);
 	}
 
-	public AutomataFinitonNoDeterminista(AutomataFinitonNoDeterminista automata)
+	public AutomataFinitoNoDeterminista(AutomataFinitoNoDeterminista automata)
 	{
 		super(automata);
 		tablaDeTransiciones = automata.tablaDeTransiciones;
@@ -39,7 +39,10 @@ public class AutomataFinitonNoDeterminista extends AutomataFinito
 				cad += "Simbolo "+(j+1)+" {";
 				for (int k=0; k<tablaDeTransiciones.get(0).get(0).size(); k++) {
 					cad += tablaDeTransiciones.get(i).get(j).get(k);
-					k+1==tablaDeTransiciones.get(0).get(0).size()? cad += "}": cad += ",";
+					if(k + 1 == tablaDeTransiciones.get(0).get(0).size())
+						cad += "}";
+					else
+						cad += ", ";
 				}
 				cad += "\t";
 			}
@@ -49,10 +52,10 @@ public class AutomataFinitonNoDeterminista extends AutomataFinito
 	}
 
 	@Override
-	public boolean equals(Objecto obj){
+	public boolean equals(Object obj){
 		if(obj == null) return false;
-		if(!(obj instanceof AutomataFinitonNoDeterminista)) return false;
-		AutomataFinitonNoDeterminista afd = (AutomataFinitonNoDeterminista)obj;
+		if(!(obj instanceof AutomataFinitoNoDeterminista)) return false;
+		AutomataFinitoNoDeterminista afd = (AutomataFinitoNoDeterminista)obj;
 		return super.equals(afd) && tablaDeTransiciones.equals(afd.tablaDeTransiciones);
 	}
 

@@ -57,13 +57,16 @@ public class AutomataAPila extends AutomataFinito
 		int i = 0;
 		for(ArrayList estado: tablaDeTransiciones)
 		{
-			retorno += "Estado " + (++i) + ": " + estado + "\n"; 
+			i++;
+			if(estado != null)
+				retorno += "Estado " + i + ": " + estado + "\n"; 
 		}
 		i = 0;
 		for(ArrayList simbolos: tablaDeLaPila)
 		{
+			i++;
 			if(simbolos != null)
-				retorno += "Transiciones del estado " + (++i) + ": " + simbolos + "\n";
+				retorno += "Transiciones del estado " + i + ": " + simbolos + "\n";
 		}
 		retorno += pila;
 		return retorno;
