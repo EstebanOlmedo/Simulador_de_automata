@@ -79,6 +79,6 @@ public class AutomataFinitoDeterminista extends AutomataFinito
 		if(simbolo > tablaDeTransiciones.get(0).size())
 			return -1;
 		else
-			return tablaDeTransiciones.get(q.get(simbolo);
+			return tablaDeTransiciones.get(q).get(simbolo);
 	}
 }
