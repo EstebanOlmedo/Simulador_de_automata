@@ -77,5 +77,20 @@ public class EvaluadorDeExpresion{
 		automataFinitoNoDeterminista.equals(evaluador.automataFinitoNoDeterminista) &&
 		automataFinitoNoDeterministaEpsilon.equals(evaluador.automataFinitoNoDeterministaEpsilon);
 	}
-
+	public boolean perteneceAlAlfabeto(char caracter, AutomataFinito automata)
+	{
+		if(automata.getNumeroSimbolo(caracter) == -1)
+			return false;
+		else
+			return true;
+	}
+	public boolean perteneceAlAlfabeto(String cadena, AutomataFinito automata)
+	{
+		for(int i = 0; i < cadena.length(); i++)
+		{
+			if(!perteneceAlAlfabeto(cadena.charAt(i), automata))
+				return false;
+		}
+		return true;
+	}
 }
