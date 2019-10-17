@@ -74,5 +74,22 @@ public class ConversorDeAutomata{
 		automataFinitoNoDeterministaEpsilon.equals(conversor.automataFinitoNoDeterministaEpsilon) &&
 		automataAPila.equals(conversor.automataAPila);
 	}
-
+	public boolean sePuede(boolean sePuede)
+	{
+		if(sePuede)
+			return true;
+		else
+		{
+			System.out.println("No se puede convertir los automátas propuestos");
+			return false;
+		}
+	}
+	public boolean sePuede(AutomataFinitoDeterminista afd, AutomataAPila automataPila)
+	{
+		return sePuede(true);
+	}
+	public boolean sePuede(AutomataAPila automataPila, AutomataFinitoDeterminista adf)
+	{
+		return sePuede(false);
+	}
 }
