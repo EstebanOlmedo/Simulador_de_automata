@@ -31,7 +31,8 @@ public class AutomataFinitoNoDeterminista extends AutomataFinito
 	}
 
 	@Override
-	public String  toString(){
+	public String  toString()
+	{
 		String cad = super.toString();
 		for (int i=0; i<tablaDeTransiciones.size(); i++){
 			cad += "Estado "+ (i+1) + ": ";
@@ -52,11 +53,27 @@ public class AutomataFinitoNoDeterminista extends AutomataFinito
 	}
 
 	@Override
-	public boolean equals(Object obj){
+	public boolean equals(Object obj)
+	{
 		if(obj == null) return false;
 		if(!(obj instanceof AutomataFinitoNoDeterminista)) return false;
 		AutomataFinitoNoDeterminista afd = (AutomataFinitoNoDeterminista)obj;
 		return super.equals(afd) && tablaDeTransiciones.equals(afd.tablaDeTransiciones);
 	}
-
+	public ArrayList<ArrayList<Integer>> obtenerTransicion(int q)
+	{
+			if(q > tablaDeTransiciones.size()) 
+				return null;
+			return tablaDeTransiciones.get(q);
+	}
+	public ArrayList<ArrayList<Integer>> obtenerTransicion(int q, int p)
+	{
+		ArrayList<ArrayList<Integer>> trancisiones = new ArrayList<ArrayList<Integer>>();
+		ArrayList<ArrayList<Integer>> estado = obtenerTransicion(q);
+		if(estado == null) return null;
+		for(int i=0; i<estado.size(); i++)
+			if(estado.get(i).lastIndexOf(p) != -1)
+				trancisiones.add(estado.get(i));
+		return trancisiones;
+	}
 }
