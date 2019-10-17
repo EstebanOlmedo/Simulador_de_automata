@@ -48,4 +48,21 @@ public class MaquinaDeTuring
 		}
 		return cabezal == maquinaDeTuring.cabezal;
 	}
+	public void modificarCinta(char modificacion, char movimiento)
+	{
+		cinta[cabezal] = modificacion;
+		movimiento == 'L'? cabezal--:cabezal++;
+	}
+	public void modificarCinta(char modificacion, char movimiento, int casillas)
+	{
+		for(int i = 0; i < casillas; i++)
+		{
+			modificarCinta(modificacion, movimiento);
+		}
+	}
+	public void modificarCinta(char modificacion, char movimiento, char paro)
+	{
+		while(cinta[cabezal] != paro)
+			modificarCinta(modificacion, movimiento);
+	}
 }
