@@ -1,4 +1,5 @@
-import java.util.File;
+import java.io.File;
+import java.io.IOException;
 public class Archivo
 {
 	private String path;
