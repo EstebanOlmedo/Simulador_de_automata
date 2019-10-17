@@ -51,7 +51,10 @@ public class MaquinaDeTuring
 	public void modificarCinta(char modificacion, char movimiento)
 	{
 		cinta[cabezal] = modificacion;
-		movimiento == 'L'? cabezal--:cabezal++;
+		if(movimiento == 'L')
+			cabezal--;
+		else
+			cabezal++;
 	}
 	public void modificarCinta(char modificacion, char movimiento, int casillas)
 	{
@@ -64,5 +67,28 @@ public class MaquinaDeTuring
 	{
 		while(cinta[cabezal] != paro)
 			modificarCinta(modificacion, movimiento);
+	}
+	public void agrandarCinta(char haciaDonde)
+	{
+		int actual = cinta.length;
+		char[] temp = cinta;
+		agrandarCinta(actual);
+		if(haciaDonde == 'L')
+		{
+			for(int i = temp.length-1; i >= cabezal; i--)
+				cinta[i] = temp[i];
+		}
+		else
+		{
+			for(int i = 0; i <= cabezal; i++)
+				cinta[i] = temp[i];
+		}
+		temp = null;
+		System.gc();
+	}
+	public void agrandarCinta(int tamanio)
+	{
+		char[] nueva = new char[cinta.length*2];
+		cinta = nueva;
 	}
 }
