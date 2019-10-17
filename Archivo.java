@@ -12,7 +12,7 @@ public class Archivo
 		this.path = path;
 		this.nombre = nombre;
 	}
-	public Archivo(Arhivo archivo)
+	public Archivo(Archivo archivo)
 	{
 		this(archivo.path, archivo.nombre);
 	}
@@ -32,12 +32,12 @@ public class Archivo
 		if(!(obj instanceof Archivo)) return false;
 		Archivo archivo = (Archivo)obj;
 		return path.equals(archivo.path) &&
-			nombre.equals(archivo.nombre;
+			nombre.equals(archivo.nombre);
 	}
 	@Override
 	public String toString()
 	{
-		return "PATH: " + path "\n" +
+		return "PATH: " + path + "\n" +
 			"Nombre: " + nombre + "\n";
 	}
 }

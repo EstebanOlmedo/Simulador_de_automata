@@ -1,7 +1,7 @@
 public class EvaluadorDeExpresion{
 	private MaquinaDeTuring maquina;
 	private AutomataAPila automataPila;
-	private AutomataFinitoNoDeterminista automataFinitoDeterminista;
+	private AutomataFinitoDeterminista automataFinitoDeterminista;
 	private AutomataFinitoNoDeterminista automataFinitoNoDeterminista;
 	private AutomataFinitoNoDeterministaEpsilon automataFinitoNoDeterministaEpsilon;
 
@@ -48,9 +48,9 @@ public class EvaluadorDeExpresion{
 			automataFinitoNoDeterministaEpsilon.destruir();
 			automataFinitoNoDeterministaEpsilon = null;
 		}
-		if(automataAPila != null){
-			automataAPila.destruir();
-			automataAPila = null;
+		if(automataPila != null){
+			automataPila.destruir();
+			automataPila = null;
 		}
 		System.gc(); 
 	}
