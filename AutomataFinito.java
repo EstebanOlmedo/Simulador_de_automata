@@ -69,4 +69,22 @@ public class AutomataFinito
 		}
 		return retorno;
 	}
+	public boolean isAceptacion(int q)
+	{
+		for(int i = 0; i < estadosAceptacion.length; i++)
+		{
+			if(estadosAceptacion[i] == q)
+				return true;
+		}
+		return false;
+	}
+	public int getNumeroSimbolo(char a)
+	{
+		for(int i = 0; i < alfabeto.length; i++)
+		{
+			if(alfabeto[i] == a)
+				return i;
+		}
+		return -1;
+	}
 }

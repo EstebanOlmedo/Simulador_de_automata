@@ -66,4 +66,19 @@ public class AutomataFinitoDeterminista extends AutomataFinito
 		}
 		return transiciones;
 	}
+	public int getAdyacencia(int q, char a)
+	{
+		int simbolo = super.getNumeroSimbolo(a);
+		if(simbolo == -1)
+			return -1;
+		else
+			return getAdyacencia(q, simbolo);
+	}
+	public int getAdyacencia(int q, int simbolo)
+	{
+		if(simbolo > tablaDeTransiciones.get(0).size())
+			return -1;
+		else
+			return tablaDeTransiciones.get(q.get(simbolo);
+	}
 }
