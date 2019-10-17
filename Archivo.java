@@ -1,3 +1,4 @@
+import java.util.File;
 public class Archivo
 {
 	private String path;
@@ -39,5 +40,22 @@ public class Archivo
 	{
 		return "PATH: " + path + "\n" +
 			"Nombre: " + nombre + "\n";
+	}
+
+	public boolean verificarExisteArchivo() throws IOException
+	{
+		File archivo = new File (path);
+		if(archivo.exists() == true)
+			return true;
+		else
+			return false;
+	}
+
+	public boolean verificarExisteArchivo(File archivo) throws IOException
+	{
+		if(archivo.exists() == true)
+			return true;
+		else
+			return false;
 	}
 }
