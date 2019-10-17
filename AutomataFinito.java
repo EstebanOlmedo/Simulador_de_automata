@@ -87,4 +87,8 @@ public class AutomataFinito
 		}
 		return -1;
 	}
+	public int getNumeroDeEstados()
+	{
+		return numeroDeEstados;
+	}
 }
