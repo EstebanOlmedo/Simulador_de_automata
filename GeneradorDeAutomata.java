@@ -1,12 +1,13 @@
-public class GeneradorDeAutomata{
+public class GeneradorDeAutomata
+{
 	private AutomataFinitoDeterminista automataFinitoDeterminista;
-	private AutomataFinitoNoDetermista automataFinitoNoDeterminista;
+	private AutomataFinitoNoDeterminista automataFinitoNoDeterminista;
 	private AutomataFinitoNoDeterministaEpsilon automataFinitoNoDeterministaEpsilon;
 	private AutomataAPila automataAPila;
 
 	public GeneradorDeAutomata(
 			AutomataFinitoDeterminista automataFinitoDeterminista,
-			AutomataFinitoNoDetermista automataFinitoNoDeterminista,
+			AutomataFinitoNoDeterminista automataFinitoNoDeterminista,
 			AutomataFinitoNoDeterministaEpsilon automataFinitoNoDeterministaEpsilon,
 			AutomataAPila automataAPila
 		)
@@ -17,33 +18,40 @@ public class GeneradorDeAutomata{
 		this.automataAPila = automataAPila;
 	}
 
-	public GeneradorDeAutomata(){
+	public GeneradorDeAutomata()
+	{
 		this(null, null, null, null);
 	}
 
-	public GeneradorDeAutomata(GeneradorDeAutomata conversor){
+	public GeneradorDeAutomata(GeneradorDeAutomata conversor)
+	{
 		this(
 			conversor.automataFinitoDeterminista,
-			conversor.automataFinitoNoDetermista,
+			conversor.automataFinitoNoDeterminista,
 			conversor.automataFinitoNoDeterministaEpsilon,
 			conversor.automataAPila
 			);
 	}
 
-	public void destruir(){
-		if(automataFinitoDeterminista != null){
+	public void destruir()
+	{
+		if(automataFinitoDeterminista != null)
+		{
 			automataFinitoNoDeterminista.destruir();
 			automataFinitoDeterminista = null;
 		}
-		if(automataFinitoNoDeterminista != null){
+		if(automataFinitoNoDeterminista != null)
+		{
 			automataFinitoNoDeterminista.destruir();
 			automataFinitoNoDeterminista = null;
 		}
-		if(automataFinitoNoDeterministaEpsilon != null){
+		if(automataFinitoNoDeterministaEpsilon != null)
+		{
 			automataFinitoNoDeterministaEpsilon.destruir();
 			automataFinitoNoDeterministaEpsilon = null;
 		}
-		if(automataAPila != null){
+		if(automataAPila != null)
+		{
 			automataAPila.destruir();
 			automataAPila = null;
 		}
@@ -51,7 +59,8 @@ public class GeneradorDeAutomata{
 	}
 
 	@Override
-	public String toString(){
+	public String toString()
+	{
 		String cad = "Automatas generados:\n";
 		if(automataFinitoDeterminista != null)
 			cad += "Automata Finito Determinista: " + automataFinitoDeterminista + "\n";
@@ -65,7 +74,8 @@ public class GeneradorDeAutomata{
 	}
 
 	@Override
-	public boolean equals(Object obj){
+	public boolean equals(Object obj)
+	{
 		if(obj == null) return false;
 		if(!(obj instanceof GeneradorDeAutomata)) return false;
 		GeneradorDeAutomata conversor = (GeneradorDeAutomata)obj;
@@ -74,5 +84,23 @@ public class GeneradorDeAutomata{
 		automataFinitoNoDeterministaEpsilon.equals(conversor.automataFinitoNoDeterministaEpsilon) &&
 		automataAPila.equals(conversor.automataAPila);
 	}
-
+	public String getInforme()
+	{
+		return "Automata generado\nDatos del automata generado:n";
+	}
+	public String getInforme(AutomataFinitoDeterminista afd)
+	{
+		return getInforme() + afd;
+	}
+	public String getInforme(AutomataFinitoNoDeterminista afn){
+		return getInforme() + afn;
+	}
+	public String getInforme(AutomataFinitoNoDeterministaEpsilon afn_e)
+	{
+		return getInforme() + afn_e;
+	}
+	public String getInforme(AutomataAPila automataPila)
+	{
+		return getInforme() + automataPila;
+	}
 }
