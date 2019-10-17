@@ -1,12 +1,12 @@
 public class ConversorDeAutomata{
 	private AutomataFinitoDeterminista automataFinitoDeterminista;
-	private AutomataFinitoNoDetermista automataFinitoNoDeterminista;
+	private AutomataFinitoNoDeterminista automataFinitoNoDeterminista;
 	private AutomataFinitoNoDeterministaEpsilon automataFinitoNoDeterministaEpsilon;
 	private AutomataAPila automataAPila;
 
 	public ConversorDeAutomata(
 			AutomataFinitoDeterminista automataFinitoDeterminista,
-			AutomataFinitoNoDetermista automataFinitoNoDeterminista,
+			AutomataFinitoNoDeterminista automataFinitoNoDeterminista,
 			AutomataFinitoNoDeterministaEpsilon automataFinitoNoDeterministaEpsilon,
 			AutomataAPila automataAPila
 		)
@@ -24,7 +24,7 @@ public class ConversorDeAutomata{
 	public ConversorDeAutomata(ConversorDeAutomata conversor){
 		this(
 			conversor.automataFinitoDeterminista,
-			conversor.automataFinitoNoDetermista,
+			conversor.automataFinitoNoDeterminista,
 			conversor.automataFinitoNoDeterministaEpsilon,
 			conversor.automataAPila
 			);
