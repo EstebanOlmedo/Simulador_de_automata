@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 public class AutomataFinitoNoDeterministaEpsilon extends AutomataFinitoNoDeterminista
 {
 	private ArrayList<ArrayList<Integer>> adyacenciaEpsilon;
@@ -52,5 +53,15 @@ public class AutomataFinitoNoDeterministaEpsilon extends AutomataFinitoNoDetermi
 		AutomataFinitoNoDeterministaEpsilon automata = (AutomataFinitoNoDeterministaEpsilon)obj;
 		return super.equals(automata) && 
 			adyacenciaEpsilon.equals(automata.adyacenciaEpsilon);
+	}
+	public ArrayList<ArrayList<Integer>> obtenerTransicion(int q, int p, int k)
+	{
+		ArrayList<ArrayList<Integer>> transiciones = super.obtenerTransicion(q,p);
+		if(q > adyacenciaEpsilon.size()) return transiciones;
+		if(transiciones == null) transiciones = new ArrayList<ArrayList<Integer>>();
+		ArrayList<Integer> epsilon = adyacenciaEpsilon.get(q);
+		if(epsilon.lastIndexOf(k) != -1)
+			transiciones.add(epsilon);
+		return transiciones;
 	}
 }
