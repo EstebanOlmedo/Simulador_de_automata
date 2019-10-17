@@ -77,4 +77,28 @@ public class GeneradorDeCodigoLaTex
 			"Automata finito no determinista:\n" + afn.toString() + "\n" +
 			"Automata finito no determinista epsilon:\n" + afn_epsilon.toString() + "\n";
 	}
+	public boolean verificar(AutomataFinito automata)
+	{
+		if(automata != null && automata.getNumeroDeEstados() > 0)
+			return true;
+		return false;
+	}
+	public boolean verificar(AutomataFinitoDeterminista afd)
+	{
+		return verificar((AutomataFinito)afd) &&
+			afd.getTablaDeTransiciones().size()==afd.getNumeroDeEstados();
+	}
+	public boolean verificar(AutomataFinitoNoDeterminista afn)
+	{
+		return verificar((AutomataFinito)afn) &&
+			afn.getTablaDeTransiciones().size()==afn.getNumeroDeEstados();
+	}
+	public boolean verificar(AutomataFinitoNoDeterministaEpsilon afn_e)
+	{
+		return verificar((AutomataFinitoNoDeterminista)afn_e);
+	}
+	public boolean verificar(AutomataAPila ap)
+	{
+		return verificar((AutomataFinito)ap);
+	}
 }
