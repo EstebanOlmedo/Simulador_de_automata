@@ -26,6 +26,23 @@ public class AutomataFinitoDeterminista extends AutomataFinito
 			tablaDeTransiciones = null;
 		System.gc();
 	}
+	public String obtenerTransicion(int q)
+	{
+		String retorno = "";
+		ArrayList<Integer> estado = tablaDeTransiciones.get(q);
+		for (int i=0; i<estado.size(); i++)
+			retorno += "S("+q+","+i+") -> "+estado.get(i)+"\n";
+		return retorno;
+	}
+	public String obtenerTransicion(int q, int p)
+	{
+		String retorno = "";
+		ArrayList<Integer> estado = tablaDeTransiciones.get(q);
+		for (int i=0; i<estado.size(); i++)
+			if(estado.get(i) == p)
+				retorno += "S("+q+","+i+") -> "+estado.get(i)+"\n";
+		return retorno;
+	}
 	@Override 
 	public String toString()
 	{
