@@ -55,14 +55,14 @@ public class AutomataAPila extends AutomataFinito
 		String retorno = new String();
 		retorno += super.toString();
 		int i = 0;
-		for(ArrayList estado: tablaDeTransiciones)
+		for(ArrayList<Integer> estado: tablaDeTransiciones)
 		{
 			i++;
 			if(estado != null)
 				retorno += "Estado " + i + ": " + estado + "\n"; 
 		}
 		i = 0;
-		for(ArrayList simbolos: tablaDeLaPila)
+		for(ArrayList<String> simbolos: tablaDeLaPila)
 		{
 			i++;
 			if(simbolos != null)
@@ -70,5 +70,31 @@ public class AutomataAPila extends AutomataFinito
 		}
 		retorno += pila;
 		return retorno;
+	}
+	public ArrayList<Integer> obtenerTransicion(int q)
+	{
+		if(q > tablaDeTransiciones.size())
+			return null;
+		return tablaDeTransiciones.get(q);
+	}
+	public ArrayList<Integer> obtenerTransicion(int q, int p)
+	{
+		ArrayList<Integer> transiciones = new ArrayList<Integer>();
+		ArrayList<Integer> estado = obtenerTransicion(q);
+		if(estado == null) return null;
+		for(int i=0; i<estado.size(); i++)
+			if(estado.get(i) == p)
+				transiciones.add(i);
+		return transiciones;
+	}
+	public ArrayList<Integer> obtenerTransicion(int q, int p, String cima)
+	{
+		ArrayList<Integer> estado = obtenerTransicion(q,p);
+		ArrayList<Integer> transiciones = new ArrayList<Integer>();
+		if(estado == null) return null;
+		for(int i=0; i<estado.size(); i++)
+			if(tablaDeLaPila.get(q).get(estado.get(i)).equals(cima))
+				transiciones.add(estado.get(i));
+		return transiciones;
 	}
 }
