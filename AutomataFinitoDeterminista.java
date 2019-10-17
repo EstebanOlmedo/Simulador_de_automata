@@ -81,4 +81,8 @@ public class AutomataFinitoDeterminista extends AutomataFinito
 		else
 			return tablaDeTransiciones.get(q).get(simbolo);
 	}
+	public ArrayList<ArrayList<Integer>> getTablaDeTransiciones()
+	{
+		return tablaDeTransiciones;
+	}
 }
