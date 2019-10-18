@@ -1,3 +1,6 @@
+/**
+ * @author Gabriel Graciano Herrera
+ */
 public class MaquinaDeTuring
 {
 	private char[] cinta;

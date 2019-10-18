@@ -1,13 +1,16 @@
+/**
+ * @author Gabriel Graciano Herrera
+ */
 public class EvaluadorDeExpresion{
 	private MaquinaDeTuring maquina;
-	private AutomataAPila automataPila;
+	private AutomataFinitoAPila automataPila;
 	private AutomataFinitoDeterminista automataFinitoDeterminista;
 	private AutomataFinitoNoDeterminista automataFinitoNoDeterminista;
 	private AutomataFinitoNoDeterministaEpsilon automataFinitoNoDeterministaEpsilon;
 
 	public EvaluadorDeExpresion(
 		MaquinaDeTuring maquina,
-		AutomataAPila automataPila,
+		AutomataFinitoAPila automataPila,
 		AutomataFinitoDeterminista automataFinitoDeterminista,
 		AutomataFinitoNoDeterminista automataFinitoNoDeterminista,
 		AutomataFinitoNoDeterministaEpsilon automataFinitoNoDeterministaEpsilon)

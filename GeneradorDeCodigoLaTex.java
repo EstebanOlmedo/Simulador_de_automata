@@ -1,7 +1,10 @@
+/**
+ * @author Esteban Olmedo Ramírez
+ */
 public class GeneradorDeCodigoLaTex
 {
 	private ArchivoTex archivo;
-	private AutomataAPila automataAPila;
+	private AutomataFinitoAPila automataAPila;
 	private AutomataFinitoDeterminista afd;
 	private AutomataFinitoNoDeterminista afn;
 	private AutomataFinitoNoDeterministaEpsilon afn_epsilon;
@@ -11,7 +14,7 @@ public class GeneradorDeCodigoLaTex
 		this(null, null, null, null, null);
 	}
 	public GeneradorDeCodigoLaTex(ArchivoTex archivo,
-			AutomataAPila automataAPila,
+			AutomataFinitoAPila automataAPila,
 			AutomataFinitoDeterminista afd, 
 			AutomataFinitoNoDeterminista afn,
 			AutomataFinitoNoDeterministaEpsilon afn_epsilon)
@@ -97,7 +100,7 @@ public class GeneradorDeCodigoLaTex
 	{
 		return verificar((AutomataFinitoNoDeterminista)afn_e);
 	}
-	public boolean verificar(AutomataAPila ap)
+	public boolean verificar(AutomataFinitoAPila ap)
 	{
 		return verificar((AutomataFinito)ap);
 	}

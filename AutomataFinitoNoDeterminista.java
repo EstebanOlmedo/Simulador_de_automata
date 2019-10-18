@@ -1,5 +1,5 @@
 /**
- * @author Daniel Montes Guerrero
+ * @author Gabriel Graciano Herrera
  */
 import java.util.ArrayList;
 public class AutomataFinitoNoDeterminista extends AutomataFinito

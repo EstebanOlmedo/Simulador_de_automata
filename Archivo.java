@@ -1,5 +1,5 @@
 /**
- * @author Daniel Montes Guerrero
+ * @author Gabriel Graciano Herrera
  */
 import java.io.File;
 import java.io.IOException;

@@ -1,3 +1,6 @@
+/**
+ * @author Esteba Olmedo Ramírez
+ */
 public class GeneradorDeMaquinaDeTuring
 {
 	private MaquinaDeTuring maquina;

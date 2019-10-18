@@ -1,3 +1,6 @@
+/**
+ * @author Gabriel Graciano Herrera
+ */
 public class GeneradorDeAutomataFinitoDeterminista extends GeneradorDeAutomataFinito
 {
 	private AutomataFinitoDeterminista afd;
