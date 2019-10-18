@@ -1,4 +1,7 @@
-public class GeneradorDeAutomata implements IGeneradorDeAutomataFinitoAPila, IGeneradorDeAutomataFinitoNoDeterminista
+public class GeneradorDeAutomata implements IGeneradorDeAutomataFinitoNoDeterministaEpsilon,
+											IGeneradorDeAutomataFinitoDeterminista,
+											IGeneradorDeAutomataFinitoAPila, 
+											IGeneradorDeAutomataFinitoNoDeterminista
 {
 	private AutomataFinitoDeterminista automataFinitoDeterminista;
 	private AutomataFinitoNoDeterminista automataFinitoNoDeterminista;
@@ -112,5 +115,15 @@ public class GeneradorDeAutomata implements IGeneradorDeAutomataFinitoAPila, IGe
 	{
 		System.out.println("Generando autómata");
 		return new AutomataFinitoAPila();
+	}
+	public AutomataFinitoDeterminista crearAutomataFinitoDeterminista()
+	{
+		System.out.println("Generando automata");
+		return new AutomataFinitoDeterminista();
+	}
+	public AutomataFinitoNoDeterministaEpsilon crearAutomataFinitoNoDeterministaEpsilon()
+	{
+		System.out.println("Generando automata");
+		return new AutomataFinitoNoDeterministaEpsilon();
 	}
 }
