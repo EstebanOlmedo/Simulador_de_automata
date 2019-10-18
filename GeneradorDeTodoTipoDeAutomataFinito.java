@@ -1,7 +1,10 @@
+/**
+ * @author Esteban Olmedo Ramírez
+ */
 public class GeneradorDeTodoTipoDeAutomataFinito
 	implements IGeneradorDeTodoTipoDeAutomataFinitoFinitoNoDeterministaEpsilon,
 		   IGeneradorDeTodoTipoDeAutomataFinitoFinitoAPila,
-	extends GeneradorDeTodoTipoDeAutomataFinitoFinitoDeterminista;
+	extends GeneradorDeAutomataFinitoDeterminista;
 {
 	//private AutomataFinitoDeterminista automataFinitoDeterminista;
 	private AutomataFinitoNoDeterminista automataFinitoNoDeterminista;
