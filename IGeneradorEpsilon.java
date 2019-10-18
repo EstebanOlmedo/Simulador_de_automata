@@ -1,8 +1,8 @@
 /**
  * @author Daniel Montes Guerrero
  */
-public interface IGeneradorDeAutomataFinitoNoDeterministaEpsilon 
-	extends IGeneradorDeAutomataFinitoDeterminista
+public interface IGeneradorEpsilon
 {
+	public AutomataFinitoNoDeterminista crearAutomataFinitoNoDeterminista();
 	public AutomataFinitoNoDeterministaEpsilon crearAutomataFinitoNoDeterministaEpsilon();
 }
