@@ -1,6 +1,3 @@
-/**
- * @author Daniel Montes Guerrero
- */
 import java.util.ArrayList;
 import java.util.Stack;
 public class AutomataFinitoAPila extends AutomataFinito
@@ -23,7 +20,7 @@ public class AutomataFinitoAPila extends AutomataFinito
 		this.tablaDeLaPila = tablaDeLaPila;
 		this.pila = pila;
 	}
-	public AutomataFinitoAPila(AutomataAPila automata)
+	public AutomataFinitoAPila(AutomataFinitoAPila automata)
 	{
 		super(automata);
 		this.tablaDeTransiciones = automata.tablaDeTransiciones;
@@ -46,7 +43,7 @@ public class AutomataFinitoAPila extends AutomataFinito
 	{
 		if(obj == null){return false;}
 		if(!(obj instanceof AutomataFinitoAPila)){return false;}
-		AutomataFinitoAPila automata = (AutomataAPila)obj;
+		AutomataFinitoAPila automata = (AutomataFinitoAPila)obj;
 		return super.equals(automata) &&
 			tablaDeTransiciones.equals(automata.tablaDeTransiciones) &&
 			tablaDeLaPila.equals(automata.tablaDeLaPila) &&
