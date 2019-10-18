@@ -2,9 +2,9 @@
  * @author Esteban Olmedo Ramírez
  */
 public class GeneradorDeTodoTipoDeAutomataFinito
-	implements IGeneradorDeTodoTipoDeAutomataFinitoFinitoNoDeterministaEpsilon,
-		   IGeneradorDeTodoTipoDeAutomataFinitoFinitoAPila,
-	extends GeneradorDeAutomataFinitoDeterminista;
+	extends GeneradorDeAutomataFinitoDeterminista
+	implements IGeneradorDeAutomataFinitoNoDeterministaEpsilon,
+		   IGeneradorDeAutomataFinitoAPila
 {
 	//private AutomataFinitoDeterminista automataFinitoDeterminista;
 	private AutomataFinitoNoDeterminista automataFinitoNoDeterminista;
@@ -35,7 +35,7 @@ public class GeneradorDeTodoTipoDeAutomataFinito
 				);
 	}
 
-	public GeneradorDeTodoTipoDeAutomataFinito(GeneradorDeAutomata generador)
+	public GeneradorDeTodoTipoDeAutomataFinito(GeneradorDeTodoTipoDeAutomataFinito generador)
 	{
 		super(generador);
 		this.automataFinitoNoDeterminista = generador.automataFinitoNoDeterminista;
@@ -81,7 +81,7 @@ public class GeneradorDeTodoTipoDeAutomataFinito
 	{
 		if(obj == null) return false;
 		if(!(obj instanceof GeneradorDeTodoTipoDeAutomataFinito)) return false;
-		GeneradorDeTodoTipoDeAutomataFinito conversor = (GeneradorDeAutomata)obj;
+		GeneradorDeTodoTipoDeAutomataFinito conversor = (GeneradorDeTodoTipoDeAutomataFinito)obj;
 		return super.equals(obj) &&
 		automataFinitoNoDeterminista.equals(conversor.automataFinitoNoDeterminista) &&
 		automataFinitoNoDeterministaEpsilon.equals(conversor.automataFinitoNoDeterministaEpsilon) &&
