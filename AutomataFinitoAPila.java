@@ -1,16 +1,16 @@
 import java.util.ArrayList;
 import java.util.Stack;
-public class AutomataAPila extends AutomataFinito
+public class AutomataFinitoAPila extends AutomataFinito
 {
 	private ArrayList<ArrayList<Integer>> tablaDeTransiciones;
 	private ArrayList<ArrayList<String>> tablaDeLaPila;
 	private Stack <String> pila;
 
-	public AutomataAPila()
+	public AutomataFinitoAPila()
 	{
 		this(0, null, null, null, null, null);
 	}
-	public AutomataAPila(int numeroDeEstados, char[] alfabeto, int[] estadosAceptacion, 
+	public AutomataFinitoAPila(int numeroDeEstados, char[] alfabeto, int[] estadosAceptacion, 
 			ArrayList<ArrayList<Integer>> tablaDeTransiciones, 
 			ArrayList<ArrayList<String>> tablaDeLaPila, 
 			Stack <String> pila)
@@ -20,7 +20,7 @@ public class AutomataAPila extends AutomataFinito
 		this.tablaDeLaPila = tablaDeLaPila;
 		this.pila = pila;
 	}
-	public AutomataAPila(AutomataAPila automata)
+	public AutomataFinitoAPila(AutomataAPila automata)
 	{
 		super(automata);
 		this.tablaDeTransiciones = automata.tablaDeTransiciones;
@@ -42,8 +42,8 @@ public class AutomataAPila extends AutomataFinito
 	public boolean equals(Object obj)
 	{
 		if(obj == null){return false;}
-		if(!(obj instanceof AutomataAPila)){return false;}
-		AutomataAPila automata = (AutomataAPila)obj;
+		if(!(obj instanceof AutomataFinitoAPila)){return false;}
+		AutomataFinitoAPila automata = (AutomataAPila)obj;
 		return super.equals(automata) &&
 			tablaDeTransiciones.equals(automata.tablaDeTransiciones) &&
 			tablaDeLaPila.equals(automata.tablaDeLaPila) &&
