@@ -3,7 +3,7 @@
  */
 import java.util.ArrayList;
 import java.util.Stack;
-public class AutomataFinitoAPila extends AutomataFinito
+public class AutomataFinitoAPila extends AutomataFinito implements IPila
 {
 	private ArrayList<ArrayList<Integer>> tablaDeTransiciones;
 	private ArrayList<ArrayList<String>> tablaDeLaPila;
@@ -99,5 +99,21 @@ public class AutomataFinitoAPila extends AutomataFinito
 			if(tablaDeLaPila.get(q).get(estado.get(i)).equals(cima))
 				transiciones.add(estado.get(i));
 		return transiciones;
+	}
+	public String pop()
+	{
+		return pila.pop();
+	}
+	public void push(String cadena)
+	{
+		pila.push(cadena);
+	}
+	public String top()
+	{
+		return pila.top();
+	}
+	public boolean isEmpty()
+	{
+		return pila.empty();
 	}
 }
