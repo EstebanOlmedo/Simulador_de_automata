@@ -1,3 +1,6 @@
+/**
+ * @author Esteban Olmedo Ramírez
+ */
 public interface IPila
 {
 	public String pop();
