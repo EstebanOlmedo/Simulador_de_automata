@@ -1,3 +1,6 @@
+/**
+ * @author Daniel Montes Guerrero
+ */
 import java.util.ArrayList;
 import java.util.Stack;
 public class AutomataFinitoAPila extends AutomataFinito

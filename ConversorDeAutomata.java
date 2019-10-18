@@ -1,3 +1,6 @@
+/**
+ * @author Daniel Montes Guerrero
+ */
 public class ConversorDeAutomata{
 	private AutomataFinitoDeterminista automataFinitoDeterminista;
 	private AutomataFinitoNoDeterminista automataFinitoNoDeterminista;

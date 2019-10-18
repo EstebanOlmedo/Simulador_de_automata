@@ -1,3 +1,6 @@
+/**
+ * @author Daniel Montes Guerrero
+ */
 import java.io.File;
 import java.io.IOException;
 public class Archivo
