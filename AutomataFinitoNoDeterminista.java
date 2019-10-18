@@ -79,7 +79,7 @@ public class AutomataFinitoNoDeterminista extends AutomataFinito
 				trancisiones.add(estado.get(i));
 		return trancisiones;
 	}
-	public ArrayList<ArrayList<ArrayList<Integer>>> getTablaDeTransiciones()
+	public ArrayList<ArrayList<ArrayList<Integer>>> getTablaDeTransicion()
 	{
 		return tablaDeTransiciones;
 	}
