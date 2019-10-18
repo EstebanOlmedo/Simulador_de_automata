@@ -1,3 +1,6 @@
+/**
+ * @author Esteban Olmedo Ramírez
+ */
 public class ArchivoTex extends Archivo
 {
 	private String contenido;

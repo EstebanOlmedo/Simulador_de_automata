@@ -1,3 +1,6 @@
+/**
+ * @author Esteban Olmedo Ramírez
+ */
 import java.util.ArrayList;
 public class AutomataFinitoNoDeterministaEpsilon extends AutomataFinitoNoDeterminista
 {
