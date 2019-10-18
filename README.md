@@ -1,6 +1,7 @@
 # Simulador_de_automata
 Simulador básico de automátas
 
+#Contribuidores
  |Nombre|Usuario|
  |------|-------|
  |Gabriel Graciano Herrera|brialgah|
