@@ -89,7 +89,7 @@ public class GeneradorDeTodoTipoDeAutomataFinito
 	}
 	public String getInforme()
 	{
-		return "Automata generado\nDatos del automata generado:n";
+		return "Automata generado\nDatos del automata generado:\n";
 	}
 	public String getInforme(AutomataFinitoDeterminista afd)
 	{
