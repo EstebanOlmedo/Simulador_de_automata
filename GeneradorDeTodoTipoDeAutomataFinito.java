@@ -3,10 +3,8 @@
  */
 public class GeneradorDeTodoTipoDeAutomataFinito
 	extends GeneradorDeAutomataFinitoDeterminista
-	implements IGeneradorDeAutomataFinitoNoDeterministaEpsilon,
-		   IGeneradorDeAutomataFinitoAPila
+	implements IGeneradorEpsilon
 {
-	//private AutomataFinitoDeterminista automataFinitoDeterminista;
 	private AutomataFinitoNoDeterminista automataFinitoNoDeterminista;
 	private AutomataFinitoNoDeterministaEpsilon automataFinitoNoDeterministaEpsilon;
 	private AutomataFinitoAPila automataAPila;
@@ -19,7 +17,6 @@ public class GeneradorDeTodoTipoDeAutomataFinito
 		)
 	{
 		super(automataFinitoDeterminista, automataFinitoDeterminista);
-		//this.automataFinitoDeterminista = automataFinitoDeterminista;
 		this.automataFinitoNoDeterminista = automataFinitoNoDeterminista;
 		this.automataFinitoNoDeterministaEpsilon = automataFinitoNoDeterministaEpsilon;
 		this.automataAPila = automataAPila;
@@ -116,13 +113,6 @@ public class GeneradorDeTodoTipoDeAutomataFinito
 		System.out.println("Generando autómata");
 		return new AutomataFinitoAPila();
 	}
-	/*
-	public AutomataFinitoDeterminista crearAutomataFinitoDeterminista()
-	{
-		System.out.println("Generando automata");
-		return new AutomataFinitoDeterminista();
-	}
-	*/
 	public AutomataFinitoNoDeterministaEpsilon crearAutomataFinitoNoDeterministaEpsilon()
 	{
 		System.out.println("Generando automata");
