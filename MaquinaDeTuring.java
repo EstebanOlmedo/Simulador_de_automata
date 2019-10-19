@@ -32,7 +32,7 @@ public class MaquinaDeTuring
 		retorno += "Cinta: {...,";
 		for(int i = 0; i < cinta.length; i++)
 			retorno += cinta[i] + ", ";
-		retorno += ",...}\n";
+		retorno += "...}\n";
 		retorno += "Cabezal: " + cabezal + "\n";
 		return retorno;
 	}
@@ -93,5 +93,9 @@ public class MaquinaDeTuring
 	{
 		char[] nueva = new char[cinta.length*2];
 		cinta = nueva;
+	}
+	public void setCinta(char[] cinta)
+	{
+		this.cinta = cinta;
 	}
 }

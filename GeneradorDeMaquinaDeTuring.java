@@ -48,4 +48,13 @@ public class GeneradorDeMaquinaDeTuring
 	{
 		return getInforme() + maquina;
 	}
+	public MaquinaDeTuring getMaquinaDeTuring()
+	{
+		return maquina;
+	}
+	public void generar(char[] cinta)
+	{
+		System.out.println("Generando máquina de turing...");
+		maquina.setCinta(cinta);
+	}
 }
