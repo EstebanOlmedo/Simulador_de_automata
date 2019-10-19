@@ -3,32 +3,32 @@
  */
 public class GeneradorDeCodigoLaTex
 {
-	private ArchivoTex archivo;
+	private Archivo archivo;
 	private AutomataFinitoAPila automataAPila;
 	private AutomataFinitoDeterminista afd;
 	private AutomataFinitoNoDeterminista afn;
-	private AutomataFinitoNoDeterministaEpsilon afn_epsilon;
+	private AutomataFinitoNoDeterministaEpsilon afnEpsilon;
 
 	public GeneradorDeCodigoLaTex()
 	{
 		this(null, null, null, null, null);
 	}
-	public GeneradorDeCodigoLaTex(ArchivoTex archivo,
+	public GeneradorDeCodigoLaTex(Archivo archivo,
 			AutomataFinitoAPila automataAPila,
 			AutomataFinitoDeterminista afd, 
 			AutomataFinitoNoDeterminista afn,
-			AutomataFinitoNoDeterministaEpsilon afn_epsilon)
+			AutomataFinitoNoDeterministaEpsilon afnEpsilon)
 	{
 		this.archivo = archivo;
 		this.automataAPila = automataAPila;
 		this.afd = afd;
 		this.afn = afn;
-		this.afn_epsilon = afn_epsilon;
+		this.afnEpsilon = afnEpsilon;
 	}
 	public GeneradorDeCodigoLaTex(GeneradorDeCodigoLaTex generador)
 	{
 		this(generador.archivo, generador.automataAPila, 
-				generador.afd, generador.afn, generador.afn_epsilon);
+				generador.afd, generador.afn, generador.afnEpsilon);
 	}
 	public void destruir()
 	{
@@ -52,10 +52,10 @@ public class GeneradorDeCodigoLaTex
 			afn.destruir();
 			afn = null;
 		}
-		if(afn_epsilon != null)
+		if(afnEpsilon != null)
 		{
-			afn_epsilon.destruir();
-			afn_epsilon = null;
+			afnEpsilon.destruir();
+			afnEpsilon = null;
 		}
 		System.gc();
 	}
@@ -69,7 +69,7 @@ public class GeneradorDeCodigoLaTex
 			automataAPila.equals(generador.automataAPila) &&
 			afd.equals(generador.afd) &&
 			afn.equals(generador.afn) &&
-			afn_epsilon.equals(generador.afn_epsilon);
+			afnEpsilon.equals(generador.afnEpsilon);
 	}
 	@Override
 	public String toString()
@@ -78,7 +78,7 @@ public class GeneradorDeCodigoLaTex
 			"Automata a pila:\n" + automataAPila.toString() + "\n" +
 			"Automata finito determinista:\n" + afd.toString() + "\n" +
 			"Automata finito no determinista:\n" + afn.toString() + "\n" +
-			"Automata finito no determinista epsilon:\n" + afn_epsilon.toString() + "\n";
+			"Automata finito no determinista epsilon:\n" + afnEpsilon.toString() + "\n";
 	}
 	public boolean verificar(AutomataFinito automata)
 	{
