@@ -42,4 +42,13 @@ public class ArchivoTex extends Archivo
 		return super.toString() + "\n" +
 			"Contenido:\n" + contenido + "\n";
 	}
+	public void establecerCabecera(String cabecera)
+	{
+		contenido += "\\documentclass[letter,12pt]{"+cabecera+"}\n";
+	}
+	public void establecerCabecera(String cabecera, String section)
+	{
+		establecerCabecera(cabecera);
+		contenido += "\\section{"+section+"}\n";
+	}
 }
