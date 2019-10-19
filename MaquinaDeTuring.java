@@ -29,10 +29,10 @@ public class MaquinaDeTuring
 	public String toString()
 	{
 		String retorno = new String();
-		retorno += "Cinta: {";
+		retorno += "Cinta: {...,";
 		for(int i = 0; i < cinta.length; i++)
 			retorno += cinta[i] + ", ";
-		retorno += "}\n";
+		retorno += ",...}\n";
 		retorno += "Cabezal: " + cabezal + "\n";
 		return retorno;
 	}
