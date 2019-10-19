@@ -108,9 +108,9 @@ public class AutomataFinitoAPila extends AutomataFinito implements IPila
 	{
 		pila.push(cadena);
 	}
-	public String top()
+	public String peek()
 	{
-		return pila.top();
+		return pila.peek();
 	}
 	public boolean isEmpty()
 	{
