@@ -5,13 +5,13 @@ public class ConversorDeAutomata{
 	private AutomataFinitoDeterminista automataFinitoDeterminista;
 	private AutomataFinitoNoDeterminista automataFinitoNoDeterminista;
 	private AutomataFinitoNoDeterministaEpsilon automataFinitoNoDeterministaEpsilon;
-	private AutomataAPila automataAPila;
+	private AutomataFinitoAPila automataAPila;
 
 	public ConversorDeAutomata(
 			AutomataFinitoDeterminista automataFinitoDeterminista,
 			AutomataFinitoNoDeterminista automataFinitoNoDeterminista,
 			AutomataFinitoNoDeterministaEpsilon automataFinitoNoDeterministaEpsilon,
-			AutomataAPila automataAPila
+			AutomataFinitoAPila automataAPila
 		)
 	{
 		this.automataFinitoDeterminista = automataFinitoDeterminista;
@@ -87,11 +87,11 @@ public class ConversorDeAutomata{
 			return false;
 		}
 	}
-	public boolean sePuede(AutomataFinitoDeterminista afd, AutomataAPila automataPila)
+	public boolean sePuede(AutomataFinitoDeterminista afd, AutomataFinitoAPila automataPila)
 	{
 		return sePuede(true);
 	}
-	public boolean sePuede(AutomataAPila automataPila, AutomataFinitoDeterminista adf)
+	public boolean sePuede(AutomataFinitoAPila automataPila, AutomataFinitoDeterminista adf)
 	{
 		return sePuede(false);
 	}
