@@ -96,4 +96,21 @@ public class EvaluadorDeExpresion{
 		}
 		return true;
 	}
+	public boolean evaluarCadena(String cadena, AutomataFinito automata)
+	{
+		if(!perteneceAlAlfabeto(cadena, automata)){return false;}
+		int tam = cadena.length();
+		//Para un autómata finito
+		int p = automata.getEstadoInicial();
+		int q;
+		for(int i = 0; i < tam; i++)
+		{
+			q = automata.getTransicion(p, cadena.getCharAt(i));
+			if(q = -1)
+				return false;
+			else
+				p = q;
+		}
+		return esEstadoAceptacion(p);
+	}
 }
