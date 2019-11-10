@@ -2,6 +2,7 @@
  * @author Gabriel Graciano Herrera
  */
 import java.util.ArrayList;
+import java.util.TreeMap;
 public class AutomataFinitoNoDeterminista extends AutomataFinito
 {
 	private ArrayList< ArrayList< ArrayList<Integer>>> tablaDeTransiciones;
@@ -10,14 +11,15 @@ public class AutomataFinitoNoDeterminista extends AutomataFinito
 			int numeroDeEstados,
 			char[] alfabeto,
 			int[] estadosAceptacion,
+			TreeMap<Character,Integer> mapa,
 			ArrayList<ArrayList<ArrayList<Integer>>> tablaDeTransiciones)
 	{
-		super(numeroDeEstados, alfabeto, estadosAceptacion);
+		super(numeroDeEstados, alfabeto, estadosAceptacion, mapa);
 		this.tablaDeTransiciones = tablaDeTransiciones;
 	}
 
 	public AutomataFinitoNoDeterminista(){
-		this(0, null, null, null);
+		this(0, null, null, null, null);
 	}
 
 	public AutomataFinitoNoDeterminista(AutomataFinitoNoDeterminista automata)
@@ -82,5 +84,29 @@ public class AutomataFinitoNoDeterminista extends AutomataFinito
 	public ArrayList<ArrayList<ArrayList<Integer>>> getTablaDeTransiciones()
 	{
 		return tablaDeTransiciones;
+	}
+	public ArrayList<Integer> getAdyacencia(int estado, int simbolo)
+	{
+		if(obtenerTransicion(estado) == null)
+			return null;
+		else
+			return obtenerTransicion(estado).get(simbolo);
+	}
+	public boolean evaluar(String cadena, int indice, int estado)
+	{
+		if(indice >= cadena.length()){
+			return isAceptacion(estado);
+		}
+		if(super.exist(cadena.charAt(indice))){
+			boolean respuesta = false;
+			ArrayList<Integer> adyacencia = getAdyacencia(estado, super.getNumeroSimbolo(cadena.charAt(indice)));
+			for(int i=0; i<adyacencia.size(); i++){
+				respuesta |= evaluar(cadena, indice+1, adyacencia.get(i));
+				if(respuesta == true) return true;
+			}
+			return respuesta;
+		}
+		else
+			return false;
 	}
 }
