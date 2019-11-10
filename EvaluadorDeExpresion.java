@@ -106,11 +106,20 @@ public class EvaluadorDeExpresion{
 		for(int i = 0; i < tam; i++)
 		{
 			q = automata.getTransicion(p, cadena.getCharAt(i));
-			if(q = -1)
+			if(q == -1)
 				return false;
 			else
 				p = q;
 		}
 		return esEstadoAceptacion(p);
+	}
+	public boolean evaluarCadena(String cadena, MaquinaDeTuring maquinaDeTuring)
+	{
+		this.maquina = maquinaDeTuring;
+		maquina.prepararMaquina(cadena);
+		if(maquina.accionar())
+			return true;
+		else
+			return false;
 	}
 }
