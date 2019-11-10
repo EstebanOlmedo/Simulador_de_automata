@@ -82,7 +82,7 @@ public class AutomataFinitoDeterminista extends AutomataFinito
 	}
 	public int getAdyacencia(int q, int simbolo)
 	{
-		if(simbolo > tablaDeTransiciones.get(0).size())
+		if(q > tablaDeTransiciones.size())
 			return -1;
 		else
 			return tablaDeTransiciones.get(q).get(simbolo);
