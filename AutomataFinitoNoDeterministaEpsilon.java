@@ -2,22 +2,24 @@
  * @author Esteban Olmedo Ramírez
  */
 import java.util.ArrayList;
+import java.util.TreeMap;
 public class AutomataFinitoNoDeterministaEpsilon extends AutomataFinitoNoDeterminista
 {
 	private ArrayList<ArrayList<Integer>> adyacenciaEpsilon;
 
 	public AutomataFinitoNoDeterministaEpsilon()
 	{
-		this(0, null, null, null, null);
+		this(0, null, null, null, null, null);
 	}
 	public AutomataFinitoNoDeterministaEpsilon(
 			int numeroDeEstados,
 			char[] alfabeto,
 			int[] estadosAceptacion,
+			TreeMap<Character, Integer> mapa,
 			ArrayList<ArrayList<ArrayList<Integer>>> tablaDeTransiciones,
 			ArrayList<ArrayList<Integer>> adyacenciaEpsilon)
 	{
-		super(numeroDeEstados, alfabeto, estadosAceptacion, tablaDeTransiciones);
+		super(numeroDeEstados, alfabeto, estadosAceptacion, mapa, tablaDeTransiciones);
 		this.adyacenciaEpsilon = adyacenciaEpsilon;
 	}
 	public AutomataFinitoNoDeterministaEpsilon(AutomataFinitoNoDeterministaEpsilon automata)
@@ -66,5 +68,36 @@ public class AutomataFinitoNoDeterministaEpsilon extends AutomataFinitoNoDetermi
 		if(epsilon.lastIndexOf(k) != -1)
 			transiciones.add(epsilon);
 		return transiciones;
+	}
+	@Override
+	public boolean evaluar(String cadena, int indice, int estado)
+	{
+		boolean respuesta = false;
+		if(indice >= cadena.length()){
+			if(isAceptacion(estado))
+				return true;
+			else
+			{
+				for(int i=0; i<adyacenciaEpsilon.get(estado).size(); i++){
+					if( isAceptacion(adyacenciaEpsilon.get(estado).get(i)) )
+						return true;
+				}
+				return false;
+			}
+		}
+		if(super.exist(cadena.charAt(indice))){
+			ArrayList<Integer> adyacencia = getAdyacencia(estado, super.getNumeroSimbolo(cadena.charAt(indice)));
+			for(int i=0; i<adyacencia.size(); i++){
+				respuesta |= evaluar(cadena, indice+1, adyacencia.get(i));
+				if(respuesta == true) return true;
+			}
+			for(int i=0; i<adyacenciaEpsilon.get(estado).size(); i++){
+				respuesta |= evaluar(cadena, indice, adyacenciaEpsilon.get(estado).get(i));
+				if(respuesta == true) return true;
+			}
+			return respuesta;
+		}
+		else
+			return false;
 	}
 }
