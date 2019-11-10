@@ -1,27 +1,31 @@
 /**
  * @author Esteban Olmedo Ramírez
  */
+
+import java.util.TreeMap;
 public class AutomataFinito
 {
 	private int numeroDeEstados;
 	private char[] alfabeto;
 	private int[] estadosAceptacion;
+	private TreeMap<Character,Integer> mapa; 
 
 	public AutomataFinito()
 	{
-		this(0, null, null);
+		this(0, null, null, null);
 	}
 	public AutomataFinito(int numeroDeEstados, char[] alfabeto,
-			int[] estadosAceptacion)
+			int[] estadosAceptacion, TreeMap<Character,Integer> mapa)
 	{
 		this.numeroDeEstados = numeroDeEstados;
 		this.alfabeto = alfabeto;
 		this.estadosAceptacion = estadosAceptacion;
+		this.mapa = mapa;
 	}
 	public AutomataFinito(AutomataFinito automata)
 	{
 		this(automata.numeroDeEstados, automata.alfabeto, 
-				automata.estadosAceptacion);
+				automata.estadosAceptacion, automata.mapa);
 	}
 	public void destruir()
 	{
@@ -83,15 +87,22 @@ public class AutomataFinito
 	}
 	public int getNumeroSimbolo(char a)
 	{
-		for(int i = 0; i < alfabeto.length; i++)
-		{
-			if(alfabeto[i] == a)
-				return i;
-		}
+		Integer simbolo = mapa.get(a);
+		if(simbolo != null)
+			return simbolo;
 		return -1;
 	}
 	public int getNumeroDeEstados()
 	{
 		return numeroDeEstados;
+	}
+	public void setMapa(){
+		for(int i=0; i<alfabeto.length; i++)
+		{
+			mapa.put(alfabeto[i], i);
+		}
+	}
+	public TreeMap<Character, Integer> getMapa(){
+		return mapa;
 	}
 }
