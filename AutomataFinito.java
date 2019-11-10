@@ -105,4 +105,8 @@ public class AutomataFinito
 	public TreeMap<Character, Integer> getMapa(){
 		return mapa;
 	}
+	public boolean exist(char a)
+	{
+		return mapa.containsValue(a);
+	}
 }
