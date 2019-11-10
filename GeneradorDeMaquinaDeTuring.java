@@ -1,5 +1,5 @@
 /**
- * @author Esteba Olmedo Ramírez
+ * @author Esteban Olmedo Ramírez
  */
 import java.util.ArrayList;
 public class GeneradorDeMaquinaDeTuring
@@ -78,10 +78,18 @@ public class GeneradorDeMaquinaDeTuring
 			char simbolo, 
 			char movimiento)
 	{
-		int indiceSimbolo = maquina.getIndiceSimboloEnAlfabeto(simbolo);
-		FuncionDeltaMaquinaDeTuring funcion = new FuncionDeltaMaquinaDeTuring(estadoCambio, simbolo, movimiento);
-		TablaMaquinaDeTuring tabla = maquina.getTabla();
-		tabla.setEstado(estado, indiceSimbolo, funcion);
+		try
+		{
+			int indiceSimbolo = maquina.getIndiceSimboloEnAlfabeto(simbolo);
+			FuncionDeltaMaquinaDeTuring funcion = new FuncionDeltaMaquinaDeTuring(estadoCambio, simbolo, movimiento);
+			TablaMaquinaDeTuring tabla = maquina.getTabla();
+			tabla.setEstado(estado, indiceSimbolo, funcion);
+		}
+		catch(ArrayOutOfBoundsException aoobe)
+		{
+			System.out.println("Ha ocurrido un error");
+			aoobe.printStackTrace();
+		}
 	}
 	public void crearEstructuraMaquina(
 			String alfabeto, 

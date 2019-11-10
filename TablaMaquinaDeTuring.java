@@ -68,7 +68,8 @@ public class TablaMaquinaDeTuring
 	{
 		tabla[numeroEstado][simbolo] = transicion;
 	}
-	public FuncionDeltaMaquinaDeTuring getFuncion(int numeroEstado, int simbolo) //Arrojar error si se pasa del tamaño del arreglo
+	public FuncionDeltaMaquinaDeTuring getFuncion(int numeroEstado, int simbolo) 
+			throws IndexOutOfBoundsException
 	{
 		return tabla[numeroEstado][simbolo];
 	}

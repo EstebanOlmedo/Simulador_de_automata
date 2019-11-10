@@ -95,9 +95,9 @@ public class GeneradorDeTodoTipoDeAutomataFinito
 	public String getInforme(AutomataFinitoNoDeterminista afn){
 		return getInforme() + afn;
 	}
-	public String getInforme(AutomataFinitoNoDeterministaEpsilon afn_e)
+	public String getInforme(AutomataFinitoNoDeterministaEpsilon afnE)
 	{
-		return getInforme() + afn_e;
+		return getInforme() + afnE;
 	}
 	public String getInforme(AutomataFinitoAPila automataPila)
 	{

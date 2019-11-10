@@ -112,17 +112,42 @@ public class MaquinaDeTuring
 	}
 	public boolean modificarCinta(FuncionDeltaMaquinaDeTuring funcion)
 	{
-		if(funcion.hayCamino())
+		try
 		{
-			cinta[cabezal] = funcion.getLoQueDeja();
-			if(funcion.getMovimiento() == 'D')
-				cabezal++;
+			if(funcion.hayCamino())
+			{
+				cinta[cabezal] = funcion.getLoQueDeja();
+				if(funcion.getMovimiento() == 'D')
+					cabezal++;
+				else
+					cabezal--;
+				return true;
+			}
 			else
-				cabezal--;
-			return true;
+				return false;
 		}
-		else
+		catch(ArrayIndexOutOfBoundsException aioobe)
+		{
+			aioobe.printStackTrace();
+		}
+		catch(NullPointerException npe)
+		{
+			npe.printStackTrace();
+		}
+		finally
+		{
+			System.out.println("Ocurrió un error al intentar modificar la cinta");
 			return false;
+		}
+	}
+	public boolean estaEnAlfabeto(char simbolo)
+	{
+		for(int i = 0; i < alfabeto.length; i++)
+		{
+			if(alfabeto[i] == simbolo)
+				return true;
+		}
+		return false;
 	}
 	private void setCinta(String cadena)
 	{
@@ -146,29 +171,62 @@ public class MaquinaDeTuring
 	{
 		int retorno = 0;
 		int i = 0;
-		while(alfabeto[i] != simbolo)
+		try
 		{
-			i++;
-			retorno++;
+			if(estaEnAlfabeto(simbolo))
+			{
+				while(alfabeto[i] != simbolo)
+				{
+					i++;
+					retorno++;
+				}
+				return retorno;
+			}
+			else
+				return -1;
 		}
-		return retorno;
+		catch(ArrayIndexOutOfBoundsException aioobe)
+		{
+			aioobe.printStackTrace();
+		}
+		finally
+		{
+			System.out.println("Ocurrió un error al intentar encontrar el índice del símbolo");
+			return-1;
+		}
 	}
 	public boolean accionar()
 	{
-		int indice = getIndiceSimboloEnAlfabeto(cinta[cabezal]);
-		int estado = 0;
-		FuncionDeltaMaquinaDeTuring funcion = tabla.getFuncion(estado, indice);
-		while(funcion.hayCamino())
+		try
 		{
-			estado = funcion.getEstado();
-			modificarCinta(funcion);
-			indice = getIndiceSimboloEnAlfabeto(cinta[cabezal]);
-			funcion = tabla.getFuncion(estado, indice);
+			int indice = getIndiceSimboloEnAlfabeto(cinta[cabezal]);
+			int estado = 0;
+			FuncionDeltaMaquinaDeTuring funcion = tabla.getFuncion(estado, indice);
+			while(funcion.hayCamino())
+			{
+				estado = funcion.getEstado();
+				modificarCinta(funcion);
+				indice = getIndiceSimboloEnAlfabeto(cinta[cabezal]);
+				funcion = tabla.getFuncion(estado, indice);
+			}
+			if(tabla.isEstadoAceptacion(estado))
+				return true;
+			else
+				return false;
 		}
-		if(tabla.isEstadoAceptacion(estado))
-			return true;
-		else
+		catch(ArrayIndexOutOfBoundsException aioobe)
+		{
+			aioobe.printStackTrace();
+		}
+		catch(NullPointerException npe)
+		{
+			npe.printStackTrace();
+		}
+		finally
+		{
+			System.out.println("Ocurrió un error al intentar accionar la Máquina de Turing");
 			return false;
+		}
 	}
 	public TablaMaquinaDeTuring getTabla()
 	{

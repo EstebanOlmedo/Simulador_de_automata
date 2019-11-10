@@ -1,3 +1,6 @@
+/**
+ * @author Esteban Olmedo Ramírez
+ */
 public class FuncionDeltaMaquinaDeTuring
 {
 	private int estado;
