@@ -23,7 +23,6 @@ public class TablaMaquinaDeTuring
 	{
 		tabla = new FuncionDeltaMaquinaDeTuring[numeroEstados][tamanioAlfabeto];
 	}
-	
 	public void destruir()
 	{
 		if(tabla != null)

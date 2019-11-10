@@ -1,6 +1,7 @@
 /**
  * @author Esteba Olmedo Ramírez
  */
+import java.util.ArrayList;
 public class GeneradorDeMaquinaDeTuring
 {
 	private MaquinaDeTuring maquina;
@@ -56,5 +57,42 @@ public class GeneradorDeMaquinaDeTuring
 	{
 		System.out.println("Generando máquina de turing...");
 		maquina.setCinta(cinta);
+	}
+	public void generarAlfabeto(String alfabeto)
+	{
+		maquina.setAlfabeto(alfabeto.toCharArray());
+	}
+	public void generarTablaMaquinaDeTuring(int numeroEstados, 
+			ArrayList<Integer> estadosAceptacion, String alfabeto)
+	{
+		generarAlfabeto(alfabeto);
+		TablaMaquinaDeTuring tabla = maquina.getTabla();
+		if(tabla == null)
+			tabla = new TablaMaquinaDeTuring(numeroEstados, alfabeto.length());
+		tabla.setEstadosAceptacion(estadosAceptacion);
+		maquina.setTabla(tabla);
+	}
+	public void crearFuncionEnTabla(
+			int estado, 
+			int estadoCambio,
+			char simbolo, 
+			char movimiento)
+	{
+		int indiceSimbolo = maquina.getIndiceSimboloEnAlfabeto(simbolo);
+		FuncionDeltaMaquinaDeTuring funcion = new FuncionDeltaMaquinaDeTuring(estadoCambio, simbolo, movimiento);
+		TablaMaquinaDeTuring tabla = maquina.getTabla();
+		tabla.setEstado(estado, indiceSimbolo, funcion);
+	}
+	public void crearEstructuraMaquina(
+			String alfabeto, 
+			int numeroEstados, 
+			ArrayList<Integer> estadosAceptacion
+			)
+	{
+		generarTablaMaquinaDeTuring(numeroEstados, estadosAceptacion, alfabeto);
+	}
+	public MaquinaDeTuring getMaquina()
+	{
+		return maquina;
 	}
 }

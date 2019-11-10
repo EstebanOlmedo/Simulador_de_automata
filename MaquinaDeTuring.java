@@ -170,4 +170,12 @@ public class MaquinaDeTuring
 		else
 			return false;
 	}
+	public TablaMaquinaDeTuring getTabla()
+	{
+		return tabla;
+	}
+	public void setTabla(TablaMaquinaDeTuring tabla)
+	{
+		this.tabla = tabla;
+	}
 }
