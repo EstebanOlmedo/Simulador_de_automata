@@ -2,19 +2,22 @@
  * @author Esteban Olmedo Ramírez
  */
 import java.util.ArrayList;
+import java.util.TreeMap;
 public class AutomataFinitoDeterminista extends AutomataFinito
 {
 	private ArrayList <ArrayList <Integer> > tablaDeTransiciones;
 
 	public AutomataFinitoDeterminista()
 	{
-		this(0, null, null, null);
+		this(0, null, null, null, null);
 	}
 	public AutomataFinitoDeterminista(
-			int numeroEstados, char[] alfabeto, int[] estadosAceptacion, 
+			int numeroEstados,
+			char[] alfabeto, int[] estadosAceptacion,
+			TreeMap<Character,Integer> mapa,
 			ArrayList <ArrayList <Integer> > tablaDeTransiciones)
 	{
-		super(numeroEstados, alfabeto, estadosAceptacion);
+		super(numeroEstados, alfabeto, estadosAceptacion, mapa);
 		this.tablaDeTransiciones = tablaDeTransiciones;
 	}
 	public AutomataFinitoDeterminista(AutomataFinitoDeterminista automata)
@@ -87,5 +90,19 @@ public class AutomataFinitoDeterminista extends AutomataFinito
 	public ArrayList<ArrayList<Integer>> getTablaDeTransiciones()
 	{
 		return tablaDeTransiciones;
+	}
+	public boolean evaluar(String cadena)
+	{
+		int estado = 0;
+		for(int i=0; i<cadena.length(); i++)
+		{
+			char simbolo = cadena.charAt(i);
+			if(super.exist(simbolo))
+				estado = getAdyacencia(estado, super.getNumeroSimbolo(simbolo));
+			else
+				return false;
+			if(estado == -1) return false;
+		}
+		return isAceptacion(estado);
 	}
 }
