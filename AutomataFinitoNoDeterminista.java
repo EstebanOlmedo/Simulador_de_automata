@@ -66,6 +66,7 @@ public class AutomataFinitoNoDeterminista extends AutomataFinito
 		return super.equals(afd) && tablaDeTransiciones.equals(afd.tablaDeTransiciones);
 	}
 	public ArrayList<ArrayList<Integer>> obtenerTransicion(int q)
+		throws IndexOutOfBoundsException
 	{
 			if(q > tablaDeTransiciones.size()) 
 				return null;
@@ -87,26 +88,54 @@ public class AutomataFinitoNoDeterminista extends AutomataFinito
 	}
 	public ArrayList<Integer> getAdyacencia(int estado, int simbolo)
 	{
-		if(obtenerTransicion(estado) == null)
+		try
+		{
+			if(obtenerTransicion(estado) == null)
+				return null;
+			else
+				return obtenerTransicion(estado).get(simbolo);
+		}catch(IndexOutOfBoundsException ioobe)
+		{
+			System.out.println("Ocurrió un error");
+			ioobe.printStackTrace();
+		}
+		finally
+		{
 			return null;
-		else
-			return obtenerTransicion(estado).get(simbolo);
+		}
 	}
 	public boolean evaluar(String cadena, int indice, int estado)
 	{
 		if(indice >= cadena.length()){
 			return isAceptacion(estado);
 		}
-		if(super.exist(cadena.charAt(indice))){
-			boolean respuesta = false;
-			ArrayList<Integer> adyacencia = getAdyacencia(estado, super.getNumeroSimbolo(cadena.charAt(indice)));
-			for(int i=0; i<adyacencia.size(); i++){
-				respuesta |= evaluar(cadena, indice+1, adyacencia.get(i));
-				if(respuesta == true) return true;
+		try
+		{
+			if(super.exist(cadena.charAt(indice))){
+				boolean respuesta = false;
+				ArrayList<Integer> adyacencia = getAdyacencia(estado, super.getNumeroSimbolo(cadena.charAt(indice)));
+				for(int i=0; i<adyacencia.size(); i++){
+					respuesta |= evaluar(cadena, indice+1, adyacencia.get(i));
+					if(respuesta == true) return true;
+				}
+				return respuesta;
 			}
-			return respuesta;
+			else
+				return false;
 		}
-		else
+		catch(NullPointerException npe)
+		{
+			System.out.println("Ha ocurrido un error al evaluar");
+			npe.printStackTrace();
+		}
+		catch(IndexOutOfBoundsException ioobe)
+		{
+			System.out.println("Ha ocurrido un error al evaluar");
+			ioobe.printStackTrace();
+		}
+		finally
+		{
 			return false;
+		}
 	}
 }

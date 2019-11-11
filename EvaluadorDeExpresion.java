@@ -98,23 +98,39 @@ public class EvaluadorDeExpresion{
 	}
 	public boolean evaluarCadena(String cadena, AutomataFinito automata)
 	{
-		if(!perteneceAlAlfabeto(cadena, automata)){return false;}
-		int tam = cadena.length();
-		if(automata instanceof AutomataFinitoDeterminista)
+		try
 		{
-			return ((AutomataFinitoDeterminista)automata).evaluar(cadena);
+			if(!perteneceAlAlfabeto(cadena, automata)){return false;}
+			int tam = cadena.length();
+			if(automata instanceof AutomataFinitoDeterminista)
+			{
+				return ((AutomataFinitoDeterminista)automata).evaluar(cadena);
+			}
+			//TODO implementar las siguientes partes para los distintos autómatas
+			else
+				return false;
+		}catch(NullPointerException npe)
+		{
+			System.out.println("No se ha podido evaluar, " + 
+					"existe un error con el autómata");
+			npe.printStackTrace();
 		}
-		//TODO implementar las siguientes partes para los distintos autómatas
-		else
-			return false;
 	}
 	public boolean evaluarCadena(String cadena, MaquinaDeTuring maquinaDeTuring)
 	{
-		this.maquina = maquinaDeTuring;
-		maquina.prepararMaquina(cadena);
-		if(maquina.accionar())
-			return true;
-		else
-			return false;
+		try
+		{
+			this.maquina = maquinaDeTuring;
+			maquina.prepararMaquina(cadena);
+			if(maquina.accionar())
+				return true;
+			else
+				return false;
+		}catch(NullPointerException npe)
+		{
+			System.out.prtinln("No se ha podido evaluar correctamente, " + 
+					"hay un error con la máquina de Turing");
+			npe.printStackTrace();
+		}
 	}
 }
