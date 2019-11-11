@@ -81,6 +81,7 @@ public class AutomataFinitoDeterminista extends AutomataFinito
 			return getAdyacencia(q, simbolo);
 	}
 	public int getAdyacencia(int q, int simbolo)
+		throws IndexOutOfBoundsException
 	{
 		if(q > tablaDeTransiciones.size())
 			return -1;
@@ -94,15 +95,24 @@ public class AutomataFinitoDeterminista extends AutomataFinito
 	public boolean evaluar(String cadena)
 	{
 		int estado = 0;
-		for(int i=0; i<cadena.length(); i++)
+		try
 		{
-			char simbolo = cadena.charAt(i);
-			if(super.exist(simbolo))
-				estado = getAdyacencia(estado, super.getNumeroSimbolo(simbolo));
-			else
-				return false;
-			if(estado == -1) return false;
+			for(int i=0; i<cadena.length(); i++)
+			{
+				char simbolo = cadena.charAt(i);
+				if(super.exist(simbolo))
+					estado = getAdyacencia(estado, super.getNumeroSimbolo(simbolo));
+				else
+					return false;
+				if(estado == -1) return false;
+			}
+			return isAceptacion(estado);
+		}catch(IndexOutOfBoundsException ioobe){
+			System.out.println("Ocurrió un error en el proceso de evaluación");
+			ioobe.printStackTrace();
 		}
-		return isAceptacion(estado);
+		finally{
+			return false;
+		}
 	}
 }

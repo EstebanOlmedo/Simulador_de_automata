@@ -3,6 +3,7 @@
  */
 import java.util.ArrayList;
 import java.util.Stack;
+import java.util.TreeMap;
 public class AutomataFinitoAPila extends AutomataFinito implements IPila
 {
 	private ArrayList<ArrayList<Integer>> tablaDeTransiciones;
@@ -11,14 +12,15 @@ public class AutomataFinitoAPila extends AutomataFinito implements IPila
 
 	public AutomataFinitoAPila()
 	{
-		this(0, null, null, null, null, null);
+		this(0, null, null, null, null, null, null);
 	}
-	public AutomataFinitoAPila(int numeroDeEstados, char[] alfabeto, int[] estadosAceptacion, 
+	public AutomataFinitoAPila(int numeroDeEstados, char[] alfabeto, int[] estadosAceptacion,
+			TreeMap<Character,Integer> mapa,
 			ArrayList<ArrayList<Integer>> tablaDeTransiciones, 
 			ArrayList<ArrayList<String>> tablaDeLaPila, 
 			Stack <String> pila)
 	{
-		super(numeroDeEstados, alfabeto, estadosAceptacion);
+		super(numeroDeEstados, alfabeto, estadosAceptacion, mapa);
 		this.tablaDeTransiciones = tablaDeTransiciones;
 		this.tablaDeLaPila = tablaDeLaPila;
 		this.pila = pila;

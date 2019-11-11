@@ -100,18 +100,13 @@ public class EvaluadorDeExpresion{
 	{
 		if(!perteneceAlAlfabeto(cadena, automata)){return false;}
 		int tam = cadena.length();
-		//Para un autómata finito
-		int p = automata.getEstadoInicial();
-		int q;
-		for(int i = 0; i < tam; i++)
+		if(automata instanceof AutomataFinitoDeterminista)
 		{
-			q = automata.getTransicion(p, cadena.getCharAt(i));
-			if(q == -1)
-				return false;
-			else
-				p = q;
+			return ((AutomataFinitoDeterminista)automata).evaluar(cadena);
 		}
-		return esEstadoAceptacion(p);
+		//TODO implementar las siguientes partes para los distintos autómatas
+		else
+			return false;
 	}
 	public boolean evaluarCadena(String cadena, MaquinaDeTuring maquinaDeTuring)
 	{
