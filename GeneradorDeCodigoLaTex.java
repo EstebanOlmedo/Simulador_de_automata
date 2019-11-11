@@ -96,9 +96,9 @@ public class GeneradorDeCodigoLaTex
 		return verificar((AutomataFinito)afn) &&
 			afn.getTablaDeTransiciones().size()==afn.getNumeroDeEstados();
 	}
-	public boolean verificar(AutomataFinitoNoDeterministaEpsilon afn_e)
+	public boolean verificar(AutomataFinitoNoDeterministaEpsilon afnE)
 	{
-		return verificar((AutomataFinitoNoDeterminista)afn_e);
+		return verificar((AutomataFinitoNoDeterminista)afnE);
 	}
 	public boolean verificar(AutomataFinitoAPila ap)
 	{

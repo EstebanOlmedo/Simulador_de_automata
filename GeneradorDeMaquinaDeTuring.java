@@ -85,7 +85,7 @@ public class GeneradorDeMaquinaDeTuring
 			TablaMaquinaDeTuring tabla = maquina.getTabla();
 			tabla.setEstado(estado, indiceSimbolo, funcion);
 		}
-		catch(ArrayOutOfBoundsException aoobe)
+		catch(IndexOutOfBoundsException aoobe)
 		{
 			System.out.println("Ha ocurrido un error");
 			aoobe.printStackTrace();
