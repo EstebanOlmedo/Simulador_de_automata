@@ -30,33 +30,81 @@ public class Teclado{
 	}
 
 	public int dameUnInt(String mensaje){
-		System.out.println(mensaje);
-		return Integer.parseInt(teclado.nextLine());
+		int entrada = 0;
+		try{
+			System.out.println(mensaje);
+			entrada = Integer.parseInt(teclado.nextLine());
+		}
+		catch(NumberFormatException nfe){
+			System.out.println("Debe ingresar un numero");
+			nfe.printStackTrace();
+		}
+		return entrada;
 	}
 
 	public short dameUnShort(String mensaje){
-		System.out.println(mensaje);
-		return Short.parseShort(teclado.nextLine());
+		short entrada = 0;
+		try{
+			System.out.println(mensaje);
+			entrada = Short.parseShort(teclado.nextLine());
+		}
+		catch(NumberFormatException nfe){
+			System.out.println("Debe ingresar un numero");
+			nfe.printStackTrace();
+		}
+		return entrada;
 	}
 
 	public byte dameUnByte(String mensaje){
-		System.out.println(mensaje);
-		return Byte.parseByte(teclado.nextLine());
+		byte entrada = 0;
+		try{
+			System.out.println(mensaje);
+			entrada = Byte.parseByte(teclado.nextLine());
+		}
+		catch(NumberFormatException nfe){
+			System.out.println("Debe ingresar un numero");
+			nfe.printStackTrace();
+		}
+		return entrada;
 	}
 
 	public long dameUnLong(String mensaje){
-		System.out.println(mensaje);
-		return Long.parseLong(teclado.nextLine());
+		long entrada = 0;
+		try{
+			System.out.println(mensaje);
+			entrada = Long.parseLong(teclado.nextLine());
+		}
+		catch(NumberFormatException nfe){
+			System.out.println("Debe ingresar un numero");
+			nfe.printStackTrace();
+		}
+		return entrada;
 	}
 
 	public float dameUnFloat(String mensaje){
-		System.out.println(mensaje);
-		return Float.parseFloat(teclado.nextLine());
+		float entrada = 0.0f;
+		try{
+			System.out.println(mensaje);
+			entrada = Float.parseFloat(teclado.nextLine());
+		}
+		catch(NumberFormatException nfe){
+			System.out.println("Debe ingresar un numero");
+			nfe.printStackTrace();
+		}
+		return entrada;
 	}
 
 	public double dameUnDouble(String mensaje){
-		System.out.println(mensaje);
-		return Double.parseDouble(teclado.nextLine());
+		Double entrada = 0.0d;
+		try{
+			System.out.println(mensaje);
+			entrada = Double.parseDouble(teclado.nextLine());
+		}
+		catch(NumberFormatException nfe){
+			System.out.println("Debe ingresar un numero");
+			nfe.printStackTrace();
+		}
+		return entrada;
 	}
 
 	public boolean dameUnBoolean(String mensaje){
