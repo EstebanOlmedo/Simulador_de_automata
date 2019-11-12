@@ -96,7 +96,13 @@ public class AutomataFinito
 	{
 		return numeroDeEstados;
 	}
-	public void setMapa(){
+	public int[] getEstadosDeAceptacion(){
+		return estadosAceptacion;
+	}
+	public char[] getAlfabeto(){
+		return alfabeto;
+	}
+ 	public void setMapa(){
 		for(int i=0; i<alfabeto.length; i++)
 		{
 			mapa.put(alfabeto[i], i);
@@ -108,5 +114,10 @@ public class AutomataFinito
 	public boolean exist(char a)
 	{
 		return mapa.containsValue(a);
+	}
+	public char getSimbolo(int indice){
+		if(indice < alfabeto.length)
+			return alfabeto[indice];
+		return '\u0000';
 	}
 }
