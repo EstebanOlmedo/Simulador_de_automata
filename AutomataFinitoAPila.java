@@ -1,35 +1,28 @@
-/**
- * @author Gabriel Graciano Herrera
- */
 import java.util.ArrayList;
 import java.util.Stack;
 import java.util.TreeMap;
+import Simulador_de_automata.Delta;
 public class AutomataFinitoAPila extends AutomataFinito implements IPila
 {
-	private ArrayList<ArrayList<Integer>> tablaDeTransiciones;
-	private ArrayList<ArrayList<String>> tablaDeLaPila;
-	private Stack <String> pila;
+	private ArrayList < ArrayList < ArrayList <Delta> > > tablaDeTransiciones;
+	private Stack <Character> pila;
 
 	public AutomataFinitoAPila()
 	{
-		this(0, null, null, null, null, null, null);
+		this(0, null, null, null, null,null);
 	}
-	public AutomataFinitoAPila(int numeroDeEstados, char[] alfabeto, int[] estadosAceptacion,
-			TreeMap<Character,Integer> mapa,
-			ArrayList<ArrayList<Integer>> tablaDeTransiciones, 
-			ArrayList<ArrayList<String>> tablaDeLaPila, 
-			Stack <String> pila)
+	public AutomataFinitoAPila(int numeroDeEstados, char[] alfabeto, int[] estadosAceptacion, 
+			ArrayList<ArrayList<ArrayList<Delta>>> tablaDeTransiciones, 
+			Stack <Character> pila,TreeMap<Character,Integer> mapa)
 	{
-		super(numeroDeEstados, alfabeto, estadosAceptacion, mapa);
+		super(numeroDeEstados, alfabeto, estadosAceptacion,mapa);
 		this.tablaDeTransiciones = tablaDeTransiciones;
-		this.tablaDeLaPila = tablaDeLaPila;
 		this.pila = pila;
 	}
 	public AutomataFinitoAPila(AutomataFinitoAPila automata)
 	{
 		super(automata);
 		this.tablaDeTransiciones = automata.tablaDeTransiciones;
-		this.tablaDeLaPila = automata.tablaDeLaPila;
 		this.pila = automata.pila;
 	}
 	public void destruir()
@@ -37,85 +30,117 @@ public class AutomataFinitoAPila extends AutomataFinito implements IPila
 		super.destruir();
 		if(tablaDeTransiciones != null)
 			tablaDeTransiciones = null;
-		if(tablaDeLaPila != null)
-			tablaDeLaPila = null;
 		if(pila != null)
 			pila = null;
 		System.gc();
 	}
-	@Override
-	public boolean equals(Object obj)
+        public boolean evaluarCadena(String cadena,Stack <Character> pila,int estado,int indice)
+        {
+            Delta delta;
+            if(indice == cadena.length())
+            {
+                if(isAceptacion(estado))
+                {
+                    return true;
+                }
+                for(int x=0;x<tablaDeTransiciones.get(estado).size();x++)
+                {
+                    if(!tablaDeTransiciones.get(estado).get(x).isEmpty())
+                    {
+                        for(int y=0;y<tablaDeTransiciones.get(estado).get(x).size();y++)
+                        {
+                            delta = tablaDeTransiciones.get(estado).get(x).get(y);
+                            if(delta.getPrimero() == '~' && delta.getSegundo() == peek())
+                            {
+                                Stack <Character> pilaCopia = pila;
+                                push(delta.getTercero(),pilaCopia);
+                                if(evaluarCadena(cadena, pilaCopia, estado, indice))
+                                {
+                                    return true;
+                                }
+                                
+                            }
+                        }
+                    }
+                }
+            }
+            for(int x=0;x<tablaDeTransiciones.get(estado).size();x++)
+                {
+                    if(!tablaDeTransiciones.get(estado).get(x).isEmpty())
+                    {
+                        for(int y=0;y<tablaDeTransiciones.get(estado).get(x).size();y++)
+                        {
+                            delta = tablaDeTransiciones.get(estado).get(x).get(y);
+                            if(indice < cadena.length() && delta.getPrimero() == cadena.charAt(indice) && delta.getSegundo() == peek())
+                            {
+                                pop(delta.getTercero(),pilaCopia);
+                                if(evaluarCadena(cadena, pilaCopia, x, indice+1))
+                                {
+                                    return true;
+                                }
+                            }
+                            else if(delta.getPrimero() == '~' && delta.getSegundo() == peek())
+                            {
+                                push(delta.getTercero(),pilaCopia);
+                                if(evaluarCadena(cadena, pilaCopia, x, indice))
+                                {
+		                     return true;
+                                }
+                                
+                            }
+                        }
+                    }
+                }
+                            
+            return false;
+        }
+        
+        public char pop(Stack <Character> pila)
 	{
-		if(obj == null){return false;}
-		if(!(obj instanceof AutomataFinitoAPila)){return false;}
-		AutomataFinitoAPila automata = (AutomataFinitoAPila)obj;
-		return super.equals(automata) &&
-			tablaDeTransiciones.equals(automata.tablaDeTransiciones) &&
-			tablaDeLaPila.equals(automata.tablaDeLaPila) &&
-			pila.equals(automata.pila);
+		return pila.pop().charValue();
 	}
-	@Override
-	public String toString()
+
+	public void push(String cadena,Stack <Character> pila)
 	{
-		String retorno = new String();
-		retorno += super.toString();
-		int i = 0;
-		for(ArrayList<Integer> estado: tablaDeTransiciones)
-		{
-			i++;
-			if(estado != null)
-				retorno += "Estado " + i + ": " + estado + "\n"; 
-		}
-		i = 0;
-		for(ArrayList<String> simbolos: tablaDeLaPila)
-		{
-			i++;
-			if(simbolos != null)
-				retorno += "Transiciones del estado " + i + ": " + simbolos + "\n";
-		}
-		retorno += pila;
-		return retorno;
+            for (int i = 0; i < cadena.length(); i++)
+            {
+                pila.push(cadena.charAt(i));
+            }
+		
 	}
-	public ArrayList<Integer> obtenerTransicion(int q)
+
+	public char peek(Stack <Character> pila)
 	{
-		if(q > tablaDeTransiciones.size())
-			return null;
-		return tablaDeTransiciones.get(q);
+		return pila.peek().charValue();
 	}
-	public ArrayList<Integer> obtenerTransicion(int q, int p)
+
+	public boolean isEmpty(Stack <Character> pila)
 	{
-		ArrayList<Integer> transiciones = new ArrayList<Integer>();
-		ArrayList<Integer> estado = obtenerTransicion(q);
-		if(estado == null) return null;
-		for(int i=0; i<estado.size(); i++)
-			if(estado.get(i) == p)
-				transiciones.add(i);
-		return transiciones;
+		return pila.empty();
 	}
-	public ArrayList<Integer> obtenerTransicion(int q, int p, String cima)
+
+	public char pop()
 	{
-		ArrayList<Integer> estado = obtenerTransicion(q,p);
-		ArrayList<Integer> transiciones = new ArrayList<Integer>();
-		if(estado == null) return null;
-		for(int i=0; i<estado.size(); i++)
-			if(tablaDeLaPila.get(q).get(estado.get(i)).equals(cima))
-				transiciones.add(estado.get(i));
-		return transiciones;
+		return pila.pop().charValue();
 	}
-	public String pop()
-	{
-		return pila.pop();
-	}
+
 	public void push(String cadena)
 	{
-		pila.push(cadena);
+            for (int i = 0; i < cadena.length(); i++)
+            {
+                pila.push(cadena.charAt(i));
+            }
+		
 	}
-	public String peek()
+
+	public char peek()
 	{
-		return pila.peek();
+		return pila.peek().charValue();
 	}
+
 	public boolean isEmpty()
 	{
 		return pila.empty();
 	}
 }
+
