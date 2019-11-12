@@ -1,6 +1,7 @@
 /**
  * @author Gabriel Graciano Herrera
  */
+import java.util.ArrayList;
 public class GeneradorDeAutomataFinitoDeterminista extends GeneradorDeAutomataFinito
 {
 	private AutomataFinitoDeterminista afd;
@@ -46,6 +47,23 @@ public class GeneradorDeAutomataFinitoDeterminista extends GeneradorDeAutomataFi
 	}
 	public AutomataFinitoDeterminista crearAutomataFinitoDeterminista()
 	{
-		return new AutomataFinitoDeterminista();
+		AutomataFinito automata = crearAutomataFinito();
+		ArrayList<ArrayList<Integer>> tabla = new ArrayList<ArrayList<Integer>>();
+		System.out.println("Ingresando transiciones");
+		for(int i=0; i<automata.getNumeroDeEstados(); i++){
+			ArrayList<Integer> estado = new ArrayList<Integer>();
+			for(int j=0; j<automata.getMapa().size(); j++){
+				int estadoDestino = super.getTeclado().dameUnInt("Ingresa el valor de S(q"+i+","+automata.getSimbolo(j)+")");
+				estado.add(estadoDestino);
+			}
+			tabla.add(estado);
+		}
+		return new AutomataFinitoDeterminista(
+			automata.getNumeroDeEstados(),
+			automata.getAlfabeto(),
+			automata.getEstadosDeAceptacion(),
+			automata.getMapa(),
+			tabla
+		);
 	}
 }
