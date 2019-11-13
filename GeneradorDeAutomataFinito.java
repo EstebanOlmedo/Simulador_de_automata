@@ -44,7 +44,8 @@ public class GeneradorDeAutomataFinito
 		GeneradorDeAutomataFinito generador = (GeneradorDeAutomataFinito)obj;
 		return automataFinito.equals(generador.automataFinito);
 	}
-	public AutomataFinito crearAutomataFinito(){
+	public void crearAutomataFinito()
+	{
 		System.out.println("Creando Automata...");
 		int numeroDeEstados = teclado.dameUnInt("Ingresa la cardinalidad del conjunto de estados");
 		int numeroDeEstadosAceptacion = teclado.dameUnInt("Ingresa la cardinalidad del conjunto de estados de aceptacion");
@@ -59,9 +60,13 @@ public class GeneradorDeAutomataFinito
 		}
 		AutomataFinito automata = new AutomataFinito(numeroDeEstados,alfabeto,aceptacion,new TreeMap<Character,Integer>());
 		automata.setMapa();
-		return automata;
+		automataFinito = automata;
 	}
-	public Teclado getTeclado(){
+	public Teclado getTeclado()
+	{
 		return teclado;
+	}
+	public AutomataFinito getAutomataFinito(){
+		return automataFinito;
 	}
 }
