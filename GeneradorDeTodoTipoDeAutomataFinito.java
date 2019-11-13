@@ -2,6 +2,7 @@
  * @author Esteban Olmedo Ramírez
  */
 import java.util.ArrayList;
+import java.util.Stack;
 public class GeneradorDeTodoTipoDeAutomataFinito
 	extends GeneradorDeAutomataFinitoDeterminista
 	implements IGeneradorEpsilon
@@ -104,9 +105,10 @@ public class GeneradorDeTodoTipoDeAutomataFinito
 	{
 		return getInforme() + automataPila;
 	}
-	public AutomataFinitoNoDeterminista crearAutomataFinitoNoDeterminista()
+	public void crearAutomataFinitoNoDeterminista()
 	{
-		AutomataFinito automata = crearAutomataFinito();
+		crearAutomataFinito();
+		AutomataFinito automata = getAutomataFinito();
 		System.out.println("Generando autómata");
 		ArrayList<ArrayList<ArrayList<Integer>>> tabla = new ArrayList<ArrayList<ArrayList<Integer>>>();
 		System.out.println("Ingresando transiciones");
@@ -125,7 +127,7 @@ public class GeneradorDeTodoTipoDeAutomataFinito
 			tabla.add(estado);
 		}
 		System.out.println("El automata fue creado con exito :)");
-		return new AutomataFinitoNoDeterminista(
+		automataFinitoNoDeterminista = new AutomataFinitoNoDeterminista(
 			automata.getNumeroDeEstados(),
 			automata.getAlfabeto(),
 			automata.getEstadosDeAceptacion(),
@@ -133,13 +135,41 @@ public class GeneradorDeTodoTipoDeAutomataFinito
 			tabla
 		);
 	}
-	public AutomataFinitoAPila crearAutomataFinitoAPila()
+	public void crearAutomataFinitoAPila()
 	{
-		return new AutomataFinitoAPila();
+		crearAutomataFinito();
+		AutomataFinito automata = getAutomataFinito();
+		ArrayList<ArrayList<ArrayList<Delta>>> tabla = new ArrayList<ArrayList<ArrayList<Delta>>>();
+		for(int i=0; i<automata.getNumeroDeEstados(); i++){
+			ArrayList<ArrayList<Delta>> estado = new ArrayList<ArrayList<Delta>>();
+			for(int j=0; j<automata.getMapa().size(); j++){
+				System.out.println("Ingresando transiciones del estado q"+i+" al estado q"+j);
+				System.out.println("Ingresa '#' para omitir/finalizar la transicion actual");
+				ArrayList<Delta> transiciones = new ArrayList<Delta>();
+				char carLeido = '#';
+				char cimaPila = '\u0000';
+				String dejarEnPila = "";
+				while((carLeido = getTeclado().dameUnChar("Ingresa el caracter leido")) != '#'){
+					cimaPila = getTeclado().dameUnChar("Ingresa lo que hay en la cima de la pila");
+					dejarEnPila = getTeclado().dameUnString("Ingresa lo que se inserta en la pila");
+					transiciones.add(new Delta(carLeido,cimaPila,dejarEnPila));
+				}
+				estado.add(transiciones);
+			}
+		}
+		automataAPila = new AutomataFinitoAPila(
+			automata.getNumeroDeEstados(),
+			automata.getAlfabeto(),
+			automata.getEstadosDeAceptacion(),
+			tabla,
+			new Stack<Character>(),
+			automata.getMapa()
+		);
 	}
-	public AutomataFinitoNoDeterministaEpsilon crearAutomataFinitoNoDeterministaEpsilon()
+	public void crearAutomataFinitoNoDeterministaEpsilon()
 	{
-		AutomataFinitoNoDeterminista automata = crearAutomataFinitoNoDeterminista();
+		crearAutomataFinitoNoDeterminista();
+		AutomataFinitoNoDeterminista automata = getAutomataFinitoNoDeterminista();
 		System.out.println("Ahora solo faltan las transiciones epsilon");
 		ArrayList<ArrayList<Integer>> adyacenciaEpsilon = new ArrayList<ArrayList<Integer>>();
 		for(int i=0; i<automata.getNumeroDeEstados(); i++){
@@ -153,7 +183,7 @@ public class GeneradorDeTodoTipoDeAutomataFinito
 			adyacenciaEpsilon.add(transiciones);
 		}
 		System.out.println("El automata ha sido creado completamente ;)");
-		return new AutomataFinitoNoDeterministaEpsilon(
+		automataFinitoNoDeterministaEpsilon =  new AutomataFinitoNoDeterministaEpsilon(
 			automata.getNumeroDeEstados(),
 			automata.getAlfabeto(),
 			automata.getEstadosDeAceptacion(),
@@ -161,5 +191,17 @@ public class GeneradorDeTodoTipoDeAutomataFinito
 			automata.getTablaDeTransiciones(),
 			adyacenciaEpsilon
 		);
+	}
+	public AutomataFinitoNoDeterminista getAutomataFinitoNoDeterminista()
+	{
+		return automataFinitoNoDeterminista;
+	}
+	public AutomataFinitoNoDeterministaEpsilon getAutomataFinitoNoDeterministaEpsilon()
+	{
+		return automataFinitoNoDeterministaEpsilon;
+	}
+	public AutomataFinitoAPila getAutomataFinitoAPila()
+	{
+		return automataAPila;
 	}
 }
