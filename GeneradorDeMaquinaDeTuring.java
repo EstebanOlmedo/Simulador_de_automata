@@ -94,10 +94,12 @@ public class GeneradorDeMaquinaDeTuring
 	public void crearEstructuraMaquina(
 			String alfabeto, 
 			int numeroEstados, 
-			ArrayList<Integer> estadosAceptacion
+			ArrayList<Integer> estadosAceptacion,
+			String descripcion
 			)
 	{
 		generarTablaMaquinaDeTuring(numeroEstados, estadosAceptacion, alfabeto);
+		maquina.setDescripcion(descripcion);
 	}
 	public MaquinaDeTuring getMaquina()
 	{

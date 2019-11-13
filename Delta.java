@@ -1,4 +1,4 @@
-package Simulador_de_automata;
+//package Simulador_de_automata;
 public class Delta {
     
    char primero;

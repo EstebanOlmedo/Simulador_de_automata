@@ -6,23 +6,27 @@ public class MaquinaDeTuring
 	private char[] cinta;
 	private int cabezal;
 	private char[] alfabeto;
+	private String descripcion;
 	private TablaMaquinaDeTuring tabla;
 	public MaquinaDeTuring()
 	{
-		this(null, 0, null, null);
+		this(null, 0, null, null, null);
 	}
 	public MaquinaDeTuring(char[] cinta, int cabezal,
-		       	char[] alfabeto, TablaMaquinaDeTuring tabla)
+		       	char[] alfabeto, TablaMaquinaDeTuring tabla,
+			String descripcion)
 	{
 		this.cinta = cinta;
 		this.cabezal = cabezal;
 		this.alfabeto = alfabeto;
 		this.tabla = tabla;
+		this.descripcion = descripcion;
 	}
 	public MaquinaDeTuring(MaquinaDeTuring maquinaDeTuring)
 	{
 		this(maquinaDeTuring.cinta, maquinaDeTuring.cabezal,
-				maquinaDeTuring.alfabeto, maquinaDeTuring.tabla);
+				maquinaDeTuring.alfabeto, maquinaDeTuring.tabla,
+				maquinaDeTuring.descripcion);
 	}
 	public void destruir()
 	{
@@ -35,12 +39,15 @@ public class MaquinaDeTuring
 			tabla.destruir();
 			tabla = null;
 		}
+		if(descripcion != null)
+			descripcion = null;
 		System.gc();
 	}
 	@Override
 	public String toString()
 	{
 		String retorno = new String();
+		retorno += "Descripcion:\n" + descripcion + "\n";
 		retorno += "Cinta: {...,";
 		for(int i = 0; i < cinta.length; i++)
 			retorno += cinta[i] + ", ";
@@ -61,7 +68,8 @@ public class MaquinaDeTuring
 			if(cinta[i] != maquinaDeTuring.cinta[i])
 				return false;
 		}
-		return cabezal == maquinaDeTuring.cabezal;
+		return cabezal == maquinaDeTuring.cabezal &&
+			descripcion.equals(maquinaDeTuring.descripcion);
 	}
 	public void modificarCinta(char modificacion, char movimiento)
 	{
@@ -235,5 +243,9 @@ public class MaquinaDeTuring
 	public void setTabla(TablaMaquinaDeTuring tabla)
 	{
 		this.tabla = tabla;
+	}
+	public void setDescripcion(String descripcion)
+	{
+		this.descripcion = descripcion;
 	}
 }
