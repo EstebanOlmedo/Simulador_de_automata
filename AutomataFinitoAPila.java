@@ -1,7 +1,10 @@
+/**
+ * @author Gabriel Graciano Herrera
+ */
 import java.util.ArrayList;
 import java.util.Stack;
 import java.util.TreeMap;
-//import Simulador_de_automata.Delta;
+import Simulador_de_automata.Delta;
 public class AutomataFinitoAPila extends AutomataFinito implements IPila
 {
 	private ArrayList < ArrayList < ArrayList <Delta> > > tablaDeTransiciones;
@@ -37,7 +40,6 @@ public class AutomataFinitoAPila extends AutomataFinito implements IPila
         public boolean evaluarCadena(String cadena,Stack <Character> pila,int estado,int indice)
         {
             Delta delta;
-            Stack <Character> pilaCopia = pila;
             if(indice == cadena.length())
             {
                 if(isAceptacion(estado))
@@ -53,6 +55,7 @@ public class AutomataFinitoAPila extends AutomataFinito implements IPila
                             delta = tablaDeTransiciones.get(estado).get(x).get(y);
                             if(delta.getPrimero() == '~' && delta.getSegundo() == peek())
                             {
+                                Stack <Character> pilaCopia = pila;
                                 push(delta.getTercero(),pilaCopia);
                                 if(evaluarCadena(cadena, pilaCopia, estado, indice))
                                 {
@@ -73,7 +76,8 @@ public class AutomataFinitoAPila extends AutomataFinito implements IPila
                             delta = tablaDeTransiciones.get(estado).get(x).get(y);
                             if(indice < cadena.length() && delta.getPrimero() == cadena.charAt(indice) && delta.getSegundo() == peek())
                             {
-                                pop(delta.getTercero(),pilaCopia);
+                                Stack <Character> pilaCopia = pila;
+                                push(delta.getTercero(),pilaCopia);
                                 if(evaluarCadena(cadena, pilaCopia, x, indice+1))
                                 {
                                     return true;
@@ -81,10 +85,11 @@ public class AutomataFinitoAPila extends AutomataFinito implements IPila
                             }
                             else if(delta.getPrimero() == '~' && delta.getSegundo() == peek())
                             {
+                                Stack <Character> pilaCopia = pila;
                                 push(delta.getTercero(),pilaCopia);
                                 if(evaluarCadena(cadena, pilaCopia, x, indice))
                                 {
-		                     return true;
+                                    return true;
                                 }
                                 
                             }
