@@ -45,9 +45,10 @@ public class GeneradorDeAutomataFinitoDeterminista extends GeneradorDeAutomataFi
 		GeneradorDeAutomataFinitoDeterminista generador = (GeneradorDeAutomataFinitoDeterminista)obj;
 		return super.equals(generador) && afd.equals(generador.afd);
 	}
-	public AutomataFinitoDeterminista crearAutomataFinitoDeterminista()
+	public void crearAutomataFinitoDeterminista()
 	{
-		AutomataFinito automata = crearAutomataFinito();
+		crearAutomataFinito();
+		AutomataFinito automata = getAutomataFinito();
 		ArrayList<ArrayList<Integer>> tabla = new ArrayList<ArrayList<Integer>>();
 		System.out.println("Ingresando transiciones");
 		for(int i=0; i<automata.getNumeroDeEstados(); i++){
@@ -59,12 +60,16 @@ public class GeneradorDeAutomataFinitoDeterminista extends GeneradorDeAutomataFi
 			tabla.add(estado);
 		}
 		System.out.println("El automata fue creado con exito :)");
-		return new AutomataFinitoDeterminista(
+		afd = new AutomataFinitoDeterminista(
 			automata.getNumeroDeEstados(),
 			automata.getAlfabeto(),
 			automata.getEstadosDeAceptacion(),
 			automata.getMapa(),
 			tabla
 		);
+	}
+	public AutomataFinitoDeterminista getAFD()
+	{
+		return afd;
 	}
 }
