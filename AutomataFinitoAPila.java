@@ -4,7 +4,6 @@
 import java.util.ArrayList;
 import java.util.Stack;
 import java.util.TreeMap;
-import Simulador_de_automata.Delta;
 public class AutomataFinitoAPila extends AutomataFinito implements IPila
 {
 	private ArrayList < ArrayList < ArrayList <Delta> > > tablaDeTransiciones;
