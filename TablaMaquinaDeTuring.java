@@ -68,6 +68,16 @@ public class TablaMaquinaDeTuring
 	{
 		tabla[numeroEstado][simbolo] = transicion;
 	}
+	public void setEstado(int numeroEstado, int simbolo,
+		int estado, char loQueDeja, char movimiento)
+	{
+		if(numeroEstado > 0)
+			setEstado(numeroEstado, simbolo,
+				new FuncionDeltaMaquinaDeTuring(estado, loQueDeja, movimiento));
+		else
+			setEstado(numeroEstado, simbolo,
+					new FuncionDeltaMaquinaDeTuring());
+	}	
 	public FuncionDeltaMaquinaDeTuring getFuncion(int numeroEstado, int simbolo) 
 			throws IndexOutOfBoundsException
 	{

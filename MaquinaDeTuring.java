@@ -248,4 +248,8 @@ public class MaquinaDeTuring
 	{
 		this.descripcion = descripcion;
 	}
+	public char[] getAlfabeto()
+	{
+		return alfabeto;
+	}
 }
