@@ -3,6 +3,6 @@
  */
 public interface IGeneradorEpsilon
 {
-	public AutomataFinitoNoDeterminista crearAutomataFinitoNoDeterminista();
-	public AutomataFinitoNoDeterministaEpsilon crearAutomataFinitoNoDeterministaEpsilon();
+	public void crearAutomataFinitoNoDeterminista();
+	public void crearAutomataFinitoNoDeterministaEpsilon();
 }
