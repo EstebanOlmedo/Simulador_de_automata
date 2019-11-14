@@ -9,7 +9,7 @@ public class AutomataFinitoNoDeterministaEpsilon extends AutomataFinitoNoDetermi
 
 	public AutomataFinitoNoDeterministaEpsilon()
 	{
-		this(0, null, null, null, null, null);
+		this(0, null, null, null, null, null, null);
 	}
 	public AutomataFinitoNoDeterministaEpsilon(
 			int numeroDeEstados,
@@ -17,9 +17,10 @@ public class AutomataFinitoNoDeterministaEpsilon extends AutomataFinitoNoDetermi
 			int[] estadosAceptacion,
 			TreeMap<Character, Integer> mapa,
 			ArrayList<ArrayList<ArrayList<Integer>>> tablaDeTransiciones,
-			ArrayList<ArrayList<Integer>> adyacenciaEpsilon)
+			ArrayList<ArrayList<Integer>> adyacenciaEpsilon,
+			String descripcion)
 	{
-		super(numeroDeEstados, alfabeto, estadosAceptacion, mapa, tablaDeTransiciones);
+		super(numeroDeEstados, alfabeto, estadosAceptacion, mapa, tablaDeTransiciones,descripcion);
 		this.adyacenciaEpsilon = adyacenciaEpsilon;
 	}
 	public AutomataFinitoNoDeterministaEpsilon(AutomataFinitoNoDeterministaEpsilon automata)
