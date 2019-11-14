@@ -221,6 +221,7 @@ public class ManejadorDeAutomataYMaquinaDeTuring
                     {
                         if(generadorDeAutomata.getAFD() != null)
                         {
+			   System.out.println(generadorDeautomata.getAFD().getDescripcion());
                            String cadena = teclado.dameUnString("Ingresa la cadena a evaluar");
                            evaluador.evaluarCadena(cadena,generadorDeAutomata.getAFD());
                         }
@@ -317,6 +318,7 @@ public class ManejadorDeAutomataYMaquinaDeTuring
                     {
                         if(generadorDeAutomata.getAutomataFinitoNoDeterminista() != null)
                         {
+			    System.out.println(generadorDeAutomata.geAutomataFinitoNoDeterminista().getDescripcion());
                             String cadena = teclado.dameUnString("Ingresa la cadena a evaluar");
                             evaluador.evaluarCadena(cadena,generadorDeAutomata.getAutomataFinitoNoDeterminista());
                         }
@@ -412,6 +414,7 @@ public class ManejadorDeAutomataYMaquinaDeTuring
                     {
                         if(generadorDeAutomata.getAutomataFinitoNoDeterministaEpsilon() != null)
                         {
+			    System.out.println(generadorDeAutomata.getAutomataFinitoNoDeterministaEpsilon.getDescripcion());
                             String cadena = teclado.dameUnString("Ingresa la cadena a evaluar");
                             evaluador.evaluarCadena(cadena,generadorDeAutomata.getAutomataFinitoNoDeterministaEpsilon());
                         }
@@ -491,6 +494,7 @@ public class ManejadorDeAutomataYMaquinaDeTuring
                     {
                         if(generadorDeAutomata.getAutomataFinitoAPila() != null)
                         {
+			    System.out.println(generadorDeAutomata.getAutomataFinitoAPila().getDescripcion());
                             String cadena = teclado.dameUnString("Ingresa la cadena a evaluar");
                             evaluador.evaluarCadena(cadena,generadorDeAutomata.getAutomataFinitoAPila());
                         }
@@ -568,6 +572,7 @@ public class ManejadorDeAutomataYMaquinaDeTuring
                     {
                         if(generadorDeMaquina.getMaquina() != null)
                         {
+			    System.out.println(generadorDeMaquina.getMaquina().getDescripcion()); 
                             String cadena = teclado.dameUnString("Ingresa la cadena a evaluar");
                             if(evaluador.evaluarCadena(cadena,generadorDeMaquina.getMaquina()))
 			    {
