@@ -4,6 +4,6 @@ Simulador básico de automátas
 # Colaboradores
  |Nombre|Usuario|
  |------|-------|
- |Gabriel Graciano Herrera|[brialgah](https://github.com/brielgah)|
+ |Gabriel Graciano Herrera|[brielgah](https://github.com/brielgah)|
  |Daniel Montes Guerrero|[DanielMontesGuerrero](https://github.com/DanielMontesGuerrero)|
  |Esteban Raymundo Olmedo Ramirez|[EstebanOlmedo](https://github.com/EstebanOlmedo)|
