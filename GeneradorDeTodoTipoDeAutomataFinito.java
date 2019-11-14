@@ -27,10 +27,10 @@ public class GeneradorDeTodoTipoDeAutomataFinito
 	public GeneradorDeTodoTipoDeAutomataFinito()
 	{
 		this(
-				new AutomataFinitoDeterminista(), 
-				new AutomataFinitoNoDeterministaEpsilon(),
-			       	new AutomataFinitoNoDeterministaEpsilon(),
-			       	new AutomataFinitoAPila()
+				null, 
+				null,
+			       	null,
+			       	null
 				);
 	}
 
