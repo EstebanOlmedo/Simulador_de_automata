@@ -220,51 +220,67 @@ public class ManejadorDeAutomataYMaquinaDeTuring
                 case 2:
                     try
                     {
-                        String cadena = teclado.dameUnString("Ingresa la cadena a evaluar");
-                        evaluador.evaluarCadena(cadena,generadorDeAutomata.getAFD());
+                        if(generadorDeAutomata.getAFD() != null)
+                        {
+                           String cadena = teclado.dameUnString("Ingresa la cadena a evaluar");
+                           evaluador.evaluarCadena(cadena,generadorDeAutomata.getAFD());
+                        }
+                        else
+                        {
+                            System.out.println("Aun no has generado el automata");
+                        }
                         break;
                     }catch(NullPointerException npe)
                     {
-                        System.out.println("Aun no has generado el automata");
-                    }finally
-                    {
-                        continue;
+                        npe.printStackTrace();
                     }
-
                 case 3:
                     try
                     {
-                        conversor.convertirAFDaAFP(generadorDeAutomata.getAFD());
+                        if(generadorDeAutomata.getAFD() != null)
+                        {
+                            conversor.convertirAFDaAFP(generadorDeAutomata.getAFD());
+                        }
+                        else
+                        {
+                            System.out.println("Aun no has generado el automata");
+                        }
                         break;
                     }catch(NullPointerException npe)
                     {
-                        System.out.println("Aun no has generado el automata");
-                    }finally
-                    {
-                        continue;
+                        npe.printStackTrace();
                     }
                 case 4:
                     try
                     {
-
+                        if(generadorDeAutomata.getAFD() != null)
+                        {
+                            
+                        }
+                        else
+                        {
+                            System.out.println("Aun no has generado el automata");
+                        }
                         break;
                     }catch(NullPointerException npe)
                     {
-                        System.out.println("Aun no has generado el automata");
-                    }finally
-                    {
-                        continue;
-                    }               
+                       npe.printStackTrace();
+                    }            
                 case 5:
                     try
                     {
+                        if(generadorDeAutomata.getAFD() != null)
+                        {
+                            
+                        }
+                        else
+                        {
+                            System.out.println("Aun no has generado el automata");
+                        }
                         break;
                     }catch(NullPointerException npe)
                     {
-                        System.out.println("Aun no has generado el automata");
-                    }finally
-                    {
-                        continue;
+                        npe.printStackTrace();
                     }
                 case 6:
                     break;
@@ -300,51 +316,67 @@ public class ManejadorDeAutomataYMaquinaDeTuring
                 case 2:
                     try
                     {
-                        String cadena = teclado.dameUnString("Ingresa la cadena a evaluar");
-                        evaluador.evaluarCadena(cadena,generadorDeAutomata.getAutomataFinitoNoDeterminista());
+                        if(generadorDeAutomata.getAutomataFinitoNoDeterminista() != null)
+                        {
+                            String cadena = teclado.dameUnString("Ingresa la cadena a evaluar");
+                            evaluador.evaluarCadena(cadena,generadorDeAutomata.getAutomataFinitoNoDeterminista());
+                        }
+                        else
+                        {
+                            System.out.println("Aun no has generado el automata");
+                        }
                         break;
                     }catch(NullPointerException npe)
                     { 
-                        System.out.println("Aun no has generado el automata");
-                    }finally
-                    {
-                        continue;
+                        npe.printStackTrace();
                     }
                 case 3:
                     try
                     {
-                        conversor.convertirAFNaAFD(generadorDeAutomata.getAutomataFinitoNoDeterminista());
+                        if(generadorDeAutomata.getAutomataFinitoNoDeterminista() != null)
+                        {
+                            conversor.convertirAFNaAFD(generadorDeAutomata.getAutomataFinitoNoDeterminista());
+                        }
+                        else
+                        {
+                            System.out.println("Aun no has generado el automata");
+                        }
                         break;
                     }catch(NullPointerException npe)
                     {
-                        System.out.println("Aun no has generado el automata");
-                    }finally
-                    {
-                        continue;
+                        npe.printStackTrace();
                     }
                 case 4:
                     try
                     {
-
+                        if(generadorDeAutomata.getAutomataFinitoNoDeterminista() != null)
+                        {
+                            
+                        }
+                        else
+                        {
+                            System.out.println("Aun no has generado el automata");
+                        }
                         break;
                     }catch(NullPointerException npe)
                     {
-                        System.out.println("Aun no has generado el automata");
-                    }finally
-                    {
-                        continue;
+                        npe.printStackTrace();
                     }
                 case 5:
                     try
                     {
-
+                        if(generadorDeAutomata.getAutomataFinitoNoDeterminista() != null)
+                        {
+                            
+                        }
+                        else
+                        {
+                            System.out.println("Aun no has generado el automata");
+                        }
                         break;
                     }catch(NullPointerException npe)
                     {
-                        System.out.println();
-                    }finally
-                    {
-                        continue;
+                       npe.printStackTrace();
                     }
                 case 6:
                     break;
@@ -379,39 +411,51 @@ public class ManejadorDeAutomataYMaquinaDeTuring
                 case 2:
                     try
                     {
-                        String cadena = teclado.dameUnString("Ingresa la cadena a evaluar");
-                        evaluador.evaluarCadena(cadena,generadorDeAutomata.getAutomataFinitoNoDeterministaEpsilon());
+                        if(generadorDeAutomata.getAutomataFinitoNoDeterministaEpsilon() != null)
+                        {
+                            String cadena = teclado.dameUnString("Ingresa la cadena a evaluar");
+                            evaluador.evaluarCadena(cadena,generadorDeAutomata.getAutomataFinitoNoDeterministaEpsilon());
+                        }
+                        else
+                        {
+                            System.out.println("Aun no has generado el automata");
+                        }
                         break;
                     }catch(NullPointerException npe)
                     {
-                        System.out.println("Aun no has generado el automata");
-                    }finally
-                    {
-                        continue;
+                        npe.printStackTrace();
                     }
                 case 3:
                     try
                     {
-
+                        if(generadorDeAutomata.getAutomataFinitoNoDeterministaEpsilon() != null)
+                        {
+                            
+                        }
+                        else
+                        {
+                            System.out.println("Aun no has generado el automata");
+                        }
                         break;
                     }catch(NullPointerException npe)
                     {
-                        System.out.println("Aun no has generado el automata");
-                    }finally
-                    {
-                        continue;
+                        npe.printStackTrace();
                     }
                 case 4:
                     try
                     {
-
+                        if(generadorDeAutomata.getAutomataFinitoNoDeterministaEpsilon() != null)
+                        {
+                            
+                        }
+                        else
+                        {
+                            System.out.println("Aun no has generado el automata");
+                        }
                         break;
                     }catch(NullPointerException npe)
                     {
-                        System.out.println("Aun no has generado el automata");
-                    }finally
-                    {
-                        continue;
+                        npe.printStackTrace();
                     }
                 case 5:
                     break;
@@ -446,39 +490,51 @@ public class ManejadorDeAutomataYMaquinaDeTuring
                 case 2:
                     try
                     {
-                        String cadena = teclado.dameUnString("Ingresa la cadena a evaluar");
-                        evaluador.evaluarCadena(cadena,generadorDeAutomata.getAutomataFinitoAPila());
+                        if(generadorDeAutomata.getAutomataFinitoAPila() != null)
+                        {
+                            String cadena = teclado.dameUnString("Ingresa la cadena a evaluar");
+                            evaluador.evaluarCadena(cadena,generadorDeAutomata.getAutomataFinitoAPila());
+                        }
+                        else
+                        {
+                            System.out.println("Aun no has generado el automata");
+                        }
                         break;
                     }catch(NullPointerException npe)
                     {
-                        System.out.println("Aun no has generado el automata");
-                    }finally
-                    {
-                        continue;
+                        npe.printStackTrace();
                     }
                 case 3:
                     try
                     {
-
+                        if(generadorDeAutomata.getAutomataFinitoNoDeterministaEpsilon() != null)
+                        {
+                            
+                        }
+                        else
+                        {
+                            System.out.println("Aun no has generado el automata");
+                        }
                         break;
                     }catch(NullPointerException npe)
                     {
-                        System.out.println("Aun no has generado el automata");
-                    }finally
-                    {
-                        continue;
+                        npe.printStackTrace();
                     }
                 case 4:
                     try
                     {
-
+                        if(generadorDeAutomata.getAutomataFinitoNoDeterministaEpsilon() != null)
+                        {
+                            
+                        }
+                        else
+                        {
+                            System.out.println("Aun no has generado el automata");
+                        }
                         break;
                     }catch(NullPointerException npe)
                     {
-                        System.out.println("Aun no has generado el automata");
-                    }finally
-                    {
-                        continue;
+                        npe.printStackTrace();
                     }
                 case 5:
                     break;
@@ -511,27 +567,35 @@ public class ManejadorDeAutomataYMaquinaDeTuring
                 case 2:
                     try
                     {
-                        String cadena = teclado.dameUnString("Ingresa la cadena a evaluar");
-                        evaluador.evaluarCadena(cadena,generadorDeMaquina.getMaquina());
+                        if(generadorDeMaquina.getMaquina() != null)
+                        {
+                            String cadena = teclado.dameUnString("Ingresa la cadena a evaluar");
+                            evaluador.evaluarCadena(cadena,generadorDeMaquina.getMaquina());
+                        }
+                        else
+                        {
+                            System.out.println("Aun no has generado el automata");
+                        }
                         break;
                     }catch(NullPointerException npe)
                     {
-                        System.out.println("Aun no has generado la maquina");
-                    }finally
-                    {
-                        continue;
+                        npe.printStackTrace();
                     }
                 case 3:
                     try
                     {
-
+                        if(generadorDeMaquina.getMaquina() != null)
+                        {
+                            
+                        }
+                        else
+                        {
+                            System.out.println("Aun no has generado el automata");
+                        }
                         break;
                     }catch(NullPointerException npe)
                     {
-                        System.out.println("Aun no has generado la maquina");
-                    }finally
-                    {
-                        continue;
+                        npe.printStackTrace();
                     }
                 case 4:
                     break;
