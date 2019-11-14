@@ -71,6 +71,11 @@ public class AutomataFinitoNoDeterministaEpsilon extends AutomataFinitoNoDetermi
 		return transiciones;
 	}
 	@Override
+	public boolean evaluar(String cadena)
+	{
+		return evaluar(cadena,0,0);
+	}
+	@Override
 	public boolean evaluar(String cadena, int indice, int estado)
 	{
 		boolean respuesta = false;

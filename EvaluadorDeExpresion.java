@@ -104,12 +104,7 @@ public class EvaluadorDeExpresion{
 			{
 					return false;
 			}
-			int tam = cadena.length();
-			if(automata instanceof AutomataFinitoDeterminista)
-			{
-				return ((AutomataFinitoDeterminista)automata).evaluar(cadena);
-			}
-			//Agregar los demas casos
+			return automata.evaluar(cadena);
 		}catch(NullPointerException npe)
 		{
 			System.out.println("No se ha podido evaluar, " + 

@@ -125,4 +125,7 @@ public class AutomataFinito
 	public String getDescripcion(){
 		return descripcion;
 	}
+	public boolean evaluar(String cadena){
+		return false;
+	}
 }

@@ -102,6 +102,11 @@ public class AutomataFinitoNoDeterminista extends AutomataFinito
 		}
 		return null;
 	}
+	@Override
+	public boolean evaluar(String cadena)
+	{
+		return evaluar(cadena,0,0);
+	}
 	public boolean evaluar(String cadena, int indice, int estado)
 	{
 		if(indice >= cadena.length()){
