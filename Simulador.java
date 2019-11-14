@@ -6,7 +6,7 @@ public class Simulador
 	public static void main(String[] args)
 	{
 		ManejadorDeAutomataYMaquinaDeTuring manejador = new ManejadorDeAutomataYMaquinaDeTuring();
-		manejador.manejar();
+		manejador.menu();
 		if(manejador != null)
 		{
 			manejador.destruir();
