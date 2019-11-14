@@ -100,10 +100,7 @@ public class AutomataFinitoNoDeterminista extends AutomataFinito
 			System.out.println("Ocurrió un error");
 			ioobe.printStackTrace();
 		}
-		finally
-		{
-			return null;
-		}
+		return null;
 	}
 	public boolean evaluar(String cadena, int indice, int estado)
 	{
@@ -134,9 +131,6 @@ public class AutomataFinitoNoDeterminista extends AutomataFinito
 			System.out.println("Ha ocurrido un error al evaluar");
 			ioobe.printStackTrace();
 		}
-		finally
-		{
-			return false;
-		}
+		return false;
 	}
 }
