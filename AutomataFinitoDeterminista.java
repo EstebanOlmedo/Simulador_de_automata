@@ -115,4 +115,5 @@ public class AutomataFinitoDeterminista extends AutomataFinito
 			return false;
 		}
 	}
+
 }

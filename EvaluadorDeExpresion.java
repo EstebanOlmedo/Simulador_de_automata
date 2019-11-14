@@ -100,22 +100,25 @@ public class EvaluadorDeExpresion{
 	{
 		try
 		{
-			if(!perteneceAlAlfabeto(cadena, automata)){return false;}
+			if(!perteneceAlAlfabeto(cadena, automata))
+			{
+					return false;
+			}
 			int tam = cadena.length();
 			if(automata instanceof AutomataFinitoDeterminista)
 			{
 				return ((AutomataFinitoDeterminista)automata).evaluar(cadena);
 			}
-			//TODO implementar las siguientes partes para los distintos autómatas
-			else
-				return false;
+			//Agregar los demas casos
 		}catch(NullPointerException npe)
 		{
 			System.out.println("No se ha podido evaluar, " + 
 					"existe un error con el autómata");
 			npe.printStackTrace();
 		}
+		return false;
 	}
+
 	public boolean evaluarCadena(String cadena, MaquinaDeTuring maquinaDeTuring)
 	{
 		try
@@ -128,9 +131,17 @@ public class EvaluadorDeExpresion{
 				return false;
 		}catch(NullPointerException npe)
 		{
-			System.out.prtinln("No se ha podido evaluar correctamente, " + 
+			System.out.println("No se ha podido evaluar correctamente, " + 
 					"hay un error con la máquina de Turing");
 			npe.printStackTrace();
 		}
+		return false;
 	}
+
+	public void setAutomataFinitoDeterminista(AutomataFinitoDeterminista afd)
+	{
+		this.automataFinitoDeterminista = afd;
+	}
+
+
 }

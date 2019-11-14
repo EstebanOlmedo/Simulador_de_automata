@@ -7,6 +7,12 @@ public class Simulador
 	{
 		ManejadorDeAutomataYMaquinaDeTuring manejador = new ManejadorDeAutomataYMaquinaDeTuring();
 		manejador.manejar();
-		manejador.destruir();
+		if(manejador != null)
+		{
+			manejador.destruir();
+			manejador = null;
+			System.gc();
+		}
+		
 	}
 }

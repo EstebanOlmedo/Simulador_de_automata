@@ -192,14 +192,17 @@ public class GeneradorDeTodoTipoDeAutomataFinito
 			adyacenciaEpsilon
 		);
 	}
+
 	public AutomataFinitoNoDeterminista getAutomataFinitoNoDeterminista()
 	{
 		return automataFinitoNoDeterminista;
 	}
+
 	public AutomataFinitoNoDeterministaEpsilon getAutomataFinitoNoDeterministaEpsilon()
 	{
 		return automataFinitoNoDeterministaEpsilon;
 	}
+	
 	public AutomataFinitoAPila getAutomataFinitoAPila()
 	{
 		return automataAPila;
