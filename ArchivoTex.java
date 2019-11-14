@@ -1,18 +1,23 @@
 /**
  * @author Esteban Olmedo Ramírez
  */
+import java.io.File;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
 public class ArchivoTex extends Archivo
 {
 	private String contenido;
 
 	public ArchivoTex()
 	{
-		this("", "", "");
+		this("", "", null, null, null, "");
 	}
-	public ArchivoTex(String path, String nombre, 
+	public ArchivoTex(String path, String nombre, File file,
+			FileWriter fileWriter, 
+			BufferedWriter bufferedWriter,
 			String contenido)
 	{
-		super(path, nombre);
+		super(path, nombre, file, fileWriter, bufferedWriter);
 		this.contenido = contenido;
 	}
 	public ArchivoTex(ArchivoTex archivo)
