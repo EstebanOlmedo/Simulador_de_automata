@@ -65,7 +65,8 @@ public class GeneradorDeAutomataFinitoDeterminista extends GeneradorDeAutomataFi
 			automata.getAlfabeto(),
 			automata.getEstadosDeAceptacion(),
 			automata.getMapa(),
-			tabla
+			tabla,
+			automata.getDescripcion()
 		);
 	}
 	public AutomataFinitoDeterminista getAFD()

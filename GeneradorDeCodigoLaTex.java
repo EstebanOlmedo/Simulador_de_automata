@@ -135,8 +135,12 @@ public class GeneradorDeCodigoLaTex
 					contenido += "\\" + dire[k] + "("+i+")"+ "{"+
 						lista.get(j)+"}\n";
 					usados[lista.get(j)] = true;
-					contenido += "\\Edge[label = " + "," + estilo1 + "](" + 
-						i + ")(" +lista.get(j) + ")\n";
+					if(k < 2)
+						contenido += "\\Edge[label = " + "," + estilo1 + "](" + 
+							i + ")(" +lista.get(j) + ")\n";
+					else
+						contenido += "\\Edge[label = " + "," + estilo2 + "](" + 
+							i + ")(" +lista.get(j) + ")\n";
 				}
 				else
 				{

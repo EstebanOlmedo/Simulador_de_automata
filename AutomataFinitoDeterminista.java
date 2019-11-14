@@ -9,15 +9,16 @@ public class AutomataFinitoDeterminista extends AutomataFinito
 
 	public AutomataFinitoDeterminista()
 	{
-		this(0, null, null, null, null);
+		this(0, null, null, null, null,null);
 	}
 	public AutomataFinitoDeterminista(
 			int numeroEstados,
 			char[] alfabeto, int[] estadosAceptacion,
 			TreeMap<Character,Integer> mapa,
-			ArrayList <ArrayList <Integer> > tablaDeTransiciones)
+			ArrayList <ArrayList <Integer> > tablaDeTransiciones,
+			String descripcion)
 	{
-		super(numeroEstados, alfabeto, estadosAceptacion, mapa);
+		super(numeroEstados, alfabeto, estadosAceptacion, mapa, descripcion);
 		this.tablaDeTransiciones = tablaDeTransiciones;
 	}
 	public AutomataFinitoDeterminista(AutomataFinitoDeterminista automata)

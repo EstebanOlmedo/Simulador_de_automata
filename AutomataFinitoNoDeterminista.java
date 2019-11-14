@@ -12,14 +12,15 @@ public class AutomataFinitoNoDeterminista extends AutomataFinito
 			char[] alfabeto,
 			int[] estadosAceptacion,
 			TreeMap<Character,Integer> mapa,
-			ArrayList<ArrayList<ArrayList<Integer>>> tablaDeTransiciones)
+			ArrayList<ArrayList<ArrayList<Integer>>> tablaDeTransiciones,
+			String descripcion)
 	{
-		super(numeroDeEstados, alfabeto, estadosAceptacion, mapa);
+		super(numeroDeEstados, alfabeto, estadosAceptacion, mapa, descripcion);
 		this.tablaDeTransiciones = tablaDeTransiciones;
 	}
 
 	public AutomataFinitoNoDeterminista(){
-		this(0, null, null, null, null);
+		this(0, null, null, null, null,null);
 	}
 
 	public AutomataFinitoNoDeterminista(AutomataFinitoNoDeterminista automata)

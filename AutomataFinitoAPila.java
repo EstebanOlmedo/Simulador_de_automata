@@ -11,13 +11,13 @@ public class AutomataFinitoAPila extends AutomataFinito implements IPila
 
 	public AutomataFinitoAPila()
 	{
-		this(0, null, null, null, null,null);
+		this(0, null, null, null, null,null,null);
 	}
 	public AutomataFinitoAPila(int numeroDeEstados, char[] alfabeto, int[] estadosAceptacion, 
 			ArrayList<ArrayList<ArrayList<Delta>>> tablaDeTransiciones, 
-			Stack <Character> pila,TreeMap<Character,Integer> mapa)
+			Stack <Character> pila,TreeMap<Character,Integer> mapa,String descripcion)
 	{
-		super(numeroDeEstados, alfabeto, estadosAceptacion,mapa);
+		super(numeroDeEstados, alfabeto, estadosAceptacion,mapa,descripcion);
 		this.tablaDeTransiciones = tablaDeTransiciones;
 		this.pila = pila;
 	}
