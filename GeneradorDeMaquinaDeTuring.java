@@ -69,7 +69,8 @@ public class GeneradorDeMaquinaDeTuring
 	}
 	public void generarAlfabeto(String alfabeto)
 	{
-		maquina.setAlfabeto(alfabeto.toCharArray());
+		System.out.println("ALFABETO ENVIADO:" + alfabeto);
+		maquina.setAlfabeto(alfabeto);
 	}
 	public void generarTablaMaquinaDeTuring(int numeroEstados, 
 			ArrayList<Integer> estadosAceptacion, String alfabeto)

@@ -136,17 +136,14 @@ public class MaquinaDeTuring
 		}
 		catch(ArrayIndexOutOfBoundsException aioobe)
 		{
+			System.out.println("Ocurrió un error al intentar modificar la cinta");
 			aioobe.printStackTrace();
 		}
 		catch(NullPointerException npe)
 		{
 			npe.printStackTrace();
 		}
-		finally
-		{
-			System.out.println("Ocurrió un error al intentar modificar la cinta");
-			return false;
-		}
+		return false;
 	}
 	public boolean estaEnAlfabeto(char simbolo)
 	{
@@ -161,6 +158,7 @@ public class MaquinaDeTuring
 	{
 		String nuevaCadena = "B" + cadena + "B";
 		cinta = nuevaCadena.toCharArray();
+		System.out.println(cinta);
 	}
 	public void prepararMaquina(String cadena)
 	{
@@ -169,10 +167,16 @@ public class MaquinaDeTuring
 	}
 	public void setAlfabeto(String alfabeto)
 	{
-		setAlfabeto(alfabeto.toCharArray());
+		this.alfabeto = new char[alfabeto.length()];
+		for(int i = 0; i < alfabeto.length(); i++)
+			this.alfabeto[i] = alfabeto.charAt(i);
+		System.out.println("ALFABETO: " + this.alfabeto);
+		for(int i = 0; i < this.alfabeto.length; i++)
+			System.out.println(this.alfabeto[i]);
 	}
 	public void setAlfabeto(char[] alfabeto)
 	{
+		System.out.println("ALFABETO: " + alfabeto);
 		this.alfabeto = alfabeto;
 	}
 	public int getIndiceSimboloEnAlfabeto(char simbolo)
@@ -197,11 +201,7 @@ public class MaquinaDeTuring
 		{
 			aioobe.printStackTrace();
 		}
-		finally
-		{
-			System.out.println("Ocurrió un error al intentar encontrar el índice del símbolo");
-			return-1;
-		}
+		return -1;
 	}
 	public boolean accionar()
 	{
@@ -210,8 +210,10 @@ public class MaquinaDeTuring
 			int indice = getIndiceSimboloEnAlfabeto(cinta[cabezal]);
 			int estado = 0;
 			FuncionDeltaMaquinaDeTuring funcion = tabla.getFuncion(estado, indice);
+			System.out.println("Funcion: " + funcion);
 			while(funcion.hayCamino())
 			{
+				System.out.println("ESTADO:" + estado);
 				estado = funcion.getEstado();
 				modificarCinta(funcion);
 				indice = getIndiceSimboloEnAlfabeto(cinta[cabezal]);
@@ -230,11 +232,7 @@ public class MaquinaDeTuring
 		{
 			npe.printStackTrace();
 		}
-		finally
-		{
-			System.out.println("Ocurrió un error al intentar accionar la Máquina de Turing");
-			return false;
-		}
+		return false;
 	}
 	public TablaMaquinaDeTuring getTabla()
 	{
@@ -251,5 +249,9 @@ public class MaquinaDeTuring
 	public char[] getAlfabeto()
 	{
 		return alfabeto;
+	}
+	public String getDescripcion()
+	{
+		return descripcion;
 	}
 }
