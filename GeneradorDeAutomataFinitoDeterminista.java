@@ -69,7 +69,7 @@ public class GeneradorDeAutomataFinitoDeterminista extends GeneradorDeAutomataFi
 			automata.getDescripcion()
 		);
 	}
-	public AutomataFinitoDeterminista getAFD()
+	public AutomataFinitoDeterminista getAutomataFinitoDeterminista()
 	{
 		return afd;
 	}
