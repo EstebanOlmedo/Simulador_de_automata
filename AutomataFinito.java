@@ -115,7 +115,7 @@ public class AutomataFinito
 	}
 	public boolean exist(char a)
 	{
-		return mapa.containsValue(a);
+		return mapa.containsKey(a);
 	}
 	public char getSimbolo(int indice){
 		if(indice < alfabeto.length)

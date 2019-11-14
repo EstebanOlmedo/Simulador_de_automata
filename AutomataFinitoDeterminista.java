@@ -112,9 +112,7 @@ public class AutomataFinitoDeterminista extends AutomataFinito
 			System.out.println("Ocurrió un error en el proceso de evaluación");
 			ioobe.printStackTrace();
 		}
-		finally{
-			return false;
-		}
+		return false;
 	}
 
 }
