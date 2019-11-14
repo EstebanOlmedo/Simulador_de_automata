@@ -132,7 +132,8 @@ public class GeneradorDeTodoTipoDeAutomataFinito
 			automata.getAlfabeto(),
 			automata.getEstadosDeAceptacion(),
 			automata.getMapa(),
-			tabla
+			tabla,
+			automata.getDescripcion()
 		);
 	}
 	public void crearAutomataFinitoAPila()
@@ -163,7 +164,8 @@ public class GeneradorDeTodoTipoDeAutomataFinito
 			automata.getEstadosDeAceptacion(),
 			tabla,
 			new Stack<Character>(),
-			automata.getMapa()
+			automata.getMapa(),
+			automata.getDescripcion()
 		);
 	}
 	public void crearAutomataFinitoNoDeterministaEpsilon()
@@ -189,7 +191,8 @@ public class GeneradorDeTodoTipoDeAutomataFinito
 			automata.getEstadosDeAceptacion(),
 			automata.getMapa(),
 			automata.getTablaDeTransiciones(),
-			adyacenciaEpsilon
+			adyacenciaEpsilon,
+			automata.getDescripcion()
 		);
 	}
 	public AutomataFinitoNoDeterminista getAutomataFinitoNoDeterminista()
