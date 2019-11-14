@@ -221,9 +221,16 @@ public class ManejadorDeAutomataYMaquinaDeTuring
                     {
                         if(generadorDeAutomata.getAFD() != null)
                         {
-			   System.out.println(generadorDeautomata.getAFD().getDescripcion());
+			   System.out.println(generadorDeAutomata.getAFD().getDescripcion());
                            String cadena = teclado.dameUnString("Ingresa la cadena a evaluar");
-                           evaluador.evaluarCadena(cadena,generadorDeAutomata.getAFD());
+                           if( evaluador.evaluarCadena(cadena,generadorDeAutomata.getAFD()) )
+			   {
+				   System.out.println("La cadena pertenece al lenguaje del automata");
+			   }
+			   else
+			   {
+				   System.out.println("La cadena no pertenece al lenguaje del automata");
+			   }
                         }
                         else
                         {
@@ -318,9 +325,16 @@ public class ManejadorDeAutomataYMaquinaDeTuring
                     {
                         if(generadorDeAutomata.getAutomataFinitoNoDeterminista() != null)
                         {
-			    System.out.println(generadorDeAutomata.geAutomataFinitoNoDeterminista().getDescripcion());
+			    System.out.println(generadorDeAutomata.getAutomataFinitoNoDeterminista().getDescripcion());
                             String cadena = teclado.dameUnString("Ingresa la cadena a evaluar");
-                            evaluador.evaluarCadena(cadena,generadorDeAutomata.getAutomataFinitoNoDeterminista());
+                            if( evaluador.evaluarCadena(cadena,generadorDeAutomata.getAutomataFinitoNoDeterminista()) )
+			    {
+				    System.out.println("La cadena pertenece al lenguaje del automata");
+			    }
+			    else
+			    {
+				    System.out.println("La cadena no pertenece al lenguaje del automata");
+			    }
                         }
                         else
                         {
@@ -414,9 +428,16 @@ public class ManejadorDeAutomataYMaquinaDeTuring
                     {
                         if(generadorDeAutomata.getAutomataFinitoNoDeterministaEpsilon() != null)
                         {
-			    System.out.println(generadorDeAutomata.getAutomataFinitoNoDeterministaEpsilon.getDescripcion());
+			    System.out.println(generadorDeAutomata.getAutomataFinitoNoDeterministaEpsilon().getDescripcion());
                             String cadena = teclado.dameUnString("Ingresa la cadena a evaluar");
-                            evaluador.evaluarCadena(cadena,generadorDeAutomata.getAutomataFinitoNoDeterministaEpsilon());
+                            if( evaluador.evaluarCadena(cadena,generadorDeAutomata.getAutomataFinitoNoDeterministaEpsilon()) )
+			    {
+				    System.out.println("La cadena pertenece al lenguaje del automata");
+			    }
+			    else
+			    {
+				    System.out.println("La cadena no pertenece al lenguaje del automata");
+			    }
                         }
                         else
                         {
@@ -496,7 +517,14 @@ public class ManejadorDeAutomataYMaquinaDeTuring
                         {
 			    System.out.println(generadorDeAutomata.getAutomataFinitoAPila().getDescripcion());
                             String cadena = teclado.dameUnString("Ingresa la cadena a evaluar");
-                            evaluador.evaluarCadena(cadena,generadorDeAutomata.getAutomataFinitoAPila());
+                            if( evaluador.evaluarCadena(cadena,generadorDeAutomata.getAutomataFinitoAPila()) )
+			    {
+				    System.out.println("La cadena pertenece al lenguaje del automata");
+			    }
+			    else
+			    {
+				    System.out.println("La cadena no pertenece al lenguaje del automata");
+			    }
                         }
                         else
                         {

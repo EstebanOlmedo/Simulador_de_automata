@@ -205,7 +205,10 @@ public class GeneradorDeTodoTipoDeAutomataFinito
 	{
 		return automataFinitoNoDeterministaEpsilon;
 	}
-	
+	public AutomataFinitoDeterminista getAFD()
+	{
+		return getAutomataFinitoDeterminista();
+	}
 	public AutomataFinitoAPila getAutomataFinitoAPila()
 	{
 		return automataAPila;

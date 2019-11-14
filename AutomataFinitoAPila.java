@@ -36,6 +36,13 @@ public class AutomataFinitoAPila extends AutomataFinito implements IPila
 			pila = null;
 		System.gc();
 	}
+	@Override
+	public boolean evaluar(String cadena)
+	{
+		Stack<Character> pilaCopia = pila;
+		pilaCopia.push('#');
+		return evaluarCadena(cadena,pilaCopia,0,0);
+	}
         public boolean evaluarCadena(String cadena,Stack <Character> pila,int estado,int indice)
         {
             Delta delta;
