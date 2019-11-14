@@ -8,24 +8,26 @@ public class AutomataFinito
 	private int numeroDeEstados;
 	private char[] alfabeto;
 	private int[] estadosAceptacion;
-	private TreeMap<Character,Integer> mapa; 
+	private TreeMap<Character,Integer> mapa;
+	private String descripcion;
 
 	public AutomataFinito()
 	{
-		this(0, null, null, null);
+		this(0, null, null, null, null);
 	}
 	public AutomataFinito(int numeroDeEstados, char[] alfabeto,
-			int[] estadosAceptacion, TreeMap<Character,Integer> mapa)
+			int[] estadosAceptacion, TreeMap<Character,Integer> mapa, String descripcion)
 	{
 		this.numeroDeEstados = numeroDeEstados;
 		this.alfabeto = alfabeto;
 		this.estadosAceptacion = estadosAceptacion;
 		this.mapa = mapa;
+		this.descripcion = descripcion;
 	}
 	public AutomataFinito(AutomataFinito automata)
 	{
 		this(automata.numeroDeEstados, automata.alfabeto, 
-				automata.estadosAceptacion, automata.mapa);
+				automata.estadosAceptacion, automata.mapa, automata.descripcion);
 	}
 	public void destruir()
 	{
@@ -119,5 +121,8 @@ public class AutomataFinito
 		if(indice < alfabeto.length)
 			return alfabeto[indice];
 		return '\u0000';
+	}
+	public String getDescripcion(){
+		return descripcion;
 	}
 }
