@@ -19,7 +19,7 @@ public class TablaMaquinaDeTuring
 	{
 		this(tablaMaquinaDeTuring.tabla);
 	}
-	public TablaMaquinaDeTuring(int tamanioAlfabeto, int numeroEstados)
+	public TablaMaquinaDeTuring(int numeroEstados, int tamanioAlfabeto)
 	{
 		tabla = new FuncionDeltaMaquinaDeTuring[numeroEstados][tamanioAlfabeto];
 	}
@@ -66,7 +66,15 @@ public class TablaMaquinaDeTuring
 	public void setEstado(int numeroEstado, int simbolo,
 			FuncionDeltaMaquinaDeTuring transicion)
 	{
-		tabla[numeroEstado][simbolo] = transicion;
+		try
+		{
+			tabla[numeroEstado][simbolo] = transicion;
+		}catch(IndexOutOfBoundsException ioobe){
+			System.out.println("Número de estado:" + numeroEstado + "\n" +
+					"Símbolo: " + simbolo + "\n" + 
+					"Transición: " + transicion);
+			ioobe.printStackTrace();
+		}
 	}
 	public void setEstado(int numeroEstado, int simbolo,
 		int estado, char loQueDeja, char movimiento)

@@ -93,6 +93,7 @@ public class GeneradorDeMaquinaDeTuring
 			FuncionDeltaMaquinaDeTuring funcion = new FuncionDeltaMaquinaDeTuring(estadoCambio, simbolo, movimiento);
 			TablaMaquinaDeTuring tabla = maquina.getTabla();
 			tabla.setEstado(estado, indiceSimbolo, funcion);
+			maquina.setTabla(tabla);
 		}
 		catch(IndexOutOfBoundsException aoobe)
 		{
@@ -119,17 +120,19 @@ public class GeneradorDeMaquinaDeTuring
 		String descripcion = new String();
 		descripcion = teclado.dameUnString("¿Cuál es la descripción de la máquina?");
 		int tamanio = teclado.dameUnInt("¿Cuál es el tamaño del alfabeto?");
-		char[] alfabeto = new char[tamanio];
+		char[] alfabeto = new char[tamanio + 1];
 		for(int i = 0; i < tamanio; i++)
 			alfabeto[i] = teclado.dameUnChar("Ingresa el caracter del alfabeto:");
+		alfabeto[tamanio] = 'B';
 		int numeroDeEstados = teclado.dameUnInt("¿Cuál es el número de estados de la Máquina de Turing");
 		System.out.println("A continuación ingrese los estados de aceptación de la máquina");
 		ArrayList<Integer> estadosAceptacion = new ArrayList<>();
-		while(numeroDeEstados != 0)
+		while(true)
 		{
-			int estado = teclado.dameUnInt("Ingresa el número del estado de aceptación o -1 para terminar");
+			int estado = teclado.dameUnInt("Ingresa el número del estado de aceptación o -1 cando hayas terminado");
+			if(estado == -1)
+				break;
 			estadosAceptacion.add(estado);
-			numeroDeEstados--;
 		}
 		crearEstructuraMaquina(new String(alfabeto), numeroDeEstados, estadosAceptacion, descripcion);
 		crearEstados(numeroDeEstados, tamanio);
@@ -143,7 +146,7 @@ public class GeneradorDeMaquinaDeTuring
 		int respuesta;
 		for(int i = 0; i < numeroDeEstados; i++)
 		{
-			for(int j = 0; j < tamanioAlfabeto; j++)
+			for(int j = 0; j < tamanioAlfabeto + 1; j++)
 			{
 				System.out.println("Para el estado " + i + " con el símbolo " +
 						alfabeto[j] + ":");
