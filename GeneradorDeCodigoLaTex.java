@@ -1,6 +1,7 @@
 /**
  * @author Esteban Olmedo Ramírez
  */
+import java.util.ArrayList;
 public class GeneradorDeCodigoLaTex
 {
 	private Archivo archivo;
@@ -103,5 +104,49 @@ public class GeneradorDeCodigoLaTex
 	public boolean verificar(AutomataFinitoAPila ap)
 	{
 		return verificar((AutomataFinito)ap);
+	}
+	public boolean generarCodigo(AutomataFinitoDeterminista automata)
+	{
+		String contenido = new String();
+		String estilo1 = "style={bend right, ->}";
+		String estilo2 = "style={bend left, ->}";
+		String estiloLoop = "dist = 4cm, dir = NO, color = orange, labelstyle = {draw, color = black, fill = gray!20}";
+		String[] dire = {"NOEA", "EA","SOEA", "SO"};
+		boolean[] estanDisponibles = new boolean[4];
+		for(int i = 0; i < 4; i++)
+			estanDisponibles[i] = true;
+		((ArchivoTex)archivo).establecerCabecera();
+		ArrayList<ArrayList<Integer> > tablaDeTransiciones = automata.getTablaDeTransiciones();
+		boolean[] usados = new boolean[tablaDeTransiciones.size()];
+		for(int i = 0; i < tablaDeTransiciones.size(); i++)
+		{
+			ArrayList<Integer> lista = tablaDeTransiciones.get(i);
+			if(lista.size() > 4)
+				return false;
+			if(!usados[i])
+				contenido += "\t\t\\Vertex{"+i +"}\n";
+			for(int j = 0; j < lista.size(); j++)
+			{
+				int k = 0;
+				while(!estanDisponibles[k])k++;
+				estanDisponibles[k] = true;
+				if(lista.get(j) != i)
+				{
+					contenido += "\\" + dire[k] + "("+i+")"+ "{"+
+						lista.get(j)+"}\n";
+					usados[lista.get(j)] = true;
+					contenido += "\\Edge[label = " + "," + estilo1 + "](" + 
+						i + ")(" +lista.get(j) + ")\n";
+				}
+				else
+				{
+					contenido += "\\Loop[" + estiloLoop + ",label = " + i + "]" + 
+						"(" + i + ".north)\n";
+				}
+			}
+		}
+		((ArchivoTex)archivo).aumentarContenido(contenido);
+		((ArchivoTex)archivo).establecerFin();
+		return true;
 	}
 }

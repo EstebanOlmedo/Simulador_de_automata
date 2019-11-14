@@ -51,4 +51,22 @@ public class ArchivoTex extends Archivo
 		establecerCabecera(cabecera);
 		contenido += "\\section{"+section+"}\n";
 	}
+	public void establecerCabecera()
+	{
+		contenido += "\\documentclass[border = 12pt]{standalone}\n";
+		contenido += "\\usepackage{tikz-graph}\n";
+		contenido += "\\begin{document}\n";
+		contenido += "\t\\begin{tikzpicture}";
+		contenido += "\\GraphInit[vstyle = Normal]\n";
+        	contenido += "\\SetUpEdge[color = orange, labelcolor = gray!20,labelstyle = {draw}]\n";
+		contenido += " \\SetGraphUnit{5}\n";
+	}
+	public void establecerFin()
+	{
+		contenido += "\\end{document}";
+	}
+	public void aumentarContenido(String contenido)
+	{
+		this.contenido += contenido;
+	}
 }
