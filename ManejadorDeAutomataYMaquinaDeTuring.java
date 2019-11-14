@@ -181,7 +181,6 @@ public class ManejadorDeAutomataYMaquinaDeTuring
                     break;
                 case 3:
                     subMenuAFNE();
-
                     break;
                 case 4:
                     subMenuAFP();
@@ -570,7 +569,14 @@ public class ManejadorDeAutomataYMaquinaDeTuring
                         if(generadorDeMaquina.getMaquina() != null)
                         {
                             String cadena = teclado.dameUnString("Ingresa la cadena a evaluar");
-                            evaluador.evaluarCadena(cadena,generadorDeMaquina.getMaquina());
+                            if(evaluador.evaluarCadena(cadena,generadorDeMaquina.getMaquina()))
+			    {
+				System.out.println("La cadena pertenece al lenguaje de la MT");
+			    }
+			    else
+			    {
+				System.out.println("La cadena no pertenece al lenguaje de la MT");
+			    }
                         }
                         else
                         {
