@@ -113,8 +113,6 @@ public class GeneradorDeCodigoLaTex
 		String estiloLoop = "dist = 4cm, dir = NO, color = orange, labelstyle = {draw, color = black, fill = gray!20}";
 		String[] dire = {"NOEA", "EA","SOEA", "SO"};
 		boolean[] estanDisponibles = new boolean[4];
-		for(int i = 0; i < 4; i++)
-			estanDisponibles[i] = true;
 		((ArchivoTex)archivo).establecerCabecera();
 		ArrayList<ArrayList<Integer> > tablaDeTransiciones = automata.getTablaDeTransiciones();
 		boolean[] usados = new boolean[tablaDeTransiciones.size()];
@@ -125,6 +123,8 @@ public class GeneradorDeCodigoLaTex
 				return false;
 			if(!usados[i])
 				contenido += "\t\t\\Vertex{"+i +"}\n";
+			for(int i = 0; i < 4; i++)
+				estanDisponibles[i] = true;
 			for(int j = 0; j < lista.size(); j++)
 			{
 				int k = 0;
