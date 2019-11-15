@@ -143,7 +143,7 @@ public class GeneradorDeTodoTipoDeAutomataFinito
 		ArrayList<ArrayList<ArrayList<Delta>>> tabla = new ArrayList<ArrayList<ArrayList<Delta>>>();
 		for(int i=0; i<automata.getNumeroDeEstados(); i++){
 			ArrayList<ArrayList<Delta>> estado = new ArrayList<ArrayList<Delta>>();
-			for(int j=0; j<automata.getMapa().size(); j++){
+			for(int j=0; j<automata.getNumeroDeEstados(); j++){
 				System.out.println("Ingresando transiciones del estado q"+i+" al estado q"+j);
 				System.out.println("Ingresa '#' para omitir/finalizar la transicion actual");
 				ArrayList<Delta> transiciones = new ArrayList<Delta>();
@@ -157,6 +157,7 @@ public class GeneradorDeTodoTipoDeAutomataFinito
 				}
 				estado.add(transiciones);
 			}
+			tabla.add(estado);
 		}
 		automataAPila = new AutomataFinitoAPila(
 			automata.getNumeroDeEstados(),
