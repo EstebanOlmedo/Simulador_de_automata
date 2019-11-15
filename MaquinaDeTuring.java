@@ -203,11 +203,13 @@ public class MaquinaDeTuring
 			FuncionDeltaMaquinaDeTuring funcion = tabla.getFuncion(estado, indice);
 			while(funcion.hayCamino())
 			{
+				mostrarEstado();
 				estado = funcion.getEstado();
 				modificarCinta(funcion);
 				indice = getIndiceSimboloEnAlfabeto(cinta[cabezal]);
 				funcion = tabla.getFuncion(estado, indice);
 			}
+			mostrarEstado();
 			System.out.println("Estado final: " + estado);
 			if(tabla.isEstadoAceptacion(estado))
 				return true;
@@ -223,5 +225,21 @@ public class MaquinaDeTuring
 			npe.printStackTrace();
 		}
 		return false;
+	}
+	public void mostrarEstado()
+	{
+		System.out.print("|");
+		for(int i = 0; i < cinta.length; i++)
+		{
+			System.out.print(cinta[i] + "|");
+		}
+		System.out.println();
+		for(int i = 1; i <= cabezal*2 + 1; i++)
+			System.out.print(" ");
+		System.out.println("^");
+		for(int i = 1; i <= cabezal*2 + 1; i++)
+			System.out.print(" ");
+		System.out.println("|");
+
 	}
 }
