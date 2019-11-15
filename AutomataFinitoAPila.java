@@ -85,6 +85,7 @@ public class AutomataFinitoAPila extends AutomataFinito implements IPila
                     System.out.println("Ocurrio un problema con la pila");
                     ese.printStackTrace();
                 }
+                return false;
             }
             try
             {
@@ -125,13 +126,13 @@ public class AutomataFinitoAPila extends AutomataFinito implements IPila
                 ioobe.printStackTrace();
             }
             catch(EmptyStackException ese){
-                System.out.println("Ocurrio un problema con la pila");
+                System.out.println("Ha currido un problema con la pila");
                 ese.printStackTrace();
             }   
             return false;
         }
         
-        public char pop(Stack <Character> pila)
+    public char pop(Stack <Character> pila)
 	{
 		return pila.pop().charValue();
 	}
@@ -182,15 +183,7 @@ public class AutomataFinitoAPila extends AutomataFinito implements IPila
 	}
     public Stack<Character> crearCopia(Stack<Character> pila){
         Stack<Character> copia = new Stack<Character>();
-        Stack<Character> aux = new Stack<Character>();
-        while(!pila.empty()){
-            aux.push(pila.peek());
-            pila.pop();
-        }
-        while(!aux.empty()){
-            copia.push(aux.peek());
-            aux.pop();
-        }
+        copia.addAll(pila);
         return copia;
     }
 }
