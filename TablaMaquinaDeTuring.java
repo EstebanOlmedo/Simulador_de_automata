@@ -79,7 +79,7 @@ public class TablaMaquinaDeTuring
 	public void setEstado(int numeroEstado, int simbolo,
 		int estado, char loQueDeja, char movimiento)
 	{
-		if(numeroEstado > 0)
+		if(numeroEstado >= 0)
 			setEstado(numeroEstado, simbolo,
 				new FuncionDeltaMaquinaDeTuring(estado, loQueDeja, movimiento));
 		else

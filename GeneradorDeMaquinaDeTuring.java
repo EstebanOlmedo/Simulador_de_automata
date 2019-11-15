@@ -12,12 +12,10 @@ public class GeneradorDeMaquinaDeTuring
 		this.maquina = maquina;
 		this.teclado = teclado;
 	}
-
 	public GeneradorDeMaquinaDeTuring()
 	{
 		this(new MaquinaDeTuring(), new Teclado());
 	}
-
 	public GeneradorDeMaquinaDeTuring(GeneradorDeMaquinaDeTuring generador)
 	{
 		this(generador.maquina, generador.teclado);
@@ -35,13 +33,11 @@ public class GeneradorDeMaquinaDeTuring
 		}
 		System.gc();
 	}
-
 	@Override
 	public String toString()
 	{
 		return "Maquina de Turing: " + maquina;
 	}
-
 	@Override
 	public boolean equals(Object obj)
 	{
@@ -50,6 +46,7 @@ public class GeneradorDeMaquinaDeTuring
 		GeneradorDeMaquinaDeTuring generador = (GeneradorDeMaquinaDeTuring)obj;
 		return maquina.equals(generador.maquina);
 	}
+
 	public String getInforme()
 	{
 		return "Maquina de turing generada\nInformacion de la maquina:\n";
@@ -62,14 +59,13 @@ public class GeneradorDeMaquinaDeTuring
 	{
 		return maquina;
 	}
-	public void generar(char[] cinta)
+	public MaquinaDeTuring getMaquina()
 	{
-		System.out.println("Generando máquina de turing...");
-		maquina.setCinta(cinta);
+		return maquina;
 	}
+
 	public void generarAlfabeto(String alfabeto)
 	{
-		System.out.println("ALFABETO ENVIADO:" + alfabeto);
 		maquina.setAlfabeto(alfabeto);
 	}
 	public void generarTablaMaquinaDeTuring(int numeroEstados, 
@@ -112,39 +108,10 @@ public class GeneradorDeMaquinaDeTuring
 		generarTablaMaquinaDeTuring(numeroEstados, estadosAceptacion, alfabeto);
 		maquina.setDescripcion(descripcion);
 	}
-	public MaquinaDeTuring getMaquina()
-	{
-		return maquina;
-	}
-	public void crearMaquinaDeTuring()
-	{
-		String descripcion = new String();
-		descripcion = teclado.dameUnString("¿Cuál es la descripción de la máquina?");
-		int tamanio = teclado.dameUnInt("¿Cuál es el tamaño del alfabeto?");
-		char[] alfabeto = new char[tamanio + 1];
-		for(int i = 0; i < tamanio; i++)
-			alfabeto[i] = teclado.dameUnChar("Ingresa el caracter del alfabeto:");
-		alfabeto[tamanio] = 'B';
-		int numeroDeEstados = teclado.dameUnInt("¿Cuál es el número de estados de la Máquina de Turing");
-		System.out.println("A continuación ingrese los estados de aceptación de la máquina");
-		ArrayList<Integer> estadosAceptacion = new ArrayList<>();
-		while(true)
-		{
-			int estado = teclado.dameUnInt("Ingresa el número del estado de aceptación o -1 cando hayas terminado");
-			if(estado == -1)
-				break;
-			estadosAceptacion.add(estado);
-		}
-		crearEstructuraMaquina(new String(alfabeto), numeroDeEstados, estadosAceptacion, descripcion);
-		crearEstados(numeroDeEstados, tamanio);
-	}
 	private void crearEstados(int numeroDeEstados, int tamanioAlfabeto)
 	{
 		TablaMaquinaDeTuring tabla = maquina.getTabla();
 		char[] alfabeto = maquina.getAlfabeto();
-		if(tabla == null)
-			tabla = new TablaMaquinaDeTuring(tamanioAlfabeto, numeroDeEstados);
-		int respuesta;
 		for(int i = 0; i < numeroDeEstados; i++)
 		{
 			for(int j = 0; j < tamanioAlfabeto + 1; j++)
@@ -157,11 +124,35 @@ public class GeneradorDeMaquinaDeTuring
 					char loQueDeja = teclado.dameUnChar("¿Qué es lo que deja en la cinta?");
 					char movimiento = teclado.dameUnChar("¿Hacia dónde se mueve el cabezal?");
 					tabla.setEstado(i, j, estadoDeTransicion, loQueDeja, movimiento);
+					FuncionDeltaMaquinaDeTuring funcion = tabla.getFuncion(i, j);
 				}
 				else
-					tabla.setEstado(i, j, estadoDeTransicion, '-', '-');
+					tabla.setEstado(i, j, -1, '-', '-');
 			}
 		}
 		maquina.setTabla(tabla);
+	}
+	public void crearMaquinaDeTuring()
+	{
+		String descripcion = new String();
+		descripcion = teclado.dameUnString("¿Cuál es la descripción de la máquina? (El lenguaje que representa)");
+		int tamanioAlfabeto = teclado.dameUnInt("¿Cuál es la cardinalidad del alfabeto? (Excluyendo el símbolo 'B' (blanco)");
+		char[] alfabeto = new char[tamanioAlfabeto + 1];
+		System.out.println("A continuación se ingreasarán los carácteres del alfabeto");
+		for(int i = 0; i < tamanioAlfabeto; i++)
+			alfabeto[i] = teclado.dameUnChar("Ingresa el caracter del alfabeto:");
+		alfabeto[tamanioAlfabeto] = 'B';
+		int numeroDeEstados = teclado.dameUnInt("¿Cuál es el número de estados de la Máquina de Turing");
+		System.out.println("A continuación ingrese los estados de aceptación de la máquina (indexados en cero)");
+		ArrayList<Integer> estadosAceptacion = new ArrayList<>();
+		while(true)
+		{
+			int estado = teclado.dameUnInt("Ingresa el número del estado de aceptación o -1 cando hayas terminado");
+			if(estado == -1)
+				break;
+			estadosAceptacion.add(estado);
+		}
+		crearEstructuraMaquina(new String(alfabeto), numeroDeEstados, estadosAceptacion, descripcion);
+		crearEstados(numeroDeEstados, tamanioAlfabeto);
 	}
 }

@@ -71,53 +71,71 @@ public class MaquinaDeTuring
 		return cabezal == maquinaDeTuring.cabezal &&
 			descripcion.equals(maquinaDeTuring.descripcion);
 	}
-	public void modificarCinta(char modificacion, char movimiento)
-	{
-		cinta[cabezal] = modificacion;
-		if(movimiento == 'L')
-			cabezal--;
-		else
-			cabezal++;
-	}
-	public void modificarCinta(char modificacion, char movimiento, int casillas)
-	{
-		for(int i = 0; i < casillas; i++)
-		{
-			modificarCinta(modificacion, movimiento);
-		}
-	}
-	public void modificarCinta(char modificacion, char movimiento, char paro)
-	{
-		while(cinta[cabezal] != paro)
-			modificarCinta(modificacion, movimiento);
-	}
-	public void agrandarCinta(char haciaDonde)
-	{
-		int actual = cinta.length;
-		char[] temp = cinta;
-		agrandarCinta(actual);
-		if(haciaDonde == 'L')
-		{
-			for(int i = temp.length-1; i >= cabezal; i--)
-				cinta[i] = temp[i];
-		}
-		else
-		{
-			for(int i = 0; i <= cabezal; i++)
-				cinta[i] = temp[i];
-		}
-		temp = null;
-		System.gc();
-	}
-	public void agrandarCinta(int tamanio)
-	{
-		char[] nueva = new char[cinta.length*2];
-		cinta = nueva;
-	}
 	public void setCinta(char[] cinta)
 	{
 		this.cinta = cinta;
 	}
+
+
+	public TablaMaquinaDeTuring getTabla()
+	{
+		return tabla;
+	}
+	public void setTabla(TablaMaquinaDeTuring tabla)
+	{
+		this.tabla = tabla;
+	}
+	public void setDescripcion(String descripcion)
+	{
+		this.descripcion = descripcion;
+	}
+	public char[] getAlfabeto()
+	{
+		return alfabeto;
+	}
+	public String getDescripcion()
+	{
+		return descripcion;
+	}
+	public int getIndiceSimboloEnAlfabeto(char simbolo)
+	{
+		int retorno = 0;
+		int i = 0;
+		try
+		{
+			if(estaEnAlfabeto(simbolo))
+			{
+				while(alfabeto[i] != simbolo)
+				{
+					i++;
+					retorno++;
+				}
+				return retorno;
+			}
+			else
+				return -1;
+		}
+		catch(ArrayIndexOutOfBoundsException aioobe)
+		{
+			aioobe.printStackTrace();
+		}
+		return -1;
+	}
+	private void setCinta(String cadena)
+	{
+		String nuevaCadena = "BB" + cadena + "BB";
+		cinta = nuevaCadena.toCharArray();
+		System.out.println(cinta);
+	}
+	public void setAlfabeto(String alfabeto)
+	{
+		this.alfabeto = alfabeto.toCharArray();
+	}
+	public void setAlfabeto(char[] alfabeto)
+	{
+		this.alfabeto = alfabeto;
+	}
+
 	public boolean modificarCinta(FuncionDeltaMaquinaDeTuring funcion)
 	{
 		try
@@ -145,6 +163,10 @@ public class MaquinaDeTuring
 		}
 		return false;
 	}
+	public boolean modificarCinta(int estado, char loQueDeja, char movimiento)
+	{
+		return modificarCinta(new FuncionDeltaMaquinaDeTuring(estado, loQueDeja, movimiento));
+	}
 	public boolean estaEnAlfabeto(char simbolo)
 	{
 		for(int i = 0; i < alfabeto.length; i++)
@@ -154,71 +176,39 @@ public class MaquinaDeTuring
 		}
 		return false;
 	}
-	private void setCinta(String cadena)
+	public boolean estaEnAlfabeto(String cadena)
 	{
-		String nuevaCadena = "B" + cadena + "B";
-		cinta = nuevaCadena.toCharArray();
-		System.out.println(cinta);
+		boolean respuesta = true;
+		for(int i = 0; i < cadena.length(); i++)
+			respuesta = respuesta && estaEnAlfabeto(cadena.charAt(i));
+		return respuesta;
+	}
+	public boolean estaEnAlfabeto(char[] cadena)
+	{
+		return estaEnAlfabeto(new String(cadena));
 	}
 	public void prepararMaquina(String cadena)
 	{
 		setCinta(cadena);
-		cabezal = 1;
-	}
-	public void setAlfabeto(String alfabeto)
-	{
-		this.alfabeto = new char[alfabeto.length()];
-		for(int i = 0; i < alfabeto.length(); i++)
-			this.alfabeto[i] = alfabeto.charAt(i);
-		System.out.println("ALFABETO: " + this.alfabeto);
-		for(int i = 0; i < this.alfabeto.length; i++)
-			System.out.println(this.alfabeto[i]);
-	}
-	public void setAlfabeto(char[] alfabeto)
-	{
-		System.out.println("ALFABETO: " + alfabeto);
-		this.alfabeto = alfabeto;
-	}
-	public int getIndiceSimboloEnAlfabeto(char simbolo)
-	{
-		int retorno = 0;
-		int i = 0;
-		try
-		{
-			if(estaEnAlfabeto(simbolo))
-			{
-				while(alfabeto[i] != simbolo)
-				{
-					i++;
-					retorno++;
-				}
-				return retorno;
-			}
-			else
-				return -1;
-		}
-		catch(ArrayIndexOutOfBoundsException aioobe)
-		{
-			aioobe.printStackTrace();
-		}
-		return -1;
+		cabezal = 2;
 	}
 	public boolean accionar()
 	{
+		if(!estaEnAlfabeto(cinta)){return false;}
 		try
 		{
 			int indice = getIndiceSimboloEnAlfabeto(cinta[cabezal]);
 			int estado = 0;
+			int estadoFinal;
 			FuncionDeltaMaquinaDeTuring funcion = tabla.getFuncion(estado, indice);
-			System.out.println("Funcion: " + funcion);
 			while(funcion.hayCamino())
 			{
-				System.out.println("ESTADO:" + estado);
 				estado = funcion.getEstado();
 				modificarCinta(funcion);
 				indice = getIndiceSimboloEnAlfabeto(cinta[cabezal]);
 				funcion = tabla.getFuncion(estado, indice);
 			}
+			System.out.println("Estado final: " + estado);
 			if(tabla.isEstadoAceptacion(estado))
 				return true;
 			else
@@ -233,25 +223,5 @@ public class MaquinaDeTuring
 			npe.printStackTrace();
 		}
 		return false;
-	}
-	public TablaMaquinaDeTuring getTabla()
-	{
-		return tabla;
-	}
-	public void setTabla(TablaMaquinaDeTuring tabla)
-	{
-		this.tabla = tabla;
-	}
-	public void setDescripcion(String descripcion)
-	{
-		this.descripcion = descripcion;
-	}
-	public char[] getAlfabeto()
-	{
-		return alfabeto;
-	}
-	public String getDescripcion()
-	{
-		return descripcion;
 	}
 }

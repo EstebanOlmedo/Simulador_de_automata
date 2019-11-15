@@ -58,6 +58,7 @@ public class FuncionDeltaMaquinaDeTuring
 	{
 		return loQueDeja;
 	}
+
 	public boolean hayCamino()
 	{
 		if(estado == -1)
