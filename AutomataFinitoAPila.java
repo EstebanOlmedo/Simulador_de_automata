@@ -4,6 +4,7 @@
 import java.util.ArrayList;
 import java.util.Stack;
 import java.util.TreeMap;
+import java.util.EmptyStackException;
 public class AutomataFinitoAPila extends AutomataFinito implements IPila
 {
 	private ArrayList < ArrayList < ArrayList <Delta> > > tablaDeTransiciones;
@@ -39,8 +40,8 @@ public class AutomataFinitoAPila extends AutomataFinito implements IPila
 	@Override
 	public boolean evaluar(String cadena)
 	{
-		Stack<Character> pilaCopia = pila;
-		pilaCopia.push('#');
+		Stack<Character> pilaCopia = crearCopia(pila);
+		push("#",pilaCopia);
 		return evaluarCadena(cadena,pilaCopia,0,0);
 	}
         public boolean evaluarCadena(String cadena,Stack <Character> pila,int estado,int indice)
@@ -52,57 +53,81 @@ public class AutomataFinitoAPila extends AutomataFinito implements IPila
                 {
                     return true;
                 }
-                for(int x=0;x<tablaDeTransiciones.get(estado).size();x++)
+                try
                 {
-                    if(!tablaDeTransiciones.get(estado).get(x).isEmpty())
+                    for(int x=0;x<tablaDeTransiciones.get(estado).size();x++)
                     {
-                        for(int y=0;y<tablaDeTransiciones.get(estado).get(x).size();y++)
+                        if(!tablaDeTransiciones.get(estado).get(x).isEmpty())
                         {
-                            delta = tablaDeTransiciones.get(estado).get(x).get(y);
-                            if(delta.getPrimero() == '~' && delta.getSegundo() == peek())
+                            for(int y=0;y<tablaDeTransiciones.get(estado).get(x).size();y++)
                             {
-                                Stack <Character> pilaCopia = pila;
-                                push(delta.getTercero(),pilaCopia);
-                                if(evaluarCadena(cadena, pilaCopia, estado, indice))
+                                delta = tablaDeTransiciones.get(estado).get(x).get(y);
+                                if(delta.getPrimero() == '~' && delta.getSegundo() == peek(pila))
                                 {
-                                    return true;
+                                    Stack <Character> pilaCopia = crearCopia(pila);
+                                    pop(pilaCopia);
+                                    push(delta.getTercero(),pilaCopia);
+                                    if(evaluarCadena(cadena, pilaCopia, x, indice))
+                                    {
+                                        return true;
+                                    }
+                                    
                                 }
-                                
                             }
                         }
                     }
+                }
+                catch(IndexOutOfBoundsException ioobe){
+                    System.out.println("Ocurrió un problema al evaluar la cadena");
+                    ioobe.printStackTrace();
+                }
+                catch(EmptyStackException ese){
+                    System.out.println("Ocurrio un problema con la pila");
+                    ese.printStackTrace();
                 }
             }
-            for(int x=0;x<tablaDeTransiciones.get(estado).size();x++)
-                {
-                    if(!tablaDeTransiciones.get(estado).get(x).isEmpty())
+            try
+            {
+                for(int x=0;x<tablaDeTransiciones.get(estado).size();x++)
                     {
-                        for(int y=0;y<tablaDeTransiciones.get(estado).get(x).size();y++)
+                        if(!tablaDeTransiciones.get(estado).get(x).isEmpty())
                         {
-                            delta = tablaDeTransiciones.get(estado).get(x).get(y);
-                            if(indice < cadena.length() && delta.getPrimero() == cadena.charAt(indice) && delta.getSegundo() == peek())
+                            for(int y=0;y<tablaDeTransiciones.get(estado).get(x).size();y++)
                             {
-                                Stack <Character> pilaCopia = pila;
-                                push(delta.getTercero(),pilaCopia);
-                                if(evaluarCadena(cadena, pilaCopia, x, indice+1))
+                                delta = tablaDeTransiciones.get(estado).get(x).get(y);
+                                if(indice < cadena.length() && delta.getPrimero() == cadena.charAt(indice) && delta.getSegundo() == peek(pila))
                                 {
-                                    return true;
+                                    Stack <Character> pilaCopia = crearCopia(pila);
+                                    pop(pilaCopia);
+                                    push(delta.getTercero(),pilaCopia);
+                                    if(evaluarCadena(cadena, pilaCopia, x, indice+1))
+                                    {
+                                        return true;
+                                    }
                                 }
-                            }
-                            else if(delta.getPrimero() == '~' && delta.getSegundo() == peek())
-                            {
-                                Stack <Character> pilaCopia = pila;
-                                push(delta.getTercero(),pilaCopia);
-                                if(evaluarCadena(cadena, pilaCopia, x, indice))
+                                else if(delta.getPrimero() == '~' && delta.getSegundo() == peek(pila))
                                 {
-                                    return true;
+                                    Stack <Character> pilaCopia = crearCopia(pila);
+                                    pop(pilaCopia);
+                                    push(delta.getTercero(),pilaCopia);
+                                    if(evaluarCadena(cadena, pilaCopia, x, indice))
+                                    {
+                                        return true;
+                                    }
+                                    
                                 }
-                                
                             }
                         }
                     }
-                }
-                            
+            }
+            catch(IndexOutOfBoundsException ioobe){
+                System.out.println("Ocurrió un problema al evaluar la cadena");
+                ioobe.printStackTrace();
+            }
+            catch(EmptyStackException ese){
+                System.out.println("Ocurrio un problema con la pila");
+                ese.printStackTrace();
+            }   
             return false;
         }
         
@@ -115,7 +140,8 @@ public class AutomataFinitoAPila extends AutomataFinito implements IPila
 	{
             for (int i = 0; i < cadena.length(); i++)
             {
-                pila.push(cadena.charAt(i));
+                if(cadena.charAt(i) != '~')
+                    pila.push(cadena.charAt(i));
             }
 		
 	}
@@ -139,7 +165,8 @@ public class AutomataFinitoAPila extends AutomataFinito implements IPila
 	{
             for (int i = 0; i < cadena.length(); i++)
             {
-                pila.push(cadena.charAt(i));
+                if(cadena.charAt(i) != '~')
+                    pila.push(cadena.charAt(i));
             }
 		
 	}
@@ -153,5 +180,18 @@ public class AutomataFinitoAPila extends AutomataFinito implements IPila
 	{
 		return pila.empty();
 	}
+    public Stack<Character> crearCopia(Stack<Character> pila){
+        Stack<Character> copia = new Stack<Character>();
+        Stack<Character> aux = new Stack<Character>();
+        while(!pila.empty()){
+            aux.push(pila.peek());
+            pila.pop();
+        }
+        while(!aux.empty()){
+            copia.push(aux.peek());
+            aux.pop();
+        }
+        return copia;
+    }
 }
 
