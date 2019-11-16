@@ -60,7 +60,14 @@ public class GeneradorDeAutomataFinitoDeterminista extends GeneradorDeAutomataFi
 		for(int i=0; i<automata.getNumeroDeEstados(); i++){
 			ArrayList<Integer> estado = new ArrayList<Integer>();
 			for(int j=0; j<automata.getMapa().size(); j++){
-				int estadoDestino = getTeclado().dameUnInt("Ingresa el valor de S(q"+i+","+automata.getSimbolo(j)+")");
+				int estadoDestino;
+				while(true){
+					estadoDestino = getTeclado().dameUnInt("Ingresa el valor de S(q"+i+","+automata.getSimbolo(j)+")");
+					if(estadoDestino < automata.getNumeroDeEstados())
+						break;
+					else
+						System.out.println("No existe el estado que ingresaste ._.");
+				}
 				estado.add(estadoDestino);
 			}
 			tabla.add(estado);

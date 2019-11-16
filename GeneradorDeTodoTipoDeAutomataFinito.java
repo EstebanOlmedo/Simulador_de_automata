@@ -102,7 +102,10 @@ public class GeneradorDeTodoTipoDeAutomataFinito
 				ArrayList<Integer> transiciones = new ArrayList<Integer>();
 				int transicion = -1;
 				while((transicion = getTeclado().dameUnInt("Ingresa el estado destino")) >= 0){
-					transiciones.add(transicion);
+					if(transicion >= automata.getNumeroDeEstados())
+						System.out.println("No existe el estado que ingresaste ._.");
+					else
+						transiciones.add(transicion);
 				}
 				estado.add(transiciones);
 			}
@@ -165,7 +168,10 @@ public class GeneradorDeTodoTipoDeAutomataFinito
 			System.out.println("Ingresa -1 para omitir/finalizar la transicion actual");
 			int transicion = -1;
 			while((transicion = getTeclado().dameUnInt("Ingresa el estado destino")) >= 0){
-				transiciones.add(transicion);
+				if(transicion >= automata.getNumeroDeEstados())
+					System.out.println("No existe el estado que ingresaste ._.");
+				else
+					transiciones.add(transicion);
 			}
 			adyacenciaEpsilon.add(transiciones);
 		}
