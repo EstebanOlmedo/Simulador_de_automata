@@ -3,7 +3,8 @@
  */
 
 import java.util.TreeMap;
-public class AutomataFinito
+import java.io.Serializable;
+public class AutomataFinito implements Serializable
 {
 	private int numeroDeEstados;
 	private char[] alfabeto;

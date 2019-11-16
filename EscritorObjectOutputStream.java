@@ -60,7 +60,7 @@ public class EscritorObjectOutputStream extends Archivo
 			{
 				fos = new FileOutputStream(getFile());
 				oos = new ObjectOutputStream(fos);
-				return false;
+				return true;
 			}
 		}catch(FileNotFoundException fnfe){
 			fnfe.printStackTrace();
@@ -69,7 +69,6 @@ public class EscritorObjectOutputStream extends Archivo
 			ioe.printStackTrace();
 			return false;
 		}
-		return false;
 	}
 
 	private boolean cerrarFlujo()
@@ -94,7 +93,6 @@ public class EscritorObjectOutputStream extends Archivo
 		{
 			return cerradoFos && cerradoOos;
 		}
-		return cerradoFos && cerradoOos;
 	}
 
 	public boolean escribirObjeto(Object objeto,Teclado teclado)
