@@ -47,27 +47,21 @@ public class GeneradorDeMaquinaDeTuring
 		return maquina.equals(generador.maquina);
 	}
 
-	public String getInforme()
-	{
-		return "Maquina de turing generada\nInformacion de la maquina:\n";
-	}
-	public String getInforme(MaquinaDeTuring maquina)
-	{
-		return getInforme() + maquina;
-	}
 	public MaquinaDeTuring getMaquinaDeTuring()
 	{
 		return maquina;
 	}
-	public MaquinaDeTuring getMaquina()
+
+	public void setMaquinaDeTuring(MaquinaDeTuring maquina)
 	{
-		return maquina;
+		this.maquina = maquina;
 	}
 
 	public void generarAlfabeto(String alfabeto)
 	{
 		maquina.setAlfabeto(alfabeto);
 	}
+
 	public void generarTablaMaquinaDeTuring(int numeroEstados, 
 			ArrayList<Integer> estadosAceptacion, String alfabeto)
 	{
@@ -78,6 +72,7 @@ public class GeneradorDeMaquinaDeTuring
 		tabla.setEstadosAceptacion(estadosAceptacion);
 		maquina.setTabla(tabla);
 	}
+
 	public void crearFuncionEnTabla(
 			int estado, 
 			int estadoCambio,
@@ -98,6 +93,7 @@ public class GeneradorDeMaquinaDeTuring
 			aoobe.printStackTrace();
 		}
 	}
+
 	public void crearEstructuraMaquina(
 			String alfabeto, 
 			int numeroEstados, 
@@ -108,6 +104,7 @@ public class GeneradorDeMaquinaDeTuring
 		generarTablaMaquinaDeTuring(numeroEstados, estadosAceptacion, alfabeto);
 		maquina.setDescripcion(descripcion);
 	}
+
 	private void crearEstados(int numeroDeEstados, int tamanioAlfabeto)
 	{
 		TablaMaquinaDeTuring tabla = maquina.getTabla();
@@ -132,6 +129,7 @@ public class GeneradorDeMaquinaDeTuring
 		}
 		maquina.setTabla(tabla);
 	}
+
 	public void crearMaquinaDeTuring()
 	{
 		String descripcion = new String();

@@ -107,7 +107,7 @@ public class GeneradorDeCodigoLaTex
 	}
 	public boolean generarCodigo(AutomataFinitoDeterminista automata)
 	{
-		String contenido = new String();
+		/*String contenido = new String();
 		String estilo1 = "style={bend right, ->}";
 		String estilo2 = "style={bend left, ->}";
 		String estiloLoop = "dist = 4cm, dir = NO, color = orange, labelstyle = {draw, color = black, fill = gray!20}";
@@ -150,7 +150,7 @@ public class GeneradorDeCodigoLaTex
 			}
 		}
 		((ArchivoTex)archivo).aumentarContenido(contenido);
-		((ArchivoTex)archivo).establecerFin();
+		((ArchivoTex)archivo).establecerFin();*/
 		return true;
 	}
 }

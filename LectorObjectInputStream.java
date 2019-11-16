@@ -9,37 +9,96 @@ import java.io.ObjectInputStream;
 import java.util.List;
 import java.util.LinkedList;
 import java.util.ArrayList;
+import java.io.File;
 
-public class LectorObjectInputStream
+public class LectorObjectInputStream extends Archivo
 {
-	private String archivo;
+
 	private FileInputStream fis;
 	private ObjectInputStream ois;
 
-	public LectorObjectInputStream(String archivo)
+	public LectorObjectInputStream(String path,String nombre)
 	{
-		this.archivo = archivo;
+		super(path,nombre,null);
 		fis = null;
 		ois = null;
 	}
 
+	public LectorObjectInputStream(String path,String nombre,File file,FileInputStream fis,ObjectInputStream ois)
+	{
+		super(path,nombre,file);
+		this.fis = fis;
+		this.ois = ois;
+	}
+
+	public LectorObjectInputStream()
+	{
+		this("","",null,null,null);
+	}
+
+	public LectorObjectInputStream(LectorObjectInputStream lector)
+	{
+		super(lector);
+		this.fis = lector.fis;
+		this.ois = lector.ois;
+	}
+
+	@Override
+	public void destruir()
+	{
+		super.destruir();
+		if(fis != null)
+			fis = null;
+		if(ois != null)
+			ois = null;
+		System.gc();
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if(obj == null) 
+			return false;
+		if(!(obj instanceof LectorObjectInputStream))
+			return false;
+		LectorObjectInputStream lector = (LectorObjectInputStream) obj;
+		return super.equals(lector) && 
+				fis.equals(lector.fis) &&
+				ois.equals(lector.ois);
+	}
+
+	@Override
+	public String toString()
+	{
+		return super.toString() + fis.toString() + ois.toString();
+	}
+
 	private boolean abrirFlujo()
 	{
-		boolean abierto = false;
 		try
 		{
-			fis = new FileInputStream(archivo);
-			ois = new ObjectInputStream(fis);
-			abierto = true;
+			if(verificarExistenciaArchivo())
+			{
+				fis = new FileInputStream(getFile());
+				ois = new ObjectInputStream(fis);
+				return true;
+			}
+			else
+			{
+				System.out.println("El archivo no se existe");
+			}
 		}catch(FileNotFoundException fnfe)
 		{
 			fnfe.printStackTrace();
+			return false;
 		}catch(IOException ioe)
 		{
 			ioe.printStackTrace();
+			return false;
 		}
-		return abierto;
+		return false;
 	}
+
 	private boolean cerrarFlujo()
 	{
 		boolean cerradoOis = false;
@@ -68,9 +127,9 @@ public class LectorObjectInputStream
 		}
 		return cerradoOis && cerradoFis;
 	}
-	public List<Object> leerObjetos()
+
+	public Object leerObjetoArchivo()
 	{
-		ArrayList<Object> lista = new ArrayList<>();
 		if(abrirFlujo())
 		{
 			try
@@ -78,7 +137,7 @@ public class LectorObjectInputStream
 				if(fis.available() != 0)
 				{
 					Object aux = ois.readObject();
-					lista = (ArrayList<Object>)aux;
+					return aux;
 				}
 			}catch(EOFException eofe)
 			{
@@ -102,6 +161,6 @@ public class LectorObjectInputStream
 					System.out.println("Ocurrió un error al cerrar el flujo");
 			}
 		}
-		return lista;
+		return null;
 	}
 }

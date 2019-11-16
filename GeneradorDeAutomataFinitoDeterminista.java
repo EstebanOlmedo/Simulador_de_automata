@@ -4,47 +4,53 @@
 import java.util.ArrayList;
 public class GeneradorDeAutomataFinitoDeterminista extends GeneradorDeAutomataFinito
 {
-	private AutomataFinitoDeterminista afd;
+	private AutomataFinitoDeterminista automataFinitoDeterminista;
 
 	public GeneradorDeAutomataFinitoDeterminista(AutomataFinito automata, AutomataFinitoDeterminista afd)
 	{
 		super(automata);
-		this.afd = afd;
+		this.automataFinitoDeterminista = afd;
 	}
+
 	public GeneradorDeAutomataFinitoDeterminista()
 	{
 		this(null, null);
 	}
+
 	public GeneradorDeAutomataFinitoDeterminista(GeneradorDeAutomataFinitoDeterminista generador){
 		super(generador);
-		this.afd = generador.afd;
+		this.automataFinitoDeterminista = generador.automataFinitoDeterminista;
 	}
+
 	public void destruir()
 	{
-		if(afd != null)
+		if(automataFinitoDeterminista != null)
 		{
-			afd.destruir();
-			afd = null;
+			automataFinitoDeterminista.destruir();
+			automataFinitoDeterminista = null;
 		}
 		System.gc();
 	}
+
 	@Override
 	public String toString(){
 		String retorno = "Generador de Automata Finito Determinista\nAutomata generado:\n";
-		if(afd != null)
-			retorno += afd;
+		if(automataFinitoDeterminista != null)
+			retorno += automataFinitoDeterminista;
 		else
 			retorno += "Aun no se ha generado";
 		return retorno;
 	}
+
 	@Override
 	public boolean equals(Object obj)
 	{
 		if(obj == null) return false;
 		if(!(obj instanceof GeneradorDeAutomataFinitoDeterminista)) return false;
 		GeneradorDeAutomataFinitoDeterminista generador = (GeneradorDeAutomataFinitoDeterminista)obj;
-		return super.equals(generador) && afd.equals(generador.afd);
+		return super.equals(generador) && automataFinitoDeterminista.equals(generador.automataFinitoDeterminista);
 	}
+
 	public void crearAutomataFinitoDeterminista()
 	{
 		crearAutomataFinito();
@@ -60,7 +66,7 @@ public class GeneradorDeAutomataFinitoDeterminista extends GeneradorDeAutomataFi
 			tabla.add(estado);
 		}
 		System.out.println("El automata fue creado con exito :)");
-		afd = new AutomataFinitoDeterminista(
+		automataFinitoDeterminista = new AutomataFinitoDeterminista(
 			automata.getNumeroDeEstados(),
 			automata.getAlfabeto(),
 			automata.getEstadosDeAceptacion(),
@@ -69,8 +75,14 @@ public class GeneradorDeAutomataFinitoDeterminista extends GeneradorDeAutomataFi
 			automata.getDescripcion()
 		);
 	}
+
 	public AutomataFinitoDeterminista getAutomataFinitoDeterminista()
 	{
-		return afd;
+		return automataFinitoDeterminista;
+	}
+
+	public void setAutomataFinitoDeterminista(AutomataFinitoDeterminista automataFinitoDeterminista)
+	{
+		this.automataFinitoDeterminista = automataFinitoDeterminista;
 	}
 }

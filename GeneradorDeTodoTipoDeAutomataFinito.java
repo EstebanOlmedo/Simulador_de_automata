@@ -86,25 +86,7 @@ public class GeneradorDeTodoTipoDeAutomataFinito
 		automataFinitoNoDeterministaEpsilon.equals(conversor.automataFinitoNoDeterministaEpsilon) &&
 		automataAPila.equals(conversor.automataAPila);
 	}
-	public String getInforme()
-	{
-		return "Automata generado\nDatos del automata generado:\n";
-	}
-	public String getInforme(AutomataFinitoDeterminista afd)
-	{
-		return getInforme() + afd;
-	}
-	public String getInforme(AutomataFinitoNoDeterminista afn){
-		return getInforme() + afn;
-	}
-	public String getInforme(AutomataFinitoNoDeterministaEpsilon afnE)
-	{
-		return getInforme() + afnE;
-	}
-	public String getInforme(AutomataFinitoAPila automataPila)
-	{
-		return getInforme() + automataPila;
-	}
+	
 	public void crearAutomataFinitoNoDeterminista()
 	{
 		crearAutomataFinito();
@@ -136,6 +118,7 @@ public class GeneradorDeTodoTipoDeAutomataFinito
 			automata.getDescripcion()
 		);
 	}
+
 	public void crearAutomataFinitoAPila()
 	{
 		crearAutomataFinito();
@@ -169,6 +152,7 @@ public class GeneradorDeTodoTipoDeAutomataFinito
 			automata.getDescripcion()
 		);
 	}
+	
 	public void crearAutomataFinitoNoDeterministaEpsilon()
 	{
 		crearAutomataFinitoNoDeterminista();
@@ -206,12 +190,25 @@ public class GeneradorDeTodoTipoDeAutomataFinito
 	{
 		return automataFinitoNoDeterministaEpsilon;
 	}
-	public AutomataFinitoDeterminista getAFD()
-	{
-		return getAutomataFinitoDeterminista();
-	}
+
 	public AutomataFinitoAPila getAutomataFinitoAPila()
 	{
 		return automataAPila;
 	}
+
+	public void setAutomataFinitoNoDeterminista(AutomataFinitoNoDeterminista afn)
+	{
+		automataFinitoNoDeterminista = afn;
+	}
+
+	public void setAutomataFinitoNoDeterministaEpsilon(AutomataFinitoNoDeterministaEpsilon afne)
+	{
+		automataFinitoNoDeterministaEpsilon = afne;
+	}
+
+	public void setAutomataFinitoAPila(AutomataFinitoAPila afp)
+	{
+		automataAPila = afp;
+	}
+
 }

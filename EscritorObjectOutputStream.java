@@ -6,73 +6,116 @@ import java.io.EOFException;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
-import java.util.List;
-import java.util.LinkedList;
-import java.util.Iterator;
-import java.util.ArrayList;
-public class EscritorObjectOutputStream
+import java.io.File;
+public class EscritorObjectOutputStream extends Archivo
 {
-	private String archivo;
 	private FileOutputStream fos;
 	private ObjectOutputStream  oos;
 
-	public EscritorObjectOutputStream(String archivo)
+	public EscritorObjectOutputStream(String path,String nombre)
 	{
-		this.archivo = archivo;
+		super(path,nombre,null);
 		fos = null;
 		oos = null;
 	}
-	private boolean abrirFlujo()
+
+	public EscritorObjectOutputStream(String path,String nombre,File file,FileOutputStream fos,ObjectOutputStream oos)
 	{
-		boolean abierto = false;
+		super(path,nombre,file);
+		this.fos = fos;
+		this.oos = oos;
+	}
+
+	public EscritorObjectOutputStream()
+	{
+		this("","",null,null,null);
+	}
+
+	public EscritorObjectOutputStream(EscritorObjectOutputStream escritor)
+	{
+		super(escritor);
+		this.fos = escritor.fos;
+		this.oos = escritor.oos;
+	}
+
+	private boolean abrirFlujo(Teclado teclado)
+	{
 		try
 		{
-			fos = new FileOutputStream(archivo);
-			oos = new ObjectOutputStream(fos);
-			abierto = true;
+			if(verificarExistenciaArchivo())
+			{
+				String op = teclado.dameUnString("El archivo ya existe,¿quieres sobreescribirlo?");
+				if((op.toUpperCase()).equals("SI"))
+				{
+					fos = new FileOutputStream(getFile());
+					oos = new ObjectOutputStream(fos);
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+			else
+			{
+				fos = new FileOutputStream(getFile());
+				oos = new ObjectOutputStream(fos);
+				return false;
+			}
 		}catch(FileNotFoundException fnfe){
 			fnfe.printStackTrace();
+			return false;
 		}catch(IOException ioe){
 			ioe.printStackTrace();
+			return false;
 		}
-		return abierto;
+		return false;
 	}
+
 	private boolean cerrarFlujo()
 	{
 		boolean cerradoOos = false;
 		boolean cerradoFos = false;
-		if(oos != null)
-		{
-			try
+		try{
+			if(oos != null)
 			{
 				oos.close();
 				cerradoOos = true;
-			}catch(IOException ioe){
-				ioe.printStackTrace();
 			}
-		}
-		if(fos != null)
-		{
-			try
+			if(fos != null)
 			{
 				fos.close();
 				cerradoFos = true;
-			}catch(IOException ioe){
-				ioe.printStackTrace();
 			}
+		}catch(IOException ioe)
+		{
+			ioe.printStackTrace();
+		}finally
+		{
+			return cerradoFos && cerradoOos;
 		}
 		return cerradoFos && cerradoOos;
 	}
-	public void escribirFlujo(ArrayList<Object> lista)
+
+	public boolean escribirObjeto(Object objeto,Teclado teclado)
 	{
-		if(abrirFlujo())
+		if(abrirFlujo(teclado))
 		{
 			try
 			{
-				oos.writeObject(lista);
+				oos.writeObject(objeto);
+				return true;
 			}catch(IOException ioe){
 				ioe.printStackTrace();
+			}finally
+			{
+				if(cerrarFlujo())
+					System.out.println("Flujo cerrado correctamente");
+				else
+					System.out.println("Ocurrio un error al cerrar el flujo");
 			}
 		}
+		return false;
 	}
 }
+	
