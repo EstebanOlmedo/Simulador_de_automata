@@ -97,7 +97,7 @@ public class MaquinaDeTuring
 	{
 		return descripcion;
 	}
-	public int getIndiceSimboloEnAlfabeto(char simbolo)
+	public int getIndiceSimboloEnAlfabeto(char simbolo) throws NoExisteEnAlfabetoException
 	{
 		int retorno = 0;
 		int i = 0;
@@ -167,25 +167,47 @@ public class MaquinaDeTuring
 	{
 		return modificarCinta(new FuncionDeltaMaquinaDeTuring(estado, loQueDeja, movimiento));
 	}
-	public boolean estaEnAlfabeto(char simbolo)
+	public boolean estaEnAlfabeto(char simbolo) throws NoExisteEnAlfabetoException
 	{
+		boolean respuesta = false;
 		for(int i = 0; i < alfabeto.length; i++)
 		{
 			if(alfabeto[i] == simbolo)
-				return true;
+			return true;
 		}
-		return false;
+		throw new NoExisteEnAlfabetoException("El alfabeto de la máquina "
+				+ "de Turing no contiene el simbolo: " + simbolo);
 	}
-	public boolean estaEnAlfabeto(String cadena)
+	public boolean estaEnAlfabeto(String cadena) throws NoExisteEnAlfabetoException
 	{
 		boolean respuesta = true;
-		for(int i = 0; i < cadena.length(); i++)
-			respuesta = respuesta && estaEnAlfabeto(cadena.charAt(i));
-		return respuesta;
+		try
+		{
+			for(int i = 0; i < cadena.length(); i++)
+				respuesta = respuesta && estaEnAlfabeto(cadena.charAt(i));
+		}catch(NoExisteEnAlfabetoException neeae){
+			respuesta = false;
+			throw new NoExisteEnAlfabetoException("La cadena: " + cadena +
+					" no se encuentra dentro del alfabeto");
+		}
+		finally{
+			return respuesta;
+		}
 	}
-	public boolean estaEnAlfabeto(char[] cadena)
+	public boolean estaEnAlfabeto(char[] cadena) throws NoExisteEnAlfabetoException
 	{
-		return estaEnAlfabeto(new String(cadena));
+		boolean respuesta = false;
+		try
+		{
+			respuesta = estaEnAlfabeto(new String(cadena));
+		}
+		catch(NoExisteEnAlfabetoException neeae){
+			respuesta = false;
+			throw neeae;
+		}
+		finally{
+			return respuesta;
+		}
 	}
 	public void prepararMaquina(String cadena)
 	{
@@ -194,27 +216,28 @@ public class MaquinaDeTuring
 	}
 	public boolean accionar()
 	{
-		if(!estaEnAlfabeto(cinta)){return false;}
+		boolean laMaquinaAcepta = false;
 		try
 		{
-			int indice = getIndiceSimboloEnAlfabeto(cinta[cabezal]);
-			int estado = 0;
-			int estadoFinal;
-			FuncionDeltaMaquinaDeTuring funcion = tabla.getFuncion(estado, indice);
-			while(funcion.hayCamino())
+			if(estaEnAlfabeto(cinta))
 			{
+				int indice = getIndiceSimboloEnAlfabeto(cinta[cabezal]);
+				int estado = 0;
+				int estadoFinal;
+				FuncionDeltaMaquinaDeTuring funcion = tabla.getFuncion(estado, indice);
+				while(funcion.hayCamino())
+				{
+					mostrarEstado();
+					estado = funcion.getEstado();
+					modificarCinta(funcion);
+					indice = getIndiceSimboloEnAlfabeto(cinta[cabezal]);
+					funcion = tabla.getFuncion(estado, indice);
+				}
 				mostrarEstado();
-				estado = funcion.getEstado();
-				modificarCinta(funcion);
-				indice = getIndiceSimboloEnAlfabeto(cinta[cabezal]);
-				funcion = tabla.getFuncion(estado, indice);
+				System.out.println("Estado final: " + estado);
+				if(tabla.isEstadoAceptacion(estado))
+					laMaquinaAcepta = true;
 			}
-			mostrarEstado();
-			System.out.println("Estado final: " + estado);
-			if(tabla.isEstadoAceptacion(estado))
-				return true;
-			else
-				return false;
 		}
 		catch(ArrayIndexOutOfBoundsException aioobe)
 		{
@@ -224,7 +247,14 @@ public class MaquinaDeTuring
 		{
 			npe.printStackTrace();
 		}
-		return false;
+		catch(NoExisteEnAlfabetoException neeae)
+		{
+			System.out.println(neeae);
+		}
+		finally
+		{
+			return laMaquinaAcepta;
+		}
 	}
 	public void mostrarEstado()
 	{
