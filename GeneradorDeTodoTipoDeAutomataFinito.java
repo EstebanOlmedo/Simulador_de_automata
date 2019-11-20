@@ -104,11 +104,11 @@ public class GeneradorDeTodoTipoDeAutomataFinito
 				while((transicion = getTeclado().dameUnInt("Ingresa el estado destino")) >= 0){
 					try{
 						if(transicion >= automata.getNumeroDeEstados())
-							throw new NoExisteElEstadoException(transicion);
+							throw new NoExisteEstadoException(transicion);
 						else
 							transiciones.add(transicion);
 					}
-					catch(NoExisteElEstadoException neeee){
+					catch(NoExisteEstadoException neeee){
 						neeee.printStackTrace();
 						System.out.println("Ingresa un estado válido");
 					}
@@ -176,11 +176,11 @@ public class GeneradorDeTodoTipoDeAutomataFinito
 			while((transicion = getTeclado().dameUnInt("Ingresa el estado destino")) >= 0){
 				try{
 					if(transicion >= automata.getNumeroDeEstados())
-						throw new NoExisteElEstadoException(transicion);
+						throw new NoExisteEstadoException(transicion);
 					else
 						transiciones.add(transicion);
 				}
-				catch(NoExisteElEstadoException neeee){
+				catch(NoExisteEstadoException neeee){
 					neeee.printStackTrace();
 					System.out.println("Ingresa un estado válido");
 				}

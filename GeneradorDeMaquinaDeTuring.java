@@ -92,6 +92,9 @@ public class GeneradorDeMaquinaDeTuring
 			System.out.println("Ha ocurrido un error");
 			aoobe.printStackTrace();
 		}
+		catch(NoExisteEnAlfabetoException neea){
+			System.out.println(neea);
+		}
 	}
 
 	public void crearEstructuraMaquina(
@@ -113,18 +116,26 @@ public class GeneradorDeMaquinaDeTuring
 		{
 			for(int j = 0; j < tamanioAlfabeto + 1; j++)
 			{
-				System.out.println("Para el estado " + i + " con el símbolo " +
+				System.out.println("Para el estado q" + i + " con el símbolo " +
 						alfabeto[j] + ":");
-				int estadoDeTransicion = teclado.dameUnInt("¿A qué estado cambia? Ingresa -1 si no hay transición");
-				if(estadoDeTransicion != -1)
+				try
 				{
-					char loQueDeja = teclado.dameUnChar("¿Qué es lo que deja en la cinta?");
-					char movimiento = teclado.dameUnChar("¿Hacia dónde se mueve el cabezal?");
-					tabla.setEstado(i, j, estadoDeTransicion, loQueDeja, movimiento);
-					FuncionDeltaMaquinaDeTuring funcion = tabla.getFuncion(i, j);
+					int estadoDeTransicion = teclado.dameUnInt("¿A qué estado cambia? Ingresa -1 si no hay transición");
+					if(estadoDeTransicion > numeroDeEstados)
+						throw new NoExisteEstadoException();
+					if(estadoDeTransicion != -1)
+					{
+						char loQueDeja = teclado.dameUnChar("¿Qué es lo que deja en la cinta?");
+						char movimiento = teclado.dameUnChar("¿Hacia dónde se mueve el cabezal?");
+						tabla.setEstado(i, j, estadoDeTransicion, loQueDeja, movimiento);
+						FuncionDeltaMaquinaDeTuring funcion = tabla.getFuncion(i, j);
+					}
+					else
+						tabla.setEstado(i, j, -1, '-', '-');
+				}catch(NoExisteEstadoException neee){
+					j--;
+					neee.printStackTrace();
 				}
-				else
-					tabla.setEstado(i, j, -1, '-', '-');
 			}
 		}
 		maquina.setTabla(tabla);
@@ -145,10 +156,18 @@ public class GeneradorDeMaquinaDeTuring
 		ArrayList<Integer> estadosAceptacion = new ArrayList<>();
 		while(true)
 		{
-			int estado = teclado.dameUnInt("Ingresa el número del estado de aceptación o -1 cando hayas terminado");
-			if(estado == -1)
-				break;
-			estadosAceptacion.add(estado);
+			try
+			{
+				int estado = teclado.dameUnInt("Ingresa el número del estado de aceptación o -1 cando hayas terminado");
+				if(estado > numeroDeEstados - 1) throw new NoExisteEstadoException(estado);
+				if(estado == -1)
+					break;
+				estadosAceptacion.add(estado);
+			}
+			catch(NoExisteEstadoException neee)
+			{
+				System.out.println(neee);
+			}
 		}
 		crearEstructuraMaquina(new String(alfabeto), numeroDeEstados, estadosAceptacion, descripcion);
 		crearEstados(numeroDeEstados, tamanioAlfabeto);

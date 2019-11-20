@@ -56,9 +56,9 @@ public class GeneradorDeAutomataFinito
 			try{
 				aceptacion[i] = teclado.dameUnInt("Ingresa el "+i+"-ésimo estado de aceptacion");
 				if(aceptacion[i] >= numeroDeEstados)
-					throw new NoExisteElEstadoException(aceptacion[i]);
+					throw new NoExisteEstadoException(aceptacion[i]);
 			}
-			catch(NoExisteElEstadoException neeee){
+			catch(NoExisteEstadoException neeee){
 				neeee.printStackTrace();
 				System.out.println("Ingresa un estado válido");
 				i--;

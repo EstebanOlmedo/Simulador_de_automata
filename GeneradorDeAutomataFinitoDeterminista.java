@@ -64,10 +64,10 @@ public class GeneradorDeAutomataFinitoDeterminista extends GeneradorDeAutomataFi
 				try{
 					estadoDestino = getTeclado().dameUnInt("Ingresa el valor de S(q"+i+","+automata.getSimbolo(j)+")");
 					if(estadoDestino >= automata.getNumeroDeEstados())
-						throw new NoExisteElEstadoException(estadoDestino);
+						throw new NoExisteEstadoException(estadoDestino);
 					estado.add(estadoDestino);
 				}
-				catch(NoExisteElEstadoException neeee){
+				catch(NoExisteEstadoException neeee){
 					neeee.printStackTrace();
 					System.out.println("Ingresa un estado valido");
 					j--;
