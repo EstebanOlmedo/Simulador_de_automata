@@ -2,6 +2,7 @@
  * @author Daniel Montes Guerrero
  */
 import java.util.Scanner;
+import java.util.NoSuchElementException;
 public class Teclado{
 	Scanner teclado;
 
@@ -25,8 +26,15 @@ public class Teclado{
 	}
 
 	public String dameUnString(String mensaje){
-		System.out.println(mensaje);
-		return teclado.nextLine();
+		String entrada = "";
+		try{
+			System.out.println(mensaje);
+			entrada = teclado.nextLine();
+		}
+		catch(NoSuchElementException nsee){
+			nsee.printStackTrace();
+		}
+		return entrada;
 	}
 
 	public int dameUnInt(String mensaje){
@@ -38,6 +46,9 @@ public class Teclado{
 		catch(NumberFormatException nfe){
 			System.out.println("Debe ingresar un numero");
 			nfe.printStackTrace();
+		}
+		catch(NoSuchElementException nsee){
+			nsee.printStackTrace();
 		}
 		return entrada;
 	}
@@ -52,6 +63,9 @@ public class Teclado{
 			System.out.println("Debe ingresar un numero");
 			nfe.printStackTrace();
 		}
+		catch(NoSuchElementException nsee){
+			nsee.printStackTrace();
+		}
 		return entrada;
 	}
 
@@ -64,6 +78,9 @@ public class Teclado{
 		catch(NumberFormatException nfe){
 			System.out.println("Debe ingresar un numero");
 			nfe.printStackTrace();
+		}
+		catch(NoSuchElementException nsee){
+			nsee.printStackTrace();
 		}
 		return entrada;
 	}
@@ -78,6 +95,9 @@ public class Teclado{
 			System.out.println("Debe ingresar un numero");
 			nfe.printStackTrace();
 		}
+		catch(NoSuchElementException nsee){
+			nsee.printStackTrace();
+		}
 		return entrada;
 	}
 
@@ -90,6 +110,9 @@ public class Teclado{
 		catch(NumberFormatException nfe){
 			System.out.println("Debe ingresar un numero");
 			nfe.printStackTrace();
+		}
+		catch(NoSuchElementException nsee){
+			nsee.printStackTrace();
 		}
 		return entrada;
 	}
@@ -104,17 +127,34 @@ public class Teclado{
 			System.out.println("Debe ingresar un numero");
 			nfe.printStackTrace();
 		}
+		catch(NoSuchElementException nsee){
+			nsee.printStackTrace();
+		}
 		return entrada;
 	}
 
 	public boolean dameUnBoolean(String mensaje){
-		System.out.println(mensaje);
-		return Boolean.parseBoolean(teclado.nextLine());
+		Boolean entrada = false;
+		try{
+			System.out.println(mensaje);
+			entrada = Boolean.parseBoolean(teclado.nextLine());
+		}
+		catch(NoSuchElementException nsee){
+			nsee.printStackTrace();
+		}
+		return entrada;
 	}
 
 	public char dameUnChar(String mensaje){
-		System.out.println(mensaje);
-		return teclado.nextLine().charAt(0);
+		Character entrada = '\u0000';
+		try{
+			System.out.println(mensaje);
+			entrada = teclado.nextLine().charAt(0);
+		}
+		catch(NoSuchElementException nsee){
+			nsee.printStackTrace();
+		}
+		return entrada;
 	}
 
 	public void esperar(String mensaje){
