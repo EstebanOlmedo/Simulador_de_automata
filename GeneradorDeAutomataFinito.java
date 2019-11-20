@@ -51,18 +51,22 @@ public class GeneradorDeAutomataFinito
 		int numeroDeEstados = teclado.dameUnInt("Ingresa la cardinalidad del conjunto de estados");
 		int numeroDeEstadosAceptacion = teclado.dameUnInt("Ingresa la cardinalidad del conjunto de estados de aceptación");
 		int[] aceptacion = new int[numeroDeEstadosAceptacion];
-		for(int i=0; i<numeroDeEstadosAceptacion; i++){
-			while(true){
+		int i = 0;
+		for(i=0; i<numeroDeEstadosAceptacion; i++){
+			try{
 				aceptacion[i] = teclado.dameUnInt("Ingresa el "+i+"-ésimo estado de aceptacion");
-				if(aceptacion[i] < numeroDeEstados)
-					break;
-				else
-					System.out.println("No existe el estado que ingresaste ._.");
+				if(aceptacion[i] >= numeroDeEstados)
+					throw new NoExisteElEstadoException(aceptacion[i]);
+			}
+			catch(NoExisteElEstadoException neeee){
+				neeee.printStackTrace();
+				System.out.println("Ingresa un estado válido");
+				i--;
 			}
 		}
 		int cardinalidad = teclado.dameUnInt("Ingresa la cardinalidad del alfabeto");
 		char[] alfabeto = new char[cardinalidad];
-		for(int i=0; i<cardinalidad; i++){
+		for(i=0; i<cardinalidad; i++){
 			alfabeto[i] = teclado.dameUnChar("Ingresa el símbolo "+(i+1)+" del alfabeto");
 		}
 		AutomataFinito automata = new AutomataFinito(numeroDeEstados,alfabeto,aceptacion,new TreeMap<Character,Integer>(), descripcion);
