@@ -14,7 +14,7 @@ public class GeneradorDeMaquinaDeTuring
 	}
 	public GeneradorDeMaquinaDeTuring()
 	{
-		this(new MaquinaDeTuring(), new Teclado());
+		this(null, new Teclado());
 	}
 	public GeneradorDeMaquinaDeTuring(GeneradorDeMaquinaDeTuring generador)
 	{
@@ -143,6 +143,7 @@ public class GeneradorDeMaquinaDeTuring
 
 	public void crearMaquinaDeTuring()
 	{
+		maquina = new MaquinaDeTuring();
 		String descripcion = new String();
 		descripcion = teclado.dameUnString("¿Cuál es la descripción de la máquina? (El lenguaje que representa)");
 		int tamanioAlfabeto = teclado.dameUnInt("¿Cuál es la cardinalidad del alfabeto? (Excluyendo el símbolo 'B' (blanco)");
