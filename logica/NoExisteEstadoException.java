@@ -1,6 +1,8 @@
 package logica;
 /**
  * @author Esteban Olmedo
+ * 
+ * */
 public class NoExisteEstadoException extends Exception
 {
 	private String descripcion;
