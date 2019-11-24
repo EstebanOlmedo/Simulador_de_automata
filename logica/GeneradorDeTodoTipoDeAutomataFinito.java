@@ -28,11 +28,11 @@ public class GeneradorDeTodoTipoDeAutomataFinito
 	public GeneradorDeTodoTipoDeAutomataFinito()
 	{
 		this(
-				null, 
-				null,
-			       	null,
-			       	null
-				);
+			null, 
+			null,
+			null,
+			null
+			);
 	}
 
 	public GeneradorDeTodoTipoDeAutomataFinito(GeneradorDeTodoTipoDeAutomataFinito generador)
@@ -88,12 +88,12 @@ public class GeneradorDeTodoTipoDeAutomataFinito
 		automataAPila.equals(conversor.automataAPila);
 	}
 	
-	public void crearAutomataFinitoNoDeterminista(AutomataFinito automata
+	public void crearAutomataFinitoNoDeterminista(AutomataFinito automata,
 			ArrayList<ArrayList<ArrayList<Integer>>> tablaDeTransiciones)
 	{
 		System.out.println("Generando autómata");
 		automataFinitoNoDeterminista = new AutomataFinitoNoDeterminista(automata);
-		automataFinitoDeterminista.setTablaDeTransiciones(tablaDeTransiciones);
+		automataFinitoNoDeterminista.setTablaDeTransiciones(tablaDeTransiciones);
 		System.out.println("El automata fue creado con exito :)");
 	}
 	public void crearAutomataFinitoAPila(AutomataFinito automata,
@@ -101,7 +101,7 @@ public class GeneradorDeTodoTipoDeAutomataFinito
 	{
 		System.out.println("Creando un automáta finito a pila");
 		automataAPila = new AutomataFinitoAPila(automata);
-		automataAPila.setTablaDeTransiciones(tabla);
+		automataAPila.setTablaDeTransiciones(tablaDeTransiciones);
 		System.out.println("El autómata ha sido creado con éxito :)");
 	}
 	

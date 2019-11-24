@@ -3,6 +3,7 @@ package logica;
  * @author Daniel Montes Guerrero
  */
 import java.util.TreeMap;
+import vista.Teclado;
 public class GeneradorDeAutomataFinito
 {
 	private AutomataFinito automataFinito;
@@ -51,7 +52,7 @@ public class GeneradorDeAutomataFinito
 		AutomataFinito automata = new AutomataFinito();
 		automata.setNumeroDeEstados(numeroDeEstados);
 		automata.setAlfabeto(alfabeto);
-		automata.setAceptacion(aceptacion);
+		automata.setEstadosAceptacion(aceptacion);
 		automata.setDescripcion(descripcion);
 		automata.setMapa();
 		automataFinito = automata;
