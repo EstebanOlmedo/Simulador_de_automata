@@ -18,7 +18,7 @@ public class ControlGeneradorDeTodoTipoDeAutomataFinito
 	}
 	public ControlGeneradorDeTodoTipoDeAutomataFinito()
 	{
-		this(new Teclado(), new GeneradorDeTodoTipoDeAutomataFinito);
+		this(new Teclado(), new GeneradorDeTodoTipoDeAutomataFinito());
 	}
 	public ControlGeneradorDeTodoTipoDeAutomataFinito(
 			ControlGeneradorDeTodoTipoDeAutomataFinito control)
