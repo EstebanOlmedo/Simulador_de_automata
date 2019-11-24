@@ -29,6 +29,10 @@ public class AutomataFinitoNoDeterministaEpsilon extends AutomataFinitoNoDetermi
 		super(automata);
 		this.adyacenciaEpsilon = automata.adyacenciaEpsilon;
 	}
+	public AutomataFinitoNoDeterministaEpsilon(AutomataFinitoNoDeterminista automata){
+		super(automata);
+		adyacenciaEpsilon = null;
+	}
 	public void destruir()
 	{
 		super.destruir();
@@ -106,5 +110,8 @@ public class AutomataFinitoNoDeterministaEpsilon extends AutomataFinitoNoDetermi
 		}
 		else
 			return false;
+	}
+	public  void setAdyacenciaEpsilon(ArrayList<ArrayList<Integer>> adyacenciaEpsilon){
+		this.adyacenciaEpsilon = adyacenciaEpsilon;
 	}
 }
