@@ -61,7 +61,7 @@ public class GeneradorDeAutomataFinitoDeterminista extends GeneradorDeAutomataFi
 		System.out.println("El autómata ha sido creado con exito");
 	}
 
-	public AutomataFinito getAutomataFinitoDeterminista()
+	public AutomataFinitoDeterminista getAutomataFinitoDeterminista()
 	{
 		return automataFinitoDeterminista;
 	}
