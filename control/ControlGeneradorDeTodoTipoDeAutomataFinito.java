@@ -1,5 +1,12 @@
 package control;
 import logica.GeneradorDeTodoTipoDeAutomataFinito;
+import logica.NoExisteEstadoException;
+import logica.AutomataFinito;
+import java.util.ArrayList;
+import logica.AutomataFinitoNoDeterminista;
+import logica.Delta;
+import vista.Teclado;
+
 
 /**
  * @author Esteban Olmedo
@@ -7,7 +14,7 @@ import logica.GeneradorDeTodoTipoDeAutomataFinito;
 
 public class ControlGeneradorDeTodoTipoDeAutomataFinito
 {
-	private GeneradorDeAutomataFinitoDeterminista generador;
+	private GeneradorDeTodoTipoDeAutomataFinito generador;
 	private Teclado teclado;
 
 	public ControlGeneradorDeTodoTipoDeAutomataFinito(Teclado teclado,
@@ -63,7 +70,7 @@ public class ControlGeneradorDeTodoTipoDeAutomataFinito
 		int numeroDeEstadosAceptacion = teclado.dameUnInt("Ingresa la cardinalidad del conjunto de estados de aceptación");
 		int[] aceptacion = new int[numeroDeEstadosAceptacion];
 		int i = 0;
-		for(int i = 0; i < numeroDeEstadosAceptacion; i++)
+		for(i = 0; i < numeroDeEstadosAceptacion; i++)
 		{
 			try{
 				aceptacion[i] = teclado.dameUnInt("Ingresa el "+i+"-ésimo estado de aceptación");
