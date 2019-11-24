@@ -29,7 +29,11 @@ public class AutomataFinitoNoDeterminista extends AutomataFinito
 		super(automata);
 		tablaDeTransiciones = automata.tablaDeTransiciones;
 	}
-
+	public AutomataFinitoNoDeterminista(AutomataFinito automata)
+	{
+		super(automata);
+		tablaDeTransiciones = null;
+	}
 	public void destruir()
 	{
 		if(tablaDeTransiciones != null) tablaDeTransiciones = null;
@@ -138,5 +142,10 @@ public class AutomataFinitoNoDeterminista extends AutomataFinito
 			ioobe.printStackTrace();
 		}
 		return false;
+	}
+	public void setTablaDeTransiciones(
+			ArrayList<ArrayList<ArrayList<Integer>>> tablaDeTransiciones)
+	{
+		this.tablaDeTransiciones = tablaDeTransiciones;
 	}
 }

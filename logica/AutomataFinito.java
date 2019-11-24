@@ -112,6 +112,18 @@ public class AutomataFinito implements Serializable
 			mapa.put(alfabeto[i], i);
 		}
 	}
+	public void setNumeroDeEstados(int numeroDeEstados){
+		this.numeroDeEstados = numeroDeEstados;
+	}
+	public void setAlfabeto(char[] alfabeto){
+		this.alfabeto = alfabeto;
+	}
+	public void setEstadosAceptacion(int[] estadosAceptacion){
+		this.estadosAceptacion = estadosAceptacion;
+	}
+	public void setDescripcion(String descripcion){
+		this.descripcion = descripcion;
+	}
 	public TreeMap<Character, Integer> getMapa(){
 		return mapa;
 	}

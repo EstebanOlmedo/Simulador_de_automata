@@ -52,42 +52,16 @@ public class GeneradorDeAutomataFinitoDeterminista extends GeneradorDeAutomataFi
 		return super.equals(generador) && automataFinitoDeterminista.equals(generador.automataFinitoDeterminista);
 	}
 
-	public void crearAutomataFinitoDeterminista()
+	public void crearAutomataFinitoDeterminista(AutomataFinito automataFinito, 
+			ArrayList<ArrayList<Integer>> tabla)
 	{
-		crearAutomataFinito();
-		AutomataFinito automata = getAutomataFinito();
-		ArrayList<ArrayList<Integer>> tabla = new ArrayList<ArrayList<Integer>>();
-		System.out.println("Ingresando transiciones");
-		for(int i=0; i<automata.getNumeroDeEstados(); i++){
-			ArrayList<Integer> estado = new ArrayList<Integer>();
-			for(int j=0; j<automata.getMapa().size(); j++){
-				int estadoDestino;
-				try{
-					estadoDestino = getTeclado().dameUnInt("Ingresa el valor de S(q"+i+","+automata.getSimbolo(j)+")");
-					if(estadoDestino >= automata.getNumeroDeEstados())
-						throw new NoExisteEstadoException(estadoDestino);
-					estado.add(estadoDestino);
-				}
-				catch(NoExisteEstadoException neeee){
-					neeee.printStackTrace();
-					System.out.println("Ingresa un estado valido");
-					j--;
-				}
-			}
-			tabla.add(estado);
-		}
-		System.out.println("El automata fue creado con exito :)");
-		automataFinitoDeterminista = new AutomataFinitoDeterminista(
-			automata.getNumeroDeEstados(),
-			automata.getAlfabeto(),
-			automata.getEstadosDeAceptacion(),
-			automata.getMapa(),
-			tabla,
-			automata.getDescripcion()
-		);
+		System.out.println("Creando autómata finito determinista");
+		automataFinitoDeterminista = new AutomataFinitoDeterminista(automataFinito);
+		automataFinitoDeterminista.setTablaDeTransiciones(tabla);
+		System.out.println("El autómata ha sido creado con exito");
 	}
 
-	public AutomataFinitoDeterminista getAutomataFinitoDeterminista()
+	public AutomataFinito getAutomataFinitoDeterminista()
 	{
 		return automataFinitoDeterminista;
 	}

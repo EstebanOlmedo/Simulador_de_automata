@@ -27,6 +27,11 @@ public class AutomataFinitoDeterminista extends AutomataFinito
 		super(automata);
 		this.tablaDeTransiciones = automata.tablaDeTransiciones;
 	}
+	public AutomataFinitoDeterminista(AutomataFinito automata)
+	{
+		super(automata);
+		tablaDeTransiciones = null;
+	}
 	public void destruir()
 	{
 		super.destruir();
@@ -115,5 +120,8 @@ public class AutomataFinitoDeterminista extends AutomataFinito
 		}
 		return false;
 	}
-
+	public void setTablaDeTransiciones(ArrayList<ArrayList<Integer>> tablaDeTransiciones)
+	{
+		this.tablaDeTransiciones = tablaDeTransiciones;
+	}
 }

@@ -29,6 +29,12 @@ public class AutomataFinitoAPila extends AutomataFinito implements IPila
 		this.tablaDeTransiciones = automata.tablaDeTransiciones;
 		this.pila = automata.pila;
 	}
+	public AutomataFinitoAPila(AutomataFinito automata)
+	{
+		super(automata);
+		pila = new Stack<Character>();
+		tablaDeTransiciones = null;
+	}
 	public void destruir()
 	{
 		super.destruir();
@@ -182,10 +188,18 @@ public class AutomataFinitoAPila extends AutomataFinito implements IPila
 	{
 		return pila.empty();
 	}
-    public Stack<Character> crearCopia(Stack<Character> pila){
-        Stack<Character> copia = new Stack<Character>();
-        copia.addAll(pila);
-        return copia;
-    }
+    	public Stack<Character> crearCopia(Stack<Character> pila){
+        	Stack<Character> copia = new Stack<Character>();
+        	copia.addAll(pila);
+        	return copia;
+    	}
+	public void setPila(Stack<Character> pila)
+	{
+		this.pila = pila;
+	}
+	public void setTablaDeTransiciones(ArrayList<ArrayList<ArrayList<Delta>>> tablaDeTransiciones)
+	{
+		this.tablaDeTransiciones = tablaDeTransiciones;
+	}
 }
 

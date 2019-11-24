@@ -88,116 +88,30 @@ public class GeneradorDeTodoTipoDeAutomataFinito
 		automataAPila.equals(conversor.automataAPila);
 	}
 	
-	public void crearAutomataFinitoNoDeterminista()
+	public void crearAutomataFinitoNoDeterminista(AutomataFinito automata
+			ArrayList<ArrayList<ArrayList<Integer>>> tablaDeTransiciones)
 	{
-		crearAutomataFinito();
-		AutomataFinito automata = getAutomataFinito();
 		System.out.println("Generando autómata");
-		ArrayList<ArrayList<ArrayList<Integer>>> tabla = new ArrayList<ArrayList<ArrayList<Integer>>>();
-		System.out.println("Ingresando transiciones");
-		for(int i=0; i<automata.getNumeroDeEstados(); i++){
-			ArrayList<ArrayList<Integer>> estado = new ArrayList<ArrayList<Integer>>();
-			for(int j=0; j<automata.getMapa().size(); j++){
-				System.out.println("Ingresando transiciones de S(q"+i+","+automata.getSimbolo(j)+")");
-				System.out.println("Ingresa -1 para omitir/finalizar la transicion actual");
-				ArrayList<Integer> transiciones = new ArrayList<Integer>();
-				int transicion = -1;
-				while((transicion = getTeclado().dameUnInt("Ingresa el estado destino")) >= 0){
-					try{
-						if(transicion >= automata.getNumeroDeEstados())
-							throw new NoExisteEstadoException(transicion);
-						else
-							transiciones.add(transicion);
-					}
-					catch(NoExisteEstadoException neeee){
-						neeee.printStackTrace();
-						System.out.println("Ingresa un estado válido");
-					}
-				}
-				estado.add(transiciones);
-			}
-			tabla.add(estado);
-		}
+		automataFinitoNoDeterminista = new AutomataFinitoNoDeterminista(automata);
+		automataFinitoDeterminista.setTablaDeTransiciones(tablaDeTransiciones);
 		System.out.println("El automata fue creado con exito :)");
-		automataFinitoNoDeterminista = new AutomataFinitoNoDeterminista(
-			automata.getNumeroDeEstados(),
-			automata.getAlfabeto(),
-			automata.getEstadosDeAceptacion(),
-			automata.getMapa(),
-			tabla,
-			automata.getDescripcion()
-		);
 	}
-
-	public void crearAutomataFinitoAPila()
+	public void crearAutomataFinitoAPila(AutomataFinito automata,
+			ArrayList<ArrayList<ArrayList<Delta>>> tablaDeTransiciones)
 	{
-		crearAutomataFinito();
-		AutomataFinito automata = getAutomataFinito();
-		ArrayList<ArrayList<ArrayList<Delta>>> tabla = new ArrayList<ArrayList<ArrayList<Delta>>>();
-		for(int i=0; i<automata.getNumeroDeEstados(); i++){
-			ArrayList<ArrayList<Delta>> estado = new ArrayList<ArrayList<Delta>>();
-			for(int j=0; j<automata.getNumeroDeEstados(); j++){
-				System.out.println("Ingresando transiciones del estado q"+i+" al estado q"+j);
-				System.out.println("Ingresa '#' para omitir/finalizar la transicion actual");
-				ArrayList<Delta> transiciones = new ArrayList<Delta>();
-				char carLeido = '#';
-				char cimaPila = '\u0000';
-				String dejarEnPila = "";
-				while((carLeido = getTeclado().dameUnChar("Ingresa el caracter leido")) != '#'){
-					cimaPila = getTeclado().dameUnChar("Ingresa lo que hay en la cima de la pila");
-					dejarEnPila = getTeclado().dameUnString("Ingresa lo que se inserta en la pila");
-					transiciones.add(new Delta(carLeido,cimaPila,dejarEnPila));
-				}
-				estado.add(transiciones);
-			}
-			tabla.add(estado);
-		}
-		automataAPila = new AutomataFinitoAPila(
-			automata.getNumeroDeEstados(),
-			automata.getAlfabeto(),
-			automata.getEstadosDeAceptacion(),
-			tabla,
-			new Stack<Character>(),
-			automata.getMapa(),
-			automata.getDescripcion()
-		);
+		System.out.println("Creando un automáta finito a pila");
+		automataAPila = new AutomataFinitoAPila(automata);
+		automataAPila.setTablaDeTransiciones(tabla);
+		System.out.println("El autómata ha sido creado con éxito :)");
 	}
 	
-	public void crearAutomataFinitoNoDeterministaEpsilon()
+	public void crearAutomataFinitoNoDeterministaEpsilon(AutomataFinitoNoDeterminista automata,
+			ArrayList<ArrayList<Integer>> adyacenciaEpsilon)
 	{
-		crearAutomataFinitoNoDeterminista();
-		AutomataFinitoNoDeterminista automata = getAutomataFinitoNoDeterminista();
-		System.out.println("Ahora solo faltan las transiciones epsilon");
-		ArrayList<ArrayList<Integer>> adyacenciaEpsilon = new ArrayList<ArrayList<Integer>>();
-		for(int i=0; i<automata.getNumeroDeEstados(); i++){
-			ArrayList<Integer> transiciones = new ArrayList<Integer>();
-			System.out.println("Ingresando las transiciones-epsilon del estado "+i);
-			System.out.println("Ingresa -1 para omitir/finalizar la transicion actual");
-			int transicion = -1;
-			while((transicion = getTeclado().dameUnInt("Ingresa el estado destino")) >= 0){
-				try{
-					if(transicion >= automata.getNumeroDeEstados())
-						throw new NoExisteEstadoException(transicion);
-					else
-						transiciones.add(transicion);
-				}
-				catch(NoExisteEstadoException neeee){
-					neeee.printStackTrace();
-					System.out.println("Ingresa un estado válido");
-				}
-			}
-			adyacenciaEpsilon.add(transiciones);
-		}
+		System.out.println("Creando automata finito no determinista Epsilon");
+		automataFinitoNoDeterministaEpsilon = new AutomataFinitoNoDeterministaEpsilon(automata);
+		automataFinitoNoDeterministaEpsilon.setAdyacenciaEpsilon(adyacenciaEpsilon);
 		System.out.println("El automata ha sido creado completamente ;)");
-		automataFinitoNoDeterministaEpsilon =  new AutomataFinitoNoDeterministaEpsilon(
-			automata.getNumeroDeEstados(),
-			automata.getAlfabeto(),
-			automata.getEstadosDeAceptacion(),
-			automata.getMapa(),
-			automata.getTablaDeTransiciones(),
-			adyacenciaEpsilon,
-			automata.getDescripcion()
-		);
 	}
 
 	public AutomataFinitoNoDeterminista getAutomataFinitoNoDeterminista()
