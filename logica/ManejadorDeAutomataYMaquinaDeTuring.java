@@ -1,11 +1,13 @@
 package logica;
 import persistencia.GeneradorYLectorDeArchivo;
+import vista.Teclado;
+import control.ControlGeneradorDeTodoTipoDeAutomataFinito;
 /**
  * @author Gabriel Graciano Herrera
  */
 public class ManejadorDeAutomataYMaquinaDeTuring
 {
-    private GeneradorDeTodoTipoDeAutomataFinito generadorDeAutomata;
+    private ControlGeneradorDeTodoTipoDeAutomataFinito controlGeneradorDeAutomata;
     private GeneradorDeMaquinaDeTuring generadorDeMaquina;
     private ConversorDeAutomata conversor;
     private EvaluadorDeExpresion evaluador;
@@ -15,7 +17,7 @@ public class ManejadorDeAutomataYMaquinaDeTuring
     public ManejadorDeAutomataYMaquinaDeTuring()
     {
         this(
-                new GeneradorDeTodoTipoDeAutomataFinito(),
+                new ControlGeneradorDeTodoTipoDeAutomataFinito(),
                 new GeneradorDeMaquinaDeTuring(),
                 new ConversorDeAutomata(),
                 new EvaluadorDeExpresion(),
@@ -24,7 +26,7 @@ public class ManejadorDeAutomataYMaquinaDeTuring
             );
     }
     public ManejadorDeAutomataYMaquinaDeTuring(
-         GeneradorDeTodoTipoDeAutomataFinito generadorDeAutomata,
+         ControlGeneradorDeTodoTipoDeAutomataFinito generadorDeAutomata,
          GeneradorDeMaquinaDeTuring generadorDeMaquina,
          ConversorDeAutomata conversor,
          EvaluadorDeExpresion evaluador,
@@ -32,7 +34,7 @@ public class ManejadorDeAutomataYMaquinaDeTuring
          Teclado teclado
          )
     {
-        this.generadorDeAutomata = generadorDeAutomata;
+        this.controlGeneradorDeAutomata = controlGeneradorDeAutomata;
         this.generadorDeMaquina = generadorDeMaquina;
         this.conversor = conversor;
         this.generador = generador;
@@ -42,7 +44,7 @@ public class ManejadorDeAutomataYMaquinaDeTuring
     public ManejadorDeAutomataYMaquinaDeTuring(ManejadorDeAutomataYMaquinaDeTuring simulador)
     {
         this(
-                simulador.generadorDeAutomata,
+                simulador.controlGeneradorDeAutomata,
                 simulador.generadorDeMaquina,
                 simulador.conversor,
                 simulador.evaluador,
@@ -52,9 +54,9 @@ public class ManejadorDeAutomataYMaquinaDeTuring
     }
     public void destruir()
     {
-        if(generadorDeAutomata != null){
-            generadorDeAutomata.destruir();
-            generadorDeAutomata = null;
+        if(controlGeneradorDeAutomata != null){
+            controlGeneradorDeAutomata.destruir();
+            controlGeneradorDeAutomata = null;
         }
         if(generadorDeMaquina != null){
             generadorDeMaquina.destruir();
@@ -83,7 +85,7 @@ public class ManejadorDeAutomataYMaquinaDeTuring
     public String toString()
     {
         return "Manejador de Automata y MaquinaDeturing:\n" + 
-            generadorDeAutomata.toString() +
+            controlGeneradorDeAutomata.toString() +
             generadorDeMaquina.toString() +
             conversor.toString() +
             generador.toString() +
@@ -96,7 +98,7 @@ public class ManejadorDeAutomataYMaquinaDeTuring
         if(obj == null){return false;}
         if(!(obj instanceof ManejadorDeAutomataYMaquinaDeTuring)){return false;}
         ManejadorDeAutomataYMaquinaDeTuring simulador = (ManejadorDeAutomataYMaquinaDeTuring)obj;
-        return generadorDeAutomata.equals(simulador.generadorDeAutomata) &&
+        return controlGeneradorDeAutomata.equals(simulador.controlGeneradorDeAutomata) &&
             generadorDeMaquina.equals(simulador.generadorDeMaquina) &&
             conversor.equals(simulador.conversor) &&
             generador.equals(simulador.generador) &&
@@ -153,23 +155,22 @@ public class ManejadorDeAutomataYMaquinaDeTuring
             System.out.println("\t2.-Evaluar cadena del automata");
             System.out.println("\t3.-Convertir AFD a AFP");
             System.out.println("\t4.-Guardar el Automata Finito Determinista en un archivo");
-            System.out.println("\t5.-Generar un archivo Latex con el Automata Finito Determinista");
-            System.out.println("\t6.-Cargar AFD de un archivo");
-            System.out.println("\t7.-Salir");
+            System.out.println("\t5.-Cargar AFD de un archivo");
+            System.out.println("\t6.-Salir");
             op = teclado.dameUnInt("Ingresa una opcion");
             switch(op)
             {
                 case 1:
-                    generadorDeAutomata.crearAutomataFinitoDeterminista();
+                    controlGeneradorDeAutomata.generarAutomataFinitoDeterminista();
                     break;
                 case 2:
                     try
                     {
-                        if(generadorDeAutomata.getAutomataFinitoDeterminista() != null)
+                        if(controlGeneradorDeAutomata.getGenerador().getAutomataFinitoDeterminista() != null)
                         {
-            			   System.out.println(generadorDeAutomata.getAutomataFinitoDeterminista().getDescripcion());
+            			   System.out.println(controlGeneradorDeAutomata.getGenerador().getAutomataFinitoDeterminista().getDescripcion());
                            String cadena = teclado.dameUnString("Ingresa la cadena a evaluar");
-                           if( evaluador.evaluarCadena(cadena,generadorDeAutomata.getAutomataFinitoDeterminista()) )
+                           if( evaluador.evaluarCadena(cadena,controlGeneradorDeAutomata.getGenerador().getAutomataFinitoDeterminista()) )
 			               {
             				   System.out.println("La cadena pertenece al lenguaje del automata");
             			   }
@@ -190,9 +191,9 @@ public class ManejadorDeAutomataYMaquinaDeTuring
                 case 3:
                     try
                     {
-                        if(generadorDeAutomata.getAutomataFinitoDeterminista() != null)
+                        if(controlGeneradorDeAutomata.getGenerador().getAutomataFinitoDeterminista() != null)
                         {
-                            conversor.convertirAFDaAFP(generadorDeAutomata.getAutomataFinitoDeterminista());
+                            conversor.convertirAFDaAFP(controlGeneradorDeAutomata.getGenerador().getAutomataFinitoDeterminista());
                         }
                         else
                         {
@@ -206,9 +207,9 @@ public class ManejadorDeAutomataYMaquinaDeTuring
                 case 4:
                     try
                     {
-                        if(generadorDeAutomata.getAutomataFinitoDeterminista() != null)
+                        if(controlGeneradorDeAutomata.getGenerador().getAutomataFinitoDeterminista() != null)
                         {
-                            if(generador.escribirObjetoArchivo(generadorDeAutomata.getAutomataFinitoDeterminista(),teclado))
+                            if(generador.escribirObjetoArchivo(controlGeneradorDeAutomata.getGenerador().getAutomataFinitoDeterminista(),teclado))
                                 System.out.println("Se guardo el automata con exito");
                             else
                                 System.out.println("Hubo un error al guardar el automata");
@@ -225,27 +226,8 @@ public class ManejadorDeAutomataYMaquinaDeTuring
                 case 5:
                     try
                     {
-                        if(generadorDeAutomata.getAutomataFinitoDeterminista() != null)
-                        {
-                            if(generador.crearArchivoLatex(generadorDeAutomata.getAutomataFinitoDeterminista(),teclado))
-                                System.out.println("Se genero correctamente el archivo latex");
-                            else
-                                System.out.println("Hubo un error al crear el archivo latex");    
-                        }
-                        else
-                        {
-                            System.out.println("Aun no has generado el automata");
-                        }
-                        break;
-                    }catch(NullPointerException npe)
-                    {
-                        npe.printStackTrace();
-                    }
-                case 6:
-                    try
-                    {
                         AutomataFinitoDeterminista aux = (AutomataFinitoDeterminista) generador.leerObjetoArchivo(teclado);
-                        generadorDeAutomata.setAutomataFinitoDeterminista(aux);
+                        controlGeneradorDeAutomata.getGenerador().setAutomataFinitoDeterminista(aux);
                     }catch(NullPointerException npe)
                     {
                         System.out.println("El archivo no contenia un AFD");
@@ -254,14 +236,14 @@ public class ManejadorDeAutomataYMaquinaDeTuring
                         System.out.println("El archivo no contenia un AFD");
                     }
                     break;
-                case 7:
+                case 6:
                     break;
                 default:
                     System.out.println("Ingresa una opcion correcta");
                     break;
             }
                 
-        }while (op != 7);
+        }while (op != 6);
     }
     
     private void subMenuAFN()
@@ -274,23 +256,22 @@ public class ManejadorDeAutomataYMaquinaDeTuring
             System.out.println("\t2.-Evaluar cadena del automata");
             System.out.println("\t3.-Convertir AFN a AFD");
             System.out.println("\t4.-Guardar el AFN en un archivo");
-            System.out.println("\t5.-Generar un archivo Latex con el AFN");
-            System.out.println("\t6.-Cargar AFN de un archivo");
-            System.out.println("\t7.-Salir");
+            System.out.println("\t5.-Cargar AFN de un archivo");
+            System.out.println("\t6.-Salir");
             op = teclado.dameUnInt("Ingresa una opcion");
             switch(op)
             {
                 case 1:
-                    generadorDeAutomata.crearAutomataFinitoNoDeterminista();
+                    controlGeneradorDeAutomata.generarAutomataFinitoNoDeterminista();
                     break;
                 case 2:
                     try
                     {
-                        if(generadorDeAutomata.getAutomataFinitoNoDeterminista() != null)
+                        if(controlGeneradorDeAutomata.getGenerador().getAutomataFinitoNoDeterminista() != null)
                         {
-			                 System.out.println(generadorDeAutomata.getAutomataFinitoNoDeterminista().getDescripcion());
+			                 System.out.println(controlGeneradorDeAutomata.getGenerador().getAutomataFinitoNoDeterminista().getDescripcion());
                             String cadena = teclado.dameUnString("Ingresa la cadena a evaluar");
-                            if(evaluador.evaluarCadena(cadena,generadorDeAutomata.getAutomataFinitoNoDeterminista()))
+                            if(evaluador.evaluarCadena(cadena,controlGeneradorDeAutomata.getGenerador().getAutomataFinitoNoDeterminista()))
                             {
                 				    System.out.println("La cadena pertenece al lenguaje del automata");
             			    }
@@ -311,9 +292,9 @@ public class ManejadorDeAutomataYMaquinaDeTuring
                 case 3:
                     try
                     {
-                        if(generadorDeAutomata.getAutomataFinitoNoDeterminista() != null)
+                        if(controlGeneradorDeAutomata.getGenerador().getAutomataFinitoNoDeterminista() != null)
                         {
-                            conversor.convertirAFNaAFD(generadorDeAutomata.getAutomataFinitoNoDeterminista());
+                            conversor.convertirAFNaAFD(controlGeneradorDeAutomata.getGenerador().getAutomataFinitoNoDeterminista());
                         }
                         else
                         {
@@ -327,9 +308,9 @@ public class ManejadorDeAutomataYMaquinaDeTuring
                 case 4:
                     try
                     {
-                        if(generadorDeAutomata.getAutomataFinitoNoDeterminista() != null)
+                        if(controlGeneradorDeAutomata.getGenerador().getAutomataFinitoNoDeterminista() != null)
                         {
-                            if(generador.escribirObjetoArchivo(generadorDeAutomata.getAutomataFinitoNoDeterminista(),teclado))
+                            if(generador.escribirObjetoArchivo(controlGeneradorDeAutomata.getGenerador().getAutomataFinitoNoDeterminista(),teclado))
                                 System.out.println("Se guardo el automata con exito");
                             else
                                 System.out.println("Hubo un error al guardar el automata");
@@ -346,27 +327,8 @@ public class ManejadorDeAutomataYMaquinaDeTuring
                 case 5:
                     try
                     {
-                        if(generadorDeAutomata.getAutomataFinitoNoDeterminista() != null)
-                        {
-                            if(generador.crearArchivoLatex(generadorDeAutomata.getAutomataFinitoNoDeterminista(),teclado))
-                                System.out.println("Se creo el archivo latex con exito");
-                            else
-                                System.out.println("Hubo un error al crear el archivo latex");
-                        }
-                        else
-                        {
-                            System.out.println("Aun no has generado el automata");
-                        }
-                        break;
-                    }catch(NullPointerException npe)
-                    {
-                       npe.printStackTrace();
-                    }
-                case 6:
-                    try
-                    {
                         AutomataFinitoNoDeterminista aux = (AutomataFinitoNoDeterminista) generador.leerObjetoArchivo(teclado);
-                        generadorDeAutomata.setAutomataFinitoNoDeterminista(aux);
+                        controlGeneradorDeAutomata.getGenerador().setAutomataFinitoNoDeterminista(aux);
                     }catch(NullPointerException npe)
                     {
                         System.out.println("El archivo no contenia un AFN");
@@ -375,14 +337,14 @@ public class ManejadorDeAutomataYMaquinaDeTuring
                         System.out.println("El archivo no contenia un AFN");
                     }
                     break;
-                case 7:
+                case 6:
                     break;
                 default:
                     System.out.println("Ingresa una opcion correcta");
                     break;
             }
                 
-        }while (op != 7);
+        }while (op != 6);
     }
 
     private void subMenuAFNE()
@@ -394,23 +356,22 @@ public class ManejadorDeAutomataYMaquinaDeTuring
             System.out.println("\t1.-Generar AFNE");
             System.out.println("\t2.-Evaluar cadena del automata");
             System.out.println("\t3.-Guardar el AFNE en un archivo");
-            System.out.println("\t4.-Generar un archivo Latex con el AFNE");
-            System.out.println("\t5.-Cargar AFNE de un archivo");
-            System.out.println("\t6.-Salir");
+            System.out.println("\t4.-Cargar AFNE de un archivo");
+            System.out.println("\t5.-Salir");
             op = teclado.dameUnInt("Ingresa una opcion");
             switch(op)
             {  
                 case 1:
-                    generadorDeAutomata.crearAutomataFinitoNoDeterministaEpsilon();
+                    controlGeneradorDeAutomata.generarAutomataFinitoNoDeterministaEpsilon();
                     break;
                 case 2:
                     try
                     {
-                        if(generadorDeAutomata.getAutomataFinitoNoDeterministaEpsilon() != null)
+                        if(controlGeneradorDeAutomata.getGenerador().getAutomataFinitoNoDeterministaEpsilon() != null)
                         {
-            			    System.out.println(generadorDeAutomata.getAutomataFinitoNoDeterministaEpsilon().getDescripcion());
+            			    System.out.println(controlGeneradorDeAutomata.getGenerador().getAutomataFinitoNoDeterministaEpsilon().getDescripcion());
                             String cadena = teclado.dameUnString("Ingresa la cadena a evaluar");
-                            if(evaluador.evaluarCadena(cadena,generadorDeAutomata.getAutomataFinitoNoDeterministaEpsilon()) )
+                            if(evaluador.evaluarCadena(cadena,controlGeneradorDeAutomata.getGenerador().getAutomataFinitoNoDeterministaEpsilon()) )
                             {
 				                System.out.println("La cadena pertenece al lenguaje del automata");
                             }
@@ -431,9 +392,9 @@ public class ManejadorDeAutomataYMaquinaDeTuring
                 case 3:
                     try
                     {
-                        if(generadorDeAutomata.getAutomataFinitoNoDeterministaEpsilon() != null)
+                        if(controlGeneradorDeAutomata.getGenerador().getAutomataFinitoNoDeterministaEpsilon() != null)
                         {
-                            if(generador.escribirObjetoArchivo(generadorDeAutomata.getAutomataFinitoNoDeterministaEpsilon(),teclado))
+                            if(generador.escribirObjetoArchivo(controlGeneradorDeAutomata.getGenerador().getAutomataFinitoNoDeterministaEpsilon(),teclado))
                                 System.out.println("El automata se guardo con exito");
                             else
                                 System.out.println("Hubo un error al guardar el automata");
@@ -450,27 +411,8 @@ public class ManejadorDeAutomataYMaquinaDeTuring
                 case 4:
                     try
                     {
-                        if(generadorDeAutomata.getAutomataFinitoNoDeterministaEpsilon() != null)
-                        {
-                            if(generador.crearArchivoLatex(generadorDeAutomata.getAutomataFinitoNoDeterministaEpsilon(),teclado))
-                                System.out.println("Se creo el archivo latex con exito");
-                            else
-                                System.out.println("Hubo un error al crear el archivo latex");
-                        }
-                        else
-                        {
-                            System.out.println("Aun no has generado el automata");
-                        }
-                        break;
-                    }catch(NullPointerException npe)
-                    {
-                        npe.printStackTrace();
-                    }
-                case 5:
-                    try
-                    {
                         AutomataFinitoNoDeterministaEpsilon aux = (AutomataFinitoNoDeterministaEpsilon) generador.leerObjetoArchivo(teclado);
-                        generadorDeAutomata.setAutomataFinitoNoDeterministaEpsilon(aux);
+                        controlGeneradorDeAutomata.getGenerador().setAutomataFinitoNoDeterministaEpsilon(aux);
                     }catch(NullPointerException npe)
                     {
                         System.out.println("El archivo no contenia un AFNE");
@@ -479,14 +421,14 @@ public class ManejadorDeAutomataYMaquinaDeTuring
                         System.out.println("El archivo no contenia un AFNE");
                     }
                     break;
-                case 6:
+                case 5:
                     break;
                 default:
                     System.out.println("Ingresa una opcion correcta");
                     break;
             }
                 
-        }while (op != 6);
+        }while (op != 5);
     }
     
     private void subMenuAFP()
@@ -498,23 +440,22 @@ public class ManejadorDeAutomataYMaquinaDeTuring
             System.out.println("\t1.-Generar Automata Finito a Pila");
             System.out.println("\t2.-Evaluar cadena del automata");
             System.out.println("\t3.-Guardar el AFP en un archivo");
-            System.out.println("\t4.-Generar un archivo Latex con el AFP");
-            System.out.println("\t5.-Cargar AFP de un archivo");
-            System.out.println("\t6.-Salir");
+            System.out.println("\t4.-Cargar AFP de un archivo");
+            System.out.println("\t5.-Salir");
             op = teclado.dameUnInt("Ingresa una opcion");
             switch(op)
             {
                 case 1:
-                    generadorDeAutomata.crearAutomataFinitoAPila();
+                    controlGeneradorDeAutomata.generarAutomataFinitoAPila();
                     break;
                 case 2:
                     try
                     {
-                        if(generadorDeAutomata.getAutomataFinitoAPila() != null)
+                        if(controlGeneradorDeAutomata.getGenerador().getAutomataFinitoAPila() != null)
                         {
-                            System.out.println(generadorDeAutomata.getAutomataFinitoAPila().getDescripcion());
+                            System.out.println(controlGeneradorDeAutomata.getGenerador().getAutomataFinitoAPila().getDescripcion());
                             String cadena = teclado.dameUnString("Ingresa la cadena a evaluar");
-                            if(evaluador.evaluarCadena(cadena,generadorDeAutomata.getAutomataFinitoAPila()))
+                            if(evaluador.evaluarCadena(cadena,controlGeneradorDeAutomata.getGenerador().getAutomataFinitoAPila()))
                             {
 				                System.out.println("La cadena pertenece al lenguaje del automata");
                             }
@@ -535,9 +476,9 @@ public class ManejadorDeAutomataYMaquinaDeTuring
                 case 3:
                     try
                     {
-                        if(generadorDeAutomata.getAutomataFinitoAPila() != null)
+                        if(controlGeneradorDeAutomata.getGenerador().getAutomataFinitoAPila() != null)
                         {
-                            if(generador.escribirObjetoArchivo(generadorDeAutomata.getAutomataFinitoAPila(),teclado))
+                            if(generador.escribirObjetoArchivo(controlGeneradorDeAutomata.getGenerador().getAutomataFinitoAPila(),teclado))
                                 System.out.println("El automata se guardo con exito");
                             else
                                 System.out.println("Hubo un error al guardar el automata");
@@ -554,27 +495,8 @@ public class ManejadorDeAutomataYMaquinaDeTuring
                 case 4:
                     try
                     {
-                        if(generadorDeAutomata.getAutomataFinitoAPila() != null)
-                        {
-                            if(generador.crearArchivoLatex(generadorDeAutomata.getAutomataFinitoAPila(),teclado))
-                                System.out.println("El archivo latex fue creado con exito");
-                            else
-                                System.out.println("Hubo un error al crear el archivo latex");
-                        }
-                        else
-                        {
-                            System.out.println("Aun no has generado el automata");
-                        }
-                        break;
-                    }catch(NullPointerException npe)
-                    {
-                        npe.printStackTrace();
-                    }
-                case 5:
-                    try
-                    {
                         AutomataFinitoNoDeterminista aux = (AutomataFinitoNoDeterminista) generador.leerObjetoArchivo(teclado);
-                        generadorDeAutomata.setAutomataFinitoNoDeterminista(aux);
+                        controlGeneradorDeAutomata.getGenerador().setAutomataFinitoNoDeterminista(aux);
                     }catch(NullPointerException npe)
                     {
                         System.out.println("El archivo no contenia un AFN");
@@ -583,13 +505,13 @@ public class ManejadorDeAutomataYMaquinaDeTuring
                         System.out.println("El archivo no contenia un AFN");
                     }
                     break;
-                case 6:
+                case 5:
                     break;
                 default:
                     System.out.println("Ingresa una opcion correcta");
                     break;
             }
-        }while(op != 6);
+        }while(op != 5);
     }
     
     private void subMenuMT()
