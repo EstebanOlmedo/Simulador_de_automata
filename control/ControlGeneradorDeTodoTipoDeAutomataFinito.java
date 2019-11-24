@@ -198,4 +198,7 @@ public class ControlGeneradorDeTodoTipoDeAutomataFinito
 		}
 		generador.crearAutomataFinitoAPila(automata, tabla);
 	}
+	public GeneradorDeTodoTipoDeAutomataFinito getGenerador(){
+		return generador;
+	}
 }
