@@ -32,6 +32,11 @@ public class ControlGeneradorDeTodoTipoDeAutomataFinito
 	{
 		this(control.teclado, control.generador);
 	}
+	public ControlGeneradorDeTodoTipoDeAutomataFinito(Teclado teclado)
+	{
+		this.teclado = teclado;
+		generador = new GeneradorDeTodoTipoDeAutomataFinito();
+	}
 	public void destruir()
 	{
 		if(generador != null)

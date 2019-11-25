@@ -104,4 +104,8 @@ public class ControlGeneradorDeMaquinaDeTuring
 			}
 		}
 	}
+	public GeneradorDeMaquinaDeTuring getGenerador()
+	{
+		return generador;
+	}
 }
