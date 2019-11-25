@@ -1,8 +1,11 @@
 package logica;
+
+import java.io.Serializable;
+
 /**
  * @author Gabriel Graciano Herrera
  */
-public class MaquinaDeTuring
+public class MaquinaDeTuring implements Serializable
 {
 	private char[] cinta;
 	private int cabezal;
@@ -272,5 +275,10 @@ public class MaquinaDeTuring
 			System.out.print(" ");
 		System.out.println("|");
 
+	}
+	public void aniadirTransicionATabla(int estado, int indiceSimbolo,
+		int estadoTransicion, char loQueDeja, char movimiento)
+	{
+		tabla.setEstado(estado, indiceSimbolo, estadoTransicion, loQueDeja, movimiento);
 	}
 }
