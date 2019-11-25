@@ -10,6 +10,7 @@ public class ControlDePeticion
 	private ControlGeneradorDeMaquinaDeTuring generadorMaquinaDeTuring;
 	private ControlGeneradorDeTodoTipoDeAutomataFinito generadorAutomata;
 	private ControlEvaluadorDeCadena evaluadorCadena;
+	private ControlConversorAutomata conversor;
 	private Teclado teclado;
 	
 	public ControlDePeticion()
@@ -22,12 +23,14 @@ public class ControlDePeticion
 			new ControlGeneradorDeTodoTipoDeAutomataFinito(teclado);
 		evaluadorCadena = 
 			new ControlEvaluadorDeCadena(teclado);
+		conversor  =new ControlConversorAutomata();
 	}
 	public ControlDePeticion(
 		ControlDePersistencia persistencia,
 		ControlGeneradorDeMaquinaDeTuring generadorMaquinaDeTuring,
 		ControlGeneradorDeTodoTipoDeAutomataFinito generadorAutomata,
 		ControlEvaluadorDeCadena evaluadorCadena,
+		ControlConversorAutomata conversor,
 		Teclado teclado
 	)
 	{
@@ -35,12 +38,13 @@ public class ControlDePeticion
 		this.generadorAutomata = generadorAutomata;
 		this.generadorMaquinaDeTuring = generadorMaquinaDeTuring;
 		this.persistencia = persistencia;
+		this.conversor = conversor;
 		this.teclado = teclado;
 	}
 	public ControlDePeticion(ControlDePeticion control)
 	{
 		this(control.persistencia, control.generadorMaquinaDeTuring,
-			control.generadorAutomata, control.evaluadorCadena,
+			control.generadorAutomata, control.evaluadorCadena,control.conversor,
 			control.teclado);
 	}
 	
@@ -68,6 +72,8 @@ public class ControlDePeticion
 			case "CAFNDE": manejarPeticionDeCargado(peticion); break;
 			case "CAFP": manejarPeticionDeCargado(peticion); break;
 			case "CMT": manejarPeticionDeCargado(peticion); break;
+			case "CAFND-AFD": manejarPeticionDeConversion(peticion); break;
+			case "CAFD-AFP": manejarPeticionDeConversion(peticion); break;
 		}
 	}
 	public void manejarPeticionDeGeneracion(String peticion)
@@ -181,6 +187,15 @@ public class ControlDePeticion
 				break;
 			case "CMT": 
 				break;
+		}
+	}
+	public void manejarPeticionDeConversion(String peticion){
+		switch(peticion){
+			case "CAFND-AFD":
+				generadorAutomata.setAutomata(conversor.convertir(generadorAutomata.getGenerador().getAutomataFinitoNoDeterminista()));
+				break;
+			case "CAFD-AFP":
+				generadorAutomata.setAutomata(conversor.convertir(generadorAutomata.getGenerador().getAutomataFinitoDeterminista()));
 		}
 	}
 }
