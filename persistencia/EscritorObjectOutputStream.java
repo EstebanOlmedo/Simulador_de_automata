@@ -39,31 +39,14 @@ public class EscritorObjectOutputStream extends Archivo
 		this.oos = escritor.oos;
 	}
 
-	private boolean abrirFlujo(Teclado teclado)
+	private boolean abrirFlujo()
 	{
 		try
 		{
-			if(verificarExistenciaArchivo())
-			{
-				String op = teclado.dameUnString("El archivo ya existe,¿quieres sobreescribirlo?");
-				if((op.toUpperCase()).equals("SI"))
-				{
-					fos = new FileOutputStream(getFile());
-					oos = new ObjectOutputStream(fos);
-					return true;
-				}
-				else
-				{
-					return false;
-				}
-			}
-			else
-			{
-				fos = new FileOutputStream(getFile());
-				oos = new ObjectOutputStream(fos);
-				return true;
-			}
-		}catch(FileNotFoundException fnfe){
+			fos = new FileOutputStream(getFile());
+			oos = new ObjectOutputStream(fos);
+			return true;
+                }catch(FileNotFoundException fnfe){
 			fnfe.printStackTrace();
 			return false;
 		}catch(IOException ioe){
@@ -96,9 +79,9 @@ public class EscritorObjectOutputStream extends Archivo
 		}
 	}
 
-	public boolean escribirObjeto(Object objeto,Teclado teclado)
+	public boolean escribirObjeto(Object objeto)
 	{
-		if(abrirFlujo(teclado))
+		if(abrirFlujo())
 		{
 			try
 			{
@@ -116,5 +99,6 @@ public class EscritorObjectOutputStream extends Archivo
 		}
 		return false;
 	}
+	
 }
 	
