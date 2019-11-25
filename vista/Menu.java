@@ -32,7 +32,20 @@ public class Menu
 		Menu menu = (Menu)obj;
 		return teclado.equals(menu.teclado);
 	}
-
+	public void destruir()
+	{
+		if(teclado != null)
+		{
+			teclado.destruir();
+			teclado = null;
+		}
+		if(control != null)
+		{
+			control.destruir();
+			control = null;
+		}
+		System.gc();
+	}
 	public void mostrarMenu()
 	{
 		System.out.println("Menu");
@@ -79,6 +92,15 @@ public class Menu
 		System.out.println("\t2.-Evaluar cadena del automata");
 		System.out.println("\t3.-Guardar el Automata Finito a Pila en un archivo");
 		System.out.println("\t4.-Cargar AFP de un archivo");
+		System.out.println("\t5.-Salir");
+	}
+	public void mostrarSubMenuMT()
+	{
+		System.out.println("Menu MT");
+		System.out.println("\t1.-Generar Máquina de Turing");
+		System.out.println("\t2.-Evaluar cadena en la máquina");
+		System.out.println("\t3.-Guardar la MT en un archivo");
+		System.out.println("\t4.-Cargar MT de un archivo");
 		System.out.println("\t5.-Salir");
 	}
 	public void elegirOpcion()
@@ -179,14 +201,14 @@ public class Menu
 		int opcion;
 		do
 		{
-			mostrarSubMenuAFP();
+			mostrarSubMenuMT();
 			opcion = teclado.dameUnInt("Ingresa la opción que deseas");
 			switch(opcion)
 			{
-				case 1: control.manejarPeticion("GAFD"); break;
-				case 2: control.manejarPeticion("GAFD"); break;
-				case 3: control.manejarPeticion("GAFD"); break;
-				case 4: control.manejarPeticion("GAFD"); break;
+				case 1: control.manejarPeticion("GMT"); break;
+				case 2: control.manejarPeticion("EMT"); break;
+				case 3: control.manejarPeticion("PMT"); break;
+				case 4: control.manejarPeticion("CMT"); break;
 				case 5: break;
 				default: System.out.println("Ingresa una correcta"); break;
 			}
