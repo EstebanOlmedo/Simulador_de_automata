@@ -7,14 +7,16 @@ public class Menu
 	public Menu()
 	{
 		teclado = new Teclado();
+		control = new ControlDePeticion();
 	}
-	public Menu(Teclado teclado)
+	public Menu(Teclado teclado, ControlDePeticion control)
 	{
 		this.teclado = teclado;
+		this.control = control;
 	}
 	public Menu(Menu menu)
 	{
-		this(menu.teclado);
+		this(menu.teclado, menu.control);
 	}
 
 	@Override
