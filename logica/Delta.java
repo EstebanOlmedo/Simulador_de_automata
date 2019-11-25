@@ -1,4 +1,7 @@
 package logica;
+/**
+ * @author Gabriel Graciano Herrera
+ */
 public class Delta {
     
    char primero;
