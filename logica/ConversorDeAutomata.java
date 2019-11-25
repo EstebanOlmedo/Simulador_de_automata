@@ -106,11 +106,11 @@ public class ConversorDeAutomata{
 		ArrayList<ArrayList<ArrayList<Delta>>> nuevaTabla = new ArrayList<ArrayList<ArrayList<Delta>>> ();
 		for(int i=0; i<tabla.size(); i++){
 			nuevaTabla.add(new ArrayList<ArrayList<Delta>> (nuevaTabla.size()));
-			for(int j=0; j<tabla.get(i).size(); j++)
+			for(int j=0; j<tabla.size(); j++)
 				nuevaTabla.get(i).add(new ArrayList<Delta> ());
 		}
 		for(int i=0; i<tabla.size(); i++){
-			for(int j=0; j<tabla.size(); j++){
+			for(int j=0; j<automata.getAlfabeto().length; j++){
 				nuevaTabla.get(i).get(tabla.get(i).get(j)).add(new Delta(automata.getSimbolo(j), '#', "#"	));
 			}
 		}
