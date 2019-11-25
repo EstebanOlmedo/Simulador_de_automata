@@ -107,6 +107,7 @@ public class AutomataFinito implements Serializable
 		return alfabeto;
 	}
  	public void setMapa(){
+ 		mapa = new TreeMap<Character,Integer>();
 		for(int i=0; i<alfabeto.length; i++)
 		{
 			mapa.put(alfabeto[i], i);

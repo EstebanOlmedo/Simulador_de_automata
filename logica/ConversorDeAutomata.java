@@ -80,23 +80,33 @@ public class ConversorDeAutomata{
 	
 	public void convertirAFDaAFP(AutomataFinitoDeterminista automata)
 	{
-		ArrayList<ArrayList<ArrayList<Delta>>> tabla = crearTabla(automata);
-		automataAPila = new AutomataFinitoAPila(
-			automata.getNumeroDeEstados(),
-			automata.getAlfabeto(),
-			automata.getEstadosDeAceptacion(),
-			tabla,
-			new Stack<Character>(),
-			automata.getMapa(),
-			automata.getDescripcion()
-		);
+		try{
+			ArrayList<ArrayList<ArrayList<Delta>>> tabla = crearTabla(automata);
+			automataAPila = new AutomataFinitoAPila(
+				automata.getNumeroDeEstados(),
+				automata.getAlfabeto(),
+				automata.getEstadosDeAceptacion(),
+				tabla,
+				new Stack<Character>(),
+				automata.getMapa(),
+				automata.getDescripcion()
+			);
+		}
+		catch(NullPointerException npe){
+			System.out.println("Ocurrió un problema al convertir el automata");
+			npe.printStackTrace();
+		}
+		catch(IndexOutOfBoundsException ioobe){
+			System.out.println("Ocurrió un problema al convertir el automata");
+			ioobe.printStackTrace();
+		}
 	}
 	public ArrayList<ArrayList<ArrayList<Delta>>> crearTabla(AutomataFinitoDeterminista automata){
 		ArrayList<ArrayList<Integer>> tabla = automata.getTablaDeTransiciones();
-		ArrayList<ArrayList<ArrayList<Delta>>> nuevaTabla = new ArrayList<ArrayList<ArrayList<Delta>>> (automata.getNumeroDeEstados());
-		for(int i=0; i<nuevaTabla.size(); i++){
+		ArrayList<ArrayList<ArrayList<Delta>>> nuevaTabla = new ArrayList<ArrayList<ArrayList<Delta>>> ();
+		for(int i=0; i<tabla.size(); i++){
 			nuevaTabla.add(new ArrayList<ArrayList<Delta>> (nuevaTabla.size()));
-			for(int j=0; j<nuevaTabla.get(i).size(); j++)
+			for(int j=0; j<tabla.get(i).size(); j++)
 				nuevaTabla.get(i).add(new ArrayList<Delta> ());
 		}
 		for(int i=0; i<tabla.size(); i++){
@@ -108,16 +118,26 @@ public class ConversorDeAutomata{
 	}
 	public void convertirAFNaAFD(AutomataFinitoNoDeterminista automata)
 	{
-		ArrayList<ArrayList<Integer>> tabla = crearTabla(automata);
-		automataFinitoDeterminista = new AutomataFinitoDeterminista(
-			tabla.size(),
-			automata.getAlfabeto(),
-			crearEstadosAceptacion(automata),
-			null,
-			tabla,
-			automata.getDescripcion()
-		);
-		automataFinitoDeterminista.setMapa();
+		try{
+			ArrayList<ArrayList<Integer>> tabla = crearTabla(automata);
+			automataFinitoDeterminista = new AutomataFinitoDeterminista(
+				tabla.size(),
+				automata.getAlfabeto(),
+				crearEstadosAceptacion(automata),
+				null,
+				tabla,
+				automata.getDescripcion()
+			);
+			automataFinitoDeterminista.setMapa();
+		}
+		catch(NullPointerException npe){
+			System.out.println("Ocurrió un problema al convertir el automata");
+			npe.printStackTrace();
+		}
+		catch(IndexOutOfBoundsException ioobe){
+			System.out.println("Ocurrió un problema al convertir el automata");
+			ioobe.printStackTrace();
+		}
  	}
  	public ArrayList<ArrayList<Integer>> crearTabla(AutomataFinitoNoDeterminista automata){
  		ArrayList<ArrayList<Integer>> tabla = new ArrayList<ArrayList<Integer>> ();

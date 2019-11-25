@@ -133,7 +133,7 @@ public class Menu
 			{
 				case 1: control.manejarPeticion("GAFD"); break;
 				case 2: control.manejarPeticion("EAFD"); break;
-				case 3: control.manejarPeticion("EAFD"); break;
+				case 3: control.manejarPeticion("CAFD-AFP"); break;
 				case 4: control.manejarPeticion("PAFD"); break;
 				case 5: control.manejarPeticion("CAFD"); break;
 				case 6: break;
@@ -152,7 +152,7 @@ public class Menu
 			{
 				case 1: control.manejarPeticion("GAFND"); break;
 				case 2: control.manejarPeticion("EAFND"); break;
-				case 3: control.manejarPeticion("EAFND"); break;
+				case 3: control.manejarPeticion("CAFND-AFD"); break;
 				case 4: control.manejarPeticion("PAFND"); break;
 				case 5: control.manejarPeticion("CAFND"); break;
 				case 6: break;

@@ -109,7 +109,7 @@ public class ControlDePeticion
 		switch(peticion)
 		{
 			case "GAFD": 
-				generadorAutomata.generarAutomataFinito();
+				generadorAutomata.generarAutomataFinitoDeterminista();
 				break;	
 			case "GAFND": 
 				generadorAutomata.generarAutomataFinitoNoDeterminista();
