@@ -48,18 +48,30 @@ public class ControlEvaluadorDeCadena
 	
 	public void evaluarCadena(AutomataFinito automata)
 	{
-		String cadena = teclado.dameUnString("Ingresa la cadena que vas a evaluar");
-		if(evaluador.evaluarCadena(cadena, automata))
-			System.out.println("La cadena pertenece al lenguaje");
-		else
-			System.out.println("La cadena no pertenece al lenguaje");
+		try{
+			String cadena = teclado.dameUnString("Ingresa la cadena que vas a evaluar");
+			if(evaluador.evaluarCadena(cadena, automata))
+				System.out.println("La cadena pertenece al lenguaje");
+			else
+				System.out.println("La cadena no pertenece al lenguaje");
+		}
+		catch(NullPointerException npe){
+			System.out.println("Aun no has generado el automata -.-");
+			npe.printStackTrace();
+		}
 	}
 	public void evaluarCadena(MaquinaDeTuring maquinaDeTuring)
 	{
-		String cadena = teclado.dameUnString("Ingresa la cadena que vas a evaluar");
-		if(evaluador.evaluarCadena(cadena, maquinaDeTuring))
-			System.out.println("La cadena pertenece al lenguaje");
-		else
-			System.out.println("La cadena no pertenece al lenguaje");
+		try{
+			String cadena = teclado.dameUnString("Ingresa la cadena que vas a evaluar");
+			if(evaluador.evaluarCadena(cadena, maquinaDeTuring))
+				System.out.println("La cadena pertenece al lenguaje");
+			else
+				System.out.println("La cadena no pertenece al lenguaje");
+		}
+		catch(NullPointerException npe){
+			System.out.println("Aun no has generado la maquina -.-");
+			npe.printStackTrace();
+		}
 	}
 }
