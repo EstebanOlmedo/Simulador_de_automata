@@ -273,9 +273,4 @@ public class MaquinaDeTuring
 		System.out.println("|");
 
 	}
-	public void aniadirTransicionATabla(int estado, int indiceSimbolo,
-		int estadoTransicion, char loQueDeja, char movimiento)
-	{
-		tabla.setEstado(estado, indiceSimbolo, estadoTransicion, loQueDeja, movimiento);
-	}
 }
