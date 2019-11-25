@@ -74,7 +74,10 @@ public class ControlGeneradorDeTodoTipoDeAutomataFinito
 	public void generarAutomataFinito()
 	{
 		String descripcion = teclado.dameUnString("Ingresa la descripción del autómata");
-		int numeroDeEstados = teclado.dameUnInt("Ingresa la cardinalidad del conjunto de estados");
+		int numeroDeEstados = 0;
+		while(numeroDeEstados <= 0){
+			numeroDeEstados = teclado.dameUnInt("Ingresa la cardinalidad del conjunto de estados");
+		}
 		int numeroDeEstadosAceptacion = teclado.dameUnInt("Ingresa la cardinalidad del conjunto de estados de aceptación");
 		int[] aceptacion = new int[numeroDeEstadosAceptacion];
 		int i = 0;
