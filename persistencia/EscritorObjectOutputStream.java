@@ -43,9 +43,12 @@ public class EscritorObjectOutputStream extends Archivo
 	{
 		try
 		{
-			fos = new FileOutputStream(getFile());
-			oos = new ObjectOutputStream(fos);
-			return true;
+			if(!verificarExistenciaArchivo())
+			{
+				fos = new FileOutputStream(getFile());
+				oos = new ObjectOutputStream(fos);
+				return true;
+			}
                 }catch(FileNotFoundException fnfe){
 			fnfe.printStackTrace();
 			return false;
@@ -53,6 +56,7 @@ public class EscritorObjectOutputStream extends Archivo
 			ioe.printStackTrace();
 			return false;
 		}
+		return false;
 	}
 
 	private boolean cerrarFlujo()

@@ -25,7 +25,6 @@ public class Archivo
 	{
 		this(archivo.path, archivo.nombre,archivo.file);
 	}
-
 	public void destruir()
 	{
 		if(path != null)
