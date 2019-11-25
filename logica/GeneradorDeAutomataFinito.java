@@ -3,16 +3,13 @@ package logica;
  * @author Daniel Montes Guerrero
  */
 import java.util.TreeMap;
-import vista.Teclado;
 public class GeneradorDeAutomataFinito
 {
 	private AutomataFinito automataFinito;
-	private Teclado teclado;
 
 	public GeneradorDeAutomataFinito(AutomataFinito automataFinito)
 	{
 		this.automataFinito = automataFinito;
-		teclado = new Teclado();
 	}
 	public GeneradorDeAutomataFinito(){
 		this(new AutomataFinito());
@@ -56,10 +53,6 @@ public class GeneradorDeAutomataFinito
 		automata.setDescripcion(descripcion);
 		automata.setMapa();
 		automataFinito = automata;
-	}
-	public Teclado getTeclado()
-	{
-		return teclado;
 	}
 	public AutomataFinito getAutomataFinito(){
 		return automataFinito;
