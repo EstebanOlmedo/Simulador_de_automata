@@ -28,7 +28,19 @@ public class ControlGeneradorDeMaquinaDeTuring
 		this.generador = generador;
 		this.teclado = teclado;
 	}
-
+	public void destruir()
+	{
+		if(generador != null)
+		{
+			generador.destruir();
+			generador = null;
+		}
+		if(teclado != null)
+		{
+			teclado.destruir();
+			teclado = null;
+		}
+	}
 	@Override
 	public String toString()
 	{

@@ -23,7 +23,7 @@ public class ControlDePeticion
 			new ControlGeneradorDeTodoTipoDeAutomataFinito(teclado);
 		evaluadorCadena = 
 			new ControlEvaluadorDeCadena(teclado);
-		conversor  =new ControlConversorAutomata();
+		conversor = new ControlConversorAutomata();
 	}
 	public ControlDePeticion(
 		ControlDePersistencia persistencia,
@@ -47,7 +47,35 @@ public class ControlDePeticion
 			control.generadorAutomata, control.evaluadorCadena,control.conversor,
 			control.teclado);
 	}
-	
+	public void destruir()
+	{
+		if(persistencia != null)
+		{
+			persistencia.destruir();
+			persistencia = null;
+		}
+		if(generadorAutomata != null)
+		{
+			generadorAutomata.destruir();
+			generadorAutomata = null;
+		}
+		if(generadorMaquinaDeTuring != null)
+		{
+			generadorMaquinaDeTuring.destruir();
+			generadorMaquinaDeTuring = null;
+		}
+		if(evaluadorCadena != null)
+		{
+			evaluadorCadena.destruir();
+			evaluadorCadena = null;
+		}
+		if(conversor != null)
+		{
+			conversor.destruir();
+			conversor = null;
+		}
+		System.gc();
+	}
 	public void manejarPeticion(String peticion)
 	{
 		switch(peticion)

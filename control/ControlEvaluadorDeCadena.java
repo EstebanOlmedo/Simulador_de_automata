@@ -29,7 +29,20 @@ public class ControlEvaluadorDeCadena
 		teclado = new Teclado();
 		evaluador = new EvaluadorDeExpresion();
 	}
-	
+	public void destruir()
+	{
+		if(teclado != null)
+		{
+			teclado.destruir();
+			teclado = null;
+		}
+		if(evaluador != null)
+		{
+			evaluador.destruir();
+			evaluador = null;
+		}
+		System.gc();
+	}
 	@Override
 	public String toString()
 	{
