@@ -99,6 +99,7 @@ public class GeneradorDeMaquinaDeTuring
 			String descripcion
 			)
 	{
+		maquina = new MaquinaDeTuring();
 		generarTablaMaquinaDeTuring(numeroEstados, estadosAceptacion, alfabeto);
 		maquina.setDescripcion(descripcion);
 	}
