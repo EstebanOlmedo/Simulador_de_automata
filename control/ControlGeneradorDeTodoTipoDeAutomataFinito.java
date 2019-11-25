@@ -3,7 +3,10 @@ import logica.GeneradorDeTodoTipoDeAutomataFinito;
 import logica.NoExisteEstadoException;
 import logica.AutomataFinito;
 import java.util.ArrayList;
+import logica.AutomataFinitoAPila;
+import logica.AutomataFinitoDeterminista;
 import logica.AutomataFinitoNoDeterminista;
+import logica.AutomataFinitoNoDeterministaEpsilon;
 import logica.Delta;
 import vista.Teclado;
 
@@ -205,5 +208,25 @@ public class ControlGeneradorDeTodoTipoDeAutomataFinito
 	}
 	public GeneradorDeTodoTipoDeAutomataFinito getGenerador(){
 		return generador;
+	}
+
+	void setAutomata(Object automata)
+	{
+		if(automata instanceof AutomataFinitoDeterminista)
+			generador.setAutomataFinitoDeterminista(
+				(AutomataFinitoDeterminista)automata
+			);
+		else if(automata instanceof AutomataFinitoNoDeterminista)
+			generador.setAutomataFinitoNoDeterminista(
+				(AutomataFinitoNoDeterminista)automata
+			);
+		else if(automata instanceof AutomataFinitoNoDeterministaEpsilon)
+			generador.setAutomataFinitoNoDeterministaEpsilon(
+				(AutomataFinitoNoDeterministaEpsilon)automata
+			);
+		else if(automata instanceof AutomataFinitoAPila)
+			generador.setAutomataFinitoAPila(
+				(AutomataFinitoAPila)automata
+			);
 	}
 }
