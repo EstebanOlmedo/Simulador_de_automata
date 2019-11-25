@@ -42,12 +42,24 @@ public class ControlConversorAutomata
 	}
 	public AutomataFinitoDeterminista convertir(AutomataFinitoNoDeterminista automata)
 	{
-		conversor.convertirAFNaAFD(automata);
+		try{
+			conversor.convertirAFNaAFD(automata);
+		}
+		catch(NullPointerException npe){
+			System.out.println("Aun no has generado el automata .-.");
+			npe.printStackTrace();
+		}
 		return conversor.getAutomataFinitoDeterminista();
 	}
 	public AutomataFinitoAPila convertir(AutomataFinitoDeterminista automata)
 	{
-		conversor.convertirAFDaAFP(automata);
+		try{
+			conversor.convertirAFDaAFP(automata);
+		}
+		catch(NullPointerException npe){
+			System.out.println("Aun no has generado el automata .-.");
+			npe.printStackTrace();
+		}
 		return conversor.getAutomataFinitoAPila();
 	}
 }
