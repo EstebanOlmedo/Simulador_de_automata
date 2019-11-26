@@ -200,6 +200,9 @@ public class ControlDePeticion
 	private void manejarPeticionDeCargado(String peticion)
 	{
 		Object automata = persistencia.recuperarObjeto();
+                generadorAutomata.imprimirTransiciones(automata
+                
+                );
 		switch(peticion)
 		{
 			case "CAFD": 
