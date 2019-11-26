@@ -8,63 +8,37 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Stack;
 public class ConversorDeAutomata{
-	private AutomataFinitoDeterminista automataFinitoDeterminista;
-	private AutomataFinitoNoDeterminista automataFinitoNoDeterminista;
-	private AutomataFinitoAPila automataAPila;
+	private AutomataFinito automata;
 	private TreeMap<Integer,ArrayList<Integer>> mapa;
 
-	public ConversorDeAutomata(
-			AutomataFinitoDeterminista automataFinitoDeterminista,
-			AutomataFinitoNoDeterminista automataFinitoNoDeterminista,
-			AutomataFinitoAPila automataAPila
-		)
+	public ConversorDeAutomata(AutomataFinito automata)
 	{
-		this.automataFinitoDeterminista = automataFinitoDeterminista;
-		this.automataFinitoNoDeterminista = automataFinitoNoDeterminista;
-		this.automataAPila = automataAPila;
+		this.automata = automata;
 		mapa = new TreeMap<Integer,ArrayList<Integer>>();
 	}
 
 	public ConversorDeAutomata(){
-		this(null, null, null);
+		this(new AutomataFinitoDeterminista());
 	}
 
 	public ConversorDeAutomata(ConversorDeAutomata conversor){
-		this(
-			conversor.automataFinitoDeterminista,
-			conversor.automataFinitoNoDeterminista,
-			conversor.automataAPila
-			);
+		this(conversor.automata);
 	}
 
 	public void destruir(){
-		if(automataFinitoDeterminista != null)
+		if(automata != null)
 		{
-			automataFinitoNoDeterminista.destruir();
-			automataFinitoDeterminista = null;
-		}
-		if(automataFinitoNoDeterminista != null)
-		{
-			automataFinitoNoDeterminista.destruir();
-			automataFinitoNoDeterminista = null;
-		}
-		if(automataAPila != null)
-		{
-			automataAPila.destruir();
-			automataAPila = null;
+			automata.destruir();
+			automata = null;
 		}
 		System.gc();
 	}
 
 	@Override
 	public String toString(){
-		String cad = "Automatas convertidos:\n";
-		if(automataFinitoDeterminista != null)
-			cad += "Automata Finito Determinista: " + automataFinitoDeterminista + "\n";
-		if(automataFinitoNoDeterminista != null)
-			cad += "Automata Finito No Determinista: " + automataFinitoNoDeterminista + "\n";
-		if(automataAPila != null)
-			cad += "Automata a Pila: " + automataAPila + "\n";
+		String cad = "Automata convertido:\n";
+		if(automata != null)
+			cad += automata;
 		return cad;
 	}
 
@@ -73,16 +47,14 @@ public class ConversorDeAutomata{
 		if(obj == null) return false;
 		if(!(obj instanceof ConversorDeAutomata)) return false;
 		ConversorDeAutomata conversor = (ConversorDeAutomata)obj;
-		return automataFinitoDeterminista.equals(conversor.automataFinitoDeterminista) &&
-		automataFinitoNoDeterminista.equals(conversor.automataFinitoNoDeterminista) &&
-		automataAPila.equals(conversor.automataAPila);
+		return automata.equals(conversor.automata);
 	}
 	
 	public void convertirAFDaAFP(AutomataFinitoDeterminista automata)
 	{
 		try{
 			ArrayList<ArrayList<ArrayList<Delta>>> tabla = crearTabla(automata);
-			automataAPila = new AutomataFinitoAPila(
+			this.automata = new AutomataFinitoAPila(
 				automata.getNumeroDeEstados(),
 				automata.getAlfabeto(),
 				automata.getEstadosDeAceptacion(),
@@ -120,7 +92,7 @@ public class ConversorDeAutomata{
 	{
 		try{
 			ArrayList<ArrayList<Integer>> tabla = crearTabla(automata);
-			automataFinitoDeterminista = new AutomataFinitoDeterminista(
+			this.automata = new AutomataFinitoDeterminista(
 				tabla.size(),
 				automata.getAlfabeto(),
 				crearEstadosAceptacion(automata),
@@ -128,7 +100,7 @@ public class ConversorDeAutomata{
 				tabla,
 				automata.getDescripcion()
 			);
-			automataFinitoDeterminista.setMapa();
+			this.automata.setMapa();
 		}
 		catch(NullPointerException npe){
 			System.out.println("Ocurrió un problema al convertir el automata");
@@ -182,14 +154,9 @@ public class ConversorDeAutomata{
  		}
  		return estadosAceptacion;
  	}
-	public AutomataFinitoDeterminista getAutomataFinitoDeterminista()
+	public AutomataFinito getAutomataFinito()
 	{
-		return automataFinitoDeterminista;
-	}
-
-	public AutomataFinitoAPila getAutomataFinitoAPila()
-	{
-		return automataAPila;
+		return automata;
 	}
 	public void insertarEnMapa(ArrayList<Integer> estado){
 		int nuevoEstado = mapa.size();
