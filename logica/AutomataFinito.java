@@ -143,4 +143,5 @@ public abstract class AutomataFinito implements Serializable
 		return descripcion;
 	}
 	public abstract boolean evaluar(String cadena);
+	public abstract String getTransiciones();
 }

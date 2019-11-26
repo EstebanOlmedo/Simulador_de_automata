@@ -148,4 +148,21 @@ public class AutomataFinitoNoDeterminista extends AutomataFinito
 	{
 		this.tablaDeTransiciones = tablaDeTransiciones;
 	}
+	@Override
+	public String getTransiciones()
+	{
+		String transiciones = "";
+		for(int i=0; i<getNumeroDeEstados(); i++){
+			for(int j=0; j<getAlfabeto().length; j++){
+				ArrayList<Integer> trasicion = getAdyacencia(i,j);
+				transiciones += "S(q"+i+","+getSimbolo(j)+") = {";
+				for(int k=0; k<trasicion.size(); k++){
+					transiciones += trasicion.get(k);
+					if(k!=trasicion.size()-1) transiciones += ",";
+				}
+				transiciones += "}\n";
+			}
+		}
+		return transiciones;
+	}
 }

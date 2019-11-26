@@ -99,6 +99,7 @@ public class AutomataFinitoDeterminista extends AutomataFinito
 	{
 		return tablaDeTransiciones;
 	}
+	@Override
 	public boolean evaluar(String cadena)
 	{
 		int estado = 0;
@@ -123,5 +124,16 @@ public class AutomataFinitoDeterminista extends AutomataFinito
 	public void setTablaDeTransiciones(ArrayList<ArrayList<Integer>> tablaDeTransiciones)
 	{
 		this.tablaDeTransiciones = tablaDeTransiciones;
+	}
+	@Override
+	public String getTransiciones()
+	{
+		String transiciones = "";
+		for(int i=0; i<getNumeroDeEstados(); i++){
+			for(int j=0; j<getAlfabeto().length; j++){
+				transiciones += "S(q"+i+","+getSimbolo(j)+") = "+getAdyacencia(i,j)+"\n";
+			}
+		}
+		return transiciones;
 	}
 }

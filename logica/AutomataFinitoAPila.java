@@ -201,5 +201,18 @@ public class AutomataFinitoAPila extends AutomataFinito implements IPila
 	{
 		this.tablaDeTransiciones = tablaDeTransiciones;
 	}
+    @Override
+    public String getTransiciones()
+    {
+        String transiciones = "";
+        for(int i=0; i<getNumeroDeEstados(); i++){
+            for(int j=0; j<getNumeroDeEstados(); j++){
+                for(Delta delta:tablaDeTransiciones.get(i).get(j)){
+                    transiciones += "S(q"+i+","+delta.getPrimero()+") = (q"+j+","+delta.getSegundo()+","+delta.getTercero()+")\n";
+                }
+            }
+        }
+        return transiciones;
+    }
 }
 

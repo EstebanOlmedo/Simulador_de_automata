@@ -114,4 +114,19 @@ public class AutomataFinitoNoDeterministaEpsilon extends AutomataFinitoNoDetermi
 	public  void setAdyacenciaEpsilon(ArrayList<ArrayList<Integer>> adyacenciaEpsilon){
 		this.adyacenciaEpsilon = adyacenciaEpsilon;
 	}
+	@Override
+	public String getTransiciones()
+	{
+		String transiciones = super.getTransiciones();
+		for(int i=0; i<getNumeroDeEstados(); i++){
+			transiciones += "S(q"+i+",~) = {";
+			ArrayList<Integer> transicion = adyacenciaEpsilon.get(i);
+			for(int j=0; j<transicion.size(); j++){
+				transiciones += transicion.get(j);
+				if(j!=transicion.size()-1) transiciones += ",";
+			}
+			transiciones += "}\n";
+		}
+		return transiciones;
+	}
 }
