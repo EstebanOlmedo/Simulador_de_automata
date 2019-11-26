@@ -5,7 +5,7 @@ package logica;
 
 import java.util.TreeMap;
 import java.io.Serializable;
-public class AutomataFinito implements Serializable
+public abstract class AutomataFinito implements Serializable
 {
 	private int numeroDeEstados;
 	private char[] alfabeto;
@@ -107,7 +107,7 @@ public class AutomataFinito implements Serializable
 		return alfabeto;
 	}
  	public void setMapa(){
- 		mapa = new TreeMap<Character,Integer>();
+ 		mapa = new TreeMap<>();
 		for(int i=0; i<alfabeto.length; i++)
 		{
 			mapa.put(alfabeto[i], i);
@@ -117,6 +117,8 @@ public class AutomataFinito implements Serializable
 		this.numeroDeEstados = numeroDeEstados;
 	}
 	public void setAlfabeto(char[] alfabeto){
+		if(alfabeto == null)
+			System.out.println("ACHIS ACHIS");
 		this.alfabeto = alfabeto;
 	}
 	public void setEstadosAceptacion(int[] estadosAceptacion){
@@ -140,7 +142,5 @@ public class AutomataFinito implements Serializable
 	public String getDescripcion(){
 		return descripcion;
 	}
-	public boolean evaluar(String cadena){
-		return false;
-	}
+	public abstract boolean evaluar(String cadena);
 }

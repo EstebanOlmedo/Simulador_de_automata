@@ -10,7 +10,7 @@ public class AutomataFinitoDeterminista extends AutomataFinito
 
 	public AutomataFinitoDeterminista()
 	{
-		this(0, null, null, null, null,null);
+		this(0, null, null, new TreeMap<Character,Integer>(), null,null);
 	}
 	public AutomataFinitoDeterminista(
 			int numeroEstados,
