@@ -9,12 +9,10 @@ import java.util.Map;
 import java.util.Stack;
 public class ConversorDeAutomata{
 	private AutomataFinito automata;
-	private TreeMap<Integer,ArrayList<Integer>> mapa;
 
 	public ConversorDeAutomata(AutomataFinito automata)
 	{
 		this.automata = automata;
-		mapa = new TreeMap<Integer,ArrayList<Integer>>();
 	}
 
 	public ConversorDeAutomata(){
@@ -91,11 +89,12 @@ public class ConversorDeAutomata{
 	public void convertirAFNaAFD(AutomataFinitoNoDeterminista automata)
 	{
 		try{
-			ArrayList<ArrayList<Integer>> tabla = crearTabla(automata);
+			TreeMap<Integer,ArrayList<Integer>> mapa = new TreeMap<Integer,ArrayList<Integer>>();
+			ArrayList<ArrayList<Integer>> tabla = crearTabla(automata,mapa);
 			this.automata = new AutomataFinitoDeterminista(
 				tabla.size(),
 				automata.getAlfabeto(),
-				crearEstadosAceptacion(automata),
+				crearEstadosAceptacion(automata,mapa),
 				null,
 				tabla,
 				automata.getDescripcion()
@@ -111,33 +110,37 @@ public class ConversorDeAutomata{
 			ioobe.printStackTrace();
 		}
  	}
- 	public ArrayList<ArrayList<Integer>> crearTabla(AutomataFinitoNoDeterminista automata){
+ 	public ArrayList<ArrayList<Integer>> crearTabla(AutomataFinitoNoDeterminista automata,TreeMap<Integer,ArrayList<Integer>> mapa){
  		ArrayList<ArrayList<Integer>> tabla = new ArrayList<ArrayList<Integer>> ();
-		ArrayList<Integer> trancision = new ArrayList<Integer> (automata.getAlfabeto().length);
+		ArrayList<Integer> trancision = new ArrayList<Integer> ();
 		LinkedList<ArrayList<Integer>> cola = new LinkedList<ArrayList<Integer>> ();
 		ArrayList<Integer> auxiliar = new ArrayList<Integer> ();
+                ArrayList<Integer> procesados = new ArrayList<Integer>();
 		auxiliar.add(0);
-		obtenerID(auxiliar,cola);
+		procesados.add(obtenerID(auxiliar,cola,mapa));
 		for(int i=0; i<automata.getAlfabeto().length; i++){
 			ArrayList<Integer> nuevoEstado = generarEstado(auxiliar,i,automata);
-			int idNuevoEstado = obtenerID(nuevoEstado, cola);
+			int idNuevoEstado = obtenerID(nuevoEstado, cola,mapa);
 			trancision.add(idNuevoEstado);
 		}
 		tabla.add(trancision);
 		while(cola.size() > 0){
 			auxiliar = cola.peek();
-			trancision.clear();
-			for(int i=0; i<automata.getAlfabeto().length; i++){
-				ArrayList<Integer> nuevoEstado = generarEstado(auxiliar,i,automata);
-				int idNuevoEstado = obtenerID(nuevoEstado, cola);
-				trancision.add(idNuevoEstado);	
-			}
-			tabla.add(trancision);
+                        if(procesados.indexOf(obtenerID(auxiliar,cola,mapa)) == -1){
+                            procesados.add(obtenerID(auxiliar,cola,mapa));
+                            trancision = new ArrayList<Integer>();
+                            for(int i=0; i<automata.getAlfabeto().length; i++){
+                                    ArrayList<Integer> nuevoEstado = generarEstado(auxiliar,i,automata);
+                                    int idNuevoEstado = obtenerID(nuevoEstado, cola,mapa);
+                                    trancision.add(idNuevoEstado);	
+                            }
+                            tabla.add(trancision);
+                        }
 			cola.removeFirst();
 		}
 		return tabla;
  	}
- 	public int[] crearEstadosAceptacion(AutomataFinitoNoDeterminista automata){
+ 	public int[] crearEstadosAceptacion(AutomataFinitoNoDeterminista automata, TreeMap<Integer,ArrayList<Integer>> mapa){
  		ArrayList<Integer> aceptacion = new ArrayList<Integer>();
  		for(Map.Entry<Integer,ArrayList<Integer>> entry:mapa.entrySet()){
  			for(Integer i:entry.getValue()){
@@ -158,28 +161,37 @@ public class ConversorDeAutomata{
 	{
 		return automata;
 	}
-	public void insertarEnMapa(ArrayList<Integer> estado){
+	public void insertarEnMapa(ArrayList<Integer> estado, TreeMap<Integer,ArrayList<Integer>> mapa){
 		int nuevoEstado = mapa.size();
 		mapa.put(nuevoEstado, estado);
 	}
 	public ArrayList<Integer> generarEstado(ArrayList<Integer> estado, int simbolo,AutomataFinitoNoDeterminista automata){
 		ArrayList<Integer> nuevoEstado = new ArrayList<Integer> ();
-		for(Integer i:estado){
+		ArrayList<Integer> set = new ArrayList<Integer> ();
+                for(Integer i:estado){
 			for(Integer e:automata.getAdyacencia(i,simbolo)){
-				nuevoEstado.add(e);
+				if(set.indexOf(e) == -1)
+                                    nuevoEstado.add(e);
 			}
 		}
 		return nuevoEstado;
 	}
-	public int obtenerID(ArrayList<Integer> estado, LinkedList<ArrayList<Integer>> cola){
+	public int obtenerID(ArrayList<Integer> estado, LinkedList<ArrayList<Integer>> cola, TreeMap<Integer,ArrayList<Integer>> mapa){
 		if(mapa.containsValue(estado)){
-			ArrayList<ArrayList<Integer>> valores = new ArrayList<ArrayList<Integer>>(mapa.values());
-			return valores.lastIndexOf(estado);
+                    for(Map.Entry<Integer,ArrayList<Integer>> entry:mapa.entrySet()){
+ 			if(entry.getValue().equals(estado))
+                            return entry.getKey();
+                    }
+                    return 0;
 		}
 		else{
-			insertarEnMapa(estado);
+			insertarEnMapa(estado, mapa);
 			cola.add(estado);
-			return mapa.size();
+                        for(Map.Entry<Integer,ArrayList<Integer>> entry:mapa.entrySet()){
+                            if(entry.getValue().equals(estado))
+                                return entry.getKey();
+                        }
+			return 0;
 		}
 	}
 }
