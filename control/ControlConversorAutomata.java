@@ -6,6 +6,7 @@ import logica.ConversorDeAutomata;
 import logica.AutomataFinitoDeterminista;
 import logica.AutomataFinitoAPila;
 import logica.AutomataFinitoNoDeterminista;
+import logica.AutomataFinito;
 public class ControlConversorAutomata
 {
 	private ConversorDeAutomata conversor;
@@ -40,7 +41,7 @@ public class ControlConversorAutomata
 		ControlConversorAutomata control = (ControlConversorAutomata)obj;
 		return conversor.equals(control.conversor);
 	}
-	public AutomataFinitoDeterminista convertir(AutomataFinitoNoDeterminista automata)
+	public AutomataFinito convertir(AutomataFinitoNoDeterminista automata)
 	{
 		try{
 			conversor.convertirAFNaAFD(automata);
@@ -49,9 +50,9 @@ public class ControlConversorAutomata
 			System.out.println("Aun no has generado el automata .-.");
 			npe.printStackTrace();
 		}
-		return conversor.getAutomataFinitoDeterminista();
+		return conversor.getAutomataFinito();
 	}
-	public AutomataFinitoAPila convertir(AutomataFinitoDeterminista automata)
+	public AutomataFinito convertir(AutomataFinitoDeterminista automata)
 	{
 		try{
 			conversor.convertirAFDaAFP(automata);
@@ -60,6 +61,6 @@ public class ControlConversorAutomata
 			System.out.println("Aun no has generado el automata .-.");
 			npe.printStackTrace();
 		}
-		return conversor.getAutomataFinitoAPila();
+		return conversor.getAutomataFinito();
 	}
 }
