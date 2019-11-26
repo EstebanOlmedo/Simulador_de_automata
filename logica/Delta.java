@@ -1,8 +1,11 @@
 package logica;
+
+import java.io.Serializable;
+
 /**
  * @author Gabriel Graciano Herrera
  */
-public class Delta {
+public class Delta implements Serializable{
     
    char primero;
    char segundo;
