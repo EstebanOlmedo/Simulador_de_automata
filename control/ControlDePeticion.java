@@ -1,4 +1,5 @@
 package control;
+import logica.AutomataFinitoNoDeterminista;
 import vista.Teclado;
 /**
  *
@@ -220,10 +221,18 @@ public class ControlDePeticion
 	public void manejarPeticionDeConversion(String peticion){
 		switch(peticion){
 			case "CAFND-AFD":
-				generadorAutomata.setAutomata(conversor.convertir(generadorAutomata.getGenerador().getAutomataFinitoNoDeterminista()));
+				generadorAutomata.setAutomata(
+					conversor.convertir(
+						(AutomataFinitoNoDeterminista)generadorAutomata.
+							getGenerador().
+							getAutomataFinitoNoDeterminista())
+				);
 				break;
 			case "CAFD-AFP":
-				generadorAutomata.setAutomata(conversor.convertir(generadorAutomata.getGenerador().getAutomataFinitoDeterminista()));
+				generadorAutomata.setAutomata(conversor.
+					convertir(generadorAutomata.getGenerador().
+					getAutomataFinitoDeterminista())
+				);
 		}
 	}
 }
