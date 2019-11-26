@@ -70,16 +70,19 @@ public class ControlGeneradorDeTodoTipoDeAutomataFinito
 		return teclado.equals(control.teclado) && 
 			generador.equals(control.generador);
 	}
-
-	public void generarAutomataFinito()
+	public Object[] generarAutomataFinito()
 	{
-		String descripcion = teclado.dameUnString("Ingresa la descripción del autómata");
 		int numeroDeEstados = 0;
+		char[] alfabeto = null;
+		int[] aceptacion = null;
+		String descripcion = null;
+		descripcion = teclado.dameUnString("Ingresa la descripción del autómata");
+		numeroDeEstados = 0;
 		while(numeroDeEstados <= 0){
 			numeroDeEstados = teclado.dameUnInt("Ingresa la cardinalidad del conjunto de estados");
 		}
 		int numeroDeEstadosAceptacion = teclado.dameUnInt("Ingresa la cardinalidad del conjunto de estados de aceptación");
-		int[] aceptacion = new int[numeroDeEstadosAceptacion];
+		aceptacion = new int[numeroDeEstadosAceptacion];
 		int i = 0;
 		for(i = 0; i < numeroDeEstadosAceptacion; i++)
 		{
@@ -95,24 +98,67 @@ public class ControlGeneradorDeTodoTipoDeAutomataFinito
 			}
 		}
 		int cardinalidad = teclado.dameUnInt("Ingresa la cardinalidad del alfabeto");
-		char[] alfabeto = new char[cardinalidad];
+		alfabeto = new char[cardinalidad];
 		for(i = 0; i < cardinalidad; i++)
 			alfabeto[i] = teclado.dameUnChar("Ingrese el símbolo " + (i+1) +" del alfabeto");
-		generador.crearAutomataFinito(numeroDeEstados, alfabeto, aceptacion, descripcion);
+		Object[] elementos = {
+			numeroDeEstados,
+			alfabeto,
+			aceptacion,
+			descripcion
+		};
+		return elementos;
+		
 	}
+	public void generarAutomataFinito(
+		int numeroDeEstados, 
+		char[] alfabeto, 
+		int[] aceptacion, 
+		String descripcion)
+	{
+		descripcion = teclado.dameUnString("Ingresa la descripción del autómata");
+		numeroDeEstados = 0;
+		while(numeroDeEstados <= 0){
+			numeroDeEstados = teclado.dameUnInt("Ingresa la cardinalidad del conjunto de estados");
+		}
+		int numeroDeEstadosAceptacion = teclado.dameUnInt("Ingresa la cardinalidad del conjunto de estados de aceptación");
+		aceptacion = new int[numeroDeEstadosAceptacion];
+		int i = 0;
+		for(i = 0; i < numeroDeEstadosAceptacion; i++)
+		{
+			try{
+				aceptacion[i] = teclado.dameUnInt("Ingresa el "+i+"-ésimo estado de aceptación");
+				if(aceptacion[i] >= numeroDeEstados)
+					throw new NoExisteEstadoException(aceptacion[i]);
+			}
+			catch(NoExisteEstadoException neee){
+				neee.printStackTrace();
+				System.out.println("Ingresa un estado válido");
+				i--;
+			}
+		}
+		int cardinalidad = teclado.dameUnInt("Ingresa la cardinalidad del alfabeto");
+		alfabeto = new char[cardinalidad];
+		for(i = 0; i < cardinalidad; i++)
+			alfabeto[i] = teclado.dameUnChar("Ingrese el símbolo " + (i+1) +" del alfabeto");
+	}
+	
 	public void generarAutomataFinitoDeterminista()
 	{
-		generarAutomataFinito();
+		Object[] elementos = generarAutomataFinito();
+		int numeroDeEstados = (int)elementos[0]; 
+		char[] alfabeto = (char[])elementos[1];
+		int[] aceptacion = (int[])elementos[2];
+		String descripcion = (String)elementos[3];
 		System.out.println("Ingresando transiciones");
-		AutomataFinito automata = generador.getAutomataFinito();
 		ArrayList<ArrayList<Integer>> tabla = new ArrayList<ArrayList<Integer>>();
-		for(int i=0; i<automata.getNumeroDeEstados(); i++){
+		for(int i=0; i<numeroDeEstados; i++){
 			ArrayList<Integer> estado = new ArrayList<Integer>();
-			for(int j=0; j<automata.getMapa().size(); j++){
+			for(int j=0; j<alfabeto.length; j++){
 				int estadoDestino;
 				try{
-					estadoDestino = teclado.dameUnInt("Ingresa el valor de S(q"+i+","+automata.getSimbolo(j)+")");
-					if(estadoDestino >= automata.getNumeroDeEstados())
+					estadoDestino = teclado.dameUnInt("Ingresa el valor de S(q"+i+"," + alfabeto[j]+")");
+					if(estadoDestino >= numeroDeEstados)
 						throw new NoExisteEstadoException(estadoDestino);
 					estado.add(estadoDestino);
 				}
@@ -124,24 +170,28 @@ public class ControlGeneradorDeTodoTipoDeAutomataFinito
 			}
 			tabla.add(estado);
 		}
-		generador.crearAutomataFinitoDeterminista(automata, tabla);
+		generador.crearAutomataFinitoDeterminista(tabla, numeroDeEstados, alfabeto, 
+			aceptacion, descripcion);
 	}
 	public void generarAutomataFinitoNoDeterminista()
 	{
-		generarAutomataFinito();
-		AutomataFinito automata = generador.getAutomataFinito();
+		Object[] elementos = generarAutomataFinito();
+		int numeroDeEstados = (int)elementos[0]; 
+		char[] alfabeto = (char[])elementos[1];
+		int[] aceptacion = (int[])elementos[2];
+		String descripcion = (String)elementos[3];
 		ArrayList<ArrayList<ArrayList<Integer>>> tabla = new ArrayList<ArrayList<ArrayList<Integer>>>();
 		System.out.println("Ingresando transiciones");
-		for(int i=0; i<automata.getNumeroDeEstados(); i++){
+		for(int i=0; i<numeroDeEstados; i++){
 			ArrayList<ArrayList<Integer>> estado = new ArrayList<ArrayList<Integer>>();
-			for(int j=0; j<automata.getMapa().size(); j++){
-				System.out.println("Ingresando transiciones de S(q"+i+","+automata.getSimbolo(j)+")");
+			for(int j=0; j<alfabeto.length; j++){
+				System.out.println("Ingresando transiciones de S(q"+i+","+alfabeto[j]+")");
 				System.out.println("Ingresa -1 para omitir/finalizar la transicion actual");
 				ArrayList<Integer> transiciones = new ArrayList<Integer>();
 				int transicion = -1;
 				while((transicion = teclado.dameUnInt("Ingresa el estado destino")) >= 0){
 					try{
-						if(transicion >= automata.getNumeroDeEstados())
+						if(transicion >= numeroDeEstados)
 							throw new NoExisteEstadoException(transicion);
 						else
 							transiciones.add(transicion);
@@ -155,12 +205,13 @@ public class ControlGeneradorDeTodoTipoDeAutomataFinito
 			}
 			tabla.add(estado);
 		}
-		generador.crearAutomataFinitoNoDeterminista(automata, tabla);
+		generador.crearAutomataFinitoNoDeterminista(tabla, numeroDeEstados, 
+			alfabeto, aceptacion, descripcion);
 	}
 	public void generarAutomataFinitoNoDeterministaEpsilon()
 	{
 		generarAutomataFinitoNoDeterminista();
-		AutomataFinitoNoDeterminista automata = generador.getAutomataFinitoNoDeterminista();
+		AutomataFinito automata = generador.getAutomataFinitoNoDeterminista();
 		System.out.println("Ahora solo faltan las transiciones epsilon");
 		ArrayList<ArrayList<Integer>> adyacenciaEpsilon = new ArrayList<ArrayList<Integer>>();
 		for(int i=0; i<automata.getNumeroDeEstados(); i++){
@@ -182,16 +233,26 @@ public class ControlGeneradorDeTodoTipoDeAutomataFinito
 			}
 			adyacenciaEpsilon.add(transiciones);
 		}
-		generador.crearAutomataFinitoNoDeterministaEpsilon(automata, adyacenciaEpsilon);
+		try
+		{
+			generador.crearAutomataFinitoNoDeterministaEpsilon(
+				(AutomataFinitoNoDeterminista)automata, 
+				adyacenciaEpsilon);
+		}catch(ClassCastException cce){
+			cce.printStackTrace();
+		}
 	}
 	public void generarAutomataFinitoAPila()
 	{
-		generarAutomataFinito();
-		AutomataFinito automata = generador.getAutomataFinito();
+		Object[] elementos = generarAutomataFinito();
+		int numeroDeEstados = (int)elementos[0]; 
+		char[] alfabeto = (char[])elementos[1];
+		int[] aceptacion = (int[])elementos[2];
+		String descripcion = (String)elementos[3];
 		ArrayList<ArrayList<ArrayList<Delta>>> tabla = new ArrayList<ArrayList<ArrayList<Delta>>>();
-		for(int i=0; i<automata.getNumeroDeEstados(); i++){
+		for(int i=0; i<numeroDeEstados; i++){
 			ArrayList<ArrayList<Delta>> estado = new ArrayList<ArrayList<Delta>>();
-			for(int j=0; j<automata.getNumeroDeEstados(); j++){
+			for(int j=0; j<numeroDeEstados; j++){
 				System.out.println("Ingresando transiciones del estado q"+i+" al estado q"+j);
 				System.out.println("Ingresa '#' para omitir/finalizar la transicion actual");
 				ArrayList<Delta> transiciones = new ArrayList<Delta>();
@@ -207,7 +268,8 @@ public class ControlGeneradorDeTodoTipoDeAutomataFinito
 			}
 			tabla.add(estado);
 		}
-		generador.crearAutomataFinitoAPila(automata, tabla);
+		generador.crearAutomataFinitoAPila(tabla, numeroDeEstados, alfabeto, 
+			aceptacion, descripcion);
 	}
 	public GeneradorDeTodoTipoDeAutomataFinito getGenerador(){
 		return generador;
