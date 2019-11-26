@@ -52,11 +52,18 @@ public class GeneradorDeAutomataFinitoDeterminista extends GeneradorDeAutomataFi
 		return super.equals(generador) && automataFinitoDeterminista.equals(generador.automataFinitoDeterminista);
 	}
 
-	public void crearAutomataFinitoDeterminista(AutomataFinito automataFinito, 
-			ArrayList<ArrayList<Integer>> tabla)
+	public void crearAutomataFinitoDeterminista(
+		ArrayList<ArrayList<Integer>> tabla,
+		int numeroDeEstados, 
+		char[] alfabeto, 
+		int[] aceptacion, 
+		String descripcion
+	)
 	{
 		System.out.println("Creando autómata finito determinista");
-		automataFinitoDeterminista = new AutomataFinitoDeterminista(automataFinito);
+		automataFinitoDeterminista = new AutomataFinitoDeterminista();
+		crearAutomataFinito(numeroDeEstados, alfabeto, aceptacion,
+			descripcion, automataFinitoDeterminista);
 		automataFinitoDeterminista.setTablaDeTransiciones(tabla);
 		System.out.println("El autómata ha sido creado con exito");
 	}
@@ -69,5 +76,21 @@ public class GeneradorDeAutomataFinitoDeterminista extends GeneradorDeAutomataFi
 	public void setAutomataFinitoDeterminista(AutomataFinitoDeterminista automataFinitoDeterminista)
 	{
 		this.automataFinitoDeterminista = automataFinitoDeterminista;
+	}
+
+	@Override
+	public void crearAutomataFinito(
+		int numeroDeEstados, 
+		char[] alfabeto, 
+		int[] aceptacion, 
+		String descripcion,
+		AutomataFinito automata
+	)
+	{
+		automata.setNumeroDeEstados(numeroDeEstados);
+		automata.setAlfabeto(alfabeto);
+		automata.setEstadosAceptacion(aceptacion);
+		automata.setDescripcion(descripcion);
+		automata.setMapa();
 	}
 }

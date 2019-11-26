@@ -88,23 +88,37 @@ public class GeneradorDeTodoTipoDeAutomataFinito
 		automataAPila.equals(conversor.automataAPila);
 	}
 	
-	public void crearAutomataFinitoNoDeterminista(AutomataFinito automata,
-			ArrayList<ArrayList<ArrayList<Integer>>> tablaDeTransiciones)
+	@Override
+	public void crearAutomataFinitoNoDeterminista(
+		ArrayList<ArrayList<ArrayList<Integer>>> tablaDeTransiciones,
+		int numeroDeEstados, 
+		char[] alfabeto, 
+		int[] aceptacion, 
+		String descripcion)
 	{
 		System.out.println("Generando autómata");
-		automataFinitoNoDeterminista = new AutomataFinitoNoDeterminista(automata);
+		automataFinitoNoDeterminista = new AutomataFinitoNoDeterminista();
+		crearAutomataFinito(numeroDeEstados, alfabeto, 
+			aceptacion, descripcion, automataFinitoNoDeterminista);
 		automataFinitoNoDeterminista.setTablaDeTransiciones(tablaDeTransiciones);
 		System.out.println("El automata fue creado con exito :)");
 	}
-	public void crearAutomataFinitoAPila(AutomataFinito automata,
-			ArrayList<ArrayList<ArrayList<Delta>>> tablaDeTransiciones)
+	public void crearAutomataFinitoAPila(
+		ArrayList<ArrayList<ArrayList<Delta>>> tablaDeTransiciones,
+		int numeroDeEstados, 
+		char[] alfabeto, 
+		int[] aceptacion, 
+		String descripcion)
 	{
 		System.out.println("Creando un automáta finito a pila");
-		automataAPila = new AutomataFinitoAPila(automata);
+		automataAPila = new AutomataFinitoAPila();
+		crearAutomataFinito(numeroDeEstados, alfabeto, aceptacion, 
+			descripcion, automataAPila);
 		automataAPila.setTablaDeTransiciones(tablaDeTransiciones);
 		System.out.println("El autómata ha sido creado con éxito :)");
 	}
 	
+	@Override
 	public void crearAutomataFinitoNoDeterministaEpsilon(AutomataFinitoNoDeterminista automata,
 			ArrayList<ArrayList<Integer>> adyacenciaEpsilon)
 	{
@@ -113,18 +127,18 @@ public class GeneradorDeTodoTipoDeAutomataFinito
 		automataFinitoNoDeterministaEpsilon.setAdyacenciaEpsilon(adyacenciaEpsilon);
 		System.out.println("El automata ha sido creado completamente ;)");
 	}
-
-	public AutomataFinitoNoDeterminista getAutomataFinitoNoDeterminista()
+	
+	public AutomataFinito getAutomataFinitoNoDeterminista()
 	{
 		return automataFinitoNoDeterminista;
 	}
 
-	public AutomataFinitoNoDeterministaEpsilon getAutomataFinitoNoDeterministaEpsilon()
+	public AutomataFinito getAutomataFinitoNoDeterministaEpsilon()
 	{
 		return automataFinitoNoDeterministaEpsilon;
 	}
 
-	public AutomataFinitoAPila getAutomataFinitoAPila()
+	public AutomataFinito getAutomataFinitoAPila()
 	{
 		return automataAPila;
 	}

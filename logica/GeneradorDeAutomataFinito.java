@@ -2,8 +2,7 @@ package logica;
 /**
  * @author Daniel Montes Guerrero
  */
-import java.util.TreeMap;
-public class GeneradorDeAutomataFinito
+public abstract class GeneradorDeAutomataFinito
 {
 	private AutomataFinito automataFinito;
 
@@ -12,7 +11,7 @@ public class GeneradorDeAutomataFinito
 		this.automataFinito = automataFinito;
 	}
 	public GeneradorDeAutomataFinito(){
-		this(new AutomataFinito());
+		automataFinito = null;
 	}
 	public GeneradorDeAutomataFinito(GeneradorDeAutomataFinito generador)
 	{
@@ -43,6 +42,14 @@ public class GeneradorDeAutomataFinito
 		GeneradorDeAutomataFinito generador = (GeneradorDeAutomataFinito)obj;
 		return automataFinito.equals(generador.automataFinito);
 	}
+	public abstract void crearAutomataFinito(
+		int numeroDeEstados, 
+		char[] alfabeto, 
+		int[] aceptacion, 
+		String descripcion,
+		AutomataFinito automata
+	);
+	/*
 	public void crearAutomataFinito(int numeroDeEstados, char[] alfabeto, 
 			int[] aceptacion, String descripcion)
 	{
@@ -54,6 +61,7 @@ public class GeneradorDeAutomataFinito
 		automata.setMapa();
 		automataFinito = automata;
 	}
+	*/
 	public AutomataFinito getAutomataFinito(){
 		return automataFinito;
 	}
