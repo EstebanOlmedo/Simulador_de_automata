@@ -74,7 +74,7 @@ public class ControlDePersistencia
 	public Object recuperarObjeto()
 	{
 		String nombre = teclado.dameUnString("Ingresa el nombre "
-			+ "del archivo en el que deseas guardar");
+			+ "del archivo en el que se encuentra el objeto");
 		String path = teclado.dameUnString("Ingresa la ruta del archivo");
 		return generadorYLector.leerObjetoArchivo(nombre, path);
 	}
