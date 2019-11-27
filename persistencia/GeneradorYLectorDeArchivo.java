@@ -59,4 +59,18 @@ public class GeneradorYLectorDeArchivo
 		lector = new LectorObjectInputStream(path,nombre);
 		return lector.leerObjetoArchivo();
 	}
+
+	public LectorObjectInputStream getLector() {
+		return lector;
+	}
+
+	public EscritorObjectOutputStream getEscritor() {
+		return escritor;
+	}
+	public void mostrarArchivosEnCarpeta(String path)
+	{
+		Archivo carpeta = new Archivo(path);
+		carpeta.mostrarArchivosEnCarpeta(path);
+	}
+	
 }
