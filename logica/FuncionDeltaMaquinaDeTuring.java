@@ -1,8 +1,11 @@
 package logica;
+
+import java.io.Serializable;
+
 /**
  * @author Esteban Olmedo Ramírez
  */
-public class FuncionDeltaMaquinaDeTuring
+public class FuncionDeltaMaquinaDeTuring implements Serializable
 {
 	private int estado;
 	private char loQueDeja;

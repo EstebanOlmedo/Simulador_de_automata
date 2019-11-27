@@ -73,7 +73,7 @@ public class Archivo
 	{
 		File carpeta = new File(cadena);
 		String [] archivos = carpeta.list();
-		if(listado == null  || listado.length == 0)
+		if(archivos == null  || archivos.length == 0)
 		{
 			System.out.println("No hay elementos en el directorio");
 		}
@@ -81,7 +81,7 @@ public class Archivo
 		{
 			for(int x = 0;x < archivos.length; x++)
 			{
-				System.out.println(archivos[i]);
+				System.out.println(archivos[x]);
 			}
 		}
 	}

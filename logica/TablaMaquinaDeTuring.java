@@ -2,8 +2,9 @@ package logica;
 /**
  * @author Esteban Olmedo
  */
+import java.io.Serializable;
 import java.util.ArrayList;
-public class TablaMaquinaDeTuring
+public class TablaMaquinaDeTuring implements Serializable
 {
 	private FuncionDeltaMaquinaDeTuring[][] tabla;
 	private ArrayList<Integer> estadosAceptacion;
