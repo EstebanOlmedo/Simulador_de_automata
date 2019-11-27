@@ -1,5 +1,6 @@
 package control;
 import logica.AutomataFinitoNoDeterminista;
+import logica.MaquinaDeTuring;
 import vista.Teclado;
 /**
  *
@@ -200,8 +201,15 @@ public class ControlDePeticion
 	private void manejarPeticionDeCargado(String peticion)
 	{
 		Object automata = persistencia.recuperarObjeto();
-                generadorAutomata.imprimirTransiciones(automata);
-                generadorAutomata.setAutomata(automata);
+		if(peticion.equals("CMT")){
+			generadorMaquinaDeTuring.
+				setMaquinaDeTuring((MaquinaDeTuring)automata);
+		}
+		else
+		{
+			generadorAutomata.imprimirTransiciones(automata);
+			generadorAutomata.setAutomata(automata);
+		}
 	}
 	public void manejarPeticionDeConversion(String peticion){
 		switch(peticion){

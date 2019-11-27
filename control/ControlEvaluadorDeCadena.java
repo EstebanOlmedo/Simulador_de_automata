@@ -1,6 +1,6 @@
 package control;
 /**
- * @+author esteban
+ * @author esteban
  */
 import logica.EvaluadorDeExpresion;
 import logica.AutomataFinito;

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import logica.NoExisteEstadoException;
 import vista.Teclado;
 import logica.GeneradorDeMaquinaDeTuring;
+import logica.MaquinaDeTuring;
 
 public class ControlGeneradorDeMaquinaDeTuring
 {
@@ -120,5 +121,9 @@ public class ControlGeneradorDeMaquinaDeTuring
 	public GeneradorDeMaquinaDeTuring getGenerador()
 	{
 		return generador;
+	}
+
+	void setMaquinaDeTuring(MaquinaDeTuring maquinaDeTuring){
+		generador.setMaquinaDeTuring(maquinaDeTuring);
 	}
 }
