@@ -92,7 +92,7 @@ public class ControlGeneradorDeTodoTipoDeAutomataFinito
 					throw new NoExisteEstadoException(aceptacion[i]);
 			}
 			catch(NoExisteEstadoException neee){
-				neee.printStackTrace();
+				//neee.printStackTrace();
 				System.out.println("Ingresa un estado válido");
 				i--;
 			}
@@ -132,7 +132,7 @@ public class ControlGeneradorDeTodoTipoDeAutomataFinito
 					throw new NoExisteEstadoException(aceptacion[i]);
 			}
 			catch(NoExisteEstadoException neee){
-				neee.printStackTrace();
+				//neee.printStackTrace();
 				System.out.println("Ingresa un estado válido");
 				i--;
 			}
@@ -163,7 +163,7 @@ public class ControlGeneradorDeTodoTipoDeAutomataFinito
 					estado.add(estadoDestino);
 				}
 				catch(NoExisteEstadoException neeee){
-					neeee.printStackTrace();
+					//neeee.printStackTrace();
 					System.out.println("Ingresa un estado valido");
 					j--;
 				}
@@ -197,7 +197,7 @@ public class ControlGeneradorDeTodoTipoDeAutomataFinito
 							transiciones.add(transicion);
 					}
 					catch(NoExisteEstadoException neeee){
-						neeee.printStackTrace();
+						//neeee.printStackTrace();
 						System.out.println("Ingresa un estado válido");
 					}
 				}
@@ -227,7 +227,7 @@ public class ControlGeneradorDeTodoTipoDeAutomataFinito
 						transiciones.add(transicion);
 				}
 				catch(NoExisteEstadoException neeee){
-					neeee.printStackTrace();
+					//neeee.printStackTrace();
 					System.out.println("Ingresa un estado válido");
 				}
 			}
@@ -239,7 +239,8 @@ public class ControlGeneradorDeTodoTipoDeAutomataFinito
 				(AutomataFinitoNoDeterminista)automata, 
 				adyacenciaEpsilon);
 		}catch(ClassCastException cce){
-			cce.printStackTrace();
+                    System.out.println("Hubo un error");
+                    //cce.printStackTrace();
 		}
 	}
 	public void generarAutomataFinitoAPila()
@@ -297,7 +298,7 @@ public class ControlGeneradorDeTodoTipoDeAutomataFinito
 	void imprimirTransiciones(Object automata)
 	{
 		if(automata instanceof AutomataFinitoDeterminista)
-			System.out.println(((AutomataFinitoDeterminista)automata).getTransiciones()+"hola we");
+			System.out.println(((AutomataFinitoDeterminista)automata).getTransiciones());
 		else if(automata instanceof AutomataFinitoNoDeterminista)
 			System.out.println(((AutomataFinitoNoDeterminista)automata).getTransiciones());
 		else if(automata instanceof AutomataFinitoNoDeterministaEpsilon)

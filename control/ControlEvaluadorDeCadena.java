@@ -70,7 +70,7 @@ public class ControlEvaluadorDeCadena
 		}
 		catch(NullPointerException npe){
 			System.out.println("Aun no has generado el automata -.-");
-			npe.printStackTrace();
+			//npe.printStackTrace();
 		}
 	}
 	public void evaluarCadena(MaquinaDeTuring maquinaDeTuring)
@@ -84,7 +84,7 @@ public class ControlEvaluadorDeCadena
 		}
 		catch(NullPointerException npe){
 			System.out.println("Aun no has generado la maquina -.-");
-			npe.printStackTrace();
+			//npe.printStackTrace();
 		}
 	}
 }
