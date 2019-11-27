@@ -54,7 +54,8 @@ public class Menu
 		System.out.println("\t3.-Automata Finito No Determinista Epsilon");
 		System.out.println("\t4.-Automata Finito A Pila");
 		System.out.println("\t5.-Maquina de Turing");
-          	System.out.println("\t6.-Salir");
+		System.out.println("\t6.-Cargar AutomataFinito");
+        System.out.println("\t7.-Salir");
 	}
 	public void mostrarSubMenuAFD()
 	{
@@ -63,8 +64,7 @@ public class Menu
 		System.out.println("\t2.-Evaluar cadena del automata");
 		System.out.println("\t3.-Convertir AFD a AFP");
 		System.out.println("\t4.-Guardar el Automata Finito Determinista en un archivo");
-		System.out.println("\t5.-Cargar AFD de un archivo");
-		System.out.println("\t6.-Salir");
+		System.out.println("\t5.-Salir");
 	}
 	public void mostrarSubMenuAFND()
 	{
@@ -73,8 +73,7 @@ public class Menu
 		System.out.println("\t2.-Evaluar cadena del automata");
 		System.out.println("\t3.-Convertir AFND a AFD");
 		System.out.println("\t4.-Guardar el Automata Finito No Determinista en un archivo");
-		System.out.println("\t5.-Cargar AFND de un archivo");
-		System.out.println("\t6.-Salir");
+		System.out.println("\t5.-Salir");
 	}
 	public void mostrarSubMenuAFNDE()
 	{
@@ -82,8 +81,7 @@ public class Menu
 		System.out.println("\t1.-Generar Automata Finito No Determinista epsilon");
 		System.out.println("\t2.-Evaluar cadena del automata");
 		System.out.println("\t3.-Guardar el Automata Finito No Determinista Epsilon en un archivo");
-		System.out.println("\t4.-Cargar AFNDE de un archivo");
-		System.out.println("\t5.-Salir");
+		System.out.println("\t4.-Salir");
 	}
 	public void mostrarSubMenuAFP()
 	{
@@ -91,8 +89,7 @@ public class Menu
 		System.out.println("\t1.-Generar Automata Finito a Pila");
 		System.out.println("\t2.-Evaluar cadena del automata");
 		System.out.println("\t3.-Guardar el Automata Finito a Pila en un archivo");
-		System.out.println("\t4.-Cargar AFP de un archivo");
-		System.out.println("\t5.-Salir");
+		System.out.println("\t4.-Salir");
 	}
 	public void mostrarSubMenuMT()
 	{
@@ -117,10 +114,11 @@ public class Menu
 				case 3: elegirOpcionAFNDE(); break;
 				case 4: elegirOpcionAFP(); break;
 				case 5: elegirOpcionMT(); break;
-				case 6: System.out.println("Hasta la próxima :)"); break;
+				case 6: control.manejarPeticion("CA"); break;
+				case 7: System.out.println("Hasta la próxima :)"); break;
 				default: System.out.println("Ingresa una correcta"); break;
 			}
-		}while(opcion != 6);
+		}while(opcion != 7);
 	}
 	public void elegirOpcionAFD()
 	{
@@ -135,11 +133,10 @@ public class Menu
 				case 2: control.manejarPeticion("EAFD"); break;
 				case 3: control.manejarPeticion("CAFD-AFP"); break;
 				case 4: control.manejarPeticion("PAFD"); break;
-				case 5: control.manejarPeticion("CAFD"); break;
-				case 6: break;
+				case 5: break;
 				default: System.out.println("Ingresa una correcta"); break;
 			}
-		}while(opcion != 6);
+		}while(opcion != 5);
 	}
 	public void elegirOpcionAFND()
 	{
@@ -154,11 +151,10 @@ public class Menu
 				case 2: control.manejarPeticion("EAFND"); break;
 				case 3: control.manejarPeticion("CAFND-AFD"); break;
 				case 4: control.manejarPeticion("PAFND"); break;
-				case 5: control.manejarPeticion("CAFND"); break;
-				case 6: break;
+				case 5: break;
 				default: System.out.println("Ingresa una correcta"); break;
 			}
-		}while(opcion != 6);
+		}while(opcion != 5);
 	}
 	public void elegirOpcionAFNDE()
 	{
@@ -172,11 +168,10 @@ public class Menu
 				case 1: control.manejarPeticion("GAFNDE"); break;
 				case 2: control.manejarPeticion("EAFNDE"); break;
 				case 3: control.manejarPeticion("PAFNDE"); break;
-				case 4: control.manejarPeticion("CAFNDE"); break;
-				case 5: break;
+				case 4: break;
 				default: System.out.println("Ingresa una correcta"); break;
 			}
-		}while(opcion != 5);
+		}while(opcion != 4);
 	}
 	public void elegirOpcionAFP()
 	{
@@ -190,11 +185,10 @@ public class Menu
 				case 1: control.manejarPeticion("GAFP"); break;
 				case 2: control.manejarPeticion("EAFP"); break;
 				case 3: control.manejarPeticion("PAFP"); break;
-				case 4: control.manejarPeticion("CAFP"); break;
-				case 5: break;
+				case 4: break;
 				default: System.out.println("Ingresa una correcta"); break;
 			}
-		}while(opcion != 5);
+		}while(opcion != 4);
 	}
 	public void elegirOpcionMT()
 	{
