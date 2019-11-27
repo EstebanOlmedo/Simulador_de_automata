@@ -121,7 +121,7 @@ public class MaquinaDeTuring implements Serializable
 		}
 		catch(ArrayIndexOutOfBoundsException aioobe)
 		{
-			System.out.pritnln("Hubo un error");
+			System.out.println("Hubo un error");
 		}
 		return -1;
 	}

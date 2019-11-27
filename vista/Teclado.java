@@ -33,7 +33,6 @@ public class Teclado{
 			entrada = teclado.nextLine();
 		}
 		catch(NoSuchElementException nsee){
-			nsee.printStackTrace();
 		}
 		return entrada;
 	}
@@ -46,10 +45,8 @@ public class Teclado{
 		}
 		catch(NumberFormatException nfe){
 			System.out.println("Debe ingresar un numero");
-			nfe.printStackTrace();
 		}
 		catch(NoSuchElementException nsee){
-			nsee.printStackTrace();
 		}
 		return entrada;
 	}
@@ -62,10 +59,8 @@ public class Teclado{
 		}
 		catch(NumberFormatException nfe){
 			System.out.println("Debe ingresar un numero");
-			nfe.printStackTrace();
 		}
 		catch(NoSuchElementException nsee){
-			nsee.printStackTrace();
 		}
 		return entrada;
 	}
@@ -78,10 +73,8 @@ public class Teclado{
 		}
 		catch(NumberFormatException nfe){
 			System.out.println("Debe ingresar un numero");
-			nfe.printStackTrace();
 		}
 		catch(NoSuchElementException nsee){
-			nsee.printStackTrace();
 		}
 		return entrada;
 	}
@@ -94,10 +87,8 @@ public class Teclado{
 		}
 		catch(NumberFormatException nfe){
 			System.out.println("Debe ingresar un numero");
-			nfe.printStackTrace();
 		}
 		catch(NoSuchElementException nsee){
-			nsee.printStackTrace();
 		}
 		return entrada;
 	}
@@ -110,10 +101,8 @@ public class Teclado{
 		}
 		catch(NumberFormatException nfe){
 			System.out.println("Debe ingresar un numero");
-			nfe.printStackTrace();
 		}
 		catch(NoSuchElementException nsee){
-			nsee.printStackTrace();
 		}
 		return entrada;
 	}
@@ -126,10 +115,8 @@ public class Teclado{
 		}
 		catch(NumberFormatException nfe){
 			System.out.println("Debe ingresar un numero");
-			nfe.printStackTrace();
 		}
 		catch(NoSuchElementException nsee){
-			nsee.printStackTrace();
 		}
 		return entrada;
 	}
@@ -141,7 +128,6 @@ public class Teclado{
 			entrada = Boolean.parseBoolean(teclado.nextLine());
 		}
 		catch(NoSuchElementException nsee){
-			nsee.printStackTrace();
 		}
 		return entrada;
 	}
@@ -153,7 +139,6 @@ public class Teclado{
 			entrada = teclado.nextLine().charAt(0);
 		}
 		catch(NoSuchElementException nsee){
-			nsee.printStackTrace();
 		}
 		return entrada;
 	}

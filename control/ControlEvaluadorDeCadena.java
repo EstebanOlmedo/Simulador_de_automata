@@ -1,10 +1,13 @@
 package control;
 /**
- *
- * @author esteban
+ * @+author esteban
  */
 import logica.EvaluadorDeExpresion;
 import logica.AutomataFinito;
+import logica.AutomataFinitoAPila;
+import logica.AutomataFinitoDeterminista;
+import logica.AutomataFinitoNoDeterminista;
+import logica.AutomataFinitoNoDeterministaEpsilon;
 import logica.MaquinaDeTuring;
 import vista.Teclado;
 
@@ -62,6 +65,8 @@ public class ControlEvaluadorDeCadena
 	public void evaluarCadena(AutomataFinito automata)
 	{
 		try{
+			System.out.println(mostrarConfiguracion((Object)automata));
+			System.out.println(automata.getDescripcion());
 			String cadena = teclado.dameUnString("Ingresa la cadena que vas a evaluar");
 			if(evaluador.evaluarCadena(cadena, automata))
 				System.out.println("La cadena pertenece al lenguaje");
@@ -70,12 +75,24 @@ public class ControlEvaluadorDeCadena
 		}
 		catch(NullPointerException npe){
 			System.out.println("Aun no has generado el automata -.-");
-			//npe.printStackTrace();
 		}
+	}
+	private String mostrarConfiguracion(Object obj)
+	{
+		if(obj instanceof AutomataFinitoDeterminista)
+			return ((AutomataFinitoDeterminista)obj).getTransiciones();
+		else if(obj instanceof AutomataFinitoNoDeterminista)
+			return ((AutomataFinitoNoDeterminista)obj).getTransiciones();
+		else if(obj instanceof AutomataFinitoNoDeterministaEpsilon)
+			return ((AutomataFinitoNoDeterministaEpsilon)obj).getTransiciones();
+		else if(obj instanceof AutomataFinitoAPila)
+			return ((AutomataFinitoAPila)obj).getTransiciones();
+		else return "No es autómata";
 	}
 	public void evaluarCadena(MaquinaDeTuring maquinaDeTuring)
 	{
 		try{
+			System.out.println(maquinaDeTuring.getDescripcion());
 			String cadena = teclado.dameUnString("Ingresa la cadena que vas a evaluar");
 			if(evaluador.evaluarCadena(cadena, maquinaDeTuring))
 				System.out.println("La cadena pertenece al lenguaje");
@@ -84,7 +101,6 @@ public class ControlEvaluadorDeCadena
 		}
 		catch(NullPointerException npe){
 			System.out.println("Aun no has generado la maquina -.-");
-			//npe.printStackTrace();
 		}
 	}
 }

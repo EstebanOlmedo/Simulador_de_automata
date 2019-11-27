@@ -79,7 +79,7 @@ public class Menu
 	public void mostrarSubMenuAFNDE()
 	{
 		System.out.println("Menu AFND");
-		System.out.println("\t1.-Generar Automata Finito No Determinista");
+		System.out.println("\t1.-Generar Automata Finito No Determinista epsilon");
 		System.out.println("\t2.-Evaluar cadena del automata");
 		System.out.println("\t3.-Guardar el Automata Finito No Determinista Epsilon en un archivo");
 		System.out.println("\t4.-Cargar AFNDE de un archivo");

@@ -200,27 +200,8 @@ public class ControlDePeticion
 	private void manejarPeticionDeCargado(String peticion)
 	{
 		Object automata = persistencia.recuperarObjeto();
-                generadorAutomata.imprimirTransiciones(automata
-                
-                );
+                generadorAutomata.imprimirTransiciones(automata);
                 generadorAutomata.setAutomata(automata);
-//		switch(peticion)
-//		{
-//			case "CAFD": 
-//				generadorAutomata.setAutomata(automata);
-//				break;
-//			case "CAFND":
-//				generadorAutomata.setAutomata(automata);
-//				break;
-//			case "CAFNDE":
-//				generadorAutomata.setAutomata(automata);
-//				break;
-//			case "CAFP":
-//				generadorAutomata.setAutomata(automata);
-//				break;
-//			case "CMT": 
-//				break;
-//		}
 	}
 	public void manejarPeticionDeConversion(String peticion){
 		switch(peticion){
