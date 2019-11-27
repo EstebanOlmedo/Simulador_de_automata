@@ -69,4 +69,21 @@ public class Archivo
 		return file;
 	}
 
+	public void mostrarArchivosEnCarpeta(String cadena)
+	{
+		File carpeta = new File(cadena);
+		String [] archivos = carpeta.list();
+		if(listado == null  || listado.length == 0)
+		{
+			System.out.println("No hay elementos en el directorio");
+		}
+		else
+		{
+			for(int x = 0;x < archivos.length; x++)
+			{
+				System.out.println(archivos[i]);
+			}
+		}
+	}
+
 }
