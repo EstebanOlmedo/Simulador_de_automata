@@ -45,6 +45,7 @@ public class ControlConversorAutomata
 	{
 		try{
 			conversor.convertirAFNaAFD(automata);
+			System.out.println("Se ha convertido el automata con exito");
 		}
 		catch(NullPointerException npe){
 			System.out.println("Aun no has generado el automata .-.");
@@ -56,6 +57,7 @@ public class ControlConversorAutomata
 	{
 		try{
 			conversor.convertirAFDaAFP(automata);
+			System.out.println("Se ha convertido el automata con exito");
 		}
 		catch(NullPointerException npe){
 			System.out.println("Aun no has generado el automata .-.");
