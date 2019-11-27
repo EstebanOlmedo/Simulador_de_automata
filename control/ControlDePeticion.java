@@ -97,10 +97,10 @@ public class ControlDePeticion
 			case "PAFNDE": manejarPeticionDePersistencia(peticion); break;
 			case "PAFP": manejarPeticionDePersistencia(peticion); break;
 			case "PMT": manejarPeticionDePersistencia(peticion); break;
-			case "CAFD": manejarPeticionDeCargado(peticion); break;
-			case "CAFND": manejarPeticionDeCargado(peticion); break;
-			case "CAFNDE": manejarPeticionDeCargado(peticion); break;
-			case "CAFP": manejarPeticionDeCargado(peticion); break;
+			//case "CAFD": manejarPeticionDeCargado(peticion); break;
+			//case "CAFND": manejarPeticionDeCargado(peticion); break;
+			//case "CAFNDE": manejarPeticionDeCargado(peticion); break;
+			case "CA": manejarPeticionDeCargado(peticion); break;
 			case "CMT": manejarPeticionDeCargado(peticion); break;
 			case "CAFND-AFD": manejarPeticionDeConversion(peticion); break;
 			case "CAFD-AFP": manejarPeticionDeConversion(peticion); break;
