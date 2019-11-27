@@ -73,12 +73,10 @@ public class ControlDePersistencia
 	}
 	public Object recuperarObjeto()
 	{
+		String path = teclado.dameUnString("Ingresa la ruta del archivo");
+		generadorYLector.mostrarArchivosEnCarpeta(path);
 		String nombre = teclado.dameUnString("Ingresa el nombre "
 			+ "del archivo en el que se encuentra el objeto");
-		String path = teclado.dameUnString("Ingresa la ruta del archivo");
-		Object objeto = generadorYLector.leerObjetoArchivo(nombre,path);
-		if(objeto == null) System.out.println("No se pude cargar el objeto");
-		else System.out.println("Se cargó el objeto exitosamente\nTrancisiones del objeto cargado");
-		return objeto;
+		return generadorYLector.leerObjetoArchivo(nombre, path);
 	}
 }

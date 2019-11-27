@@ -20,7 +20,10 @@ public class Archivo
 		this.nombre = nombre;
 		this.file = file;
 	}
-
+	public Archivo(String path)
+	{
+		this.path = path;
+	}
 	public Archivo(Archivo archivo)
 	{
 		this(archivo.path, archivo.nombre,archivo.file);
@@ -81,7 +84,9 @@ public class Archivo
 		{
 			for(int x = 0;x < archivos.length; x++)
 			{
-				System.out.println(archivos[x]);
+				File archivo = new File(cadena + archivos[x]);
+				if(archivo.isFile())
+					System.out.println(archivos[x]);
 			}
 		}
 	}
