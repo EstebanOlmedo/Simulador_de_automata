@@ -142,7 +142,7 @@ public class ConversorDeAutomata{
  			for(Integer i:entry.getValue()){
  				if(automata.isAceptacion(i)){
  					if(aceptacion.lastIndexOf(i) == -1){
- 						aceptacion.add(i);
+ 						aceptacion.add(entry.getKey());
  					}
  				}
  			}
