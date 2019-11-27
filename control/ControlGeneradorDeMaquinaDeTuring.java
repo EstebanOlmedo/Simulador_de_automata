@@ -81,7 +81,8 @@ public class ControlGeneradorDeMaquinaDeTuring
 			}
 			catch(NoExisteEstadoException neee)
 			{
-				System.out.println(neee);
+                            System.out.println("No existe el estado");
+				//System.out.println(neee);
 			}
 		}
 		generador.crearEstructuraMaquina(new String(alfabeto), numeroDeEstados, estadosAceptacion, descripcion);
@@ -111,7 +112,7 @@ public class ControlGeneradorDeMaquinaDeTuring
 						generador.aniadirTransicionATabla(i, j, -1, '-', '-');
 				}catch(NoExisteEstadoException neee){
 					j--;
-					neee.printStackTrace();
+					//neee.printStackTrace();
 				}
 			}
 		}

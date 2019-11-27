@@ -48,7 +48,7 @@ public class ControlConversorAutomata
 		}
 		catch(NullPointerException npe){
 			System.out.println("Aun no has generado el automata .-.");
-			npe.printStackTrace();
+			//npe.printStackTrace();
 		}
 		return conversor.getAutomataFinito();
 	}
@@ -59,7 +59,7 @@ public class ControlConversorAutomata
 		}
 		catch(NullPointerException npe){
 			System.out.println("Aun no has generado el automata .-.");
-			npe.printStackTrace();
+			//npe.printStackTrace();
 		}
 		return conversor.getAutomataFinito();
 	}
