@@ -86,11 +86,9 @@ public class AutomataFinitoAPila extends AutomataFinito implements IPila
                 }
                 catch(IndexOutOfBoundsException ioobe){
                     System.out.println("Ocurrió un problema al evaluar la cadena");
-                    ioobe.printStackTrace();
                 }
                 catch(EmptyStackException ese){
                     System.out.println("Ocurrio un problema con la pila");
-                    ese.printStackTrace();
                 }
                 return false;
             }
@@ -130,11 +128,9 @@ public class AutomataFinitoAPila extends AutomataFinito implements IPila
             }
             catch(IndexOutOfBoundsException ioobe){
                 System.out.println("Ocurrió un problema al evaluar la cadena");
-                ioobe.printStackTrace();
             }
             catch(EmptyStackException ese){
                 System.out.println("Ha currido un problema con la pila");
-                ese.printStackTrace();
             }   
             return false;
         }

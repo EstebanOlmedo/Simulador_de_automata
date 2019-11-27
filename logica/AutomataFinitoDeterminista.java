@@ -117,7 +117,6 @@ public class AutomataFinitoDeterminista extends AutomataFinito
 			return isAceptacion(estado);
 		}catch(IndexOutOfBoundsException ioobe){
 			System.out.println("Ocurrió un error en el proceso de evaluación");
-			ioobe.printStackTrace();
 		}
 		return false;
 	}

@@ -81,7 +81,6 @@ public class EvaluadorDeExpresion{
 		{
 			System.out.println("No se ha podido evaluar, " + 
 					"existe un error con el autómata");
-			npe.printStackTrace();
 		}
 		return false;
 	}
@@ -100,7 +99,6 @@ public class EvaluadorDeExpresion{
 		{
 			System.out.println("No se ha podido evaluar correctamente, " + 
 					"hay un error con la máquina de Turing");
-			npe.printStackTrace();
 		}
 		return false;
 	}

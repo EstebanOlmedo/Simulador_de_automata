@@ -49,19 +49,6 @@ public abstract class GeneradorDeAutomataFinito
 		String descripcion,
 		AutomataFinito automata
 	);
-	/*
-	public void crearAutomataFinito(int numeroDeEstados, char[] alfabeto, 
-			int[] aceptacion, String descripcion)
-	{
-		AutomataFinito automata = new AutomataFinito();
-		automata.setNumeroDeEstados(numeroDeEstados);
-		automata.setAlfabeto(alfabeto);
-		automata.setEstadosAceptacion(aceptacion);
-		automata.setDescripcion(descripcion);
-		automata.setMapa();
-		automataFinito = automata;
-	}
-	*/
 	public AutomataFinito getAutomataFinito(){
 		return automataFinito;
 	}

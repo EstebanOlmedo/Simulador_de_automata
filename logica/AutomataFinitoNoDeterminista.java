@@ -103,7 +103,6 @@ public class AutomataFinitoNoDeterminista extends AutomataFinito
 		}catch(IndexOutOfBoundsException ioobe)
 		{
 			System.out.println("Ocurrió un error");
-			ioobe.printStackTrace();
 		}
 		return null;
 	}
@@ -134,12 +133,10 @@ public class AutomataFinitoNoDeterminista extends AutomataFinito
 		catch(NullPointerException npe)
 		{
 			System.out.println("Ha ocurrido un error al evaluar");
-			npe.printStackTrace();
 		}
 		catch(IndexOutOfBoundsException ioobe)
 		{
 			System.out.println("Ha ocurrido un error al evaluar");
-			ioobe.printStackTrace();
 		}
 		return false;
 	}

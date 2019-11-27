@@ -64,11 +64,9 @@ public class ConversorDeAutomata{
 		}
 		catch(NullPointerException npe){
 			System.out.println("Ocurrió un problema al convertir el automata");
-			npe.printStackTrace();
 		}
 		catch(IndexOutOfBoundsException ioobe){
 			System.out.println("Ocurrió un problema al convertir el automata");
-			ioobe.printStackTrace();
 		}
 	}
 	public ArrayList<ArrayList<ArrayList<Delta>>> crearTabla(AutomataFinitoDeterminista automata){
@@ -103,11 +101,9 @@ public class ConversorDeAutomata{
 		}
 		catch(NullPointerException npe){
 			System.out.println("Ocurrió un problema al convertir el automata");
-			npe.printStackTrace();
 		}
 		catch(IndexOutOfBoundsException ioobe){
 			System.out.println("Ocurrió un problema al convertir el automata");
-			ioobe.printStackTrace();
 		}
  	}
  	public ArrayList<ArrayList<Integer>> crearTabla(AutomataFinitoNoDeterminista automata,TreeMap<Integer,ArrayList<Integer>> mapa){

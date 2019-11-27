@@ -121,7 +121,7 @@ public class MaquinaDeTuring implements Serializable
 		}
 		catch(ArrayIndexOutOfBoundsException aioobe)
 		{
-			aioobe.printStackTrace();
+			System.out.pritnln("Hubo un error");
 		}
 		return -1;
 	}
@@ -159,11 +159,10 @@ public class MaquinaDeTuring implements Serializable
 		catch(ArrayIndexOutOfBoundsException aioobe)
 		{
 			System.out.println("Ocurrió un error al intentar modificar la cinta");
-			aioobe.printStackTrace();
 		}
 		catch(NullPointerException npe)
 		{
-			npe.printStackTrace();
+			System.out.println("Hubo un error");
 		}
 		return false;
 	}
@@ -245,11 +244,11 @@ public class MaquinaDeTuring implements Serializable
 		}
 		catch(ArrayIndexOutOfBoundsException aioobe)
 		{
-			aioobe.printStackTrace();
+			System.out.println("Hubo un error");
 		}
 		catch(NullPointerException npe)
 		{
-			npe.printStackTrace();
+			System.out.println("Hubo un error");
 		}
 		catch(NoExisteEnAlfabetoException neeae)
 		{

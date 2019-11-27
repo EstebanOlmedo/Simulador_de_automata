@@ -71,10 +71,7 @@ public class TablaMaquinaDeTuring
 		{
 			tabla[numeroEstado][simbolo] = transicion;
 		}catch(IndexOutOfBoundsException ioobe){
-			System.out.println("Número de estado:" + numeroEstado + "\n" +
-					"Símbolo: " + simbolo + "\n" + 
-					"Transición: " + transicion);
-			ioobe.printStackTrace();
+			System.out.println("Hubo un error al ingresar el estado");
 		}
 	}
 	public void setEstado(int numeroEstado, int simbolo,

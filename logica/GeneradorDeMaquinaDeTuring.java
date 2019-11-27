@@ -85,7 +85,6 @@ public class GeneradorDeMaquinaDeTuring
 		catch(IndexOutOfBoundsException aoobe)
 		{
 			System.out.println("Ha ocurrido un error");
-			aoobe.printStackTrace();
 		}
 		catch(NoExisteEnAlfabetoException neea){
 			System.out.println(neea);
