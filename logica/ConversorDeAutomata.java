@@ -141,9 +141,7 @@ public class ConversorDeAutomata{
  		for(Map.Entry<Integer,ArrayList<Integer>> entry:mapa.entrySet()){
  			for(Integer i:entry.getValue()){
  				if(automata.isAceptacion(i)){
- 					if(aceptacion.lastIndexOf(i) == -1){
  						aceptacion.add(entry.getKey());
- 					}
  				}
  			}
  		}
