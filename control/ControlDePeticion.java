@@ -96,11 +96,6 @@ public class ControlDePeticion
 			case "PAFNDE": manejarPeticionDePersistencia(peticion); break;
 			case "PAFP": manejarPeticionDePersistencia(peticion); break;
 			case "PMT": manejarPeticionDePersistencia(peticion); break;
-			//case "CAFD": manejarPeticionDeCargado(peticion); break;
-			//case "CAFND": manejarPeticionDeCargado(peticion); break;
-			//case "CAFNDE": manejarPeticionDeCargado(peticion); break;
-			//case "CA": manejarPeticionDeCargado(peticion,file); break;
-			//case "CMT": manejarPeticionDeCargado(peticion,file); break;
 			case "CAFND-AFD": manejarPeticionDeConversion(peticion); break;
 			case "CAFD-AFP": manejarPeticionDeConversion(peticion); break;
 		}
@@ -196,7 +191,41 @@ public class ControlDePeticion
 				break;
 		}
 	}
-        
+        public void manejarPeticionDePersistencia(String peticion, File archivo)
+	{
+		switch(peticion)
+		{
+			case "PAFD": 
+				persistencia.guardarUnObjeto(
+				generadorAutomata.
+					getGenerador().
+					getAutomataFinitoDeterminista(), archivo);
+			break;
+			case "PAFND":
+				persistencia.guardarUnObjeto(
+				generadorAutomata.
+					getGenerador().
+					getAutomataFinitoNoDeterminista(), archivo);
+				break;
+			case "PAFNDE":
+				persistencia.guardarUnObjeto(
+				generadorAutomata.
+					getGenerador().
+					getAutomataFinitoNoDeterministaEpsilon(), archivo);
+				break;
+			case "PAFP":
+				persistencia.guardarUnObjeto(
+				generadorAutomata.
+					getGenerador().
+					getAutomataFinitoAPila(), archivo);
+				break;
+			case "PMT": 
+				persistencia.guardarUnObjeto(
+				generadorMaquinaDeTuring.getGenerador().
+					getMaquinaDeTuring(), archivo);
+				break;
+		}
+	}
 	public void manejarPeticionDeCargado(String peticion,File file)
 	{
 		Object automata = persistencia.recuperarObjeto(file);

@@ -103,7 +103,7 @@ public class ControlGeneradorDeTodoTipoDeAutomataFinito
 		numeroDeEstados = 0;
 		String mensajeError = "";
 		while(numeroDeEstados <= 0){
-			numeroDeEstados = obtenerInt(mensajeError+"Ingresa la cadinalidad del conjunto de estados","Estados");
+			numeroDeEstados = obtenerInt(mensajeError+"Ingresa la cardinalidad del conjunto de estados","Estados");
 			if(numeroDeEstados == 0)
 				mensajeError = "Debe haber al menos un estado\n";
 			else
@@ -131,7 +131,7 @@ public class ControlGeneradorDeTodoTipoDeAutomataFinito
 		while(cardinalidad <= 0){
 			cardinalidad = obtenerInt(mensajeError+"Ingresa la cadinalidad del alfabeto","Alfabeto");
 			if(cardinalidad == 0)
-				mensajeError = "Debe haber al menos un simbolo en el alfabeto\n";
+				mensajeError = "Debe haber al menos un símbolo en el alfabeto\n";
 			else
 				mensajeError = "";
 		}
@@ -172,7 +172,7 @@ public class ControlGeneradorDeTodoTipoDeAutomataFinito
 				}
 				catch(NoExisteEstadoException neeee){
 					//neeee.printStackTrace();
-					mensajeError = "Ingresa un estado valido\n";
+					mensajeError = "Ingresa un estado válido\n";
 					j--;
 				}
 			}

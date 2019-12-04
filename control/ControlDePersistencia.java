@@ -72,6 +72,11 @@ public class ControlDePersistencia
 			System.out.println("Hubo un error");
 		}
 	}
+	public void guardarUnObjeto(Object obj, File archivo)
+	{
+		generadorYLector.escribirObjetoArchivo(obj, archivo.getName(), 
+			archivo.getAbsolutePath());
+	}
 	public Object recuperarObjeto(File file)
 	{
             return generadorYLector.leerObjetoArchivo(file.getAbsolutePath());

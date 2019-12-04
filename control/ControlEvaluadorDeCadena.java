@@ -86,7 +86,6 @@ public class ControlEvaluadorDeCadena
 				JOptionPane.showMessageDialog(null, "La cadena no pertenece al lenguaje", "Resultado", JOptionPane.INFORMATION_MESSAGE);
 		}
 		catch(NullPointerException npe){
-			//System.out.println("Aun no has generado la maquina -.-");
 			JOptionPane.showMessageDialog(null, "Aun no has generado la maquina", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
