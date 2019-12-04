@@ -35,6 +35,12 @@ public class AutomataFinitoNoDeterministaEpsilonPanel extends JPanel implements 
         iniciarPaneles();
         iniciarBotones();
         iniciarLabels();
+        iniciarDibujador();
+    }
+    
+    private void iniciarDibujador()
+    {
+        
     }
     
     private void iniciarLabels()

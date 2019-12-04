@@ -34,8 +34,8 @@ public class MiJFrame extends JFrame{
         panelPolimorfico.add(mt,"mt");
         //this.setSize(ancho,alto);
         this.add(panelPolimorfico);
-         this.setResizable(false);
-        this.setSize(1200, 1000);
+        this.setResizable(false);
+        this.setSize(800,600);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -52,8 +52,6 @@ public class MiJFrame extends JFrame{
         afp = new AutomataFinitoAPilaPanel(panelPolimorfico,peticiones);
         mt = new MaquinaDeTuringPanel(panelPolimorfico,peticiones);
     }
-    
-    
     
 }
 

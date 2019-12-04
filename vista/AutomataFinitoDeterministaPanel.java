@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import control.ControlDePeticion;
+import java.awt.Color;
 import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.JFileChooser;
@@ -41,11 +42,11 @@ public class AutomataFinitoDeterministaPanel extends JPanel implements ActionLis
     private void iniciarLabels()
     {
         tipo = new JLabel("AUTOMATA FINITO DETERMINISTA", (int) CENTER_ALIGNMENT);
-        tipo.setFont(new Font("",Font.BOLD,30));
-        tipo.setBounds(0, 0, 870, 50);
+        tipo.setFont(new Font("",Font.BOLD,20));
+        tipo.setBounds(0, 0, 570, 30);
         descripcion = new JTextArea();
-        descripcion.setFont(new Font("",Font.BOLD,20));
-        descripcion.setBounds(10, 70, 850, 100);
+        descripcion.setFont(new Font("",Font.BOLD,10));
+        descripcion.setBounds(10, 40, 550, 50);
         descripcion.setOpaque(false);
         descripcion.setLineWrap(true);
         descripcion.setEditable(false);
@@ -62,10 +63,10 @@ public class AutomataFinitoDeterministaPanel extends JPanel implements ActionLis
             paneles[i].setLayout(null);
             this.add(paneles[i]);
         }
-        paneles[0].setBounds(890, 30, 300, 1000);//botones
-        paneles[1].setBounds(10, 770, 870,190 );//lenguaje
-        paneles[2].setBounds(10, 220, 870, 540);//dibujo
-        paneles[3].setBounds(10, 10, 870, 200);//descripcion
+        paneles[0].setBounds(590, 60, 200, 500);//botones
+        paneles[1].setBounds(10, 480, 570,80);//lenguaje
+        paneles[2].setBounds(10, 120, 570, 350);//dibujo
+        paneles[3].setBounds(10, 10, 570, 100);//descripcion
     }
     
     public void iniciarBotones()
@@ -75,16 +76,16 @@ public class AutomataFinitoDeterministaPanel extends JPanel implements ActionLis
         {
             botones[x] = new JButton();
             botones[x].setBorder(BorderFactory.createRaisedBevelBorder());
-            botones[x].setFont(new Font("",Font.BOLD,17));
+            botones[x].setFont(new Font("",Font.BOLD,10));
             botones[x].addActionListener(this);
             paneles[0].add(botones[x]);
         }
-        botones[0].setBounds(0,10,300,140);
-        botones[1].setBounds(0,160,300,140);
-        botones[2].setBounds(0,310,300,140);
-        botones[3].setBounds(0,460,300,140);
-        botones[4].setBounds(0,610,300,140);
-        botones[5].setBounds(0,760,300,140);
+        botones[0].setBounds(0,10,200,50);
+        botones[1].setBounds(0,80,200,50);
+        botones[2].setBounds(0,150,200,50);
+        botones[3].setBounds(0,220,200,50);
+        botones[4].setBounds(0,290,200,50);
+        botones[5].setBounds(0,360,200,50);
         botones[0].setText("Generar AF Determinista");
         botones[1].setText("Evaluar cadena");
         botones[2].setText("Convertir AFD a AFP");

@@ -36,7 +36,7 @@ public class InicioPanel extends JPanel implements ActionListener{
         this.setLayout(new FlowLayout((int) CENTER_ALIGNMENT, 50, 20));
         for(int x = 0; x < botones.length; x++)
             this.add(botones[x]);
-        this.setSize(1200,1000);
+        this.setSize(800,600);
     }
     
     public void hacerVisible(boolean visible)
@@ -48,10 +48,10 @@ public class InicioPanel extends JPanel implements ActionListener{
     {
         for(int x = 0; x < botones.length; x++)
         {
-            botones[x].setFont(new Font("TimesRoman",Font.BOLD,20));
+            botones[x].setFont(new Font("",Font.BOLD,14));
             botones[x].setBorder(BorderFactory.createRaisedBevelBorder());
             botones[x].addActionListener(this);
-            botones[x].setPreferredSize(new Dimension(500,300));
+            botones[x].setPreferredSize(new Dimension(330,150));
         }
 
     }
