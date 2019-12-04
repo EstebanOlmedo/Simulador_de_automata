@@ -2,6 +2,7 @@ package control;
 import logica.AutomataFinitoNoDeterminista;
 import logica.MaquinaDeTuring;
 import vista.Teclado;
+import logica.AutomataFinito;
 /**
  *
  * @author esteban
@@ -14,19 +15,20 @@ public class ControlDePeticion
 	private ControlEvaluadorDeCadena evaluadorCadena;
 	private ControlConversorAutomata conversor;
 	private Teclado teclado;
-	
+        
 	public ControlDePeticion()
 	{
 		persistencia = new ControlDePersistencia();
 		teclado = new Teclado();
 		generadorMaquinaDeTuring = 
-			new ControlGeneradorDeMaquinaDeTuring(teclado);
+			new ControlGeneradorDeMaquinaDeTuring();
 		generadorAutomata = 
-			new ControlGeneradorDeTodoTipoDeAutomataFinito(teclado);
+			new ControlGeneradorDeTodoTipoDeAutomataFinito();
 		evaluadorCadena = 
 			new ControlEvaluadorDeCadena(teclado);
 		conversor = new ControlConversorAutomata();
 	}
+        
 	public ControlDePeticion(
 		ControlDePersistencia persistencia,
 		ControlGeneradorDeMaquinaDeTuring generadorMaquinaDeTuring,
@@ -43,12 +45,14 @@ public class ControlDePeticion
 		this.conversor = conversor;
 		this.teclado = teclado;
 	}
+        
 	public ControlDePeticion(ControlDePeticion control)
 	{
 		this(control.persistencia, control.generadorMaquinaDeTuring,
 			control.generadorAutomata, control.evaluadorCadena,control.conversor,
 			control.teclado);
 	}
+        
 	public void destruir()
 	{
 		if(persistencia != null)
@@ -228,4 +232,24 @@ public class ControlDePeticion
 				);
 		}
 	}
+        
+        public AutomataFinito getAutomataFinitoDeterminista()
+        {
+            return generadorAutomata.getAutomataFinitoDeterminista();
+        }
+        
+        public AutomataFinito getAutomataFinitoNoDeterminista()
+        {
+            return generadorAutomata.getAutomataFinitoNoDeterminista();
+        }
+        
+        public AutomataFinito getAutomataFinitoNoDeterministaEpsilon()
+        {
+            return generadorAutomata.getAutomataFinitoNoDeterministaEpsilon();
+        }
+        
+        public AutomataFinito getAutomataFinitoAPila()
+        {
+            return generadorAutomata.getAutomataFinitoAPila();
+        }
 }

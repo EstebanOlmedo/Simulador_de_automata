@@ -318,4 +318,25 @@ public class ControlGeneradorDeTodoTipoDeAutomataFinito
 		else if(automata instanceof AutomataFinitoAPila)
 			System.out.println(((AutomataFinitoAPila)automata).getTransiciones());
 	}
+        
+        public AutomataFinito getAutomataFinitoDeterminista()
+        {
+            return generador.getAutomataFinitoDeterminista();
+        }
+        
+        public AutomataFinito getAutomataFinitoNoDeterminista()
+        {
+            return generador.getAutomataFinitoNoDeterminista();
+        }
+        
+        public AutomataFinito getAutomataFinitoNoDeterministaEpsilon()
+        {
+            return generador.getAutomataFinitoNoDeterministaEpsilon();
+        } 
+        
+        public AutomataFinito getAutomataFinitoAPila()
+        {
+            return generador.getAutomataFinitoAPila();
+        }
+               
 }
