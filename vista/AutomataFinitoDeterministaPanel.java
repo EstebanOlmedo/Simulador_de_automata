@@ -13,6 +13,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import control.ControlDibujarDiagrama;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AutomataFinitoDeterministaPanel extends JPanel implements ActionListener{
     
@@ -73,7 +75,7 @@ public class AutomataFinitoDeterministaPanel extends JPanel implements ActionLis
     
     public void iniciarBotones()
     {
-        botones = new JButton[6];
+        botones = new JButton[7];
         for(int x = 0; x < botones.length; x++)
         {
             botones[x] = new JButton();
@@ -88,12 +90,14 @@ public class AutomataFinitoDeterministaPanel extends JPanel implements ActionLis
         botones[3].setBounds(0,220,200,50);
         botones[4].setBounds(0,290,200,50);
         botones[5].setBounds(0,360,200,50);
+	botones[6].setBounds(0,430,200,50);
         botones[0].setText("Generar AF Determinista");
         botones[1].setText("Evaluar cadena");
         botones[2].setText("Convertir AFD a AFP");
         botones[3].setText("Guardar el AFD en un archivo");
         botones[4].setText("Cargar AFD de un archivo");
         botones[5].setText("Regresar al menu principal");
+	botones[6].setText("Mostrar diagrama");
     }
 
     @Override
@@ -119,16 +123,41 @@ public class AutomataFinitoDeterministaPanel extends JPanel implements ActionLis
         }
         else if(ae.getSource() == botones[3])
         {
-            control.manejarPeticion("PAFD");
+            //control.manejarPeticion("PAFD");
+		panelPolimorfico.add(visualizador, "archivos");
+		((CardLayout)panelPolimorfico.getLayout()).show(panelPolimorfico, "archivos");
         }
         else if(ae.getSource() == botones[4])
         {
             panelPolimorfico.add(visualizador,"archivos");
             ((CardLayout) panelPolimorfico.getLayout()).show(panelPolimorfico,"archivos");
+	    if(control.getAutomataFinitoDeterminista() != null)
+		{
+			ControlDibujarDiagrama cd = new ControlDibujarDiagrama(control.getAutomataFinitoDeterminista(),null, new DibujadorDeDiagrama());
+			cd.dibujarAutomata();
+			cd.getDibujador().setBounds(0, 0, 570, 350);
+			descripcion.setText(control.getAutomataFinitoDeterminista().getDescripcion());
+			paneles[2].removeAll();
+			paneles[2].add(cd.getDibujador());
+			updateUI();
+		}
         }
         else if(ae.getSource() == botones[5])
         {
             ((CardLayout) panelPolimorfico.getLayout()).show(panelPolimorfico, "inicio");
         }
+	else if(ae.getSource() == botones[6])
+	{
+		if(control.getAutomataFinitoDeterminista() != null)
+		{
+			ControlDibujarDiagrama cd = new ControlDibujarDiagrama(control.getAutomataFinitoDeterminista(),null, new DibujadorDeDiagrama());
+			cd.dibujarAutomata();
+			cd.getDibujador().setBounds(0, 0, 570, 350);
+			descripcion.setText(control.getAutomataFinitoDeterminista().getDescripcion());
+			paneles[2].removeAll();
+			paneles[2].add(cd.getDibujador());
+			updateUI();
+		}
+	}
     }
 }

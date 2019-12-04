@@ -109,7 +109,7 @@ public class VisualizadorDeArchivosPanel extends JPanel implements ActionListene
             }
             else
             {
-                JOptionPane.showConfirmDialog(null,"No haz cargado ningun archivo",null,JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showConfirmDialog(null,"No has cargado ningun archivo",null,JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE);
             }
             ((CardLayout) panelPolimorfico.getLayout()).show(panelPolimorfico,peticion);
         }
@@ -117,7 +117,20 @@ public class VisualizadorDeArchivosPanel extends JPanel implements ActionListene
         {
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-            fileChooser.showSaveDialog(this);
+            int opc = fileChooser.showSaveDialog(null);
+	    if(opc == JFileChooser.APPROVE_OPTION)
+	    {
+		    archivo = fileChooser.getSelectedFile();
+		    switch(peticion)
+		    {
+			    case "afd": control.manejarPeticionDePersistencia("PAFD", archivo); break;
+			    case "afn": control.manejarPeticionDePersistencia("PAFN", archivo); break;
+			    case "afne": control.manejarPeticionDePersistencia("PAFNDE", archivo); break;
+			    case "afp": control.manejarPeticionDePersistencia("PAFP", archivo); break;
+			    case "mt": control.manejarPeticionDePersistencia("PMT", archivo); break;
+		    }
+	    }
+	    //archivo = fileChooser.getSelectedFile();
         }
     }
     

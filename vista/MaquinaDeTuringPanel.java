@@ -108,11 +108,10 @@ public class MaquinaDeTuringPanel extends JPanel implements ActionListener{
         }
         else if(ae.getSource() == botones[1])
         {
-            
+		control.manejarPeticion("EMT");
         }
         else if(ae.getSource() == botones[2])
         {
-            
         }
         else if(ae.getSource() == botones[3])
         {
