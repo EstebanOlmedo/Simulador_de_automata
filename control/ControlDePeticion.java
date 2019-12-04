@@ -2,7 +2,6 @@ package control;
 import java.io.File;
 import logica.AutomataFinitoNoDeterminista;
 import logica.MaquinaDeTuring;
-import vista.Teclado;
 import logica.AutomataFinito;
 /**
  *
@@ -15,18 +14,16 @@ public class ControlDePeticion
 	private ControlGeneradorDeTodoTipoDeAutomataFinito generadorAutomata;
 	private ControlEvaluadorDeCadena evaluadorCadena;
 	private ControlConversorAutomata conversor;
-	private Teclado teclado;
         
 	public ControlDePeticion()
 	{
 		persistencia = new ControlDePersistencia();
-		teclado = new Teclado();
 		generadorMaquinaDeTuring = 
 			new ControlGeneradorDeMaquinaDeTuring();
 		generadorAutomata = 
 			new ControlGeneradorDeTodoTipoDeAutomataFinito();
 		evaluadorCadena = 
-			new ControlEvaluadorDeCadena(teclado);
+			new ControlEvaluadorDeCadena();
 		conversor = new ControlConversorAutomata();
 	}
         
@@ -35,8 +32,7 @@ public class ControlDePeticion
 		ControlGeneradorDeMaquinaDeTuring generadorMaquinaDeTuring,
 		ControlGeneradorDeTodoTipoDeAutomataFinito generadorAutomata,
 		ControlEvaluadorDeCadena evaluadorCadena,
-		ControlConversorAutomata conversor,
-		Teclado teclado
+		ControlConversorAutomata conversor
 	)
 	{
 		this.evaluadorCadena = evaluadorCadena;
@@ -44,14 +40,12 @@ public class ControlDePeticion
 		this.generadorMaquinaDeTuring = generadorMaquinaDeTuring;
 		this.persistencia = persistencia;
 		this.conversor = conversor;
-		this.teclado = teclado;
 	}
         
 	public ControlDePeticion(ControlDePeticion control)
 	{
 		this(control.persistencia, control.generadorMaquinaDeTuring,
-			control.generadorAutomata, control.evaluadorCadena,control.conversor,
-			control.teclado);
+			control.generadorAutomata, control.evaluadorCadena,control.conversor);
 	}
         
 	public void destruir()

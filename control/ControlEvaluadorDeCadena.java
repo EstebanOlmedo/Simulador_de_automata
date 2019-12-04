@@ -9,36 +9,22 @@ import logica.AutomataFinitoDeterminista;
 import logica.AutomataFinitoNoDeterminista;
 import logica.AutomataFinitoNoDeterministaEpsilon;
 import logica.MaquinaDeTuring;
-import vista.Teclado;
+import javax.swing.JOptionPane;
 
 public class ControlEvaluadorDeCadena
 {
 	private EvaluadorDeExpresion evaluador;
-	private Teclado teclado;
 	
-	public ControlEvaluadorDeCadena(Teclado teclado)
-	{
-		this.teclado = teclado;
-		evaluador = new EvaluadorDeExpresion();
-	}
-	public ControlEvaluadorDeCadena(EvaluadorDeExpresion evaluador,
-		Teclado teclado)
-	{
-		this.evaluador = evaluador;
-		this.teclado = teclado;
-	}
 	public ControlEvaluadorDeCadena()
 	{
-		teclado = new Teclado();
 		evaluador = new EvaluadorDeExpresion();
+	}
+	public ControlEvaluadorDeCadena(EvaluadorDeExpresion evaluador)
+	{
+		this.evaluador = evaluador;
 	}
 	public void destruir()
 	{
-		if(teclado != null)
-		{
-			teclado.destruir();
-			teclado = null;
-		}
 		if(evaluador != null)
 		{
 			evaluador.destruir();
@@ -58,8 +44,7 @@ public class ControlEvaluadorDeCadena
 		if(!(obj instanceof ControlEvaluadorDeCadena))
 			return false;
 		ControlEvaluadorDeCadena control = (ControlEvaluadorDeCadena)obj;
-		return teclado.equals(control.teclado) &&
-			evaluador.equals(control.evaluador);
+		return evaluador.equals(control.evaluador);
 	}
 	
 	public void evaluarCadena(AutomataFinito automata)
@@ -67,11 +52,12 @@ public class ControlEvaluadorDeCadena
 		try{
 			System.out.println(mostrarConfiguracion((Object)automata));
 			System.out.println(automata.getDescripcion());
-			String cadena = teclado.dameUnString("Ingresa la cadena que vas a evaluar");
+			String cadena = JOptionPane.showInputDialog("Ingresa la cadena a evaluar");
 			if(evaluador.evaluarCadena(cadena, automata))
-				System.out.println("La cadena pertenece al lenguaje");
+				JOptionPane.showMessageDialog(null, "La cadena pertenece al lenguaje", "Backup problem", JOptionPane.INFORMATION_MESSAGE);
+				//JOptionPane.("La cadena pertenece al lenguaje");
 			else
-				System.out.println("La cadena no pertenece al lenguaje");
+				JOptionPane.showMessageDialog(null, "La cadena no pertenece al lenguaje", "Backup problem", JOptionPane.INFORMATION_MESSAGE);
 		}
 		catch(NullPointerException npe){
 			System.out.println("Aun no has generado el automata -.-");
@@ -93,7 +79,7 @@ public class ControlEvaluadorDeCadena
 	{
 		try{
 			System.out.println(maquinaDeTuring.getDescripcion());
-			String cadena = teclado.dameUnString("Ingresa la cadena que vas a evaluar");
+			String cadena = JOptionPane.showInputDialog("Ingresa la cadena a evaluar");
 			if(evaluador.evaluarCadena(cadena, maquinaDeTuring))
 				System.out.println("La cadena pertenece al lenguaje");
 			else
