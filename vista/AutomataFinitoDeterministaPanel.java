@@ -7,10 +7,10 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import control.ControlDePeticion;
-import java.awt.Color;
+import control.ControlEvaluadorDeCadena;
 import java.awt.Font;
 import javax.swing.BorderFactory;
-import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
 public class AutomataFinitoDeterministaPanel extends JPanel implements ActionListener{
@@ -21,7 +21,7 @@ public class AutomataFinitoDeterministaPanel extends JPanel implements ActionLis
     private JTextArea descripcion;
     private JPanel panelPolimorfico;
     private ControlDePeticion control;
-    private JFileChooser archivos;
+    private VisualizadorDeArchivosPanel visualizador;
     
     public AutomataFinitoDeterministaPanel(JPanel panelPolimorfico,ControlDePeticion control)
     {
@@ -37,6 +37,7 @@ public class AutomataFinitoDeterministaPanel extends JPanel implements ActionLis
         iniciarPaneles();
         iniciarBotones();
         iniciarLabels();
+        visualizador = new VisualizadorDeArchivosPanel(panelPolimorfico,control,"afd",descripcion);
     }
     
     private void iniciarLabels()
@@ -44,7 +45,7 @@ public class AutomataFinitoDeterministaPanel extends JPanel implements ActionLis
         tipo = new JLabel("AUTOMATA FINITO DETERMINISTA", (int) CENTER_ALIGNMENT);
         tipo.setFont(new Font("",Font.BOLD,20));
         tipo.setBounds(0, 0, 570, 30);
-        descripcion = new JTextArea("asdijasdiojasdoijasoidjasiodjaiosjdoiasjdoiasjdoiajsodijasoidjasoidjoasjodasjodjasoidjas");
+        descripcion = new JTextArea();
         descripcion.setFont(new Font("",Font.BOLD,13));
         descripcion.setBounds(10, 40, 550, 50);
         descripcion.setOpaque(false);
@@ -115,7 +116,8 @@ public class AutomataFinitoDeterministaPanel extends JPanel implements ActionLis
         }
         else if(ae.getSource() == botones[4])
         {
-            
+            panelPolimorfico.add(visualizador,"archivos");
+            ((CardLayout) panelPolimorfico.getLayout()).show(panelPolimorfico,"archivos");
         }
         else if(ae.getSource() == botones[5])
         {

@@ -18,23 +18,23 @@ public class LectorObjectInputStream extends Archivo
 	private FileInputStream fis;
 	private ObjectInputStream ois;
 
-	public LectorObjectInputStream(String path,String nombre)
+	public LectorObjectInputStream(String path)
 	{
-		super(path,nombre,null);
+		super(path,null);
 		fis = null;
 		ois = null;
 	}
 
-	public LectorObjectInputStream(String path,String nombre,File file,FileInputStream fis,ObjectInputStream ois)
+	public LectorObjectInputStream(String path,File file,FileInputStream fis,ObjectInputStream ois)
 	{
-		super(path,nombre,file);
+		super(path,file);
 		this.fis = fis;
 		this.ois = ois;
 	}
 
 	public LectorObjectInputStream()
 	{
-		this("","",null,null,null);
+		this("",null,null,null);
 	}
 
 	public LectorObjectInputStream(LectorObjectInputStream lector)

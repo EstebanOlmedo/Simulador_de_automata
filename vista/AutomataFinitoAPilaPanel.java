@@ -20,6 +20,7 @@ public class AutomataFinitoAPilaPanel extends JPanel implements ActionListener{
     private JTextArea descripcion;
     private JPanel panelPolimorfico;
     private ControlDePeticion control;
+    private VisualizadorDeArchivosPanel visualizador;
             
     public AutomataFinitoAPilaPanel(JPanel panelPolimorfico,ControlDePeticion control)
     {
@@ -35,6 +36,7 @@ public class AutomataFinitoAPilaPanel extends JPanel implements ActionListener{
         iniciarPaneles();
         iniciarBotones();
         iniciarLabels();
+        visualizador = new VisualizadorDeArchivosPanel(panelPolimorfico, control, "afp", descripcion);
     }
     
    private void iniciarLabels()
@@ -107,7 +109,8 @@ public class AutomataFinitoAPilaPanel extends JPanel implements ActionListener{
         }
         else if(ae.getSource() == botones[3])
         {
-            
+            panelPolimorfico.add(visualizador,"archivos");
+            ((CardLayout) panelPolimorfico.getLayout()).show(panelPolimorfico,"archivos");
         }
         else if(ae.getSource() == botones[4])
         {

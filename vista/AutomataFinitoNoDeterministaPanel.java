@@ -21,6 +21,7 @@ public class AutomataFinitoNoDeterministaPanel extends JPanel implements ActionL
     private JTextArea descripcion;
     private JPanel panelPolimorfico;
     private ControlDePeticion control;
+    private VisualizadorDeArchivosPanel visualizador;
     
     public AutomataFinitoNoDeterministaPanel(JPanel panelPolimorfico,ControlDePeticion control)
     {
@@ -36,6 +37,7 @@ public class AutomataFinitoNoDeterministaPanel extends JPanel implements ActionL
         iniciarPaneles();
         iniciarBotones();
         iniciarLabels();
+        visualizador = new VisualizadorDeArchivosPanel(panelPolimorfico, control, "afn", descripcion);
     }
     
     private void iniciarLabels()
@@ -114,7 +116,8 @@ public class AutomataFinitoNoDeterministaPanel extends JPanel implements ActionL
         }
         else if(ae.getSource() == botones[4])
         {  
-     
+            panelPolimorfico.add(visualizador,"archivos");
+            ((CardLayout) panelPolimorfico.getLayout()).show(panelPolimorfico,"archivos");
         }
         else if(ae.getSource() == botones[5])
         {

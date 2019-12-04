@@ -1,5 +1,6 @@
 package control;
 
+import java.io.File;
 import persistencia.GeneradorYLectorDeArchivo;
 import vista.Teclado;
 /**
@@ -71,12 +72,9 @@ public class ControlDePersistencia
 			System.out.println("Hubo un error");
 		}
 	}
-	public Object recuperarObjeto()
+	public Object recuperarObjeto(File file)
 	{
-		String path = teclado.dameUnString("Ingresa la ruta del archivo");
-		generadorYLector.mostrarArchivosEnCarpeta(path);
-		String nombre = teclado.dameUnString("Ingresa el nombre "
-			+ "del archivo en el que se encuentra el objeto");
-		return generadorYLector.leerObjetoArchivo(nombre, path);
+            return generadorYLector.leerObjetoArchivo(file.getAbsolutePath());
 	}
+        
 }

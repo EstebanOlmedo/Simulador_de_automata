@@ -152,4 +152,9 @@ public class ControlGeneradorDeMaquinaDeTuring
 	void setMaquinaDeTuring(MaquinaDeTuring maquinaDeTuring){
 		generador.setMaquinaDeTuring(maquinaDeTuring);
 	}
+        
+        public MaquinaDeTuring getMaquinaDeTuring()
+        {
+            return generador.getMaquinaDeTuring();
+        }
 }

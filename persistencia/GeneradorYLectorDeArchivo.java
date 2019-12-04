@@ -50,13 +50,13 @@ public class GeneradorYLectorDeArchivo
 	}
 	public boolean escribirObjetoArchivo(Object obj, String nombre, String path)
 	{
-		escritor = new EscritorObjectOutputStream(path,nombre);
+		escritor = new EscritorObjectOutputStream(path);
 		return escritor.escribirObjeto(obj);
 	}
 
-	public Object leerObjetoArchivo(String nombre, String path)
+	public Object leerObjetoArchivo(String path)
 	{
-		lector = new LectorObjectInputStream(path,nombre);
+		lector = new LectorObjectInputStream(path);
 		return lector.leerObjetoArchivo();
 	}
 

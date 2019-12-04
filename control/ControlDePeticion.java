@@ -1,4 +1,5 @@
 package control;
+import java.io.File;
 import logica.AutomataFinitoNoDeterminista;
 import logica.MaquinaDeTuring;
 import vista.Teclado;
@@ -104,8 +105,8 @@ public class ControlDePeticion
 			//case "CAFD": manejarPeticionDeCargado(peticion); break;
 			//case "CAFND": manejarPeticionDeCargado(peticion); break;
 			//case "CAFNDE": manejarPeticionDeCargado(peticion); break;
-			case "CA": manejarPeticionDeCargado(peticion); break;
-			case "CMT": manejarPeticionDeCargado(peticion); break;
+			//case "CA": manejarPeticionDeCargado(peticion,file); break;
+			//case "CMT": manejarPeticionDeCargado(peticion,file); break;
 			case "CAFND-AFD": manejarPeticionDeConversion(peticion); break;
 			case "CAFD-AFP": manejarPeticionDeConversion(peticion); break;
 		}
@@ -202,15 +203,16 @@ public class ControlDePeticion
 		}
 	}
         
-	private void manejarPeticionDeCargado(String peticion)
+	public void manejarPeticionDeCargado(String peticion,File file)
 	{
-		Object automata = persistencia.recuperarObjeto();
+		Object automata = persistencia.recuperarObjeto(file);
 		if(peticion.equals("CMT")){
 			generadorMaquinaDeTuring.
 				setMaquinaDeTuring((MaquinaDeTuring)automata);
 		}
 		else
 		{
+                    System.out.println("LLega");
 			generadorAutomata.imprimirTransiciones(automata);
 			generadorAutomata.setAutomata(automata);
 		}
@@ -251,5 +253,10 @@ public class ControlDePeticion
         public AutomataFinito getAutomataFinitoAPila()
         {
             return generadorAutomata.getAutomataFinitoAPila();
+        }
+        
+        public MaquinaDeTuring getMaquinaDeTuring()
+        {
+            return generadorMaquinaDeTuring.getMaquinaDeTuring();
         }
 }

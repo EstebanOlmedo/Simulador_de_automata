@@ -21,6 +21,7 @@ public class AutomataFinitoNoDeterministaEpsilonPanel extends JPanel implements 
     private JLabel tipo;
     private JPanel panelPolimorfico;
     private ControlDePeticion control;
+    private VisualizadorDeArchivosPanel visualizador;
     
     public AutomataFinitoNoDeterministaEpsilonPanel(JPanel panelPolimorfico,ControlDePeticion control)
     {
@@ -36,12 +37,7 @@ public class AutomataFinitoNoDeterministaEpsilonPanel extends JPanel implements 
         iniciarPaneles();
         iniciarBotones();
         iniciarLabels();
-        iniciarDibujador();
-    }
-    
-    private void iniciarDibujador()
-    {
-        
+        visualizador = new VisualizadorDeArchivosPanel(panelPolimorfico, control, "afne", descripcion);
     }
     
     private void iniciarLabels()
@@ -114,7 +110,8 @@ public class AutomataFinitoNoDeterministaEpsilonPanel extends JPanel implements 
         }
         else if(ae.getSource() == botones[3])
         {
-            
+            panelPolimorfico.add(visualizador,"archivos");
+            ((CardLayout) panelPolimorfico.getLayout()).show(panelPolimorfico,"archivos");
         }
         else if(ae.getSource() == botones[4])
         {

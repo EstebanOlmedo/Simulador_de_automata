@@ -6,18 +6,16 @@ import java.io.File;
 public class Archivo
 {
 	private String path;
-	private String nombre;
 	private File file;
 
 	public Archivo()
 	{
-		this("", "",null);
+		this("",null);
 	}
 
-	public Archivo(String path, String nombre,File file)
+	public Archivo(String path,File file)
 	{
 		this.path = path;
-		this.nombre = nombre;
 		this.file = file;
 	}
 	public Archivo(String path)
@@ -26,14 +24,12 @@ public class Archivo
 	}
 	public Archivo(Archivo archivo)
 	{
-		this(archivo.path, archivo.nombre,archivo.file);
+		this(archivo.path,archivo.file);
 	}
 	public void destruir()
 	{
 		if(path != null)
 			path = null;
-		if(nombre != null)
-			nombre = null;
 		if(file != null)
 			file = null;
 		System.gc();
@@ -46,7 +42,6 @@ public class Archivo
 		if(!(obj instanceof Archivo)) return false;
 		Archivo archivo = (Archivo)obj;
 		return path.equals(archivo.path) &&
-			nombre.equals(archivo.nombre) &&
 			file.equals(archivo.file);
 	}
 
@@ -54,13 +49,12 @@ public class Archivo
 	public String toString()
 	{
 		return "PATH: " + path + "\n" +
-			"Nombre: " + nombre + "\n"+
 			file;
 	}
 
 	public boolean verificarExistenciaArchivo()
 	{
-		file = new File(path + nombre);
+		file = new File(path);
 		if(file.exists() == true)
 			return true;
 		else

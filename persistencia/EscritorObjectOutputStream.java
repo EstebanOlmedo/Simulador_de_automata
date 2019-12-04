@@ -13,23 +13,23 @@ public class EscritorObjectOutputStream extends Archivo
 	private FileOutputStream fos;
 	private ObjectOutputStream  oos;
 
-	public EscritorObjectOutputStream(String path,String nombre)
+	public EscritorObjectOutputStream(String path)
 	{
-		super(path,nombre,null);
+		super(path,null);
 		fos = null;
 		oos = null;
 	}
 
-	public EscritorObjectOutputStream(String path,String nombre,File file,FileOutputStream fos,ObjectOutputStream oos)
+	public EscritorObjectOutputStream(String path,File file,FileOutputStream fos,ObjectOutputStream oos)
 	{
-		super(path,nombre,file);
+		super(path,file);
 		this.fos = fos;
 		this.oos = oos;
 	}
 
 	public EscritorObjectOutputStream()
 	{
-		this("","",null,null,null);
+		this("",null,null,null);
 	}
 
 	public EscritorObjectOutputStream(EscritorObjectOutputStream escritor)
