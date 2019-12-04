@@ -87,12 +87,13 @@ public class AutomataFinitoAPilaPanel extends JPanel implements ActionListener{
         botones[2].setBounds(0,140,200,50);
         botones[3].setBounds(0,210,200,50);
         botones[4].setBounds(0,280,200,50);
+        botones[5].setBounds(0,350,200,50);
         botones[0].setText("Generar AF A Pila");
         botones[1].setText("Evaluar cadena");
         botones[2].setText("Guardar el AFP en un archivo");
         botones[3].setText("Cargar AFP de un archivo");
         botones[5].setText("Regresar al menu principal");
-	botones[4].setText("Mostrar diagrama");
+	   botones[4].setText("Mostrar diagrama");
     }
 
     @Override

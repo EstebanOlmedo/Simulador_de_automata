@@ -87,6 +87,7 @@ public class AutomataFinitoNoDeterministaEpsilonPanel extends JPanel implements 
         botones[2].setBounds(0,140,200,50);
         botones[3].setBounds(0,210,200,50);
         botones[4].setBounds(0,280,200,50);
+        botones[5].setBounds(0,360,200,50);
         botones[0].setText("Generar AF No Determinista Epsilon");
         botones[1].setText("Evaluar cadena");
         botones[2].setText("Guardar el AFNE en un archivo");

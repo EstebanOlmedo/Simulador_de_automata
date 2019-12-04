@@ -88,12 +88,13 @@ public class AutomataFinitoNoDeterministaPanel extends JPanel implements ActionL
         botones[3].setBounds(0,220,200,50);
         botones[4].setBounds(0,290,200,50);
         botones[5].setBounds(0,360,200,50);
+        botones[6].setBounds(0,440,200,50);
         botones[0].setText("Generar AF No Determinista");
         botones[1].setText("Evaluar cadena");
         botones[2].setText("Convertir AFN a AFD");
         botones[3].setText("Guardar el AFN en un archivo");
         botones[4].setText("Cargar AFN de un archivo");
-	botones[5].setText("Mostrar diagrama");
+	   botones[5].setText("Mostrar diagrama");
         botones[6].setText("Regresar al menu principal");
     }
     

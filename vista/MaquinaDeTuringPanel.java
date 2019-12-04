@@ -86,6 +86,7 @@ public class MaquinaDeTuringPanel extends JPanel implements ActionListener{
         botones[2].setBounds(0,140,200,50);
         botones[3].setBounds(0,210,200,50);
         botones[4].setBounds(0,280,200,50);
+        botones[5].setBounds(0,350,200,50);
         botones[0].setText("Generar Maquina de Turing");
         botones[1].setText("Evaluar cadena");
         botones[2].setText("Guardar el MT en un archivo");
