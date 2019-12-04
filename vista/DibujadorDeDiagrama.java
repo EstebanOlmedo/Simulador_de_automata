@@ -18,12 +18,14 @@ public class DibujadorDeDiagrama extends JLabel
 		super();
 		estados = new ArrayList<>();
 		flechas = new ArrayList<>();
+		setVisible(true);
 	}
 	
 	public void dibujarEstado(int x, int y, int numero)
 	{
 		String estado = "q" + numero;
 		Nodo nodo = new Nodo(x, y, estado);
+		estados.add(nodo);
 		repaint();
 	}
 	public void dibujarEnlace(int inicioX, int inicioY, int finX, int finY,
@@ -38,7 +40,13 @@ public class DibujadorDeDiagrama extends JLabel
 	{
 		for (Nodo estado : estados)
 			estado.pintar(gra);
-		for(Flecha flecha: flechas)
-			flecha.pintarFlecha(gra);
+		for(Flecha flecha: flechas){
+			if(flecha.getOrigenX() == flecha.getDestinoX() && flecha.getOrigenY() == flecha.getDestinoY())
+				flecha.pintarArco(gra);
+			else
+				flecha.pintarFlecha(gra);
+			//System.out.println("B");
+		}
+		super.paintComponent(gra);
 	}
 }

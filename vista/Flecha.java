@@ -92,9 +92,13 @@ public class Flecha
 		at.concatenate(AffineTransform.getRotateInstance(angle));
 		g.transform(at); 
 		g.drawLine(0, 0, len, 0);
-		g.fillPolygon(new int[] {len, len-ARR_SIZE, len-ARR_SIZE, len},
-			new int[] {0, -ARR_SIZE, ARR_SIZE, 0}, 4);
-		g.drawString(nombre, Math.abs((destinoX - origenX)/2), 
-			Math.abs((destinoY - origenY)/2));
+		g.fillPolygon(new int[] {len, len-ARR_SIZE, len-ARR_SIZE, len}, new int[] {0, -ARR_SIZE, ARR_SIZE, 0}, 4);
+		g.drawString(nombre, len/2,0);
+	}
+
+	void pintarArco(Graphics g){
+		g.drawArc(origenX-15,origenY-15,20,20,0,270);
+		g.drawString("*",origenX+3,origenY);
+		g.drawString(nombre,origenX-20,origenY-20);
 	}
 }

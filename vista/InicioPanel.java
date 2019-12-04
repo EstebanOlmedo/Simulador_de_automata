@@ -32,7 +32,7 @@ public class InicioPanel extends JPanel implements ActionListener{
         botones[3] = new JButton("Automata Finito A Pila");
         botones[4] = new JButton("Maquina De Turing");
         botones[5] = new JButton("Salir de la aplicacion");
-        añadirDiseño();
+        anadirDiseno();
         this.setLayout(new FlowLayout((int) CENTER_ALIGNMENT, 50, 20));
         for(int x = 0; x < botones.length; x++)
             this.add(botones[x]);
@@ -44,7 +44,7 @@ public class InicioPanel extends JPanel implements ActionListener{
         this.setVisible(visible);
     }
     
-    private void añadirDiseño()
+    private void anadirDiseno()
     {
         for(int x = 0; x < botones.length; x++)
         {

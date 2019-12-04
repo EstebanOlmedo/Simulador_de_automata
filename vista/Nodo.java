@@ -58,6 +58,7 @@ public class Nodo
 	public void pintar(Graphics graphics)
 	{
 		graphics.drawOval(posX, posY, RADIO, RADIO);
+		graphics.drawString(nombre,posX+RADIO/2-4,posY+RADIO/2+3);
 	}
 }
 
