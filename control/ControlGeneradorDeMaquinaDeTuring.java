@@ -5,29 +5,25 @@ package control;
 
 import java.util.ArrayList;
 import logica.NoExisteEstadoException;
-import vista.Teclado;
 import logica.GeneradorDeMaquinaDeTuring;
 import logica.MaquinaDeTuring;
+import javax.swing.JOptionPane;
 
 public class ControlGeneradorDeMaquinaDeTuring
 {
-	private Teclado teclado;
 	private GeneradorDeMaquinaDeTuring generador;
 
-	public ControlGeneradorDeMaquinaDeTuring(Teclado teclado)
+	public ControlGeneradorDeMaquinaDeTuring()
 	{
-		this.teclado = teclado;
-		generador = new GeneradorDeMaquinaDeTuring();
+		this(new GeneradorDeMaquinaDeTuring());
 	}
 	public ControlGeneradorDeMaquinaDeTuring(ControlGeneradorDeMaquinaDeTuring control)
 	{
-		this(control.teclado, control.generador);
+		this(control.generador);
 	}
-	public ControlGeneradorDeMaquinaDeTuring(
-			Teclado teclado, GeneradorDeMaquinaDeTuring generador)
+	public ControlGeneradorDeMaquinaDeTuring(GeneradorDeMaquinaDeTuring generador)
 	{
 		this.generador = generador;
-		this.teclado = teclado;
 	}
 	public void destruir()
 	{
@@ -36,11 +32,7 @@ public class ControlGeneradorDeMaquinaDeTuring
 			generador.destruir();
 			generador = null;
 		}
-		if(teclado != null)
-		{
-			teclado.destruir();
-			teclado = null;
-		}
+		System.gc();
 	}
 	@Override
 	public String toString()
@@ -54,27 +46,62 @@ public class ControlGeneradorDeMaquinaDeTuring
 		if(!(obj instanceof ControlGeneradorDeMaquinaDeTuring))
 			return false;
 		ControlGeneradorDeMaquinaDeTuring control = (ControlGeneradorDeMaquinaDeTuring)obj;
-		return teclado.equals(control.teclado) &&
-			generador.equals(control.generador);
+		return generador.equals(control.generador);
 	}
-	
+	public int obtenerInt(String mensaje, String titulo){
+		int tipo = 3;
+		int entrada = 0;
+		String mensajeError = "";
+		while(true){
+			try{
+				entrada = Integer.parseInt(JOptionPane.showInputDialog(null,mensajeError + mensaje, titulo, tipo));
+				break;
+			}
+			catch(NumberFormatException nfe){
+				mensajeError = "Debe ingresar un numero\n";
+				tipo = 0;
+				titulo = "ERROR";
+			}
+		}
+		return entrada;
+	}
+	public String obtenerString(String mensaje, String titulo){
+		return JOptionPane.showInputDialog(null,	mensaje, titulo, JOptionPane.QUESTION_MESSAGE);
+	}
+	public char obtenerChar(String mensaje, String titulo){
+		int tipo = 3;
+		char entrada = '\u0000';
+		String mensajeError = "";
+		while(true){
+			try{
+				entrada = JOptionPane.showInputDialog(null,mensajeError + mensaje, titulo, tipo).charAt(0);
+				break;
+			}
+			catch(IndexOutOfBoundsException ioob){
+				mensajeError = "Debe ingresar un caracter\n";
+				tipo = 0;
+				titulo = "ERROR";
+			}
+		}
+		return entrada;
+	}
 	public void generarMaquinaDeTuring()
 	{	
-		String descripcion = teclado.dameUnString("¿Cuál es la descripción de la máquina? (El lenguaje que representa)");
-		int tamanioAlfabeto = teclado.dameUnInt("¿Cuál es la cardinalidad del alfabeto? (Excluyendo el símbolo 'B' (blanco)");
+		String descripcion = obtenerString("¿Cuál es la descripción de la máquina? (El lenguaje que representa)","Descripción");
+		int tamanioAlfabeto = obtenerInt("¿Cuál es la cardinalidad del alfabeto? (Excluyendo el símbolo 'B' (blanco)", "Alfabeto");
 		char[] alfabeto = new char[tamanioAlfabeto + 1];
-		System.out.println("A continuación se ingresarán los carácteres del alfabeto");
+		//System.out.println("A continuación se ingresarán los carácteres del alfabeto");
 		for(int i = 0; i < tamanioAlfabeto; i++)
-			alfabeto[i] = teclado.dameUnChar("Ingresa el caracter del alfabeto:");
+			alfabeto[i] = obtenerChar("Ingresa el caracter del alfabeto:","Alfabeto");
 		alfabeto[tamanioAlfabeto] = 'B';
-		int numeroDeEstados = teclado.dameUnInt("¿Cuál es el número de estados de la Máquina de Turing");
-		System.out.println("A continuación ingrese los estados de aceptación de la máquina (indexados en cero)");
+		int numeroDeEstados = obtenerInt("¿Cuál es el número de estados de la Máquina de Turing","Estados");
+		//System.out.println("A continuación ingrese los estados de aceptación de la máquina (indexados en cero)");
 		ArrayList<Integer> estadosAceptacion = new ArrayList<>();
 		while(true)
 		{
 			try
 			{
-				int estado = teclado.dameUnInt("Ingresa el número del estado de aceptación o -1 cando hayas terminado");
+				int estado = obtenerInt("Ingresa el número del estado de aceptación o -1 cando hayas terminado","Estados (Indexados en cero)");
 				if(estado > numeroDeEstados - 1) throw new NoExisteEstadoException(estado);
 				if(estado == -1)
 					break;
@@ -82,7 +109,7 @@ public class ControlGeneradorDeMaquinaDeTuring
 			}
 			catch(NoExisteEstadoException neee)
 			{
-                            System.out.println("No existe el estado");
+                //System.out.println("No existe el estado");
 				//System.out.println(neee);
 			}
 		}
@@ -96,17 +123,16 @@ public class ControlGeneradorDeMaquinaDeTuring
 		{
 			for(int j = 0; j < tamanioAlfabeto + 1; j++)
 			{
-				System.out.println("Para el estado q" + i + " con el símbolo " +
-						alfabeto[j] + ":");
+				String mensaje = "Para el estado q" + i + " con el símbolo " + alfabeto[j] + ":\n";
 				try
 				{
-					int estadoDeTransicion = teclado.dameUnInt("¿A qué estado cambia? Ingresa -1 si no hay transición");
+					int estadoDeTransicion = obtenerInt(mensaje + "¿A qué estado cambia? Ingresa -1 si no hay transición", "Transiciones");
 					if(estadoDeTransicion > numeroDeEstados)
 						throw new NoExisteEstadoException();
 					if(estadoDeTransicion != -1)
 					{
-						char loQueDeja = teclado.dameUnChar("¿Qué es lo que deja en la cinta?");
-						char movimiento = teclado.dameUnChar("¿Hacia dónde se mueve el cabezal?");
+						char loQueDeja = obtenerChar("¿Qué es lo que deja en la cinta?","Transicion");
+						char movimiento = obtenerChar("¿Hacia dónde se mueve el cabezal?", "Transicion");
 						generador.aniadirTransicionATabla(i, j, estadoDeTransicion, loQueDeja, movimiento);
 					}
 					else
