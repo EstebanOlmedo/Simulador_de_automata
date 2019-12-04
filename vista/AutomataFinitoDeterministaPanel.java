@@ -44,8 +44,8 @@ public class AutomataFinitoDeterministaPanel extends JPanel implements ActionLis
         tipo = new JLabel("AUTOMATA FINITO DETERMINISTA", (int) CENTER_ALIGNMENT);
         tipo.setFont(new Font("",Font.BOLD,20));
         tipo.setBounds(0, 0, 570, 30);
-        descripcion = new JTextArea();
-        descripcion.setFont(new Font("",Font.BOLD,10));
+        descripcion = new JTextArea("asdijasdiojasdoijasoidjasiodjaiosjdoiasjdoiasjdoiajsodijasoidjasoidjoasjodasjodjasoidjas");
+        descripcion.setFont(new Font("",Font.BOLD,13));
         descripcion.setBounds(10, 40, 550, 50);
         descripcion.setOpaque(false);
         descripcion.setLineWrap(true);
