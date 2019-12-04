@@ -12,6 +12,7 @@ import static java.awt.Component.CENTER_ALIGNMENT;
 import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.JTextArea;
+import control.ControlDibujarDiagrama;
 
 public class AutomataFinitoNoDeterministaEpsilonPanel extends JPanel implements  ActionListener{
  
@@ -99,6 +100,14 @@ public class AutomataFinitoNoDeterministaEpsilonPanel extends JPanel implements 
         {
             control.manejarPeticion("GAFNDE");
             descripcion.setText(control.getAutomataFinitoNoDeterministaEpsilon().getDescripcion());
+            ControlDibujarDiagrama cd = new ControlDibujarDiagrama(control.getAutomataFinitoNoDeterministaEpsilon(),null, new DibujadorDeDiagrama());
+           cd.dibujarAutomata();
+            cd.getDibujador().setBounds(0, 0, 570, 350);
+            //paneles[2] = new JPanel();
+            //paneles[2].setBounds(10, 120, 570, 350);
+            paneles[2].removeAll();
+           paneles[2].add(cd.getDibujador());
+           updateUI();
         }
         else if(ae.getSource() == botones[1])
         {

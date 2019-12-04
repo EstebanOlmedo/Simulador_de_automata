@@ -11,6 +11,8 @@ import static java.awt.Component.CENTER_ALIGNMENT;
 import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.JTextArea;
+import control.ControlDibujarDiagrama;
+
 
 public class AutomataFinitoAPilaPanel extends JPanel implements ActionListener{
  
@@ -98,6 +100,12 @@ public class AutomataFinitoAPilaPanel extends JPanel implements ActionListener{
         {
             control.manejarPeticion("GAFP");
             descripcion.setText(control.getAutomataFinitoAPila().getDescripcion());
+            ControlDibujarDiagrama cd = new ControlDibujarDiagrama(control.getAutomataFinitoAPila(),null, new DibujadorDeDiagrama());
+           cd.dibujarAutomata();
+            cd.getDibujador().setBounds(0, 0, 570, 350);
+            paneles[2].removeAll();
+           paneles[2].add(cd.getDibujador());
+           updateUI();
         }
         else if(ae.getSource() == botones[1])
         {

@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import control.ControlDePeticion;
 import static java.awt.Component.CENTER_ALIGNMENT;
 import javax.swing.JTextArea;
+import control.ControlDibujarDiagrama;
 
 public class MaquinaDeTuringPanel extends JPanel implements ActionListener{
  
@@ -97,7 +98,13 @@ public class MaquinaDeTuringPanel extends JPanel implements ActionListener{
         if(ae.getSource() == botones[0])
         {
             control.manejarPeticion("GMT");
-            descripcion.setText(control.getAutomataFinitoDeterminista().getDescripcion());
+            descripcion.setText(control.getMaquinaDeTuring().getDescripcion());
+            ControlDibujarDiagrama cd = new ControlDibujarDiagrama(null,control.getMaquinaDeTuring(), new DibujadorDeDiagrama());
+           cd.dibujarMaquina();
+            cd.getDibujador().setBounds(0, 0, 570, 350);
+            paneles[2].removeAll();
+           paneles[2].add(cd.getDibujador());
+           updateUI();
         }
         else if(ae.getSource() == botones[1])
         {
