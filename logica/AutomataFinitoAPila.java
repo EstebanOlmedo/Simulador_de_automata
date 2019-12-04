@@ -210,5 +210,8 @@ public class AutomataFinitoAPila extends AutomataFinito implements IPila
         }
         return transiciones;
     }
+    public ArrayList<ArrayList<ArrayList<Delta>>> getTablaTransiciones(){
+        return tablaDeTransiciones;
+    }
 }
 

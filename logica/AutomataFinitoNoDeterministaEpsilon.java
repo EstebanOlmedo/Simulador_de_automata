@@ -129,4 +129,7 @@ public class AutomataFinitoNoDeterministaEpsilon extends AutomataFinitoNoDetermi
 		}
 		return transiciones;
 	}
+	public ArrayList<ArrayList<Integer>> getAdyacenciaEpsilon(){
+		return adyacenciaEpsilon;
+	}
 }
