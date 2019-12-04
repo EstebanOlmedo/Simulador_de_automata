@@ -183,7 +183,7 @@ public class ControlDibujarDiagrama{
 		ArrayList<ArrayList<ArrayList<Delta>>> tabla = ((AutomataFinitoAPila)automata).getTablaTransiciones();
 		int noEstados = tabla.size();
 		//System.out.println(automata.getTransiciones());
-		int df = 10;
+		int df = 0;
 		for(int i=0; i<noEstados; i++){
 			int x1 = posUsados.get(i).getKey();
 			int y1 = posUsados.get(i).getValue();
