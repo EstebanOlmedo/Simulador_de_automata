@@ -129,6 +129,7 @@ public class VisualizadorDeArchivosPanel extends JPanel implements ActionListene
 			    case "afp": control.manejarPeticionDePersistencia("PAFP", archivo); break;
 			    case "mt": control.manejarPeticionDePersistencia("PMT", archivo); break;
 		    }
+                    JOptionPane.showConfirmDialog(null,archivo.getName()+" Guardado con exito",null,JOptionPane.DEFAULT_OPTION);
 	    }
 	    //archivo = fileChooser.getSelectedFile();
         }
