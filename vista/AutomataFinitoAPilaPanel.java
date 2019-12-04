@@ -73,7 +73,7 @@ public class AutomataFinitoAPilaPanel extends JPanel implements ActionListener{
     
     public void iniciarBotones()
     {
-        botones = new JButton[5];
+        botones = new JButton[6];
         for(int x = 0; x < botones.length; x++)
         {
             botones[x] = new JButton();
@@ -91,7 +91,8 @@ public class AutomataFinitoAPilaPanel extends JPanel implements ActionListener{
         botones[1].setText("Evaluar cadena");
         botones[2].setText("Guardar el AFP en un archivo");
         botones[3].setText("Cargar AFP de un archivo");
-        botones[4].setText("Regresar al menu principal");
+        botones[5].setText("Regresar al menu principal");
+	botones[4].setText("Mostrar diagrama");
     }
 
     @Override
@@ -113,17 +114,28 @@ public class AutomataFinitoAPilaPanel extends JPanel implements ActionListener{
         }
         else if(ae.getSource() == botones[2])
         {
-            control.manejarPeticion("PAFP");
+		panelPolimorfico.add(visualizador, "archivos");
+		((CardLayout)panelPolimorfico.getLayout()).show(panelPolimorfico, "archivos");
         }
         else if(ae.getSource() == botones[3])
         {
             panelPolimorfico.add(visualizador,"archivos");
             ((CardLayout) panelPolimorfico.getLayout()).show(panelPolimorfico,"archivos");
         }
-        else if(ae.getSource() == botones[4])
+        else if(ae.getSource() == botones[5])
         {
             ((CardLayout) panelPolimorfico.getLayout()).show(panelPolimorfico, "inicio");
         }
+	else if(ae.getSource() == botones[4])
+	{
+		descripcion.setText(control.getAutomataFinitoAPila().getDescripcion());
+		ControlDibujarDiagrama cd = new ControlDibujarDiagrama(control.getAutomataFinitoAPila(),null, new DibujadorDeDiagrama());
+		cd.dibujarAutomata();
+		cd.getDibujador().setBounds(0, 0, 570, 350);
+		paneles[2].removeAll();
+		paneles[2].add(cd.getDibujador());
+		updateUI();
+	}
     }
     
     

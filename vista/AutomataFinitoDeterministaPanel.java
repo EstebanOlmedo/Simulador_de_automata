@@ -96,22 +96,22 @@ public class AutomataFinitoDeterministaPanel extends JPanel implements ActionLis
         botones[2].setText("Convertir AFD a AFP");
         botones[3].setText("Guardar el AFD en un archivo");
         botones[4].setText("Cargar AFD de un archivo");
-        botones[5].setText("Regresar al menu principal");
-	botones[6].setText("Mostrar diagrama");
+        botones[6].setText("Regresar al menu principal");
+	botones[5].setText("Mostrar diagrama");
     }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
         if(ae.getSource() == botones[0])
         {
-            control.manejarPeticion("GAFD");
-            descripcion.setText(control.getAutomataFinitoDeterminista().getDescripcion());
-            ControlDibujarDiagrama cd = new ControlDibujarDiagrama(control.getAutomataFinitoDeterminista(),null, new DibujadorDeDiagrama());
-           cd.dibujarAutomata();
+		control.manejarPeticion("GAFD");
+		descripcion.setText(control.getAutomataFinitoDeterminista().getDescripcion());
+		ControlDibujarDiagrama cd = new ControlDibujarDiagrama(control.getAutomataFinitoDeterminista(),null, new DibujadorDeDiagrama());
+		cd.dibujarAutomata();
             cd.getDibujador().setBounds(0, 0, 570, 350);
             paneles[2].removeAll();
            paneles[2].add(cd.getDibujador());
-           updateUI();
+	   updateUI();
         }
         else if(ae.getSource() == botones[1])
         {
@@ -142,14 +142,15 @@ public class AutomataFinitoDeterministaPanel extends JPanel implements ActionLis
 			updateUI();
 		}
         }
-        else if(ae.getSource() == botones[5])
+        else if(ae.getSource() == botones[6])
         {
             ((CardLayout) panelPolimorfico.getLayout()).show(panelPolimorfico, "inicio");
         }
-	else if(ae.getSource() == botones[6])
+	else if(ae.getSource() == botones[5])
 	{
 		if(control.getAutomataFinitoDeterminista() != null)
 		{
+			descripcion.setText(control.getAutomataFinitoDeterminista().getDescripcion());
 			ControlDibujarDiagrama cd = new ControlDibujarDiagrama(control.getAutomataFinitoDeterminista(),null, new DibujadorDeDiagrama());
 			cd.dibujarAutomata();
 			cd.getDibujador().setBounds(0, 0, 570, 350);

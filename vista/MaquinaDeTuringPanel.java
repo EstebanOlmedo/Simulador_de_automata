@@ -72,7 +72,7 @@ public class MaquinaDeTuringPanel extends JPanel implements ActionListener{
     
     public void iniciarBotones()
     {
-        botones = new JButton[5];
+        botones = new JButton[6];
         for(int x = 0; x < botones.length; x++)
         {
             botones[x] = new JButton();
@@ -90,21 +90,22 @@ public class MaquinaDeTuringPanel extends JPanel implements ActionListener{
         botones[1].setText("Evaluar cadena");
         botones[2].setText("Guardar el MT en un archivo");
         botones[3].setText("Cargar MT de un archivo");
-        botones[4].setText("Regresar al menu principal");
+	botones[4].setText("Mostrar diagrama");
+        botones[5].setText("Regresar al menu principal");
     }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
         if(ae.getSource() == botones[0])
         {
-            control.manejarPeticion("GMT");
-            descripcion.setText(control.getMaquinaDeTuring().getDescripcion());
-            ControlDibujarDiagrama cd = new ControlDibujarDiagrama(null,control.getMaquinaDeTuring(), new DibujadorDeDiagrama());
-           cd.dibujarMaquina();
-            cd.getDibujador().setBounds(0, 0, 570, 350);
-            paneles[2].removeAll();
-           paneles[2].add(cd.getDibujador());
-           updateUI();
+		control.manejarPeticion("GMT");
+		descripcion.setText(control.getMaquinaDeTuring().getDescripcion());
+		ControlDibujarDiagrama cd = new ControlDibujarDiagrama(null,control.getMaquinaDeTuring(), new DibujadorDeDiagrama());
+		cd.dibujarMaquina();
+		cd.getDibujador().setBounds(0, 0, 570, 350);
+		paneles[2].removeAll();
+		paneles[2].add(cd.getDibujador());
+		updateUI();
         }
         else if(ae.getSource() == botones[1])
         {
@@ -112,13 +113,25 @@ public class MaquinaDeTuringPanel extends JPanel implements ActionListener{
         }
         else if(ae.getSource() == botones[2])
         {
+		panelPolimorfico.add(visualizador, "archivos");
+		((CardLayout)panelPolimorfico.getLayout()).show(panelPolimorfico, "archivos");
         }
         else if(ae.getSource() == botones[3])
         {
             panelPolimorfico.add(visualizador,"archivos");
             ((CardLayout) panelPolimorfico.getLayout()).show(panelPolimorfico,"archivos");
         }
-        else if(ae.getSource() == botones[4])
+	else if(ae.getSource() == botones[4])
+	{
+		descripcion.setText(control.getMaquinaDeTuring().getDescripcion());
+		ControlDibujarDiagrama cd = new ControlDibujarDiagrama(null,control.getMaquinaDeTuring(), new DibujadorDeDiagrama());
+		cd.dibujarMaquina();
+		cd.getDibujador().setBounds(0, 0, 570, 350);
+		paneles[2].removeAll();
+		paneles[2].add(cd.getDibujador());
+		updateUI();
+	}
+        else if(ae.getSource() == botones[5])
         {
             ((CardLayout) panelPolimorfico.getLayout()).show(panelPolimorfico, "inicio");
         }

@@ -102,7 +102,7 @@ public class VisualizadorDeArchivosPanel extends JPanel implements ActionListene
                         descripcion.setText(control.getAutomataFinitoAPila().getDescripcion());
                         break;
                     case "mt":
-                        control.manejarPeticionDeCargado("MT",archivo);
+                        control.manejarPeticionDeCargado("CMT",archivo);
                         descripcion.setText(control.getMaquinaDeTuring().getDescripcion());
                         break;
                 }

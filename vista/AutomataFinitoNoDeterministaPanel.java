@@ -73,7 +73,7 @@ public class AutomataFinitoNoDeterministaPanel extends JPanel implements ActionL
     
     public void iniciarBotones()
     {
-        botones = new JButton[6];
+        botones = new JButton[7];
         for(int x = 0; x < botones.length; x++)
         {
             botones[x] = new JButton();
@@ -93,7 +93,8 @@ public class AutomataFinitoNoDeterministaPanel extends JPanel implements ActionL
         botones[2].setText("Convertir AFN a AFD");
         botones[3].setText("Guardar el AFN en un archivo");
         botones[4].setText("Cargar AFN de un archivo");
-        botones[5].setText("Regresar al menu principal");
+	botones[5].setText("Mostrar diagrama");
+        botones[6].setText("Regresar al menu principal");
     }
     
     @Override
@@ -121,14 +122,25 @@ public class AutomataFinitoNoDeterministaPanel extends JPanel implements ActionL
         }
         else if(ae.getSource() == botones[3])
         {
-            control.manejarPeticion("PAFND");
+		panelPolimorfico.add(visualizador, "archivos");
+		((CardLayout)panelPolimorfico.getLayout()).show(panelPolimorfico, "archivos");
         }
         else if(ae.getSource() == botones[4])
         {  
             panelPolimorfico.add(visualizador,"archivos");
             ((CardLayout) panelPolimorfico.getLayout()).show(panelPolimorfico,"archivos");
         }
-        else if(ae.getSource() == botones[5])
+	else if(ae.getSource() == botones[5])
+	{
+		descripcion.setText(control.getAutomataFinitoNoDeterminista().getDescripcion());
+		ControlDibujarDiagrama cd = new ControlDibujarDiagrama(control.getAutomataFinitoNoDeterminista(),null, new DibujadorDeDiagrama());
+		cd.dibujarAutomata();
+		cd.getDibujador().setBounds(0, 0, 570, 350);
+		paneles[2].removeAll();
+		paneles[2].add(cd.getDibujador());
+		updateUI();
+	}
+        else if(ae.getSource() == botones[6])
         {
             ((CardLayout) panelPolimorfico.getLayout()).show(panelPolimorfico, "inicio");
         }
