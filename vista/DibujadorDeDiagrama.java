@@ -38,15 +38,21 @@ public class DibujadorDeDiagrama extends JLabel
 	@Override
 	public void paintComponent(Graphics gra)
 	{
-		for (Nodo estado : estados)
-			estado.pintar(gra);
-		for(Flecha flecha: flechas){
-			if(flecha.getOrigenX() == flecha.getDestinoX() && flecha.getOrigenY() == flecha.getDestinoY())
-				flecha.pintarArco(gra);
-			else
-				flecha.pintarFlecha(gra);
-			//System.out.println("B");
-		}
-		super.paintComponent(gra);
+            ArrayList<Flecha> dibujados = new ArrayList<Flecha>();
+            for (Nodo estado : estados)
+                    estado.pintar(gra);
+            for(Flecha flecha: flechas){
+                int i=0;
+                for(Flecha f:dibujados){
+                    if(flecha.mismasCoordenadas(f)) i++;
+                }
+                if(flecha.getOrigenX() == flecha.getDestinoX() && flecha.getOrigenY() == flecha.getDestinoY())
+                        flecha.pintarArco(gra, 10*i);
+                else
+                        flecha.pintarFlecha(gra, 10*i);
+                dibujados.add(flecha);
+                //System.out.println("B");
+            }
+            super.paintComponent(gra);
 	}
 }

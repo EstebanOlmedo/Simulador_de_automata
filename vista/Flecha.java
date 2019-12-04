@@ -61,6 +61,19 @@ public class Flecha
 		}
 		return this.destinoY == other.destinoY;
 	}
+        
+        public boolean mismasCoordenadas(Flecha flecha){
+         if (this.origenX != flecha.origenX) {
+			return false;
+		}
+		if (this.origenY != flecha.origenY) {
+			return false;
+		}
+		if (this.destinoX != flecha.destinoX) {
+			return false;
+		}
+		return this.destinoY == flecha.destinoY;   
+        }
 
 	public int getOrigenX() {
 		return origenX;
@@ -82,7 +95,7 @@ public class Flecha
 		return ARR_SIZE;
 	}
 	
-	void pintarFlecha(Graphics g1)
+	void pintarFlecha(Graphics g1, int n)
 	{ 
 		Graphics2D g = (Graphics2D) g1.create(); 
 		double dx = destinoX - origenX, dy = destinoY - origenY;
@@ -93,12 +106,12 @@ public class Flecha
 		g.transform(at); 
 		g.drawLine(0, 0, len, 0);
 		g.fillPolygon(new int[] {len, len-ARR_SIZE, len-ARR_SIZE, len}, new int[] {0, -ARR_SIZE, ARR_SIZE, 0}, 4);
-		g.drawString(nombre, len/2,0);
+		g.drawString(nombre, len/2,n);
 	}
 
-	void pintarArco(Graphics g){
+	void pintarArco(Graphics g, int n){
 		g.drawArc(origenX-15,origenY-15,20,20,0,270);
 		g.drawString("*",origenX+3,origenY);
-		g.drawString(nombre,origenX-20,origenY-20);
+		g.drawString(nombre,origenX-20,origenY-20+n);
 	}
 }
