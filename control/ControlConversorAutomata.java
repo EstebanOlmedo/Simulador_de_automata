@@ -7,6 +7,8 @@ import logica.AutomataFinitoDeterminista;
 import logica.AutomataFinitoAPila;
 import logica.AutomataFinitoNoDeterminista;
 import logica.AutomataFinito;
+import javax.swing.JOptionPane;
+
 public class ControlConversorAutomata
 {
 	private ConversorDeAutomata conversor;
@@ -45,10 +47,12 @@ public class ControlConversorAutomata
 	{
 		try{
 			conversor.convertirAFNaAFD(automata);
-			System.out.println("Se ha convertido el automata con exito");
+			//System.out.println("Se ha convertido el automata con exito");
+			JOptionPane.showMessageDialog(null, "Se ha concertido el automata con exito", "Resultado", JOptionPane.INFORMATION_MESSAGE);
 		}
 		catch(NullPointerException npe){
-			System.out.println("Aun no has generado el automata .-.");
+			//System.out.println("Aun no has generado el automata .-.");
+			JOptionPane.showMessageDialog(null, "Aun no has generado el automata", "Error", JOptionPane.ERROR_MESSAGE);
 			//npe.printStackTrace();
 		}
 		return conversor.getAutomataFinito();
@@ -57,11 +61,12 @@ public class ControlConversorAutomata
 	{
 		try{
 			conversor.convertirAFDaAFP(automata);
-			System.out.println("Se ha convertido el automata con exito");
+			JOptionPane.showMessageDialog(null, "Se ha concertido el automata con exito", "Resultado", JOptionPane.INFORMATION_MESSAGE);
 		}
 		catch(NullPointerException npe){
-			System.out.println("Aun no has generado el automata .-.");
+			//System.out.println("Aun no has generado el automata .-.");
 			//npe.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Aun no has generado el automata", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 		return conversor.getAutomataFinito();
 	}

@@ -54,13 +54,13 @@ public class ControlEvaluadorDeCadena
 			System.out.println(automata.getDescripcion());
 			String cadena = JOptionPane.showInputDialog("Ingresa la cadena a evaluar");
 			if(evaluador.evaluarCadena(cadena, automata))
-				JOptionPane.showMessageDialog(null, "La cadena pertenece al lenguaje", "Backup problem", JOptionPane.INFORMATION_MESSAGE);
-				//JOptionPane.("La cadena pertenece al lenguaje");
+				JOptionPane.showMessageDialog(null, "La cadena pertenece al lenguaje", "Resultado", JOptionPane.INFORMATION_MESSAGE);
 			else
-				JOptionPane.showMessageDialog(null, "La cadena no pertenece al lenguaje", "Backup problem", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "La cadena no pertenece al lenguaje", "Resultado", JOptionPane.INFORMATION_MESSAGE);
 		}
 		catch(NullPointerException npe){
-			System.out.println("Aun no has generado el automata -.-");
+			JOptionPane.showMessageDialog(null, "Aun no has generado el automata", "Error", JOptionPane.ERROR_MESSAGE);
+			//System.out.println("Aun no has generado el automata -.-");
 		}
 	}
 	private String mostrarConfiguracion(Object obj)
@@ -81,12 +81,13 @@ public class ControlEvaluadorDeCadena
 			System.out.println(maquinaDeTuring.getDescripcion());
 			String cadena = JOptionPane.showInputDialog("Ingresa la cadena a evaluar");
 			if(evaluador.evaluarCadena(cadena, maquinaDeTuring))
-				System.out.println("La cadena pertenece al lenguaje");
+				JOptionPane.showMessageDialog(null, "La cadena pertenece al lenguaje", "Resultado", JOptionPane.INFORMATION_MESSAGE);
 			else
-				System.out.println("La cadena no pertenece al lenguaje");
+				JOptionPane.showMessageDialog(null, "La cadena no pertenece al lenguaje", "Resultado", JOptionPane.INFORMATION_MESSAGE);
 		}
 		catch(NullPointerException npe){
-			System.out.println("Aun no has generado la maquina -.-");
+			//System.out.println("Aun no has generado la maquina -.-");
+			JOptionPane.showMessageDialog(null, "Aun no has generado la maquina", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 }
