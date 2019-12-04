@@ -105,4 +105,7 @@ public class TablaMaquinaDeTuring implements Serializable
 		else
 			return false;
 	}
+	public FuncionDeltaMaquinaDeTuring[][] getTabla(){
+		return tabla;
+	}
 }
