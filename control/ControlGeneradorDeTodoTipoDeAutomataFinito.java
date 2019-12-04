@@ -294,13 +294,13 @@ public class ControlGeneradorDeTodoTipoDeAutomataFinito
 			generador.setAutomataFinitoDeterminista(
 				(AutomataFinitoDeterminista)automata
 			);
-		else if(automata instanceof AutomataFinitoNoDeterminista)
-			generador.setAutomataFinitoNoDeterminista(
-				(AutomataFinitoNoDeterminista)automata
-			);
 		else if(automata instanceof AutomataFinitoNoDeterministaEpsilon)
 			generador.setAutomataFinitoNoDeterministaEpsilon(
 				(AutomataFinitoNoDeterministaEpsilon)automata
+			);
+		else if(automata instanceof AutomataFinitoNoDeterminista)
+			generador.setAutomataFinitoNoDeterminista(
+				(AutomataFinitoNoDeterminista)automata
 			);
 		else if(automata instanceof AutomataFinitoAPila)
 			generador.setAutomataFinitoAPila(

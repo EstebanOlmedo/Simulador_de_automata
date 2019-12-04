@@ -206,7 +206,7 @@ public class ControlDePeticion
 		}
 		else
 		{
-                    System.out.println("LLega");
+            //System.out.println("LLega");
 			generadorAutomata.imprimirTransiciones(automata);
 			generadorAutomata.setAutomata(automata);
 		}
