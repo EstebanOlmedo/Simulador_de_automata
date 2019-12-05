@@ -75,11 +75,11 @@ public class MaquinaDeTuring implements Serializable
 		return cabezal == maquinaDeTuring.cabezal &&
 			descripcion.equals(maquinaDeTuring.descripcion);
 	}
+        
 	public void setCinta(char[] cinta)
 	{
 		this.cinta = cinta;
 	}
-
 
 	public TablaMaquinaDeTuring getTabla()
 	{
@@ -291,5 +291,10 @@ public class MaquinaDeTuring implements Serializable
                     cadena.append(',');
             }
             return cadena.toString();
+        }
+        
+        public String getTransiciones()
+        {
+            return "hola";
         }
 }

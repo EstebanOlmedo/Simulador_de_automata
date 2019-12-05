@@ -130,7 +130,7 @@ public class AutomataFinitoDeterminista extends AutomataFinito
 		String transiciones = "";
 		for(int i=0; i<getNumeroDeEstados(); i++){
 			for(int j=0; j<getAlfabeto().length; j++){
-				transiciones += "S(q"+i+","+getSimbolo(j)+") = "+getAdyacencia(i,j)+"\n";
+				transiciones += "S(q"+i+","+getSimbolo(j)+") = "+getAdyacencia(i,j)+"\t";
 			}
 		}
 		return transiciones;

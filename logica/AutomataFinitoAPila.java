@@ -204,7 +204,7 @@ public class AutomataFinitoAPila extends AutomataFinito implements IPila
         for(int i=0; i<getNumeroDeEstados(); i++){
             for(int j=0; j<getNumeroDeEstados(); j++){
                 for(Delta delta:tablaDeTransiciones.get(i).get(j)){
-                    transiciones += "S(q"+i+","+delta.getPrimero()+") = (q"+j+","+delta.getSegundo()+","+delta.getTercero()+")\n";
+                    transiciones += "S(q"+i+","+delta.getPrimero()+") = (q"+j+","+delta.getSegundo()+","+delta.getTercero()+")\t";
                 }
             }
         }
