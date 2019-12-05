@@ -12,7 +12,9 @@ import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.JTextArea;
 import control.ControlDibujarDiagrama;
+import java.awt.Color;
 import javax.swing.JOptionPane;
+import logica.AutomataFinitoNoDeterminista;
 
 public class AutomataFinitoNoDeterministaPanel extends JPanel implements ActionListener{
  
@@ -24,6 +26,7 @@ public class AutomataFinitoNoDeterministaPanel extends JPanel implements ActionL
     private ControlDePeticion control;
     private VisualizadorDeArchivosPanel visualizador;
     private JTextArea alfabeto;
+    private JTextArea transiciones;
     
     public AutomataFinitoNoDeterministaPanel(JPanel panelPolimorfico,ControlDePeticion control)
     {
@@ -48,20 +51,27 @@ public class AutomataFinitoNoDeterministaPanel extends JPanel implements ActionL
         tipo.setFont(new Font("",Font.BOLD,20));
         tipo.setBounds(0, 0, 570, 30);
         descripcion = new JTextArea();
-        descripcion.setFont(new Font("",Font.BOLD,10));
+        descripcion.setFont(new Font("",Font.BOLD,17));
         descripcion.setBounds(10, 40, 550, 50);
         descripcion.setOpaque(false);
         descripcion.setLineWrap(true);
         descripcion.setEditable(false);
         alfabeto = new JTextArea();
         alfabeto.setFont(new Font("",Font.BOLD,15));
-        alfabeto.setBounds(0, 0, 570, 30);
+        alfabeto.setBounds(0, 0, 570, 50);
         alfabeto.setEditable(false);
         alfabeto.setLineWrap(true);
         alfabeto.setOpaque(false);
+        transiciones = new JTextArea();
+        transiciones.setFont(new Font("",Font.BOLD,13));
+        transiciones.setBounds(0,60,570,120);
+        transiciones.setEditable(false);
+        transiciones.setLineWrap(true);
+        transiciones.setOpaque(false);
         paneles[3].add(tipo);
         paneles[3].add(descripcion);
         paneles[1].add(alfabeto);
+        paneles[1].add(transiciones);
     }
     
     private void iniciarPaneles()
@@ -74,9 +84,9 @@ public class AutomataFinitoNoDeterministaPanel extends JPanel implements ActionL
             this.add(paneles[i]);
         }
         paneles[0].setBounds(590, 70, 200, 500);//botones
-        paneles[1].setBounds(10, 480, 570,80);//lenguaje
-        paneles[2].setBounds(10, 120, 570, 350);//dibujo
-        paneles[3].setBounds(10, 10, 570, 100);//descripcion
+        paneles[1].setBounds(10, 380, 570,180);//lenguaje
+        paneles[2].setBounds(10, 120, 570,250);//dibujo
+        paneles[3].setBounds(10, 10, 570,100);//descripcion
     }
     
     public void iniciarBotones()
@@ -141,8 +151,10 @@ public class AutomataFinitoNoDeterministaPanel extends JPanel implements ActionL
     {
         if(control.getAutomataFinitoNoDeterminista() != null)
         {
+            String transicion = "Transiciones:\n"+(((AutomataFinitoNoDeterminista)control.getAutomataFinitoNoDeterminista()).getTransiciones());
             descripcion.setText(control.getAutomataFinitoNoDeterminista().getDescripcion());
             alfabeto.setText(control.getAutomataFinitoNoDeterminista().getLenguaje());
+            transiciones.setText(transicion);
             ControlDibujarDiagrama cd = new ControlDibujarDiagrama(control.getAutomataFinitoNoDeterminista(),null, new DibujadorDeDiagrama());
             cd.dibujarAutomata();
             cd.getDibujador().setBounds(0, 0, 570, 350);

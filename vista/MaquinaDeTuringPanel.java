@@ -13,6 +13,7 @@ import static java.awt.Component.CENTER_ALIGNMENT;
 import javax.swing.JTextArea;
 import control.ControlDibujarDiagrama;
 import javax.swing.JOptionPane;
+import logica.MaquinaDeTuring;
 
 public class MaquinaDeTuringPanel extends JPanel implements ActionListener{
  
@@ -24,6 +25,7 @@ public class MaquinaDeTuringPanel extends JPanel implements ActionListener{
     private ControlDePeticion control;
     private VisualizadorDeArchivosPanel visualizador;
     private JTextArea alfabeto;
+    private JTextArea transiciones;
     
     public MaquinaDeTuringPanel(JPanel panelPolimorfico,ControlDePeticion control)
     {
@@ -46,22 +48,29 @@ public class MaquinaDeTuringPanel extends JPanel implements ActionListener{
     {
         tipo = new JLabel("MAQUINA DE TURING",(int) CENTER_ALIGNMENT);
         tipo.setFont(new Font("",Font.BOLD,20));
-        tipo.setBounds(0,0,570,30);
+        tipo.setBounds(0, 0, 570, 30);
         descripcion = new JTextArea();
-        descripcion.setFont(new Font("",Font.BOLD,13));
+        descripcion.setFont(new Font("",Font.BOLD,17));
         descripcion.setBounds(10, 40, 550, 50);
-        descripcion.setLineWrap(true);
         descripcion.setOpaque(false);
+        descripcion.setLineWrap(true);
         descripcion.setEditable(false);
         alfabeto = new JTextArea();
         alfabeto.setFont(new Font("",Font.BOLD,15));
-        alfabeto.setBounds(0, 0, 570, 30);
+        alfabeto.setBounds(0, 0, 570, 50);
         alfabeto.setEditable(false);
         alfabeto.setLineWrap(true);
         alfabeto.setOpaque(false);
+        transiciones = new JTextArea();
+        transiciones.setFont(new Font("",Font.BOLD,13));
+        transiciones.setBounds(0,60,570,120);
+        transiciones.setEditable(false);
+        transiciones.setLineWrap(true);
+        transiciones.setOpaque(false);
         paneles[3].add(tipo);
         paneles[3].add(descripcion);
         paneles[1].add(alfabeto);
+        paneles[1].add(transiciones);
     }
     
     private void iniciarPaneles()
@@ -74,8 +83,8 @@ public class MaquinaDeTuringPanel extends JPanel implements ActionListener{
             this.add(paneles[i]);
         }
         paneles[0].setBounds(590, 100, 200, 400);//botones
-        paneles[1].setBounds(10, 480, 570,80);//lenguaje
-        paneles[2].setBounds(10, 120, 570, 350);//dibujo
+        paneles[1].setBounds(10, 380, 570,180);//lenguaje
+        paneles[2].setBounds(10, 120, 570,250);//dibujo
         paneles[3].setBounds(10, 10, 570,100);//descripcion
     }
     
@@ -135,8 +144,10 @@ public class MaquinaDeTuringPanel extends JPanel implements ActionListener{
     {
         if(control.getMaquinaDeTuring() != null)
         {
+            String transicion = "Transicion:\n"+(((MaquinaDeTuring)control.getMaquinaDeTuring()).getTransiciones());
             descripcion.setText(control.getMaquinaDeTuring().getDescripcion());
             alfabeto.setText(control.getMaquinaDeTuring().getLenguaje());
+            transiciones.setText(transicion);
             ControlDibujarDiagrama cd = new ControlDibujarDiagrama(null,control.getMaquinaDeTuring(), new DibujadorDeDiagrama());
             cd.dibujarMaquina();
             cd.getDibujador().setBounds(0, 0, 570, 350);
