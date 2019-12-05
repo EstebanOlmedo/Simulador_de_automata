@@ -7,12 +7,12 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import control.ControlDePeticion;
-import java.awt.Color;
 import static java.awt.Component.CENTER_ALIGNMENT;
 import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.JTextArea;
 import control.ControlDibujarDiagrama;
+import javax.swing.JOptionPane;
 
 public class AutomataFinitoNoDeterministaEpsilonPanel extends JPanel implements  ActionListener{
  
@@ -23,6 +23,7 @@ public class AutomataFinitoNoDeterministaEpsilonPanel extends JPanel implements 
     private JPanel panelPolimorfico;
     private ControlDePeticion control;
     private VisualizadorDeArchivosPanel visualizador;
+    private JTextArea alfabeto;
     
     public AutomataFinitoNoDeterministaEpsilonPanel(JPanel panelPolimorfico,ControlDePeticion control)
     {
@@ -52,8 +53,15 @@ public class AutomataFinitoNoDeterministaEpsilonPanel extends JPanel implements 
         descripcion.setLineWrap(true);
         descripcion.setOpaque(false);
         descripcion.setEditable(false);
+        alfabeto = new JTextArea();
+        alfabeto.setFont(new Font("",Font.BOLD,15));
+        alfabeto.setBounds(0, 0, 570, 30);
+        alfabeto.setEditable(false);
+        alfabeto.setLineWrap(true);
+        alfabeto.setOpaque(false);
         paneles[3].add(tipo);
         paneles[3].add(descripcion);
+        paneles[1].add(alfabeto);
     }
     
     private void iniciarPaneles()
@@ -73,7 +81,7 @@ public class AutomataFinitoNoDeterministaEpsilonPanel extends JPanel implements 
     
     public void iniciarBotones()
     {
-        botones = new JButton[6];
+        botones = new JButton[5];
         for(int x = 0; x < botones.length; x++)
         {
             botones[x] = new JButton();
@@ -87,13 +95,11 @@ public class AutomataFinitoNoDeterministaEpsilonPanel extends JPanel implements 
         botones[2].setBounds(0,140,200,50);
         botones[3].setBounds(0,210,200,50);
         botones[4].setBounds(0,280,200,50);
-        botones[5].setBounds(0,360,200,50);
         botones[0].setText("Generar AF No Determinista Epsilon");
         botones[1].setText("Evaluar cadena");
-        botones[2].setText("Guardar el AFNE en un archivo");
-        botones[3].setText("Cargar AFNE de un archivo");
-        botones[5].setText("Regresar al menu principal");
-	botones[4].setText("Mostrar diagrama");
+        botones[2].setText("Guardar/Cargar AFNE de un archivo");
+        botones[3].setText("Actualizar");
+        botones[4].setText("Regresar al menu principal");
     }
     
     @Override
@@ -101,43 +107,46 @@ public class AutomataFinitoNoDeterministaEpsilonPanel extends JPanel implements 
         if(ae.getSource() == botones[0])
         {
             control.manejarPeticion("GAFNDE");
-            descripcion.setText(control.getAutomataFinitoNoDeterministaEpsilon().getDescripcion());
-            ControlDibujarDiagrama cd = new ControlDibujarDiagrama(control.getAutomataFinitoNoDeterministaEpsilon(),null, new DibujadorDeDiagrama());
-           cd.dibujarAutomata();
-            cd.getDibujador().setBounds(0, 0, 570, 350);
-            //paneles[2] = new JPanel();
-            //paneles[2].setBounds(10, 120, 570, 350);
-            paneles[2].removeAll();
-           paneles[2].add(cd.getDibujador());
-           updateUI();
+            actualizarInformacion();
         }
         else if(ae.getSource() == botones[1])
         {
-            control.manejarPeticion("EAFNDE");
+            if(control.getAutomataFinitoNoDeterministaEpsilon() != null)
+                control.manejarPeticion("EAFNDE");
+            else
+                JOptionPane.showConfirmDialog(null, "No hay un automata generado", "ERROR", JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
         }
         else if(ae.getSource() == botones[2])
         {
-		panelPolimorfico.add(visualizador, "archivos");
-		((CardLayout)panelPolimorfico.getLayout()).show(panelPolimorfico, "archivos");
+            panelPolimorfico.add(visualizador, "archivos");
+            ((CardLayout)panelPolimorfico.getLayout()).show(panelPolimorfico, "archivos");
         }
-        else if(ae.getSource() == botones[3])
-        {
-            panelPolimorfico.add(visualizador,"archivos");
-            ((CardLayout) panelPolimorfico.getLayout()).show(panelPolimorfico,"archivos");
-        }
-	else if(ae.getSource() == botones[4])
+	else if(ae.getSource() == botones[3])
 	{
-		descripcion.setText(control.getAutomataFinitoNoDeterministaEpsilon().getDescripcion());
-		ControlDibujarDiagrama cd = new ControlDibujarDiagrama(control.getAutomataFinitoNoDeterministaEpsilon(),null, new DibujadorDeDiagrama());
-		cd.dibujarAutomata();
-		cd.getDibujador().setBounds(0, 0, 570, 350);
-		paneles[2].removeAll();
-		paneles[2].add(cd.getDibujador());
-		updateUI();
+            actualizarInformacion();
 	}
-        else if(ae.getSource() == botones[5])
+        else if(ae.getSource() == botones[4])
         {
             ((CardLayout) panelPolimorfico.getLayout()).show(panelPolimorfico, "inicio");
+        }
+    }
+    
+    private void actualizarInformacion()
+    {
+        if(control.getAutomataFinitoNoDeterministaEpsilon() != null)
+        {
+            descripcion.setText(control.getAutomataFinitoNoDeterministaEpsilon().getDescripcion());
+            alfabeto.setText(control.getAutomataFinitoNoDeterministaEpsilon().getLenguaje());
+            ControlDibujarDiagrama cd = new ControlDibujarDiagrama(control.getAutomataFinitoNoDeterministaEpsilon(),null, new DibujadorDeDiagrama());
+            cd.dibujarAutomata();
+            cd.getDibujador().setBounds(0, 0, 570, 350);
+            paneles[2].removeAll();
+            paneles[2].add(cd.getDibujador());
+            updateUI();
+        }
+        else
+        {
+            JOptionPane.showConfirmDialog(null, "No hay un automata generado", "ERROR", JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE);
         }
     }
     
