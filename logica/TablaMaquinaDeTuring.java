@@ -108,4 +108,12 @@ public class TablaMaquinaDeTuring implements Serializable
 	public FuncionDeltaMaquinaDeTuring[][] getTabla(){
 		return tabla;
 	}
+	public int getTamanio()
+	{
+		return tabla[0].length;
+	}
+
+	public ArrayList<Integer> getEstadosAceptacion() {
+		return estadosAceptacion;
+	}
 }

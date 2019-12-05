@@ -48,7 +48,10 @@ public class FuncionDeltaMaquinaDeTuring implements Serializable
 	@Override
 	public String toString()
 	{
-		return "(" + estado + "," + loQueDeja + "," + movimiento + ")";
+		if(estado != -1)
+			return "(" + estado + "," + loQueDeja + "," + movimiento + ")";
+		else
+			return "";
 	}
 	public int getEstado()
 	{

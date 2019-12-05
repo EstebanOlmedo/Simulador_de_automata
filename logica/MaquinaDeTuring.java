@@ -1,6 +1,7 @@
 package logica;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * @author Gabriel Graciano Herrera
@@ -295,6 +296,22 @@ public class MaquinaDeTuring implements Serializable
         
         public String getTransiciones()
         {
-            return tabla.toString();
+		String retorno = new String();
+		int numEstados = 0;
+		for(int i = 0; i < tabla.getTamanio(); i++)
+		{
+			for(int j = 0; j < alfabeto.length; j++)
+			{
+				FuncionDeltaMaquinaDeTuring funcion = tabla.getFuncion(cabezal, i);
+				if(funcion.getEstado() != -1)
+				{
+					if(numEstados % 5 == 0)
+						retorno += "\n";
+					retorno += "S(" + i + ", " + alfabeto[j] + ")" + funcion.toString() + "\t ";
+					numEstados++;
+				}
+			}
+		}
+		return retorno;
         }
 }
