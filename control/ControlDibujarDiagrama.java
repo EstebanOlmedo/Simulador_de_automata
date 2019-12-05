@@ -34,7 +34,7 @@ public class ControlDibujarDiagrama{
 		this.maquina = maquina;
 		this.dibujador = dibujador;
 		posUsados = new TreeMap<Integer,Pair<Integer,Integer>>();
-		alto = 350;
+		alto = 250;
 		ancho = 570;
 	}
 
@@ -75,7 +75,11 @@ public class ControlDibujarDiagrama{
 				if((contEstados) == noEstados){
 					break;
 				}
-                                boolean aceptacion = automata.isAceptacion(contEstados);
+                                boolean aceptacion = false;
+                                if(automata != null)
+                                    aceptacion = automata.isAceptacion(contEstados);
+                                if(maquina != null)
+                                    aceptacion = maquina.getTabla().isEstadoAceptacion(contEstados);
 				dibujador.dibujarEstado(j*espacioX,i*espacioY,contEstados, aceptacion);
 				posUsados.put(contEstados,new Pair<Integer,Integer>(j*espacioX,i*espacioY));
 				contEstados++;

@@ -295,6 +295,6 @@ public class MaquinaDeTuring implements Serializable
         
         public String getTransiciones()
         {
-            return "hola";
+            return tabla.toString();
         }
 }

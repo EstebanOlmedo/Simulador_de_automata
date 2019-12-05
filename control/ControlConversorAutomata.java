@@ -48,7 +48,7 @@ public class ControlConversorAutomata
 		try{
 			conversor.convertirAFNaAFD(automata);
 			//System.out.println("Se ha convertido el automata con exito");
-			JOptionPane.showMessageDialog(null, "Se ha concertido el automata con exito", "Resultado", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Se ha convertido el automata con exito", "Resultado", JOptionPane.INFORMATION_MESSAGE);
 		}
 		catch(NullPointerException npe){
 			//System.out.println("Aun no has generado el automata .-.");
@@ -61,7 +61,7 @@ public class ControlConversorAutomata
 	{
 		try{
 			conversor.convertirAFDaAFP(automata);
-			JOptionPane.showMessageDialog(null, "Se ha concertido el automata con exito", "Resultado", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Se ha convertido el automata con exito", "Resultado", JOptionPane.INFORMATION_MESSAGE);
 		}
 		catch(NullPointerException npe){
 			//System.out.println("Aun no has generado el automata .-.");
