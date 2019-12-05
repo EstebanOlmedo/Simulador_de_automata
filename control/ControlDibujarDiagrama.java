@@ -75,7 +75,8 @@ public class ControlDibujarDiagrama{
 				if((contEstados) == noEstados){
 					break;
 				}
-				dibujador.dibujarEstado(j*espacioX,i*espacioY,contEstados);
+                                boolean aceptacion = automata.isAceptacion(contEstados);
+				dibujador.dibujarEstado(j*espacioX,i*espacioY,contEstados, aceptacion);
 				posUsados.put(contEstados,new Pair<Integer,Integer>(j*espacioX,i*espacioY));
 				contEstados++;
 			}
@@ -104,7 +105,7 @@ public class ControlDibujarDiagrama{
 						int x2 = posUsados.get(tabla.getFuncion(i,j).getEstado()).getKey();
 						int y2 = posUsados.get(tabla.getFuncion(i,j).getEstado()).getValue();
 						String cad = tabla.getFuncion(i,j).toString();
-						dibujador.dibujarEnlace(x1,y1,x2,y2,cad);
+						dibujador.dibujarEnlace(x1,y1,x2,y2,"");
 					}
 				}
 				catch(NullPointerException npe){
@@ -138,7 +139,7 @@ public class ControlDibujarDiagrama{
 				int x2 = posUsados.get(tabla.get(i).get(j)).getKey();
 				int y2 = posUsados.get(tabla.get(i).get(j)).getValue();
 				String cad = Character.toString(automata.getSimbolo(j));
-				dibujador.dibujarEnlace(x1,y1,x2,y2,cad);
+				dibujador.dibujarEnlace(x1,y1,x2,y2,"");
 				//System.out.println("A");
 			}
 		}
@@ -156,7 +157,7 @@ public class ControlDibujarDiagrama{
 					int x2 = posUsados.get(tabla.get(i).get(j).get(k)).getKey();
 					int y2 = posUsados.get(tabla.get(i).get(j).get(k)).getValue();
 					String cad = Character.toString(automata.getSimbolo(j));
-					dibujador.dibujarEnlace(x1,y1,x2,y2,cad);
+					dibujador.dibujarEnlace(x1,y1,x2,y2,"");
 				}
 			}
 		}
@@ -173,8 +174,7 @@ public class ControlDibujarDiagrama{
 			for(int j=0; j<tabla.get(i).size(); j++){
 				int x2 = posUsados.get(tabla.get(i).get(j)).getKey();
 				int y2 = posUsados.get(tabla.get(i).get(j)).getValue();
-				dibujador.dibujarEnlace(x1,y1,x2,y2,"~");
-				System.out.println("B");
+				dibujador.dibujarEnlace(x1,y1,x2,y2,"");
 			}
 		}
 	}
@@ -182,7 +182,6 @@ public class ControlDibujarDiagrama{
 	public void dibujarTransicionesAFP(){
 		ArrayList<ArrayList<ArrayList<Delta>>> tabla = ((AutomataFinitoAPila)automata).getTablaTransiciones();
 		int noEstados = tabla.size();
-		//System.out.println(automata.getTransiciones());
 		int df = 0;
 		for(int i=0; i<noEstados; i++){
 			int x1 = posUsados.get(i).getKey();
@@ -196,7 +195,7 @@ public class ControlDibujarDiagrama{
 					x1 += k*df;
 					y1 += k*df;
 					String cad = tabla.get(i).get(j).get(k).toString();
-					dibujador.dibujarEnlace(x1,y1,x2,y2,cad);
+					dibujador.dibujarEnlace(x1,y1,x2,y2,"");
 				}
 			}
 		}

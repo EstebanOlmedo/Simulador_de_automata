@@ -21,10 +21,10 @@ public class DibujadorDeDiagrama extends JLabel
 		setVisible(true);
 	}
 	
-	public void dibujarEstado(int x, int y, int numero)
+	public void dibujarEstado(int x, int y, int numero, boolean aceptacion)
 	{
 		String estado = "q" + numero;
-		Nodo nodo = new Nodo(x, y, estado);
+		Nodo nodo = new Nodo(x, y, estado, aceptacion);
 		estados.add(nodo);
 		repaint();
 	}
