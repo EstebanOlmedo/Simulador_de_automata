@@ -280,4 +280,16 @@ public class MaquinaDeTuring implements Serializable
 	{
 		tabla.setEstado(estado, indiceSimbolo, estadoTransicion, loQueDeja, movimiento);
 	}
+        
+        public String getLenguaje()
+        {
+            StringBuffer cadena = new StringBuffer("ALFABETO ACEPTADO POR EL AUTOMATA: ");
+            for(int x = 0; x < alfabeto.length;x++)
+            {
+                cadena.append(alfabeto[x]);
+                if(x != alfabeto.length-1)
+                    cadena.append(',');
+            }
+            return cadena.toString();
+        }
 }

@@ -106,6 +106,7 @@ public abstract class AutomataFinito implements Serializable
 	public char[] getAlfabeto(){
 		return alfabeto;
 	}
+        
  	public void setMapa(){
  		mapa = new TreeMap<>();
 		for(int i=0; i<alfabeto.length; i++)
@@ -142,6 +143,19 @@ public abstract class AutomataFinito implements Serializable
 	public String getDescripcion(){
 		return descripcion;
 	}
+        
+        public String getLenguaje()
+        {
+            StringBuffer cadena = new StringBuffer("ALFABETO ACEPTADO POR EL AUTOMATA: ");
+            for(int x = 0; x < alfabeto.length;x++)
+            {
+                cadena.append(alfabeto[x]);
+                if(x != alfabeto.length-1)
+                    cadena.append(',');
+            }
+            return cadena.toString();
+        }
+        
 	public abstract boolean evaluar(String cadena);
 	public abstract String getTransiciones();
 }
