@@ -27,6 +27,7 @@ public class AutomataFinitoNoDeterministaEpsilonPanel extends JPanel implements 
     private VisualizadorDeArchivosPanel visualizador;
     private JTextArea alfabeto;
     private JTextArea transiciones;
+    private JTextArea mensaje;
     
     public AutomataFinitoNoDeterministaEpsilonPanel(JPanel panelPolimorfico,ControlDePeticion control)
     {
@@ -42,7 +43,7 @@ public class AutomataFinitoNoDeterministaEpsilonPanel extends JPanel implements 
         iniciarPaneles();
         iniciarBotones();
         iniciarLabels();
-        visualizador = new VisualizadorDeArchivosPanel(panelPolimorfico, control, "afne", descripcion);
+        visualizador = new VisualizadorDeArchivosPanel(panelPolimorfico, control, "afne");
     }
     
     private void iniciarLabels()
@@ -68,15 +69,22 @@ public class AutomataFinitoNoDeterministaEpsilonPanel extends JPanel implements 
         transiciones.setEditable(false);
         transiciones.setLineWrap(true);
         transiciones.setOpaque(false);
+        mensaje = new JTextArea("SI HAZ CARGADO O\nCONVERTIDO UN AUTOMATA O MAQUINA DE TURING DA\nCLICK AL BOTON\nACTUALIZAR");
+        mensaje.setFont(new Font("",Font.BOLD,12));
+        mensaje.setEditable(false);
+        mensaje.setLineWrap(true);
+        mensaje.setOpaque(false);
+        mensaje.setBounds(0, 0, 200, 80);
         paneles[3].add(tipo);
         paneles[3].add(descripcion);
         paneles[1].add(alfabeto);
         paneles[1].add(transiciones);
+        paneles[4].add(mensaje);
     }
     
     private void iniciarPaneles()
     {
-        paneles = new JPanel[4];
+        paneles = new JPanel[5];
         for (int i = 0; i < paneles.length; i++) 
         {
             paneles[i] = new JPanel();
@@ -87,6 +95,7 @@ public class AutomataFinitoNoDeterministaEpsilonPanel extends JPanel implements 
         paneles[1].setBounds(10, 380, 570,180);//lenguaje
         paneles[2].setBounds(10, 120, 570,250);//dibujo
         paneles[3].setBounds(10, 10, 570,100);//descripcion
+        paneles[4].setBounds(590, 10, 200,80);//mensaje
     }
     
     public void iniciarBotones()

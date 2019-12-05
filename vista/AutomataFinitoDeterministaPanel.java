@@ -26,6 +26,7 @@ public class AutomataFinitoDeterministaPanel extends JPanel implements ActionLis
     private VisualizadorDeArchivosPanel visualizador;
     private JTextArea alfabeto;
     private JTextArea transiciones;
+    private JTextArea mensaje;
     
     public AutomataFinitoDeterministaPanel(JPanel panelPolimorfico,ControlDePeticion control)
     {
@@ -41,7 +42,7 @@ public class AutomataFinitoDeterministaPanel extends JPanel implements ActionLis
         iniciarPaneles();
         iniciarBotones();
         iniciarLabels();
-        visualizador = new VisualizadorDeArchivosPanel(panelPolimorfico,control,"afd",descripcion);
+        visualizador = new VisualizadorDeArchivosPanel(panelPolimorfico,control,"afd");
     }
     
     private void iniciarLabels()
@@ -60,32 +61,40 @@ public class AutomataFinitoDeterministaPanel extends JPanel implements ActionLis
         alfabeto.setBounds(0, 0, 570, 50);
         alfabeto.setEditable(false);
         alfabeto.setLineWrap(true);
-        alfabeto.setOpaque(true);
+        alfabeto.setOpaque(false);
         transiciones = new JTextArea();
         transiciones.setFont(new Font("",Font.BOLD,13));
         transiciones.setBounds(0,60,570,120);
         transiciones.setEditable(false);
         transiciones.setLineWrap(true);
         transiciones.setOpaque(false);
+        mensaje = new JTextArea("SI HAZ CARGADO O\nCONVERTIDO UN AUTOMATA O MAQUINA DE TURING DA\nCLICK AL BOTON\nACTUALIZAR");
+        mensaje.setFont(new Font("",Font.BOLD,12));
+        mensaje.setEditable(false);
+        mensaje.setLineWrap(true);
+        mensaje.setOpaque(false);
+        mensaje.setBounds(0, 0, 200, 80);
         paneles[3].add(tipo);
         paneles[3].add(descripcion);
         paneles[1].add(alfabeto);
         paneles[1].add(transiciones);
+        paneles[4].add(mensaje);
     }
     
     private void iniciarPaneles()
     {
-        paneles = new JPanel[4];
+        paneles = new JPanel[5];
         for (int i = 0; i < paneles.length; i++) 
         {
             paneles[i] = new JPanel();
             paneles[i].setLayout(null);
             this.add(paneles[i]);
         }
-        paneles[0].setBounds(590, 70, 200, 500);//botones
+        paneles[0].setBounds(590, 100, 200, 500);//botones
         paneles[1].setBounds(10, 380, 570,180);//lenguaje
         paneles[2].setBounds(10, 120, 570,250);//dibujo
         paneles[3].setBounds(10, 10, 570,100);//descripcion
+        paneles[4].setBounds(590, 10, 200,80);//mensaje
     }
     
     public void iniciarBotones()
@@ -99,12 +108,12 @@ public class AutomataFinitoDeterministaPanel extends JPanel implements ActionLis
             botones[x].addActionListener(this);
             paneles[0].add(botones[x]);
         }
-        botones[0].setBounds(0,10,200,50);
-        botones[1].setBounds(0,80,200,50);
-        botones[2].setBounds(0,150,200,50);
-        botones[3].setBounds(0,220,200,50);
-        botones[4].setBounds(0,290,200,50);
-        botones[5].setBounds(0,360,200,50);
+        botones[0].setBounds(0,0,200,50);
+        botones[1].setBounds(0,70,200,50);
+        botones[2].setBounds(0,140,200,50);
+        botones[3].setBounds(0,210,200,50);
+        botones[4].setBounds(0,280,200,50);
+        botones[5].setBounds(0,350,200,50);
         botones[0].setText("Generar AF Determinista");
         botones[1].setText("Evaluar cadena");
         botones[2].setText("Convertir AFD a AFP");

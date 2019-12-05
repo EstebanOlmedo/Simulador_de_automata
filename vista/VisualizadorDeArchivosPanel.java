@@ -8,10 +8,8 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -25,15 +23,13 @@ public class VisualizadorDeArchivosPanel extends JPanel implements ActionListene
     private ControlDePeticion control;
     private JPanel panelPolimorfico;
     private String peticion;
-    private JTextArea descripcion;
     
-    public VisualizadorDeArchivosPanel(JPanel panelPolimorfico,ControlDePeticion control,String peticion,JTextArea descripcion)
+    public VisualizadorDeArchivosPanel(JPanel panelPolimorfico,ControlDePeticion control,String peticion)
     {
         super();
         this.panelPolimorfico = panelPolimorfico;
         this.control = control;
         this.peticion = peticion;
-        this.descripcion = descripcion;
         iniciarComponentes();
     }
 
@@ -75,69 +71,66 @@ public class VisualizadorDeArchivosPanel extends JPanel implements ActionListene
                 else
                 {
                     texto.setText(archivo.getName());
+                    cargarObjeto();
+                    JOptionPane.showConfirmDialog(null,archivo.getName()+" Cargado con exito",null,JOptionPane.DEFAULT_OPTION);
+                    ((CardLayout) panelPolimorfico.getLayout()).show(panelPolimorfico, peticion);
                 }
             }
         }
         else if(ae.getSource() == botonSalir)
         {
-            if(archivo != null)
+            if(archivo == null)
             {
-                JOptionPane.showConfirmDialog(null,archivo.getName()+" Cargado con exito",null,JOptionPane.DEFAULT_OPTION);
-                switch(peticion)
-                {
-                    case "afd":
-                        control.manejarPeticionDeCargado("AFD",archivo);
-                        descripcion.setText(control.getAutomataFinitoDeterminista().getDescripcion());
-                        break;
-                    case "afn":
-                        control.manejarPeticionDeCargado("AFD",archivo);
-                        descripcion.setText(control.getAutomataFinitoNoDeterminista().getDescripcion());
-                        break;
-                    case "afne":
-                        control.manejarPeticionDeCargado("AFD",archivo);
-                        descripcion.setText(control.getAutomataFinitoNoDeterministaEpsilon().getDescripcion());
-                        break;
-                    case "afp":
-                        control.manejarPeticionDeCargado("AFD",archivo);
-                        descripcion.setText(control.getAutomataFinitoAPila().getDescripcion());
-                        break;
-                    case "mt":
-                        control.manejarPeticionDeCargado("CMT",archivo);
-                        descripcion.setText(control.getMaquinaDeTuring().getDescripcion());
-                        break;
-                }
-            }
-            else
-            {
-                JOptionPane.showConfirmDialog(null,"No has cargado ningun archivo",null,JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showConfirmDialog(null,"No has cargado/guardado ningun archivo",null,JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE);
             }
             ((CardLayout) panelPolimorfico.getLayout()).show(panelPolimorfico,peticion);
         }
         else if(ae.getSource() == botonGuardar)
         {
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-            int opc = fileChooser.showSaveDialog(null);
-	    if(opc == JFileChooser.APPROVE_OPTION)
-	    {
-		    archivo = fileChooser.getSelectedFile();
-		    switch(peticion)
-		    {
-			    case "afd": control.manejarPeticionDePersistencia("PAFD", archivo); break;
-			    case "afn": control.manejarPeticionDePersistencia("PAFN", archivo); break;
-			    case "afne": control.manejarPeticionDePersistencia("PAFNDE", archivo); break;
-			    case "afp": control.manejarPeticionDePersistencia("PAFP", archivo); break;
-			    case "mt": control.manejarPeticionDePersistencia("PMT", archivo); break;
-		    }
-                    JOptionPane.showConfirmDialog(null,archivo.getName()+" Guardado con exito",null,JOptionPane.DEFAULT_OPTION);
-	    }
-	    //archivo = fileChooser.getSelectedFile();
+            if(control.getAutomataFinitoAPila() != null || control.getAutomataFinitoDeterminista() != null ||
+               control.getAutomataFinitoNoDeterminista() != null || control.getAutomataFinitoNoDeterministaEpsilon() != null
+               || control.getMaquinaDeTuring() != null)
+            {
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+                int opc = fileChooser.showSaveDialog(null);
+                if(opc == JFileChooser.APPROVE_OPTION)
+                {
+                        archivo = fileChooser.getSelectedFile();
+                        guardarObjeto();
+                        JOptionPane.showConfirmDialog(null,archivo.getName()+" Guardado con exito",null,JOptionPane.DEFAULT_OPTION);
+                        ((CardLayout) panelPolimorfico.getLayout()).show(panelPolimorfico,peticion);
+                }
+            }
+            else
+            {
+                JOptionPane.showConfirmDialog(null,"Aun no haz creado ningun objeto para guardar","ERROR",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE);
+            }
         }
     }
     
-    public File getFile()
+    private void cargarObjeto()
     {
-        return archivo;
+        switch(peticion)
+        {
+            case "afd": control.manejarPeticionDeCargado("AFD",archivo); break;
+            case "afn": control.manejarPeticionDeCargado("AFN",archivo); break;
+            case "afne": control.manejarPeticionDeCargado("AFNE",archivo); break;
+            case "afp": control.manejarPeticionDeCargado("AFP", archivo); break;
+            case "mt": control.manejarPeticionDeCargado("CMT",archivo); break;
+        }
+    }
+    
+    private void guardarObjeto()
+    {
+        switch(peticion)
+        {
+            case "afd": control.manejarPeticionDePersistencia("PAFD", archivo); break;
+            case "afn": control.manejarPeticionDePersistencia("PAFN", archivo); break;
+            case "afne": control.manejarPeticionDePersistencia("PAFNDE", archivo); break;
+            case "afp": control.manejarPeticionDePersistencia("PAFP", archivo); break;
+            case "mt": control.manejarPeticionDePersistencia("PMT", archivo); break;
+        }
     }
     
 }
