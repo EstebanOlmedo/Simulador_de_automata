@@ -14,6 +14,7 @@ import javax.swing.JTextArea;
 import control.ControlDibujarDiagrama;
 import java.awt.Color;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import logica.AutomataFinitoNoDeterminista;
 
 public class AutomataFinitoNoDeterministaPanel extends JPanel implements ActionListener{
@@ -48,7 +49,7 @@ public class AutomataFinitoNoDeterministaPanel extends JPanel implements ActionL
     
     private void iniciarLabels()
     {
-        tipo = new JLabel("AUTOMATA FINITO DETERMINISTA", (int) CENTER_ALIGNMENT);
+        tipo = new JLabel("AUTOMATA FINITO NO DETERMINISTA", (int) CENTER_ALIGNMENT);
         tipo.setFont(new Font("",Font.BOLD,20));
         tipo.setBounds(0, 0, 570, 30);
         descripcion = new JTextArea();
@@ -143,8 +144,10 @@ public class AutomataFinitoNoDeterministaPanel extends JPanel implements ActionL
         }
         else if(ae.getSource() == botones[3])
         {
+            SwingUtilities.getWindowAncestor(panelPolimorfico).setSize(400, 100);
+            SwingUtilities.getWindowAncestor(panelPolimorfico).setLocationRelativeTo(null);
             panelPolimorfico.add(visualizador, "archivos");
-            ((CardLayout)panelPolimorfico.getLayout()).show(panelPolimorfico, "archivos");
+            ((CardLayout)panelPolimorfico.getLayout()).show(panelPolimorfico, "archivos");   
         }
         else if(ae.getSource() == botones[4])
         {  

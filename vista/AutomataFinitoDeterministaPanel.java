@@ -13,6 +13,7 @@ import javax.swing.JTextArea;
 import control.ControlDibujarDiagrama;
 import java.awt.Color;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import logica.AutomataFinitoDeterminista;
 
 public class AutomataFinitoDeterministaPanel extends JPanel implements ActionListener{
@@ -143,6 +144,8 @@ public class AutomataFinitoDeterministaPanel extends JPanel implements ActionLis
         }
         else if(ae.getSource() == botones[3])
         {
+            SwingUtilities.getWindowAncestor(panelPolimorfico).setSize(400, 100);
+            SwingUtilities.getWindowAncestor(panelPolimorfico).setLocationRelativeTo(null);
             panelPolimorfico.add(visualizador, "archivos");
             ((CardLayout)panelPolimorfico.getLayout()).show(panelPolimorfico, "archivos");
         }

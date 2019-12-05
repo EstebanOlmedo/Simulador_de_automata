@@ -11,6 +11,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class VisualizadorDeArchivosPanel extends JPanel implements ActionListener{
@@ -72,8 +73,13 @@ public class VisualizadorDeArchivosPanel extends JPanel implements ActionListene
                 {
                     texto.setText(archivo.getName());
                     cargarObjeto();
+                    texto.setText("");
                     JOptionPane.showConfirmDialog(null,archivo.getName()+" Cargado con exito",null,JOptionPane.DEFAULT_OPTION);
+                    SwingUtilities.getWindowAncestor(panelPolimorfico).setSize(800, 600);
+                    SwingUtilities.getWindowAncestor(panelPolimorfico).setLocationRelativeTo(null);
                     ((CardLayout) panelPolimorfico.getLayout()).show(panelPolimorfico, peticion);
+                    SwingUtilities.getWindowAncestor(panelPolimorfico).setSize(800, 600);
+                    SwingUtilities.getWindowAncestor(panelPolimorfico).setLocationRelativeTo(null);         
                 }
             }
         }
@@ -83,7 +89,11 @@ public class VisualizadorDeArchivosPanel extends JPanel implements ActionListene
             {
                 JOptionPane.showConfirmDialog(null,"No has cargado/guardado ningun archivo",null,JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE);
             }
+            SwingUtilities.getWindowAncestor(panelPolimorfico).setSize(800,600);
+            SwingUtilities.getWindowAncestor(panelPolimorfico).setLocationRelativeTo(null);
             ((CardLayout) panelPolimorfico.getLayout()).show(panelPolimorfico,peticion);
+            SwingUtilities.getWindowAncestor(panelPolimorfico).setSize(800,600);
+            SwingUtilities.getWindowAncestor(panelPolimorfico).setLocationRelativeTo(null);
         }
         else if(ae.getSource() == botonGuardar)
         {
@@ -96,10 +106,16 @@ public class VisualizadorDeArchivosPanel extends JPanel implements ActionListene
                 int opc = fileChooser.showSaveDialog(null);
                 if(opc == JFileChooser.APPROVE_OPTION)
                 {
-                        archivo = fileChooser.getSelectedFile();
-                        guardarObjeto();
-                        JOptionPane.showConfirmDialog(null,archivo.getName()+" Guardado con exito",null,JOptionPane.DEFAULT_OPTION);
-                        ((CardLayout) panelPolimorfico.getLayout()).show(panelPolimorfico,peticion);
+                    archivo = fileChooser.getSelectedFile();
+                    guardarObjeto();
+                    texto.setText("");
+                    JOptionPane.showConfirmDialog(null,archivo.getName()+" Guardado con exito",null,JOptionPane.DEFAULT_OPTION);
+                    SwingUtilities.getWindowAncestor(panelPolimorfico).setSize(800, 600);
+                    SwingUtilities.getWindowAncestor(panelPolimorfico).setLocationRelativeTo(null);
+                    ((CardLayout) panelPolimorfico.getLayout()).show(panelPolimorfico, peticion);
+                    SwingUtilities.getWindowAncestor(panelPolimorfico).setSize(800, 600);
+                    SwingUtilities.getWindowAncestor(panelPolimorfico).setLocationRelativeTo(null);
+                    archivo = null;
                 }
             }
             else

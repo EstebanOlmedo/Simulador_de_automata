@@ -13,6 +13,7 @@ import static java.awt.Component.CENTER_ALIGNMENT;
 import javax.swing.JTextArea;
 import control.ControlDibujarDiagrama;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import logica.MaquinaDeTuring;
 
 public class MaquinaDeTuringPanel extends JPanel implements ActionListener{
@@ -136,6 +137,8 @@ public class MaquinaDeTuringPanel extends JPanel implements ActionListener{
         }
         else if(ae.getSource() == botones[2])
         {
+            SwingUtilities.getWindowAncestor(panelPolimorfico).setSize(400, 100);
+            SwingUtilities.getWindowAncestor(panelPolimorfico).setLocationRelativeTo(null);
             panelPolimorfico.add(visualizador, "archivos");
             ((CardLayout)panelPolimorfico.getLayout()).show(panelPolimorfico, "archivos");
         }
